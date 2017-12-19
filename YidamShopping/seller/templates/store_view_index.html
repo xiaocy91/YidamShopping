@@ -1,0 +1,103 @@
+<html>
+
+<head> 
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+	
+	<style type='text/css'>
+		body{
+			margin:0px;
+		}
+		
+		
+			
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+		#store,#name,#identity,#addr{
+			border: 1px solid #E0E0E0;
+			width:250px;
+			height:30px;
+			margin:10px;
+		}
+		#sub{
+			border: 1px solid #E0E0E0;
+			width:80px;
+			height:40px;
+			margin:10px;
+		}
+		
+		.div-store-form{
+			margin:20px;
+		}
+		
+	}		
+	</style>
+	
+
+	
+</head>
+
+
+<body>
+
+
+{% include 'seller_top.html' %}
+
+<div class='bodyFrame'>
+	{% include 'seller_left.html' %}
+	
+	
+	<!--注册店铺信息-->
+	<div class='bodyContent'>
+		<div class='div-store-form'>
+			
+				<div>
+    				店铺名称:
+    				{% if storeName %}
+    					{{storeName}}
+					{% endif %}
+    			</div>
+				
+				<div>
+    				店主姓名:
+    				{% if storeBossName %}
+    					{{storeBossName}}
+					{% endif %}
+    			</div>
+    		
+    			<div>
+    				店铺所在地址:
+						{% if storeAddr%}
+							{{storeAddr}}
+						{% endif %}
+    			</div>
+   
+    			
+			</form>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+
+
+</body>
+
+</html>

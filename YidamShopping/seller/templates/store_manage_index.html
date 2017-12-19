@@ -1,0 +1,74 @@
+<html>
+
+<head> 
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+	
+	<style type='text/css'>
+		body{
+			margin:0px;
+		}
+		
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+		
+		.leftContent{
+		position:absolute;
+		float:left;
+		left:0px;
+		top:15px;
+		width:187px;
+		min-height:500px;
+		border: 1px solid #E0E0E0;}
+			
+	</style>
+	
+
+	
+</head>
+
+
+<body>
+
+
+{% include "store_manage_top.html"%}
+
+<div class='bodyFrame'>
+	<div class='leftContent'>
+		{% if typeDic%}
+			{% for key,value in typeDic.items %}
+				<div> {{key}} </div>
+				{% for t2 in value %}
+					<div>{{t2}}</div>
+				{% endfor %}
+			{% endfor %}
+		{% endif %}
+	</div>
+	
+	<div class='bodyContent'>
+		fffffffff
+	</div>
+	
+</div>
+
+
+
+
+</body>
+
+</html>

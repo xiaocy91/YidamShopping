@@ -29,6 +29,10 @@ urlpatterns = [
     url(r'^registerStore/$', registerStore),
     url(r'^searchStore/$', searchStore), 
     url(r'^manageStore/$', manageStore), 
+   
+    
+    
+    
     
     
     

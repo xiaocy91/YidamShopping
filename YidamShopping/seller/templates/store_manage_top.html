@@ -1,0 +1,138 @@
+<html>
+
+<head>
+
+<style type='text/css'>
+
+	.topFrame{
+		
+		height:85px;
+		width:100%;
+	}
+	
+	.header-back-first{
+			width:100%;
+			height:35px;
+			padding:0px;
+			margin:0px;
+			background-color:#F5F5F5;
+		}
+		
+	.header-content-first{
+			position:relative;
+			width:1200px;
+			height:35px;
+			left:50%;
+			margin-left:-600px;
+			
+		}
+		
+	.top-default-left{
+    		padding:0px 0px 0px 10px;
+    		height: 35px;
+    		line-height: 35px;
+  			color:#808080;
+  			float:left;
+  			cursor:pointer;
+  			position:relative;
+  		}	
+  		
+  
+
+
+	.header-back-second{
+			width:100%;
+			height:50px;
+			padding:0px; 
+			margin:0px;
+			background-color:white;
+		}
+		
+	.header-content-second{
+			position:relative;
+			width:1200px;
+			height:50px;
+			left:50%;
+			margin-left:-600px;
+			
+	}	
+	
+	.logoframe{
+			width: 100px;
+			height:50px;
+			background-color:white;
+			position:relative;
+			float:left;}
+		
+	.logo {
+    	width: 100px;
+    	height: 37px;
+    	margin-top:11px; }
+    	
+    .top-default-right{
+    	cursor:pointer;	
+    	margin-right:8px;
+    	margin-left:8px;
+    	padding:1px 0px 10px 0px;
+    	height: 35px;
+    	line-height: 35px;
+  		color:#808080;
+    	position:relative;
+    	height:50px;
+    	float:right;}  	
+</style>
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+
+</head>
+
+
+
+<body>
+
+	<div class='topFrame'>
+		<div class='header-back-first'>
+			<div class='header-content-first'>
+				{% if account %}
+					<div  class='top-default-left'>{{account}}</div>
+				{% endif  %}
+				<div  class='top-default-right' onclick='goSeller()'>卖家中心</div>
+				<div  class='top-default-right' onclick='goIndex()'>亿达商城首页</div>
+			</div>
+		</div>
+		
+		<div class='header-back-second'>
+			<div class='header-content-second'>
+				<div class='logoframe'>
+					<img class='logo' src='/statics/img/store_manage_logo.jpg'/>
+				</div>
+				{% if storeName%}
+				<div  class='top-default-left'>{{storeName}}</div>
+				{% endif %}
+			</div>
+		
+		</div>
+	
+	</div>
+	
+
+
+
+<!--javacript动态交换部分-->
+<script type='text/javascript'>
+
+function goIndex(){
+	window.location.href='/index/'
+}
+
+function goSeller(){
+	window.location.href='/sellerIndex/'
+
+}
+</script>
+
+</body>
+
+
+</html>
