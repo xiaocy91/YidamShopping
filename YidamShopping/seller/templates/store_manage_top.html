@@ -80,6 +80,19 @@
     	position:relative;
     	height:50px;
     	float:right;}  	
+    	
+    .store-name{
+    	line-height: 35px;
+  		color:#808080;
+  		font-weight:bold;
+  		font-size:25px;
+  		padding:16px;
+    	width: 100px;
+		height:50px;
+		background-color:white;
+		position:relative;
+		float:left;}
+  
 </style>
 
 
@@ -108,8 +121,9 @@
 					<img class='logo' src='/statics/img/store_manage_logo.jpg'/>
 				</div>
 				{% if storeName%}
-				<div  class='top-default-left'>{{storeName}}</div>
+					<div  class='store-name'>{{storeName}}</div>
 				{% endif %}
+				
 			</div>
 		
 		</div>

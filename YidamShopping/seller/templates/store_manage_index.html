@@ -35,6 +35,20 @@
 		width:187px;
 		min-height:500px;
 		border: 1px solid #E0E0E0;}
+		
+		.div-left{
+			margin:10px;
+		}
+		
+		
+		.nameFirst{
+			font-weight:bold;
+			font-size:18px;
+			padding:3px 5px 3px 5px;}
+			
+		.nameSecond{
+			font-size:15px;
+			padding:3px 5px 3px 5px;}
 			
 	</style>
 	
@@ -49,16 +63,9 @@
 {% include "store_manage_top.html"%}
 
 <div class='bodyFrame'>
-	<div class='leftContent'>
-		{% if typeDic%}
-			{% for key,value in typeDic.items %}
-				<div> {{key}} </div>
-				{% for t2 in value %}
-					<div>{{t2}}</div>
-				{% endfor %}
-			{% endfor %}
-		{% endif %}
-	</div>
+
+	{% include 'store_manage_left.html'%}
+	
 	
 	<div class='bodyContent'>
 		fffffffff
