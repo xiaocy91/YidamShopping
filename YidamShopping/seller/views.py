@@ -213,3 +213,14 @@ def editFirst(request):
         key=int(key)
         ProductType.objects.filter(TypeNid=key).update(TypeName=typeName)
         return HttpResponseRedirect('/editTypes/')
+    
+def addFirst(request):
+     if request.method=='POST':
+        data=request.POST
+        typeName=data.get('typeName')
+        #获取店铺id
+        userid=request.session.get('userid')
+        store=Store.objects.filter(UserNid_id=userid)
+        storeid=store[0].StoreNid
+        ProductType.objects.create(TypeName=typeName,StoreNid_id=storeid)
+        return HttpResponseRedirect('/editTypes/')

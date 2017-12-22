@@ -66,6 +66,7 @@
 			height:40px;
 			margin:5px;
 			border-bottom:2px solid #D3D3D3;
+			cursor:pointer;
 		}
 		
 		
@@ -93,7 +94,7 @@
 			margin: 5px auto; 
 		}
 		.types-table td{
-			width:300px;
+			width:200px;
 		}
 		
 		/*遮罩层样式*/
@@ -159,7 +160,7 @@
 		<div class='add-del-type'>
 				<div class='add-del-item'>删除全部分类</div>
 				<div class='gap-div'></div>
-				<div class='add-del-item'>新增分类</div>
+				<div class='add-del-item'  onclick='add_edit(0,"add1")'>新增分类</div>
 		</div>
 		
 		<!--商品分类最外层div-->
@@ -175,9 +176,11 @@
 								<input type='checkbox' id='{{key.0}}'  onchange='selectAll(this,{{key.0}})'  class='{{key.0}}' />
 							{{key.1}}<label>
 							</td>
-							<td class='cursor-point' onclick='add_edit({{key.0}},"edit1")>编辑jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</td>
+							<td class='cursor-point' onclick='add_edit({{key.0}},"edit1")'>编辑</td>
 							<td class='cursor-point' onclick='delChoose({{key.0}})'>删除选中</td>
 							<td class='cursor-point' onclick='add_edit({{key.0}},"add2")'>添加下级分类</td>	
+							
+								
 							
 						<tr>
 						
@@ -342,6 +345,8 @@ function add_edit(key,operType){
 				});
 			}
 			
+			
+			
 			if(operType=='edit2'){
 				$.ajax({
 					url:'/editSecond/',
@@ -362,6 +367,19 @@ function add_edit(key,operType){
 					data:data,
 					success:function(){
 						alert('成功修改一级分类')
+						window.location.reload()
+					}
+				});
+			}
+			
+			if(operType=='add1'){
+				
+				$.ajax({
+					url:'/addFirst/',
+					method:'POST',
+					data:data,
+					success:function(){
+						alert('成功添加一级分类')
 						window.location.reload()
 					}
 				});
