@@ -18,7 +18,7 @@ from django.contrib import admin
 from user_center.views import register,load,loginOut
 from index_show.views import index
 from seller.views import sellerIndex,registerStore,searchStore,manageStore,editTypes,delSecondName
-from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst
+from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,showProduct,addProduct
 
 
 urlpatterns = [
@@ -38,8 +38,8 @@ urlpatterns = [
     url(r'^editSecond/$', editSecond),
     url(r'^editFirst/$', editFirst),
     url(r'^addFirst/$', addFirst),
-    
-    
+    url(r'^showProduct/(\d+)/$', showProduct),
+    url(r'^addProduct/(\d+)/$', addProduct),
     
     
     

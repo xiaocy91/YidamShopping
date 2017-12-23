@@ -23,8 +23,7 @@
 		.nameFirst{
 			font-weight:bold;
 			font-size:18px;
-			padding:3px 5px 3px 5px;
-			cursor:pointer;}
+			padding:3px 5px 3px 5px;}
 			
 		.nameSecond{
 			font-size:15px;
@@ -47,7 +46,7 @@
 			{% for key,value in typeDic.items %}
 				<div class='nameFirst'> {{key.1}} </div>
 				{% for sencondType in value %}
-					<div class='nameSecond'>{{sencondType.1}}</div>
+					<div class='nameSecond' onclick='showProduct({{sencondType.0}})'>{{sencondType.1}}</div>
 				{% endfor %}
 			{% endfor %}
 		{% endif %}
@@ -62,6 +61,10 @@
 	<script type='text/javascript'>
 		function editTypes(){
 			window.location.href='/editTypes/'
+		}
+		
+		function showProduct(key){
+			window.location.href='/showProduct/'+key+'/'
 		}
 	</script>
 	

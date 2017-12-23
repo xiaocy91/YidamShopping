@@ -224,3 +224,17 @@ def addFirst(request):
         storeid=store[0].StoreNid
         ProductType.objects.create(TypeName=typeName,StoreNid_id=storeid)
         return HttpResponseRedirect('/editTypes/')
+    
+def showProduct(request,secondId):
+    if request.method=='GET':
+        resData=getTypesData(request)
+        resData['secondId']=secondId
+        return render_to_response('store_manage_product.html',resData)
+    
+def addProduct(request,secondId):
+    if request.method=='GET':
+        resData=getTypesData(request)
+        resData['secondId']=secondId
+        return render_to_response('store_manage_addProduct.html',resData)  
+    if request.method=='POST': 
+        pass

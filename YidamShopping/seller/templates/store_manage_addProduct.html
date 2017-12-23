@@ -1,0 +1,110 @@
+<html>
+
+<head> 
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+	
+	<style type='text/css'>
+		body{
+			margin:0px;
+		}
+		
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+		/*商品信息的最外层div*/	
+		.info-div-frame{
+			width:900px;
+			min-height:400px;
+			margin-left:49px;
+			margin-top:15px;
+			margin-bottom:15px;}	
+	
+		form input{
+			border: 1px solid #E0E0E0;
+			width:250px;
+			height:30px;
+			margin:10px;
+		}
+	
+	
+	</style>
+	
+
+	
+</head>
+
+
+<body>
+
+
+{% include "store_manage_top.html"%}
+
+<div class='bodyFrame'>
+
+	{% include 'store_manage_left.html'%}
+	
+	
+	<div class='bodyContent'>
+		
+		<!--商品信息最外层div-->
+		<div class='info-div-frame'>
+		
+			<form >
+				<div><label for='head'>商品标题:
+					<input type='text' id='head' name='head' />
+				</label></div>
+				<div><label for='price'>商品价格:
+					<input type='text' id='price' name='price'/>
+				</label></div>
+				<div><label for='attribute1'>商品类型:
+					<input type='text' id='attribute1' name='attribute1' />
+				</label></div>
+				<div><label for='attribute2'>商品大小:
+					<input type='text' id='attribute2' name='attribute2' />
+				</label></div>
+				<div><label for='media'>图片或视频:
+					<input type='file' id='media' name='media' multiple />
+				</label></div>
+				<div>
+					<input type='submit' id='sub' value='提交' />
+				</div>
+			</form>
+				
+		</div>
+		
+	</div>
+	
+</div>
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+$(function(){
+
+	$('#addProduct').click(function(){
+		window.location.href='/addProduct/'+{{secondId}}+'/'
+	});
+
+})
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+#encoding:utf-8
 from __future__ import unicode_literals
 
 from django.db import models
@@ -27,7 +28,23 @@ class ProductSecondType(models.Model):
         SecondTypeName=models.CharField(max_length=150)
     
 class ProductHome(models.Model):  
-      HomeNid=models.AutoField(primary_key=True)
-      StoreNid=models.ForeignKey(Store)
-      TypeNid=models.ForeignKey(ProductType)
-      
+    HomeNid=models.AutoField(primary_key=True)
+    StoreNid=models.ForeignKey(Store)
+    TypeNid=models.ForeignKey(ProductType)
+    
+ 
+class Product(models.Model): 
+    Nid=models.AutoField(primary_key=True)
+    TypeNid=models.ForeignKey(ProductSecondType)
+    Head=models.CharField(max_length=200)
+    Price=models.IntegerField()
+    AttributeName1=models.CharField(max_length=200,default='颜色')
+    AttributeName2=models.CharField(max_length=200,default='大小')
+    
+class ProductMedia(models.Model):
+    Nid=models.AutoField(primary_key=True)
+    ProductNid=models.ForeignKey(Product)
+    Media=models.FileField(upload_to='productMedia')
+    
+    
+        

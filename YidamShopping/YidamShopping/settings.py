@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-from django.conf.global_settings import STATICFILES_DIRS
+from django.conf.global_settings import STATICFILES_DIRS, MEDIA_ROOT
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -128,3 +128,6 @@ USE_TZ = True
 
 STATIC_URL = '/statics/'
 STATICFILES_DIRS=(os.path.join(BASE_DIR,'statics'),)
+
+
+MEDIA_ROOT='./YidamUpload'
