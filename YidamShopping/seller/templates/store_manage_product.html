@@ -85,7 +85,43 @@
 		
 		<!--商品信息最外层div-->
 		<div class='product-div-frame'>
-			fffffffffggggggg
+		
+			
+			{% if productLists %}
+				{% for product in productLists %}
+					{% for key,value in product.items %}
+						{% ifequal key 'imgPath' %}
+							<div>
+								<img width='200' height='200' src='/media/{{value}}'/>
+							</div>
+						{%  endifequal %}	
+					{% endfor %}
+				{% endfor%}	
+				
+				{% for product in productLists %}
+					{% for key,value in product.items %}
+						{% ifequal key 'price' %}
+							<div>
+								{{value}}
+							</div>
+						{%  endifequal %}	
+					{% endfor %}
+				{% endfor%}	
+				
+				
+				{% for product in productLists %}
+					{% for key,value in product.items %}
+						{% ifequal key 'head' %}
+							<div>
+								{{value}}
+							</div>
+						{%  endifequal %}	
+					{% endfor %}
+				{% endfor%}	
+				
+				
+			{% endif %}	
+			
 		</div>
 		
 	</div>

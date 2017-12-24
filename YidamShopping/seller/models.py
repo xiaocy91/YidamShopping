@@ -41,10 +41,10 @@ class Product(models.Model):
     AttributeName1=models.CharField(max_length=200,default='颜色')
     AttributeName2=models.CharField(max_length=200,default='大小')
     
-class ProductMedia(models.Model):
+class ProductImage(models.Model):
     Nid=models.AutoField(primary_key=True)
     ProductNid=models.ForeignKey(Product)
-    Media=models.FileField(upload_to='productMedia')
+    Img=models.ImageField(upload_to='img')
     
     
         

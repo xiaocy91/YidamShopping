@@ -64,7 +64,8 @@
 		<!--商品信息最外层div-->
 		<div class='info-div-frame'>
 		
-			<form >
+		
+			<form enctype="multipart/form-data"  method='post' id='form_action' >
 				<div><label for='head'>商品标题:
 					<input type='text' id='head' name='head' />
 				</label></div>
@@ -77,11 +78,11 @@
 				<div><label for='attribute2'>商品大小:
 					<input type='text' id='attribute2' name='attribute2' />
 				</label></div>
-				<div><label for='media'>图片或视频:
-					<input type='file' id='media' name='media' multiple />
+				<div><label for='media'>图片:
+					<input type='file' id='img' name='img' multiple />
 				</label></div>
 				<div>
-					<input type='submit' id='sub' value='提交' />
+					<input type='submit' id='sub' value='提交' onclick='addProduct({{secondId}})' />
 				</div>
 			</form>
 				
@@ -94,13 +95,10 @@
 <script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
 <script type='text/javascript'>
 
-$(function(){
-
-	$('#addProduct').click(function(){
-		window.location.href='/addProduct/'+{{secondId}}+'/'
-	});
-
-})
+function addProduct(key){
+		path='/addProduct/'+key+'/'
+		$('#form_action').attr('action',path)
+}
 
 </script>
 

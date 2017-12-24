@@ -7,7 +7,9 @@ import json
 from seller.models import ProductSecondType
 from django.template.defaultfilters import first
 from urllib2 import HTTPRedirectHandler
-
+from models import Product,ProductImage
+import os
+import time
 
 #进入卖家中心首页
 def sellerIndex(request):
@@ -229,12 +231,65 @@ def showProduct(request,secondId):
     if request.method=='GET':
         resData=getTypesData(request)
         resData['secondId']=secondId
+        #从产品信息表获取数据
+        products=Product.objects.filter(TypeNid_id=secondId).all()
+        productLists=[]
+        for product in products:
+            proDic={}
+            id=product.Nid
+            head=product.Head
+            price=product.Price
+            #获取一张商品的图片或者视频信息
+            proImg=ProductImage.objects.filter(ProductNid_id=id).last()
+            imgPath=proImg.Img
+            
+            proDic['id']=id
+            proDic['head']=head
+            proDic['price']=price
+            proDic['imgPath']=imgPath
+            
+            #将每个商品的封装列表加入到总列表
+            productLists.append(proDic)
+            
+        print productLists
+        #将商品列表加入返回的数据字典
+        resData['productLists']=productLists   
+            
         return render_to_response('store_manage_product.html',resData)
     
 def addProduct(request,secondId):
+    resData=getTypesData(request)
     if request.method=='GET':
-        resData=getTypesData(request)
         resData['secondId']=secondId
-        return render_to_response('store_manage_addProduct.html',resData)  
-    if request.method=='POST': 
-        pass
+        print 'aa:'+secondId
+        return render_to_response('store_manage_addProduct.html',resData)
+    if request.method=='POST':
+        print 'ss:'+secondId
+        postfiles=request.FILES
+        postData=request.POST
+        head=postData.get('head')
+        price=postData.get('price')
+        attribute1=postData.get('attribute1')
+        attribute2=postData.get('attribute2')
+        imgs= postfiles.getlist('img')
+        #商品信息表添加数据
+        p=Product(TypeNid_id=secondId,Head=head,Price=price,AttributeName1=attribute1,AttributeName2=attribute2)
+        p.save()
+       # for media in medias:
+       #     uploadPath='./UploadFiles/seller/' 
+       #     timeStr=time.strftime('%y%m%d%H%M%S',time.localtime())
+       #     filePath=uploadPath+timeStr+media.name 
+       #     fw=open(filePath,'wb')
+       #     for chunk in media.chunks():
+       #         fw.write(chunk)
+       #     fw.close()
+            #商品多媒体数据表添加数据
+       #     pm=ProductMedia(ProductNid_id=p.Nid,Media=filePath)
+        #    pm.save()
+        for img in imgs:
+            new_pm=ProductImage(ProductNid_id=p.Nid,Img=img)
+            new_pm.save()
+            print img
+        return HttpResponse('ok')
+    
+    

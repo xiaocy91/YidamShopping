@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-from django.conf.global_settings import STATICFILES_DIRS, MEDIA_ROOT
+from django.conf.global_settings import STATICFILES_DIRS, MEDIA_ROOT, MEDIA_URL
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -67,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+              
             ],
         },
     },
@@ -130,4 +132,5 @@ STATIC_URL = '/statics/'
 STATICFILES_DIRS=(os.path.join(BASE_DIR,'statics'),)
 
 
-MEDIA_ROOT='./YidamUpload'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')    
+MEDIA_URL = '/media/'
