@@ -4,7 +4,10 @@ from __future__ import unicode_literals
 from django.db import models
 from user_center.models import Userinfo
 
-# Create your models here.
+# use for picture rename
+from seller.storage import ImageStorage
+
+
 
 class Store(models.Model):
     StoreNid=models.AutoField(primary_key=True)
@@ -44,7 +47,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     Nid=models.AutoField(primary_key=True)
     ProductNid=models.ForeignKey(Product)
-    Img=models.ImageField(upload_to='img')
+    Img=models.ImageField(upload_to='img/%Y%m%d%H%M%S')
     
     
         

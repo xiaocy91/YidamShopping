@@ -20,6 +20,7 @@ from index_show.views import index
 from seller.views import sellerIndex,registerStore,searchStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,showProduct,addProduct
 
+#use for media and picture show
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -48,3 +49,6 @@ urlpatterns = [
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+#'+static'use for media and picture show

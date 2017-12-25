@@ -135,7 +135,7 @@
 		<div class='add-del-type'>
 				<div class='add-del-item'>删除全部分类</div>
 				<div class='gap-div'></div>
-				<div class='add-del-item'  onclick='add_edit(0,"add1")'>新增分类</div>
+				<div class='add-del-item'  onclick='add_edit(this,0,"add1")' id='add1'>新增分类</div>
 		</div>
 		
 		<!--商品分类最外层div-->
@@ -151,9 +151,9 @@
 								<input type='checkbox' id='{{key.0}}'  onchange='selectAll(this,{{key.0}})'  class='{{key.0}}' />
 							{{key.1}}<label>
 							</td>
-							<td class='cursor-point' onclick='add_edit({{key.0}},"edit1")'>编辑</td>
+							<td class='cursor-point' onclick='add_edit(this,{{key.0}},"edit1")' id='edit1'>编辑</td>
 							<td class='cursor-point' onclick='delChoose({{key.0}})'>删除选中</td>
-							<td class='cursor-point' onclick='add_edit({{key.0}},"add2")'>添加下级分类</td>	
+							<td class='cursor-point' onclick='add_edit(this,{{key.0}},"add2")' id='add2'>添加下级分类</td>	
 							
 								
 							
@@ -169,7 +169,7 @@
 								{{sencondType.1}}
 								<label>		
 							</td>
-							<td onclick='add_edit({{sencondType.0}},"edit2")' class='cursor-point' >编辑 </td>
+							<td onclick='add_edit(this,{{sencondType.0}},"edit2")' class='cursor-point' id='edit2' >编辑 </td>
 						<tr>
 						{% endfor %}
 					</table>
@@ -293,19 +293,17 @@ function delChoose(key){
 }
 
 
-//编辑、添加分类
-function add_edit(key,operType){
+
+function jduge_addEdit(key,operType){
 	
-	$('.fixed-div').css("display","block");
-	$('.add-div').css("display","block");
-	
-	$('#confirm').click(function(){
+		console.log(key,operType)
+		
+		
 		var typeName=$('#typeName').val()
 		if(typeName!=''){
 			//封装要提交的数据
 			data={'key':key,'typeName':typeName}
 		
-			console.log(data)
 			
 			//判断操作是否为添加二级分类
 			if(operType=='add2'){
@@ -320,8 +318,6 @@ function add_edit(key,operType){
 				});
 			}
 			
-			
-			
 			if(operType=='edit2'){
 				$.ajax({
 					url:'/editSecond/',
@@ -335,7 +331,6 @@ function add_edit(key,operType){
 			}
 			
 			if(operType=='edit1'){
-				
 				$.ajax({
 					url:'/editFirst/',
 					method:'POST',
@@ -346,9 +341,8 @@ function add_edit(key,operType){
 					}
 				});
 			}
-			
+
 			if(operType=='add1'){
-				
 				$.ajax({
 					url:'/addFirst/',
 					method:'POST',
@@ -359,26 +353,45 @@ function add_edit(key,operType){
 					}
 				});
 			}
-			
-			
-			
-			
-			
+	}
+}
+
+
+//编辑、添加分类
+function add_edit(obj,key,operType){
+	
+	//每次触发时，默认都是true，也就是点击过取消的状态
+	$(obj).attr('name','true')
+	
+	$('.fixed-div').css("display","block");
+	$('.add-div').css("display","block");
+	
+	//执行确定操作
+	//这里先要移除之前的绑定off('click'),然后再绑定现在的click,不然会重复执行多次
+	$('#confirm').off('click').click(function(){
+		//点击确定前，先要看对象的状态,避免同时对多个标签提交相同的数据
+		var name=$(obj).attr('name')
+		if(name=='true'){
+			jduge_addEdit(key,operType)
+		}else{
+			return false;
 		}
+		
+	})
+		
+	
+	//执行取消操作
+	$('#cancle').click(function(){
+		$('.fixed-div').css("display","none");
+		$('.add-div').css("display","none");	
+		//当点击过取消后，就变成false状态
+		$(obj).attr('name','false')
 	});
 	
 	
 }
 
 
-$(function(){
-	//取消添加分类的编辑框
-	$('#cancle').click(function(){
-		$('.fixed-div').css("display","none");
-		$('.add-div').css("display","none");	
-	});
-
-})
 
 
 
