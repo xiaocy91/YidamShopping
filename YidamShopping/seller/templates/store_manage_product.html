@@ -28,9 +28,10 @@
 		
 		/*商品分类的最外层div*/	
 		.product-div-frame{
-			width:900px;
+			width:998px;
 			min-height:400px;
-			margin-left:49px;
+			margin-left:8px;
+			margin-right:0px;
 			margin-top:15px;
 			margin-bottom:15px;}	
 
@@ -58,10 +59,46 @@
 			position:relative;
 			float:left;
 			margin-top:10px;}
+		
+		/*产品显示div*/
+		.product{
+			float:left;
+			width:220;
+			height:370;
+			margin:0px 27px 20px 0;
+			border:1px solid #D3D3D3;
+		}
+		.product-img{
+			width:220;
+			height:225;
+			margin:0px;
+		}
+		
+		.title{
+		height:50px;
+    	margin: 10px;
+    	line-height: 20px;
+    	font-size: 12px;
+    	max-height: 44px;
+   	 	overflow: hidden;
+   	 	margin:3px;}
+   	 	
+   	 	.price {
+	    height: 33px;
+	    line-height: 33px;
+	    overflow: hidden;
+	    margin:3px;}
+	    
+	    .seperate{
+	    	border-top:1px solid #D3D3D3;
+	    	width:220px;
+	    }
+	    
+	    .saleinfo {
+	    margin:10px;}
 			
 	</style>
 	
-
 	
 </head>
 
@@ -86,43 +123,42 @@
 		<!--商品信息最外层div-->
 		<div class='product-div-frame'>
 		
-			
-			{% if productLists %}
-				{% for product in productLists %}
-					{% for key,value in product.items %}
-						{% ifequal key 'imgPath' %}
+				
+				{% if productLists %}
+					{% for product in productLists %}
+						
+						<div class='product'>
 							<div>
-								<img width='200' height='200' src='/media/{{value}}'/>
+								<img class='product-img' src='/media/{{product.3}}'/>
 							</div>
-						{%  endifequal %}	
-					{% endfor %}
-				{% endfor%}	
-				
-				{% for product in productLists %}
-					{% for key,value in product.items %}
-						{% ifequal key 'price' %}
-							<div>
-								{{value}}
+						
+							<div class='title'>
+								{{product.1}}
 							</div>
-						{%  endifequal %}	
-					{% endfor %}
-				{% endfor%}	
-				
-				
-				{% for product in productLists %}
-					{% for key,value in product.items %}
-						{% ifequal key 'head' %}
-							<div>
-								{{value}}
+						
+							<div class='price'>
+								￥  &nbsp;{{product.2}}
 							</div>
-						{%  endifequal %}	
-					{% endfor %}
-				{% endfor%}	
+							
+							<div class='seperate'></div>
+							<div class='saleinfo'>
+								月销售信息
+							</div>
+						</div>
+						
+					{% endfor%}	
+					
+					
+					
+				{% endif %}	
 				
 				
-			{% endif %}	
 			
 		</div>
+		
+		
+		
+		
 		
 	</div>
 	

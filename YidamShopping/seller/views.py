@@ -235,7 +235,7 @@ def showProduct(request,secondId):
         products=Product.objects.filter(TypeNid_id=secondId).all()
         productLists=[]
         for product in products:
-            proDic={}
+            proList=[]
             id=product.Nid
             head=product.Head
             price=product.Price
@@ -243,13 +243,13 @@ def showProduct(request,secondId):
             proImg=ProductImage.objects.filter(ProductNid_id=id).last()
             imgPath=proImg.Img
             
-            proDic['id']=id
-            proDic['head']=head
-            proDic['price']=price
-            proDic['imgPath']=imgPath
+            proList.append(id)
+            proList.append(head)
+            proList.append(price)
+            proList.append(imgPath)
             
             #将每个商品的封装列表加入到总列表
-            productLists.append(proDic)
+            productLists.append(proList)
             
         print productLists
         #将商品列表加入返回的数据字典
@@ -261,10 +261,8 @@ def addProduct(request,secondId):
     resData=getTypesData(request)
     if request.method=='GET':
         resData['secondId']=secondId
-        print 'aa:'+secondId
         return render_to_response('store_manage_addProduct.html',resData)
     if request.method=='POST':
-        print 'ss:'+secondId
         postfiles=request.FILES
         postData=request.POST
         head=postData.get('head')
