@@ -18,7 +18,10 @@ from django.contrib import admin
 from user_center.views import register,load,loginOut
 from index_show.views import index
 from seller.views import sellerIndex,registerStore,searchStore,manageStore,editTypes,delSecondName
-from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,showProduct,addProduct
+from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
+
+
+from seller.views import testShowProduct
 
 #use for media and picture show
 from django.conf.urls.static import static
@@ -44,7 +47,7 @@ urlpatterns = [
     url(r'^addFirst/$', addFirst),
     url(r'^showProduct/(\d+)/$', showProduct),
     url(r'^addProduct/(\d+)/$', addProduct),
-    
+    url(r'^testShowProduct/$', testShowProduct),
     
     
     

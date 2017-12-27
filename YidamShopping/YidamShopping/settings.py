@@ -134,3 +134,7 @@ STATICFILES_DIRS=(os.path.join(BASE_DIR,'statics'),)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')    
 MEDIA_URL = '/media/'
+
+
+#how many datas in one page
+PER_PAGE=8

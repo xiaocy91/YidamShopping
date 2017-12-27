@@ -33,8 +33,61 @@
 			margin-left:8px;
 			margin-right:0px;
 			margin-top:15px;
-			margin-bottom:15px;}	
+			margin-bottom:15px;}
+		
+		/*a链接去掉下划线*/
+		a{
+			text-decoration:none;
+		}
+		
+		
+		/*分页的样式*/
+		.pagination{
+			clear:left;
+			width:998px;	
+			text-align:center;
+		}
+		
+		.wp-paginate {
+			width:370px;
+    		padding:0;
+   			margin:0;
+    		margin-left:314px;}
 
+		.wp-paginate li {
+    		float:left;
+    		list-style:none;
+    		margin:2px;
+   		 	padding:0;
+    		margin:0px auto;}
+		.wp-paginate a {
+		    margin:0 2px;
+		    line-height:20px;
+		    text-align:center;
+		    text-decoration:none;
+		    border-radius:3px;
+		    -moz-border-radius:3px;
+		    float:left;
+		    min-height:20px;
+		    min-width:20px;
+		    color:#858585;
+		    border:2px #e3e3e3 solid;
+		    border-radius:13px;
+		    font-size:15px;}
+		
+			.wp-paginate span{
+				margin:0 2px;
+			    line-height:20px;
+			    text-align:center;
+			    text-decoration:none;
+			    float:left;
+			    min-height:20px;
+			    min-width:20px;
+			    color:#858585;
+			    font-size:15px;
+			}		
+	
+	
 		
 	
 		.add-del-type{
@@ -96,64 +149,6 @@
 	    
 	    .saleinfo {
 	    margin:10px;}
-	    
-	    
-	    
-	    
-	    
-	    
-	    /*a链接去掉下划线*/
-		a{
-			text-decoration:none;
-		}
-		
-		
-		/*分页的样式*/
-		.pagination{
-			clear:left;
-			width:998px;	
-			text-align:center;
-		}
-		
-		.wp-paginate {
-			width:370px;
-    		padding:0;
-   			margin:0;
-    		margin-left:314px;}
-
-		.wp-paginate li {
-    		float:left;
-    		list-style:none;
-    		margin:2px;
-   		 	padding:0;
-    		margin:0px auto;}
-		.wp-paginate a {
-		    margin:0 2px;
-		    line-height:20px;
-		    text-align:center;
-		    text-decoration:none;
-		    border-radius:3px;
-		    -moz-border-radius:3px;
-		    float:left;
-		    min-height:20px;
-		    min-width:20px;
-		    color:#858585;
-		    border:2px #e3e3e3 solid;
-		    border-radius:13px;
-		    font-size:15px;}
-		
-			.wp-paginate span{
-				margin:0 2px;
-			    line-height:20px;
-			    text-align:center;
-			    text-decoration:none;
-			    float:left;
-			    min-height:20px;
-			    min-width:20px;
-			    color:#858585;
-			    font-size:15px;
-			}		
-	
 			
 	</style>
 	
@@ -181,21 +176,20 @@
 		<!--商品信息最外层div-->
 		<div class='product-div-frame'>
 		
+		
+		
 				
-				{% if productLists %}
-					{% for product in productLists %}
+				{% if products %}
+					{% for product in products%}
 						
 						<div class='product'>
-							<div>
-								<img class='product-img' src='/media/{{product.2}}'/>
-							</div>
-						
+					
 							<div class='title'>
-								{{product.1}}
+								{{product.Head}}
 							</div>
 						
 							<div class='price'>
-								￥  &nbsp;
+								￥  &nbsp;{{product.Price}}
 							</div>
 							
 							<div class='seperate'></div>
@@ -203,32 +197,37 @@
 								月销售信息
 							</div>
 						</div>
+						
 					{% endfor%}	
+					
+					
 					
 				{% endif %}	
 				
+		
 				
-				<!--使用pagination进行分页-->
-				<div class="pagination">
-				    <span class="step-links">
-					    <ol class="wp-paginate">
-					        {% if productLists.has_previous %}
-					            <li><a href="?page=1">&laquo; 第一页</a></li>
-					            <li><a href="?page={{ productLists.previous_page_number }}">上一页</a></li>
-					        {% endif %}
-					
-					        <span class="current">
-					            	<li><span>第 {{ productLists.number }} 页，共 {{ productLists.paginator.num_pages }}页</span></li>
-					        </span>
-					
-					        {% if productLists.has_next %}
-					            <li><a href="?page={{ productLists.next_page_number }}">下一页</a></li>
-					            <li><a href="?page={{ productLists.paginator.num_pages }}">最后页 &raquo;</a></li>
-					        {% endif %}
-					     </ol>
-				    </span>
-				</div>
-							
+	<div class="pagination">
+    <span class="step-links">
+	    <ol class="wp-paginate">
+	        {% if products.has_previous %}
+	            <li><a href="?page=1">&laquo; 第一页</a></li>
+	            <li><a href="?page={{ products.previous_page_number }}">上一页</a></li>
+	        {% endif %}
+	
+	        <span class="current">
+	            	<li><span>第 {{ products.number }} 页，共 {{ products.paginator.num_pages }}页</span></li>
+	        </span>
+	
+	        {% if products.has_next %}
+	            <li><a href="?page={{ products.next_page_number }}">下一页</a></li>
+	            <li><a href="?page={{ products.paginator.num_pages }}">最后页 &raquo;</a></li>
+	        {% endif %}
+	     </ol>
+    </span>
+</div>
+			
+				
+				
 				
 				
 			
@@ -248,7 +247,7 @@
 $(function(){
 
 	$('#addProduct').click(function(){
-		window.location.href='/addProduct/'+{{secondId}}+'/'
+		window.location.href='/testShowProduct/'
 	});
 
 })

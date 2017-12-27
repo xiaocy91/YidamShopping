@@ -9,6 +9,7 @@ from seller.storage import ImageStorage
 
 
 
+
 class Store(models.Model):
     StoreNid=models.AutoField(primary_key=True)
     UserNid=models.ForeignKey(Userinfo)
@@ -26,9 +27,9 @@ class ProductType(models.Model):
     TypeName=models.CharField(max_length=150)
 
 class ProductSecondType(models.Model):
-        SecondTypeNid=models.AutoField(primary_key=True)
-        TypeNid=models.ForeignKey(ProductType)
-        SecondTypeName=models.CharField(max_length=150)
+    SecondTypeNid=models.AutoField(primary_key=True)
+    TypeNid=models.ForeignKey(ProductType)
+    SecondTypeName=models.CharField(max_length=150)
     
 class ProductHome(models.Model):  
     HomeNid=models.AutoField(primary_key=True)
@@ -40,9 +41,11 @@ class Product(models.Model):
     Nid=models.AutoField(primary_key=True)
     TypeNid=models.ForeignKey(ProductSecondType)
     Head=models.CharField(max_length=200)
-    Price=models.IntegerField()
-    AttributeName1=models.CharField(max_length=200,default='颜色')
-    AttributeName2=models.CharField(max_length=200,default='大小')
+    AttributeName1=models.CharField(max_length=200,default="foobar")
+    AttributeName2=models.CharField(max_length=200,default='2')
+    DefaultImg=models.IntegerField(blank=True,null=True)
+    DefaultPrice=models.IntegerField(blank=True,null=True)
+   
     
 class ProductImage(models.Model):
     Nid=models.AutoField(primary_key=True)
