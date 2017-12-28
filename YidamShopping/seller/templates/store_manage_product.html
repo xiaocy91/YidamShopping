@@ -81,7 +81,7 @@
     	font-size: 12px;
     	max-height: 44px;
    	 	overflow: hidden;
-   	 	margin:3px;}
+   	 	}
    	 	
    	 	.price {
 	    height: 33px;
@@ -94,8 +94,9 @@
 	    	width:220px;
 	    }
 	    
-	    .saleinfo {
-	    margin:10px;}
+	    .operates {
+	    margin:10px;
+	    }
 	    
 	    
 	    
@@ -154,6 +155,20 @@
 			    font-size:15px;
 			}		
 	
+	
+			/*编辑、删除操作的样式*/
+			.sale-info{
+				line-height: 20px;
+    			font-size: 12px;
+				float:left;
+			}
+			.edit-delete{
+				float:right;
+				line-height: 20px;
+    			font-size: 12px;
+    			cursor:pointer;
+			}
+			
 			
 	</style>
 	
@@ -199,8 +214,11 @@
 							</div>
 							
 							<div class='seperate'></div>
-							<div class='saleinfo'>
-								月销售信息
+							
+							<div class='operates'>
+								<div class='sale-info'>销售信息</div> 
+								<div class='edit-delete' onclick='edit({{product.0}})'>编辑 </div>
+								<div class='edit-delete'>删除  &nbsp;</div>
 							</div>
 						</div>
 					{% endfor%}	
@@ -250,8 +268,11 @@ $(function(){
 	$('#addProduct').click(function(){
 		window.location.href='/addProduct/'+{{secondId}}+'/'
 	});
-
 })
+
+function edit(id){
+	window.location.href='/editProduct/'+id+'/'
+}
 
 </script>
 

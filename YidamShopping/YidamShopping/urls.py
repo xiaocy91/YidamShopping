@@ -19,7 +19,7 @@ from user_center.views import register,load,loginOut
 from index_show.views import index
 from seller.views import sellerIndex,registerStore,searchStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
-
+from seller.views import editProduct
 
 from seller.views import testShowProduct
 
@@ -48,6 +48,8 @@ urlpatterns = [
     url(r'^showProduct/(\d+)/$', showProduct),
     url(r'^addProduct/(\d+)/$', addProduct),
     url(r'^testShowProduct/$', testShowProduct),
+    url(r'^editProduct/(\d+)/$', editProduct),
+    
     
     
     

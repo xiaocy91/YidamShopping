@@ -285,14 +285,38 @@ def addProduct(request,secondId):
         attribute1=postData.get('attribute1')
         attribute2=postData.get('attribute2')
         imgs= postfiles.getlist('img')
+        
+        
+        #检查提交数据是否为空
+        if head and attribute1 and attribute2 and imgs :
         #商品信息表添加数据
-        p=Product(TypeNid_id=secondId,Head=head,AttributeName1=attribute1,AttributeName2=attribute2)
-        p.save()
-      
-        for img in imgs:
-            new_pm=ProductImage(ProductNid_id=p.Nid,Img=img)
-            new_pm.save()
-        return HttpResponseRedirect('/showProduct/%d'%int(secondId))
+            p=Product(TypeNid_id=secondId,Head=head,AttributeName1=attribute1,AttributeName2=attribute2)
+            p.save()
+            for img in imgs:
+                new_pm=ProductImage(ProductNid_id=p.Nid,Img=img)
+                new_pm.save()
+            return HttpResponseRedirect('/editProduct/%d'%p.Nid)
+        else:
+            resData['secondId']=secondId
+            return render_to_response('store_manage_addProduct.html',resData)
+        
+        
+
+
+def editProduct(request,id):
+    resData=getTypesData(request)
+    if request.method=='GET':
+        product=Product.objects.get(Nid=id)
+        #获取图片
+        productImgs=ProductImage.objects.filter(ProductNid_id=id)
+        if product and productImgs:
+            resData['product']=product
+            resData['productImgs']=productImgs
+        print productImgs   
+        return render_to_response('store_manage_editProduct.html',resData)
+    
+    
+   
   
     
 def testShowProduct(request):

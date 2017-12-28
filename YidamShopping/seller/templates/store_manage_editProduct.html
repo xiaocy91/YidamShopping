@@ -58,6 +58,7 @@
 		.button{  
 		    background:#E0E0E0;  
 		    color:#FFFFFF;  
+		      
 		    padding: 10px 30px 10px 30px;  
 		    font-size:16px;  
 		    font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;  
@@ -66,6 +67,26 @@
 		    -webkit-transition:all linear 0.30s;  
 		    -moz-transition:all linear 0.30s;  
 		    transition:all linear 0.30s;  }  
+  
+  		/*图片显示样式*/
+	   img{
+	   	width:100px;
+	   	height:110px;
+	   }
+	  .img-table{
+	  	font-size: 12px;
+	  	text-align:center;
+	  	border:1px solid #E5E5E5;
+	  	background: #FFFFFF;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	  }
+	  .img-table td{
+	  	width:100px;
+	  }
+ 
+  
   
 		
 	</style>
@@ -90,39 +111,53 @@
 		<!--商品信息最外层div-->
 		<div class='info-div-frame'>
 		
-			<form enctype="multipart/form-data"  method='post' id='form_action' >
-				<table>
-					<tr>
-						<td class='td-name'><label for='head'>商品标题:</td>
-						<td ><input class='td-input' type='text' id='head' name='head' /></label></td>
-					</tr>
+			<table>
+			{% if product %}
+				<tr>
+					<td class='td-name'>商品标题:</td>
+					<td ><input class='td-input' type='text' id='head' name='head' value='5555{{product.Head}}' /></td>
+				</tr>
+			{% endif %}
+			
+				<tr>
+					<td class='td-name'>图片:</td>
+					<!--图片用嵌入的table显示-->
+					<td>
+						<table class='img-table'>
+						{%  if productImgs %}
+							{% for productImg in productImgs %}
+								<tr>
+									<td >
+										<img src='/media/{{productImg.Img}}'/> 
+									</td>
+									<td>设为默认</td>
+									<td>修改</td>
+									<td>删除</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+						</table>
+					</td>
+				</tr>
 				
-					<tr>
-						<td class='td-name'>图片:</td>
-						<td >
-							<input class='td-input' type='file' id='img' name='img' />
-							<input class='td-input' type='file' id='img' name='img'/>
-							<input class='td-input' type='file' id='img' name='img'/>
-							<input class='td-input' type='file' id='img' name='img'/>
-						</td>
-					</tr>
-					<tr>
-						<td class='td-name'><label for='attribute1'>商品规格名称:</td>
-						<td ><input class='td-input' type='text' id='attribute1' name='attribute1' placeholder="颜色、口味等" /></label></td>
-					</tr>
-					<tr>
-						<td class='td-name'><label for='attribute2'>商品尺码名称:</td>
-						<td><input  class='td-input' type='text' id='attribute2' name='attribute2' placeholder='大小、尺码等'/></label></td>
-					</tr>
 				
-					<tr>
-						<td class='td-name' colspan="2"><input class='button' class='button' type='submit' id='sub' value='提交' onclick='addProduct({{secondId}})' /></td>
-					</tr>
-					
-					
+				<tr>
+					<td class='td-name'><label for='attribute1'>商品规格名称:</td>
+					<td ><input class='td-input' type='text' id='attribute1' name='attribute1' placeholder="颜色、口味等" /></label></td>
+				</tr>
+				<tr>
+					<td class='td-name'><label for='attribute2'>商品尺码名称:</td>
+					<td><input  class='td-input' type='text' id='attribute2' name='attribute2' placeholder='大小、尺码等'/></label></td>
+				</tr>
+			
+				<tr>
+					<td class='td-name' colspan="2"><input class='button' class='button' type='submit' id='sub' value='提交' onclick='addProduct({{secondId}})' /></td>
+				</tr>
 				
-				</table>
-			</form>
+				
+			
+			</table>
+		
 			
 			
 		</div>
