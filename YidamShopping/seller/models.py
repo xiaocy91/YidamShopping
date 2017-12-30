@@ -51,6 +51,21 @@ class ProductImage(models.Model):
     Nid=models.AutoField(primary_key=True)
     ProductNid=models.ForeignKey(Product)
     Img=models.ImageField(upload_to='img/%Y%m%d%H%M%S')
+
+class ProductAttr1(models.Model):
+    Nid=models.AutoField(primary_key=True)
+    ProductNid=models.ForeignKey(Product)
+    Attr1=models.CharField(max_length=200)
+    ImgAttr1=models.ImageField(upload_to='minImg/%Y%m%d%H%M%S')
     
-    
-        
+class ProductAttr2(models.Model):
+    Nid=models.AutoField(primary_key=True)
+    ProductNid=models.ForeignKey(Product)
+    Attr2=models.CharField(max_length=200)  
+ 
+class ProductPrice(models.Model): 
+    Nid=models.AutoField(primary_key=True)  
+    Attr1=models.ForeignKey(ProductAttr1)
+    Attr2=models.ForeignKey(ProductAttr2)
+    price=models.FloatField()
+  

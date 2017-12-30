@@ -57,8 +57,7 @@
 		/*提交按钮的颜色*/
 		.button{  
 		    background:#E0E0E0;  
-		    color:#FFFFFF;  
-		      
+		    color:#FFFFFF;    
 		    padding: 10px 30px 10px 30px;  
 		    font-size:16px;  
 		    font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;  
@@ -68,8 +67,8 @@
 		    -moz-transition:all linear 0.30s;  
 		    transition:all linear 0.30s;  }  
   
-  		/*图片显示样式*/
-	   img{
+  		/*商品图片显示样式*/
+	   .product-img{
 	   	width:100px;
 	   	height:110px;
 	   }
@@ -86,8 +85,74 @@
 	  	width:100px;
 	  }
  
+  	/*添加操作小图标*/
+  	.add-img1{
+  		width:25px;
+  		height:25px;
+  		padding: 4px;
+  		margin:10px;
+  	}
+  	.add-img2{
+  		width:25px;
+  		height:25px;
+  		padding: 4px;
+  		margin:10px;
+  	}
   
-  
+  	
+  	
+  	
+  	/*遮罩层样式*/
+		.fixed-div{
+			position:fixed;
+			top:0px;
+			left:0px;
+			bottom:0px;
+			right:0px;
+			background-color:#F5F5F5;
+			opacity:0.5;
+			display:none;
+			z-index:1500;}
+	/*添加分类*/
+		.add-div{
+			position:absolute;
+			top:50%;
+			left:50%;
+			width:380px;
+			height:200px;
+			margin-top:-80px;
+			margin-left:-180px;
+			background-color:#CDE1E2;
+			z-index:2000;
+			display:none;
+		}
+		
+		.add-content-div{
+			position:relative;
+			width:300px;
+			margin:40px;
+		}
+		.add-content-div td,th{
+			width:100px;
+			text-align:center;
+			height:40px;
+		}
+		
+	/*显示规格、尺码的表格*/
+	.attr td{
+		width:100px;
+		height:30px;
+		text-align:center;
+		font-size:12px;
+		padding:5px;
+		background-color:#CDE1E2;
+	}
+	
+	.min-img{
+		width:50px;
+		height:60px;
+		padding:5px;
+	}
 		
 	</style>
 	
@@ -115,9 +180,9 @@
 			{% if product %}
 				<tr>
 					<td class='td-name'>商品标题:</td>
-					<td ><input class='td-input' type='text' id='head' name='head' value='5555{{product.Head}}' /></td>
+					<td ><input class='td-input' type='text' id='head' name='head' value='{{product.Head}}' /></td>
 				</tr>
-			{% endif %}
+			
 			
 				<tr>
 					<td class='td-name'>图片:</td>
@@ -128,7 +193,7 @@
 							{% for productImg in productImgs %}
 								<tr>
 									<td >
-										<img src='/media/{{productImg.Img}}'/> 
+										<img class='product-img' src='/media/{{productImg.Img}}'/> 
 									</td>
 									<td>设为默认</td>
 									<td>修改</td>
@@ -141,19 +206,94 @@
 				</tr>
 				
 				
+				<!--商品规格-->
 				<tr>
-					<td class='td-name'><label for='attribute1'>商品规格名称:</td>
-					<td ><input class='td-input' type='text' id='attribute1' name='attribute1' placeholder="颜色、口味等" /></label></td>
+					<table><tr>
+						<td class='td-name'>商品规格名称:</td>
+						
+						<td >
+							<input class='td-input' type='text' id='attribute1' name='attribute1' value={{product.AttributeName1}} />
+						</td> 
+						<td >
+							<img class='add-img1' src='/statics/img/add.jpg' onmouseenter='addAttrImg("attr1")' onmouseleave='delAttrImg("attr1")' onclick='addAttr({{product.Nid}},"attr1")'/>
+						</td>
+					</tr><table>
 				</tr>
+				<!--商品规格-->
 				<tr>
-					<td class='td-name'><label for='attribute2'>商品尺码名称:</td>
-					<td><input  class='td-input' type='text' id='attribute2' name='attribute2' placeholder='大小、尺码等'/></label></td>
-				</tr>
-			
-				<tr>
-					<td class='td-name' colspan="2"><input class='button' class='button' type='submit' id='sub' value='提交' onclick='addProduct({{secondId}})' /></td>
+					<table class='attr'>
+						<tr>
+						{% if productAttr1s %}
+							{% for attr1 in productAttr1s %}
+								<!--模板上逻辑判断换行，conter0代表从0开始-->
+								{% if forloop.counter0|divisibleby:'5' %}
+									</tr><tr>
+								{% endif  %}
+									<td> 
+										<!--将规格图片和名称封装为table-->
+										<table>
+											<tr><td> <img class='min-img' src='/media/{{attr1.ImgAttr1}}'/></td><tr> 
+											<tr><td> {{attr1.Attr1}}</td><tr>
+										</table>
+									</td>
+							{% endfor %}
+						{% endif %}
+						</tr>
+					<table>
 				</tr>
 				
+				
+				<!--商品尺码-->
+				<tr>
+					<table><tr>
+					<td class='td-name'>商品尺码名称:</td>
+					<td><input  class='td-input' type='text' id='attribute2' name='attribute2' value={{product.AttributeName2}} /></td>
+					<td >
+						<img class='add-img2' src='/statics/img/add.jpg' onmouseenter='addAttrImg("attr2")' onmouseleave='delAttrImg("attr2")' onclick='addAttr({{product.Nid}},"attr2")'/>
+					</td>
+					</tr><table>
+				</tr>
+				<!--商品尺码-->
+				<tr>
+					<table class='attr'>
+						<tr>
+						{% if productAttr2s %}
+							{% for attr2 in productAttr2s %}
+								<!--模板上逻辑判断换行，conter0代表从0开始-->
+								{% if forloop.counter0|divisibleby:'5' %}
+									</tr><tr>
+								{% endif  %}
+									<td> {{attr2.Attr2}} </td>
+							{% endfor %}
+						{% endif %}
+						</tr>
+					<table>
+				</tr>
+				
+				
+				
+				<!--添加商品价格-->
+				<tr>
+					<td class='td-name'>商品价格:</td>
+					<form>
+						<tr>
+							
+							<td><select>
+							  <option value="opel">Opel</option>
+							  <option value="audi">Audi</option>
+							</select></td>
+							
+							
+							<td><select>
+							  <option value="opel">Opel</option>
+							  <option value="audi">Audi</option>
+							</select></td>
+						</tr>
+					</form>
+				<tr>
+				
+			{% endif %}
+			
 				
 			
 			</table>
@@ -164,7 +304,45 @@
 		
 	</div>
 	
+	
+	
+	
+<!--遮罩层-->
+<div class='fixed-div'></div>
+
+
+<!--添加商品规格-->
+<div class='add-div'>
+	<div class='add-content-div'>
+		<form id="uploadForm" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td >规格或尺码</td>
+					<td><input  id='attr' name='attr' type='text'/></td>
+				</tr>
+				<tr id='attr1Id' >
+					<td>规格图</td>
+					<td><input id='ImgAttr1' name='ImgAttr1' type='file'/>
+				</tr>
+				<tr>
+					<td> <input type='button' id='confirm' value='确定'/></td>
+					<td> <input type='button' id='cancle'  value='取消'/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </div>
+
+
+
+
+
+	
+	
+</div>
+
+
+
 
 <script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
 <script type='text/javascript'>
@@ -173,6 +351,100 @@ function addProduct(key){
 		path='/addProduct/'+key+'/'
 		$('#form_action').attr('action',path)
 }
+
+function addAttrImg(attrType){
+	if(attrType=='attr1'){
+		$('.add-img1').attr('src','/statics/img/add_light.jpg')
+	}else{
+		$('.add-img2').attr('src','/statics/img/add_light.jpg')
+	}
+}
+
+function delAttrImg(attrType){
+	if(attrType=='attr1'){
+		$('.add-img1').attr('src','/statics/img/add.jpg')
+	}else{
+		$('.add-img2').attr('src','/statics/img/add.jpg')
+	}
+}
+
+
+function addAttr(id,attrType){
+	$('.fixed-div').css('display','block')
+	$('.add-div').css("display","block");
+	if(attrType=='attr2'){
+		$('#attr1Id').attr('hidden','hidden')
+	}else{
+		$('#attr1Id').removeAttr('hidden')
+	}
+	
+	$('#confirm').off('click').click(function(){
+		
+		//添加规格
+		if(attrType=='attr1'){
+			//封装参数和文件，使用formdata提交
+			var attr=$('#attr').val()
+			var oMyForm = new FormData();
+			oMyForm.append("attr",attr);
+			oMyForm.append("id",id);
+			oMyForm.append("ImgAttr1", $('#ImgAttr1')[0].files[0]);
+			
+			//使用ajax提交formdata,其中要注意cache、processData、contentType都为false状态
+			$.ajax({
+				url:'/addAttr1/',
+				method:'POST',
+				data:oMyForm,
+				cache: false,
+				processData: false,
+                contentType: false,
+				success:function(result){
+					if(result=='True'){
+						alert('成功添加规格')
+						window.location.reload()
+						}
+					}
+			});
+		}
+	
+		
+		//添加尺码
+		if(attrType=='attr2'){
+			var attr=$('#attr').val()
+			data={'id':id,'attr':attr}
+			
+			$.ajax({
+				url:'/addAttr2/',
+				method:'POST',
+				data:data,
+				success:function(result){
+					if(result=='True'){
+						alert('成功添加尺码')
+						window.location.reload()
+						}
+					}
+			});
+		
+		}
+
+	
+	
+	});
+	
+	
+	
+	
+	
+	//执行取消操作
+	$('#cancle').click(function(){
+		$('.fixed-div').css("display","none");
+		$('.add-div').css("display","none");	
+	});
+
+}
+
+
+
+
 
 </script>
 

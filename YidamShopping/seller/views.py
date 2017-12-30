@@ -4,7 +4,7 @@ from django.http.response import HttpResponseRedirect,HttpResponse
 from user_center.models import Userinfo
 from models import Store,ProductType
 import json
-from seller.models import ProductSecondType
+from seller.models import ProductSecondType, ProductAttr1,ProductAttr2
 from django.template.defaultfilters import first
 from urllib2 import HTTPRedirectHandler
 from models import Product,ProductImage
@@ -307,32 +307,43 @@ def editProduct(request,id):
     resData=getTypesData(request)
     if request.method=='GET':
         product=Product.objects.get(Nid=id)
-        #获取图片
-        productImgs=ProductImage.objects.filter(ProductNid_id=id)
-        if product and productImgs:
+        if product:
             resData['product']=product
-            resData['productImgs']=productImgs
-        print productImgs   
+            #获取图片
+            productImgs=ProductImage.objects.filter(ProductNid_id=id)
+            if productImgs:
+                resData['productImgs']=productImgs
+            #获取规格
+            productAttr1s=ProductAttr1.objects.filter(ProductNid_id=id)
+            if productAttr1s:
+                resData['productAttr1s']=productAttr1s
+            #商品尺码
+            productAttr2s=ProductAttr2.objects.filter(ProductNid_id=id)
+            if productAttr2s:
+                resData['productAttr2s']=productAttr2s
+            
         return render_to_response('store_manage_editProduct.html',resData)
     
     
    
   
     
-def testShowProduct(request):
-    if request.method=='GET':
-        #从产品信息表获取数据
-        products=Product.objects.all() 
+def addAttr1(request):
+    if request.method=='POST':
+        data=request.POST
+        file=request.FILES
         
-        paginator = Paginator(products,2)
-        page = request.GET.get('page') # Show 25 contacts per page
-        try:
-            products = paginator.page(page)
-        except PageNotAnInteger:
-            products = paginator.page(2)
-        except EmptyPage:
-            products = paginator.page(paginator.num_pages)
+        attr1=data.get('attr')
+        id=data.get('id')
+        img=file.get('ImgAttr1')
         
-        return render(request, 'store_manage_testShow.html', {'products': products})
+        ProductAttr1.objects.create(ProductNid_id=id,Attr1=attr1,ImgAttr1=img)
+        return HttpResponse('True')
     
-    
+def addAttr2(request):
+     if request.method=='POST':
+        data=request.POST
+        attr2=data.get('attr')
+        id=data.get('id')
+        ProductAttr2.objects.create(ProductNid_id=id,Attr2=attr2)
+        return HttpResponse('True')   
