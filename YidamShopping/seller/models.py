@@ -64,8 +64,9 @@ class ProductAttr2(models.Model):
     Attr2=models.CharField(max_length=200)  
  
 class ProductPrice(models.Model): 
-    Nid=models.AutoField(primary_key=True)  
+    Nid=models.AutoField(primary_key=True) 
+    ProductNid=models.ForeignKey(Product) 
     Attr1=models.ForeignKey(ProductAttr1)
     Attr2=models.ForeignKey(ProductAttr2)
-    price=models.FloatField()
+    Price=models.FloatField()
   

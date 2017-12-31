@@ -210,7 +210,11 @@
 							</div>
 						
 							<div class='price'>
-								￥  &nbsp;
+								{% if product.3 %}
+									￥{{product.3}}
+								{% else %}
+									￥
+								{% endif %}
 							</div>
 							
 							<div class='seperate'></div>

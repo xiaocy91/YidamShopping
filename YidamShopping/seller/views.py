@@ -12,6 +12,7 @@ import os
 import time
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
+from seller.models import ProductPrice
 
 #进入卖家中心首页
 def sellerIndex(request):
@@ -241,15 +242,20 @@ def showProduct(request,secondId):
             proList=[]
             id=product.Nid
             head=product.Head
+            proList.append(id)
+            proList.append(head)
             
             #获取一张商品的图片或者视频信息
             proImg=ProductImage.objects.filter(ProductNid_id=id).last()
             imgPath=proImg.Img
-            
-            proList.append(id)
-            proList.append(head)
-           
             proList.append(imgPath)
+            
+            #获取最后一个规格尺码的价格
+            proPrice=ProductPrice.objects.filter(ProductNid_id=id).last()
+            if proPrice:
+                print proPrice
+                price=proPrice.Price
+                proList.append(price)
             
             #将每个商品的封装列表加入到总列表
             productLists.append(proList)
@@ -321,6 +327,27 @@ def editProduct(request,id):
             productAttr2s=ProductAttr2.objects.filter(ProductNid_id=id)
             if productAttr2s:
                 resData['productAttr2s']=productAttr2s
+            #商品价格
+            productPrices=ProductPrice.objects.filter(ProductNid_id=id)
+            priceLists=[]
+            if productPrices:
+                for price in productPrices:
+                    priceList=[]
+                    #通过id，查找对应的规格、尺码的实际内容
+                    id1=price.Attr1_id
+                    id2=price.Attr2_id
+                    priceAttr1=ProductAttr1.objects.get(Nid=id1)
+                    priceAttr2=ProductAttr2.objects.get(Nid=id2)
+                    attr1=priceAttr1.Attr1
+                    attr2=priceAttr2.Attr2
+                    price=price.Price
+                    #封装数据
+                    priceList.append(id)
+                    priceList.append(attr1)
+                    priceList.append(attr2)
+                    priceList.append(price)
+                    priceLists.append(priceList)
+                resData['priceLists']=priceLists
             
         return render_to_response('store_manage_editProduct.html',resData)
     
@@ -346,4 +373,14 @@ def addAttr2(request):
         attr2=data.get('attr')
         id=data.get('id')
         ProductAttr2.objects.create(ProductNid_id=id,Attr2=attr2)
-        return HttpResponse('True')   
+        return HttpResponse('True')  
+    
+def addPrice(request):
+     if request.method=='POST':
+        data=request.POST
+        attr1=data.get('attrId1')
+        attr2=data.get('attrId2')
+        price=data.get('price')
+        id=data.get('id')
+        ProductPrice.objects.create(ProductNid_id=id,Attr1_id=attr1,Attr2_id=attr2,Price=price)
+        return HttpResponse('True')  

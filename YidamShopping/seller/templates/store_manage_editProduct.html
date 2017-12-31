@@ -139,7 +139,7 @@
 		}
 		
 	/*显示规格、尺码的表格*/
-	.attr td{
+	.attr td,th{
 		width:100px;
 		height:30px;
 		text-align:center;
@@ -154,6 +154,65 @@
 		padding:5px;
 	}
 		
+		
+	/*下拉列表样式*/
+	select {
+		border: 1px solid #DADADA;
+		color: #888;
+		height: 30px;
+		margin-bottom: 16px;
+		margin-right: 6px;
+		margin-top: 2px;
+		outline: 0 none;
+		padding: 3px 3px 3px 5px;
+		width: 160px;
+		font-size: 12px;
+		line-height:15px;
+		box-shadow: inset 0px 1px 4px #ECECEC;
+		-moz-box-shadow: inset 0px 1px 4px #ECECEC;
+		-webkit-box-shadow: inset 0px 1px 4px #ECECEC;}
+	
+	/*添加按钮的颜色*/
+		.button{  
+		    background:#E0E0E0;  
+		    color:#FFFFFF;  
+		    height: 30px;
+			margin-bottom: 16px;
+			margin-right: 6px;
+			margin-top: 2px;
+		    padding: 3px 3px 3px 5px;
+		    font-size:12px;  
+		    font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;  
+		    border-radius:3px;  
+		    -webkit-transition:all linear 0.30s;  
+		    -moz-transition:all linear 0.30s;  
+		    transition:all linear 0.30s;  } 
+	/*价格输入框样式*/
+	.price-input{
+			height: 30px;
+			width: 160px;
+			margin-bottom: 16px;
+			margin-right: 6px;
+			margin-top: 2px;
+	    	border: solid 1px #E5E5E5;
+	    	outline: 0;
+	    	font: normal 12px/100% Verdana, Tahoma, sans-serif;
+		    background: #FFFFFF;
+		    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;   
+		}
+	
+	/*价格表*/
+	.price-attr td,th{
+		width:160px;
+		height:30px;
+		text-align:center;
+		font-size:12px;
+		padding:5px;
+		background-color:#CDE1E2;
+	}
+	
 	</style>
 	
 
@@ -276,19 +335,45 @@
 				<tr>
 					<td class='td-name'>商品价格:</td>
 					<form>
-						<tr>
+						<table>
+							<tr>
+								<!--规格-->
+								<td><select id='attrSelect1'>
+									{% if productAttr1s %}
+										{% for attr1 in productAttr1s %}
+										  <option name='attr1'  value='{{attr1.Nid}}'>{{attr1.Attr1}}</option>
+										{% endfor %}
+									{% endif %}
+								</select></td>
+								<!--尺码-->
+								<td><select id='attrSelect2'>
+								 	{% for attr2 in productAttr2s %}
+										 <option name='attr2' value='{{attr2.Nid}}'>{{attr2.Attr2}}</option>
+									{% endfor %}
+								</select></td>
+								<!--价格-->
+								<td><input class='price-input' type='text' name='price' placeholder='请输入价格'/></td>
+								<td><input class='button' type='button' value='添加' onclick='addPrice({{product.Nid}})'></td>
+							</tr>
+						</table>
+						
+						<table class='price-attr'>
+							{% if priceLists %}
+							<tr>
+								<th>规格</th>
+								<th>尺码</th>
+								<th>价格</th>
+							</tr>
 							
-							<td><select>
-							  <option value="opel">Opel</option>
-							  <option value="audi">Audi</option>
-							</select></td>
-							
-							
-							<td><select>
-							  <option value="opel">Opel</option>
-							  <option value="audi">Audi</option>
-							</select></td>
-						</tr>
+								{% for productList in priceLists %}
+									<tr>
+										<td>{{productList.1}}</td>
+										<td>{{productList.2}}</td>
+										<td>{{productList.3}}</td>
+									</tr>
+								{% endfor %}
+						{% endif %}
+						</table>
 					</form>
 				<tr>
 				
@@ -443,6 +528,25 @@ function addAttr(id,attrType){
 }
 
 
+
+
+function addPrice(id){
+	var attrId1=$("#attrSelect1").find("option:selected").val()
+	var attrId2=$("#attrSelect2").find("option:selected").val()
+	var price=$('.price-input').val()
+	
+	data={'attrId1':attrId1,'attrId2':attrId2,'price':price,'id':id}
+	$.ajax({
+		url:'/addPrice/',
+		method:'POST',
+		data:data,
+		success:function(result){
+			alert('成功添加价格')
+			window.location.reload()
+		},
+		
+	});
+}
 
 
 
