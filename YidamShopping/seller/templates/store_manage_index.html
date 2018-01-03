@@ -11,7 +11,7 @@
 		.bodyFrame{
 			position:relative;
 			width:1200px;
-			min-height:500px;
+			min-height:580px;
 			left:50%;
 			margin-left:-600px;
 		}
@@ -20,11 +20,212 @@
 			position:absolute;
 			float:right;
 			width:998px;
-			min-height:500px;
+			min-height:580px;
 			border: 1px solid #E0E0E0;
 			right:0px;
 			top:15px;
 		}	
+		
+		
+		.t1{
+			width:990px;
+			min-height:580px;
+			margin:5px;
+		}
+		
+		
+		.t1-left1{
+			position:relative;
+			float:left;
+			width:400px;
+			min-height:580px;
+			margin-left:40px;
+			margin-top:10px;
+		}
+		
+		.t1-left-imgOperate{
+			width:400px;
+			height:550px;
+			position:relative;
+		}
+		.t1-left1-img{
+			width:400px;
+			height:550px;
+			position:absolute;
+			z-index:-1;
+		}
+		.t1-left1-indexVertical{
+			width:400px;
+			height:550px;
+			
+		}
+		
+		/*右下方增加或删除操作*/
+		.add-del-operate{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:0px;
+			width:80px;
+			background-color:#EFE4B0;
+			color:#545151;
+			boder:2px solid #9D9191;
+			text-align:center;
+			padding:5px;
+			cursor:pointer;
+		}
+		/*分类标题*/
+		.type-head{
+			font-size:40px;
+			font-weight:900;
+			font-family:"黑体";
+			text-align:center;
+		}
+		
+		
+		/*t1-right1的样式*/
+		.t1-right1{
+			position:relative;
+			float:right;
+			width:420px;
+			margin-right:40px;
+			margin-top:10px;
+		}
+		.t1-right1-imgOperate{
+			width:420px;
+			height:280px;
+			position:relative;
+		}
+		
+		.t1-right1-img{
+			width:420px;
+			height:280px;
+			position:absolute;
+			z-index:-1;
+		}
+		.t1-right1-indexHerizon{
+			width:420px;
+			height:280px;
+		}
+		
+		
+		
+		/*t1-right2的全部样式*/
+		.t1-right2{
+			position:relative;
+			float:right;
+			width:380px;
+			margin-right:50px;
+			margin-top:10px;
+			
+		}
+		.t1-right2-imgOperate{
+			position:relative;
+			width:380px;
+			height:240px;
+		}
+		.t1-right2-img{
+			position:absolute;
+			z-index:-1;
+			width:380px;
+			height:240px;
+		}
+		.t1-right2-indexHerizon{
+			width:380px;
+			height:240px;
+		}
+		
+		
+		
+		/*t2分类区*/
+		.t2{
+			margin-left:40px;
+			width:990px;
+			min-height:50px;
+		}
+		.t2-item{
+			width:230px;
+			height:180px;
+			position:absoulte;
+			float:left;
+		}
+		.t2-imgOperate{
+			width:230px;
+			height:160px;
+			margin:15px;
+			position:relative;
+		}
+		.t2-img{
+			position:absolute;
+			z-index:-1;
+			width:230px;
+			height:160px;
+		}
+		.t2-indexHerizon{
+			width:230px;
+			height:160px;
+		}
+		
+		
+		
+		
+		
+		/*t3商品区*/
+		.t3{
+			margin-left:40px;
+			width:990px;
+			min-height:60px;
+		}
+		.t3-item1{
+			width:300px;
+			min-height:370px;
+			position:absoulte;
+			float:left;
+			margin-top:10px;
+			margin-left:10px;
+		}
+		
+		.t3-item2{
+			width:300px;
+			min-height:450px;
+			position:absoulte;
+			float:left;
+			margin-top:40px;
+			margin-left:10px;
+		}
+		
+		.t3-item3{
+			width:300px;
+			min-height:450px;
+			position:absoulte;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+		}
+		
+		.t3-imgOperate{
+			width:300px;
+			height:350px;
+			position:relative;
+		}
+		.t3-img{
+			position:absolute;
+			z-index:-1;
+			width:300px;
+			height:350px;
+		}
+		.t3-indexVertical{
+			width:300px;
+			height:350px;
+		}
+		
+		
+		/*商品标题*/
+		.product-head{
+			font-size:20px;
+			font-family:"黑体";
+			text-align:center;
+		}
 		
 			
 	</style>
@@ -45,12 +246,511 @@
 	
 	
 	<div class='bodyContent'>
-		fffffffff
+		
+		
+		<!--分类区-->
+		<div class='t1'>
+			
+			<div class='t1-left1'> 
+				<div class='t1-left-imgOperate' >
+					<div class='t1-left1-img'>
+						<img class='t1-left1-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'>
+						<span id='type1'  class='onLeave'>+增加分类</span>
+					</div>
+				</div>
+				<div  class='type-head'><span>分类名称</span></div>			
+			</div>
+				
+			
+			<div class='t1-right1'>
+				<div class='t1-right1-imgOperate'>
+					<div class='t1-right1-img'>
+						<img class='t1-right1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+				</div>
+				<div  class='type-head'><span>分类名称</span></div>	
+			</div>
+			
+			<div class='t1-right2'>
+				<div class='t1-right2-imgOperate'>
+					<div class='t1-right2-img'>
+						<img class='t1-right2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+				</div>
+				<div  class='type-head'><span>分类名称</span></div>
+			</div>	
+			
+		<div>
+		
+		
+		
+		
+		
+		<!--分类区-->
+		<table>
+		
+		<div class='t2'>
+			<tr>
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+							</div>
+							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+						</div>
+						<div  class='type-head'><span>分类名称</span></div>
+					</div>	
+				</td>
+			
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+							</div>
+							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+						</div>
+						<div  class='type-head'><span>分类名称</span></div>
+					</div>	
+				</td>
+			
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+							</div>
+							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+						</div>
+						<div  class='type-head'><span>分类名称</span></div>
+					</div>	
+				</td>
+			
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+							</div>
+							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+						</div>
+						<div  class='type-head'><span>分类名称</span></div>
+					</div>	
+				</td>
+			</tr>
+			
+		</div>
+		
+		</table>
+		
+		
+		
+		
+		<!--分类区-->
+		<table>
+		
+		<div class='t2'>
+			<tr>
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+							</div>
+							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+						</div>
+						<div  class='type-head'><span>分类名称</span></div>
+					</div>	
+				</td>
+			
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+							</div>
+							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+						</div>
+						<div  class='type-head'><span>分类名称</span></div>
+					</div>	
+				</td>
+			
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+							</div>
+							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+						</div>
+						<div  class='type-head'><span>分类名称</span></div>
+					</div>	
+				</td>
+			
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+							</div>
+							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+						</div>
+						<div  class='type-head'><span>分类名称</span></div>
+					</div>	
+				</td>
+			</tr>
+			
+		</div>
+		
+		</table>
+			
+		
+		
+		
+		<!--分类与商品隔离区-->
+		<div style='width:998px;height:120px;'></div>
+		
+		
+		
+		
+		<div class='t3'>
+		<!--商品区1-->
+		<table>
+			<tr>
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>
+			</td>
+			
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			</tr>
+		</div>	
+		</table>
+		
+		
+		
+		
+		<!--商品区2-->
+		<table>
+			<tr>
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>
+			</td>
+			
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			</tr>
+		
+		</table>
+		
+		
+		
+		
+		<!--商品区3-->
+		<table>
+			<tr>
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>
+			</td>
+			
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			</tr>
+		</table>
+		
+		
+		
+		
+		<!--商品区4-->
+		<table>
+			<tr>
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>
+			</td>
+			
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			</tr>
+		</table>
+		
+		
+		
+		<!--商品区5-->
+		<table>
+			<tr>
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>
+			</td>
+			
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			</tr>
+		</table>
+		
+		
+		
+		
+		<!--商品区6-->
+		<table>
+			<tr>
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>
+			</td>
+			
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			</tr>
+		</table>	
+			
+		
+		
+		<!--商品区7-->
+		<table>
+			<tr>
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>
+			</td>
+			
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+					</div>
+					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+				</div>
+				<div  class='product-head'><span>商品名称</span></div>
+			</div>	
+			</td>
+			</tr>
+		</table>
+			
+			
+		
+		
 	</div>
 	
 </div>
 
 
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+	$(function(){
+			
+			$('.onLeave').mouseover(function(){ $(this).css('color','#D7191C') })
+			$('.onLeave').mouseleave(function(){ $(this).css('color','#000000') })
+	
+	});
+	
+	
+	
+	function addHomeType(){
+		
+	}
+
+</script>		
 
 
 </body>

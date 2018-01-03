@@ -52,7 +52,7 @@
 		{% endif %}
 		
 		<div class='nameFirst' onclick='editTypes()'>编辑商品分类</div>
-		<div class='nameFirst'>店铺主页编辑</div>
+		<div class='nameFirst' onclick='toManageStore()'>店铺主页编辑</div>
 		
 		</div>
 	</div>
@@ -65,6 +65,10 @@
 		
 		function showProduct(key){
 			window.location.href='/showProduct/'+key+'/'
+		}
+		
+		function toManageStore(){
+			window.location.href='/manageStore/'
 		}
 	</script>
 	

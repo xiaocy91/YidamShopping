@@ -35,6 +35,7 @@ class ProductHome(models.Model):
     HomeNid=models.AutoField(primary_key=True)
     StoreNid=models.ForeignKey(Store)
     TypeNid=models.ForeignKey(ProductType)
+    TypeImg=models.ImageField(upload_to='homeTypeImg/%Y%m%d%H%M%S')
     
  
 class Product(models.Model): 
