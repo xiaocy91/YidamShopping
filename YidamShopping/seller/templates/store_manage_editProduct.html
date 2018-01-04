@@ -118,7 +118,7 @@
 			position:absolute;
 			top:50%;
 			left:50%;
-			width:380px;
+			width:500px;
 			height:200px;
 			margin-top:-80px;
 			margin-left:-180px;
@@ -129,11 +129,11 @@
 		
 		.add-content-div{
 			position:relative;
-			width:300px;
+			width:420px;
 			margin:40px;
 		}
 		.add-content-div td,th{
-			width:100px;
+			width:210px;
 			text-align:center;
 			height:40px;
 		}
@@ -213,6 +213,26 @@
 		background-color:#CDE1E2;
 	}
 	
+	
+	
+		
+	.attr_file {
+    position: relative;
+    display: inline-block;
+    background: #FFFFFF;
+    border: 1px solid #C3C3C3;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #C3C3C3;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width:250px;
+	}
+	
+	
+	
 	</style>
 	
 
@@ -271,10 +291,10 @@
 						<td class='td-name'>商品规格名称:</td>
 						
 						<td >
-							<input class='td-input' type='text' id='attribute1' name='attribute1' value={{product.AttributeName1}} />
+							<input class='td-input' type='text' id='attribute1' name='attribute1' value='{{product.AttributeName1}}' />
 						</td> 
 						<td >
-							<img class='add-img1' src='/statics/img/add.jpg' onmouseenter='addAttrImg("attr1")' onmouseleave='delAttrImg("attr1")' onclick='addAttr({{product.Nid}},"attr1")'/>
+							<img class='add-img1' src='/statics/img/add.jpg' onmouseenter='addAttrImg("attr1")' onmouseleave='delAttrImg("attr1")' onclick='addAttr({{product.Nid}},"attr1","{{product.AttributeName1}}")'/>
 						</td>
 					</tr><table>
 				</tr>
@@ -306,9 +326,9 @@
 				<tr>
 					<table><tr>
 					<td class='td-name'>商品尺码名称:</td>
-					<td><input  class='td-input' type='text' id='attribute2' name='attribute2' value={{product.AttributeName2}} /></td>
+					<td><input  class='td-input' type='text' id='attribute2' name='attribute2' value='{{product.AttributeName2}}' /></td>
 					<td >
-						<img class='add-img2' src='/statics/img/add.jpg' onmouseenter='addAttrImg("attr2")' onmouseleave='delAttrImg("attr2")' onclick='addAttr({{product.Nid}},"attr2")'/>
+						<img class='add-img2' src='/statics/img/add.jpg' onmouseenter='addAttrImg("attr2")' onmouseleave='delAttrImg("attr2")' onclick='addAttr({{product.Nid}},"attr2","{{product.AttributeName2}}")'/>
 					</td>
 					</tr><table>
 				</tr>
@@ -402,16 +422,18 @@
 		<form id="uploadForm" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td >规格或尺码</td>
-					<td><input  id='attr' name='attr' type='text'/></td>
+					<td id='attrNameAdd' ></td>
+					<td><input  id='attr' name='attr' type='text' class='attr_file'/></td>
 				</tr>
 				<tr id='attr1Id' >
-					<td>规格图</td>
-					<td><input id='ImgAttr1' name='ImgAttr1' type='file'/>
+					<td id='attrImgAdd'></td>
+					<td><input id='ImgAttr1' name='ImgAttr1' type='file' class='attr_file'/>
 				</tr>
 				<tr>
+					<table><tr>
 					<td> <input type='button' id='confirm' value='确定'/></td>
 					<td> <input type='button' id='cancle'  value='取消'/></td>
+					</tr></table>
 				</tr>
 			</table>
 		</form>
@@ -454,13 +476,19 @@ function delAttrImg(attrType){
 }
 
 
-function addAttr(id,attrType){
+function addAttr(id,attrType,name){
 	$('.fixed-div').css('display','block')
-	$('.add-div').css("display","block");
+	
+	//动态显示规格名称，规格名称对应的图
+		$('#attrNameAdd').text(name+"-名称")
+		$('#attrImgAdd').text(name+"-图")
+	
+	//动态修改添加的div标签y轴位置
+	$('.add-div').css("display","block").css('margin-top',$(document).scrollTop()-80);  
 	if(attrType=='attr2'){
 		$('#attr1Id').attr('hidden','hidden')
 	}else{
-		$('#attr1Id').removeAttr('hidden')
+		$('#attr1Id').removeAttr('hidden')	
 	}
 	
 	$('#confirm').off('click').click(function(){

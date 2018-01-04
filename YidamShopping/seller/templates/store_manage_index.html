@@ -227,6 +227,35 @@
 			text-align:center;
 		}
 		
+		
+		
+		
+			/*遮罩层样式*/
+		.fixed-div{
+			position:fixed;
+			top:0px;
+			left:0px;
+			bottom:0px;
+			right:0px;
+			background-color:#F5F5F5;
+			opacity:0.5;
+			display:none;
+			z-index:1500;}
+	/*添加分类*/
+		.add-div{
+			position:absolute;
+			top:50%;
+			left:50%;
+			width:380px;
+			height:200px;
+			margin-top:-80px;
+			margin-left:-180px;
+			background-color:#CDE1E2;
+			z-index:2000;
+			display:none;
+		}
+		
+	 
 			
 	</style>
 	
@@ -733,21 +762,52 @@
 
 
 
+<!--遮罩层-->
+<div class='fixed-div'></div>
+
+
+<!--添加商品规格-->
+<div class='add-div'>
+	<div class='add-content-div'>
+		<form id="uploadForm" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td >规格或尺码</td>
+					<td><input  id='attr' name='attr' type='text'/></td>
+				</tr>
+				<tr id='attr1Id' >
+					<td>规格图</td>
+					<td><input id='ImgAttr1' name='ImgAttr1' type='file' />
+				</tr>
+				<tr>
+					<td> <input type='button' id='confirm' value='确定'/></td>
+					<td> <input type='button' id='cancle'  value='取消'/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+
+
+
 
 <script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
 <script type='text/javascript'>
 
 	$(function(){
 			
-			$('.onLeave').mouseover(function(){ $(this).css('color','#D7191C') })
-			$('.onLeave').mouseleave(function(){ $(this).css('color','#000000') })
+			$('.onLeave').mouseover(function(){ $(this).css('color','#D7191C').css('font-weight','900') })
+			$('.onLeave').mouseleave(function(){ $(this).css('color','#000000').css('font-weight','') })
+			
+			$('#type1').bind('click',addHomeType)
 	
 	});
 	
 	
 	
 	function addHomeType(){
-		
+		$('.fixed-div').css('display','block')
+		$('.add-div').css('display','block')
 	}
 
 </script>		

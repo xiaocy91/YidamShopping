@@ -31,12 +31,7 @@ class ProductSecondType(models.Model):
     TypeNid=models.ForeignKey(ProductType)
     SecondTypeName=models.CharField(max_length=150)
     
-class ProductHome(models.Model):  
-    HomeNid=models.AutoField(primary_key=True)
-    StoreNid=models.ForeignKey(Store)
-    TypeNid=models.ForeignKey(ProductType)
-    TypeImg=models.ImageField(upload_to='homeTypeImg/%Y%m%d%H%M%S')
-    
+
  
 class Product(models.Model): 
     Nid=models.AutoField(primary_key=True)
@@ -70,4 +65,14 @@ class ProductPrice(models.Model):
     Attr1=models.ForeignKey(ProductAttr1)
     Attr2=models.ForeignKey(ProductAttr2)
     Price=models.FloatField()
+    
+    
+class ProductHomeType(models.Model):  
+    HomeNid=models.AutoField(primary_key=True)
+    StoreNid=models.ForeignKey(Store)
+    TypeNid=models.OneToOneField(ProductType)
+    ProductNid=models.ForeignKey(Product)
+    TypeImg=models.ImageField(upload_to='homeTypeImg/%Y%m%d%H%M%S')
+    
+
   

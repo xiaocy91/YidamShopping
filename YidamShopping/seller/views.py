@@ -383,4 +383,6 @@ def addPrice(request):
         price=data.get('price')
         id=data.get('id')
         ProductPrice.objects.create(ProductNid_id=id,Attr1_id=attr1,Attr2_id=attr2,Price=price)
-        return HttpResponse('True')  
+        return HttpResponse('True') 
+    
+ 
