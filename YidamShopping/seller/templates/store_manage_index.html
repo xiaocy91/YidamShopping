@@ -244,18 +244,73 @@
 	/*添加分类*/
 		.add-div{
 			position:absolute;
-			top:50%;
+			top:0px;
 			left:50%;
-			width:380px;
-			height:200px;
+			width:500px;
+			height:320px;
 			margin-top:-80px;
 			margin-left:-180px;
 			background-color:#CDE1E2;
-			z-index:2000;
+			z-index:1520;
 			display:none;
 		}
 		
+	
+	/*添加文件的样式*/	
+	.attr_file {
+    position: relative;
+    display: inline-block;
+    background: #FFFFFF;
+    border: 1px solid #C3C3C3;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #C3C3C3;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width:250px;
+	}
+	
+	.add-content-div{
+			position:relative;
+			width:420px;
+			margin:40px;
+		}
+		.add-content-div td,th{
+			width:210px;
+			text-align:center;
+			height:40px;
+		}
+		
+	/*显示规格、尺码的表格*/
+	.attr td,th{
+		width:100px;
+		height:30px;
+		text-align:center;
+		font-size:12px;
+		padding:5px;
+		background-color:#CDE1E2;
+	}
+	
+		
 	 
+	 /*下拉列表样式*/
+	select {
+		border: 1px solid #DADADA;
+		color: #888;
+		height: 30px;
+		margin-bottom: 16px;
+		margin-right: 6px;
+		margin-top: 2px;
+		outline: 0 none;
+		padding: 3px 3px 3px 5px;
+		width: 250px;
+		font-size: 12px;
+		line-height:15px;
+		box-shadow: inset 0px 1px 4px #ECECEC;
+		-moz-box-shadow: inset 0px 1px 4px #ECECEC;
+		-webkit-box-shadow: inset 0px 1px 4px #ECECEC;}
 			
 	</style>
 	
@@ -276,23 +331,54 @@
 	
 	<div class='bodyContent'>
 		
-		
+			
 		<!--分类区-->
 		<div class='t1'>
 			
+			<!--type1分类-->
 			<div class='t1-left1'> 
 				<div class='t1-left-imgOperate' >
 					<div class='t1-left1-img'>
-						<img class='t1-left1-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if homeLists %}
+							{% for homeList in homeLists %}
+								{% ifequal homeList.3 1 %}
+									<img class='t1-left1-indexVertical' src='/media/{{homeList.2}}'>
+								{% endifequal %}
+							{% endfor %}
+						{% else %}	
+							<img class='t1-left1-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+							
+								
+							
 					</div>
 					<div class='add-del-operate'>
-						<span id='type1'  class='onLeave'>+增加分类</span>
+						{% if homeLists %}
+							{% for homeList in homeLists %}
+								{% ifequal homeList.3 1 %}
+									<span   class='onLeave' >-删除分类</span>
+								{% endifequal %}
+							{% endfor %}
+						{% else %}	
+							<span id='typeAdd1'  class='onLeave' >+增加分类</span>
+						{% endif %}
 					</div>
 				</div>
-				<div  class='type-head'><span>分类名称</span></div>			
+				{% if homeLists %}
+					{% for homeList in homeLists %}
+						{% ifequal homeList.3 1 %}
+							<div  class='type-head'><span>{{homeList.1}}</span></div>	
+						{% endifequal %}
+					{% endfor %}
+				{% else %}		
+					<div  class='type-head'><span>分类名称</span></div>	
+				{% endif %}
 			</div>
-				
 			
+	
+		
+				
+			<!--type2分类-->
 			<div class='t1-right1'>
 				<div class='t1-right1-imgOperate'>
 					<div class='t1-right1-img'>
@@ -751,19 +837,29 @@
 			</div>	
 			</td>
 			</tr>
-		</table>
-			
-			
-		
+		</table>		
 		
 	</div>
 	
-</div>
-
-
-
-<!--遮罩层-->
+	
+	
+	{{typeLists}}
+	
+	
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--遮罩层-->
 <div class='fixed-div'></div>
+
 
 
 <!--添加商品规格-->
@@ -772,20 +868,53 @@
 		<form id="uploadForm" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td >规格或尺码</td>
-					<td><input  id='attr' name='attr' type='text'/></td>
+					<td id='typeNameId' >分类名称</td>
+					<td> 
+						<select id='typeSelectId'>
+							<option>请选择一级级分类</option>
+							{% if typeLists %}
+								{% for typeList in typeLists %}
+									<option  value='{{typeList.0}}' >{{typeList.1}}</option>
+								{% endfor %}
+							{% endif %}
+						</select>
+					</td>
 				</tr>
-				<tr id='attr1Id' >
-					<td>规格图</td>
-					<td><input id='ImgAttr1' name='ImgAttr1' type='file' />
+				
+				
+				<tr>
+					<td id='secondTypeNameId' >二级分类名称</td>
+					<td> 
+						<select id='secondTypeSelectId'>
+							<option>请选择二级分类</option>
+						</select>
+					</td>
+				</tr>
+				<tr >
+					<td id='secondTypeImgNameId' >分类预览图</td>
+					<td><input  type='file' class='attr_file' id='secondTypeImgId'/>
 				</tr>
 				<tr>
+					<td  id='productNameId' >商品名称</td>
+					<td>
+						<select id='productSelectId'>
+							<option ></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<table><tr>
 					<td> <input type='button' id='confirm' value='确定'/></td>
 					<td> <input type='button' id='cancle'  value='取消'/></td>
+					</tr></table>
 				</tr>
 			</table>
 		</form>
 	</div>
+</div>
+	
+	
+
 </div>
 
 
@@ -799,15 +928,90 @@
 			$('.onLeave').mouseover(function(){ $(this).css('color','#D7191C').css('font-weight','900') })
 			$('.onLeave').mouseleave(function(){ $(this).css('color','#000000').css('font-weight','') })
 			
-			$('#type1').bind('click',addHomeType)
+			
+			//获取对应二级分类
+			$('#typeSelectId').bind('change',function(){
+				var typeId=$(this).find('option:selected').val()
+				data={'typeId':typeId}
+				$.ajax({
+					url:'/getSecondType/',
+					method:'GET',
+					data:data,
+					success:function(result){
+						//先清除之前的option
+						$('#secondTypeSelectId').empty()
+						$('#secondTypeSelectId').append("<option>请选择二级分类</option>")
+					
+						var secondLists=$.parseJSON(result)
+						for(var i=0;i<secondLists.length;i++){
+							var secondList=secondLists[i]
+							var id=secondList[0]
+							var name=secondList[1]
+							$('#secondTypeSelectId').append("<option value='"+id+"'>"+name+"</option>")
+						}	
+					}
+				});
+			});
+			
+			
+			//1号分类添加点击事件
+			$('#typeAdd1').bind('click',{'order':1},addHomeType)
+			
+			
 	
 	});
 	
 	
 	
-	function addHomeType(){
+	
+	
+	
+	
+	function addHomeType(event){
+		var order=event.data.order
+		
 		$('.fixed-div').css('display','block')
-		$('.add-div').css('display','block')
+		//动态修改添加的div标签y轴位置
+		$('.add-div').css("display","block").css('margin-top',$(document).scrollTop()+80); 
+		
+		//将商品部分变为不可编辑
+		$('#productNameId').css('color','#C3C3C3')
+		$('#productSelectId').css('background-color','#EDEAEA')
+		$('#productSelectId').attr("disabled","true");
+		
+		
+	
+		//点击确定
+		$('#confirm').off('click').click(function(){
+			var typeId=$('#typeSelectId').find("option:selected").val()
+			var secondTypeId=$('#secondTypeSelectId').find("option:selected").val()
+			var oMyForm = new FormData();
+			oMyForm.append('order',parseInt(order))
+			oMyForm.append('typeId',parseInt(typeId))
+			oMyForm.append('secondTypeId',parseInt(secondTypeId))
+			oMyForm.append("secondTypeImg", $('#secondTypeImgId')[0].files[0]);
+			
+			$.ajax({
+				url:'/addHomeType/',
+				method:'POST',
+				data:oMyForm,
+				cache: false,
+				processData: false,
+                contentType: false,
+				success:function(result){
+					if(result=='True'){
+						alert('成功添加首页分类')
+						}else if(result=='Empty'){
+							alert('失败！参数不能为空')
+						}else{
+							alert('失败！添加分类不能重复')
+						}
+					window.location.reload()
+					}
+			});
+			
+		});
+		
 	}
 
 </script>		

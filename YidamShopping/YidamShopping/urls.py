@@ -19,7 +19,7 @@ from user_center.views import register,load,loginOut
 from index_show.views import index
 from seller.views import sellerIndex,registerStore,searchStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
-from seller.views import editProduct,addAttr1,addAttr2,addPrice
+from seller.views import editProduct,addAttr1,addAttr2,addPrice,addHomeType,getSecondType
 
 
 #use for media and picture show
@@ -50,7 +50,8 @@ urlpatterns = [
     url(r'^addAttr1/$', addAttr1),
     url(r'^addAttr2/$', addAttr2),
     url(r'^addPrice/$', addPrice),
-    
+    url(r'^addHomeType/$', addHomeType),
+    url(r'^getSecondType/$', getSecondType),
     
     
     

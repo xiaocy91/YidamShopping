@@ -4,7 +4,7 @@ from django.http.response import HttpResponseRedirect,HttpResponse
 from user_center.models import Userinfo
 from models import Store,ProductType
 import json
-from seller.models import ProductSecondType, ProductAttr1,ProductAttr2
+from seller.models import ProductSecondType, ProductAttr1,ProductAttr2, HomeType
 from django.template.defaultfilters import first
 from urllib2 import HTTPRedirectHandler
 from models import Product,ProductImage
@@ -90,10 +90,8 @@ def searchStore(request):
         resData={'account':account,'openStore':openStore,'storeName':storeInfo[0].StoreName,'storeAddr':storeInfo[0].StoreAddr,'storeBossName':storeInfo[0].StoreBossName}
         return render_to_response('store_view_index.html',resData)
 
-#进入店铺管理主页
-def manageStore(request):
-    resData=getTypesData(request)
-    return render_to_response('store_manage_index.html',resData)
+
+
     
 #创建默认店铺信息 ,该函数为封装的方法，在注册店铺的时候被调用   
 def defaultStore(request):
@@ -385,4 +383,115 @@ def addPrice(request):
         ProductPrice.objects.create(ProductNid_id=id,Attr1_id=attr1,Attr2_id=attr2,Price=price)
         return HttpResponse('True') 
     
- 
+
+#进入店铺管理主页
+def manageStore(request):
+    resData=getTypesData(request)
+    
+    if request.method=='GET':
+        #获取店铺分类、商品、图片，全部信息
+        storeid=request.session.get('storeid')
+        #初始化一级分类
+        productTypes=ProductType.objects.filter(StoreNid_id=storeid)
+        typeLists=[]
+        for productType in productTypes:
+            typeList=[]
+            typeId=productType.TypeNid
+            typeName=productType.TypeName
+            typeList.append(typeId)
+            typeList.append(typeName)
+            typeLists.append(typeList)
+        #添加进返回数据    
+        resData['typeLists']=typeLists
+        
+      
+        #获取主页分类
+        storeid=request.session.get('storeid')
+        if storeid:
+            homeTypes=HomeType.objects.filter(StoreNid_id=storeid)
+        homeLists=[]
+        for homeType in homeTypes:
+            secondTypeId=homeType.SecondTypeNid_id
+            secondTypeImg=homeType.SecondTypeImg
+            typeOrder=homeType.TypeOrder
+            if secondTypeId:
+                secondTypeInfo=ProductSecondType.objects.get(SecondTypeNid=secondTypeId)
+            if secondTypeInfo:
+                secondTypeName=secondTypeInfo.SecondTypeName
+            homeList=[]
+            homeList.append(secondTypeId)
+            homeList.append(secondTypeName)
+            homeList.append(secondTypeImg)
+            homeList.append(typeOrder)
+            homeLists.append(homeList)
+        
+        resData['homeLists']=homeLists
+        
+           
+        return render_to_response('store_manage_index.html',resData)
+    
+    
+
+
+def getSecondType(request):
+    if request.method=='GET':
+        data=request.GET
+        typeId=data.get('typeId')
+        typeId=int(typeId)
+        seconds = ProductSecondType.objects.filter(TypeNid_id=typeId)
+        
+        secondLists=[]
+        for second in seconds:
+            secondList=[]
+            secondId=second.SecondTypeNid
+            secondName=second.SecondTypeName
+            secondList.append(secondId)
+            secondList.append(secondName)
+            secondLists.append(secondList)
+        secondLists=json.dumps(secondLists)
+        
+        return HttpResponse(secondLists)
+
+
+
+
+def addHomeType(request):
+    if request.method=='POST':
+        data=request.POST
+        file=request.FILES
+        typeId=data.get('typeId')
+        secondTypeId=data.get('secondTypeId')
+        typeOrder=data.get('order')
+        secondTypeImg=file.get('secondTypeImg')
+        
+        
+        typeId=int(typeId)
+        secondTypeId=int(secondTypeId)
+        typeOrder=int(typeOrder)
+        
+        
+        print secondTypeId
+        print typeId
+        print secondTypeImg
+      
+     
+        if typeId and secondTypeImg:
+            storeid=request.session.get('storeid')
+            #同一个位置只能添加一次，多个位置的分类相互不重复
+            homeTypes=HomeType.objects.all()
+            if homeTypes:
+                for homeType in homeTypes:
+                    if typeId==homeType.TypeNid_id or typeOrder==homeType.TypeOrder:
+                        return HttpResponse('Duplicate')
+                    else:
+                        HomeType.objects.create(StoreNid_id=storeid,SecondTypeImg=secondTypeImg,TypeNid_id=typeId,TypeOrder=typeOrder,SecondTypeNid_id=secondTypeId)
+                        return HttpResponse('True')
+            else:
+                HomeType.objects.create(StoreNid_id=storeid,SecondTypeImg=secondTypeImg,TypeNid_id=typeId,TypeOrder=typeOrder,SecondTypeNid_id=secondTypeId)
+                return HttpResponse('True')
+        else:
+            return HttpResponse('Empty')
+        
+        
+        
+        
