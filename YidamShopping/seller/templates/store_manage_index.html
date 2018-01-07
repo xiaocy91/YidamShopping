@@ -74,6 +74,9 @@
 			padding:5px;
 			cursor:pointer;
 		}
+		
+		
+		
 		/*分类标题*/
 		.type-head{
 			font-size:40px;
@@ -103,6 +106,7 @@
 			position:absolute;
 			z-index:-1;
 		}
+		
 		.t1-right1-indexHerizon{
 			width:420px;
 			height:280px;
@@ -339,64 +343,79 @@
 			<div class='t1-left1'> 
 				<div class='t1-left-imgOperate' >
 					<div class='t1-left1-img'>
-						{% if homeLists %}
-							{% for homeList in homeLists %}
-								{% ifequal homeList.3 1 %}
-									<img class='t1-left1-indexVertical' src='/media/{{homeList.2}}'>
-								{% endifequal %}
-							{% endfor %}
-						{% else %}	
+						{% if typeOrder1 %}
+							<img class='t1-left1-indexVertical' src='/media/{{typeOrder1.2}}'>
+						{% else %}
 							<img class='t1-left1-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
 						{% endif %}
-							
-								
-							
 					</div>
 					<div class='add-del-operate'>
-						{% if homeLists %}
-							{% for homeList in homeLists %}
-								{% ifequal homeList.3 1 %}
-									<span   class='onLeave' >-删除分类</span>
-								{% endifequal %}
-							{% endfor %}
-						{% else %}	
-							<span id='typeAdd1'  class='onLeave' >+增加分类</span>
-						{% endif %}
+							{% if typeOrder1 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span id='typeAdd1'  class='onLeave' >+增加分类</span>	
+							{% endif %}
 					</div>
 				</div>
-				{% if homeLists %}
-					{% for homeList in homeLists %}
-						{% ifequal homeList.3 1 %}
-							<div  class='type-head'><span>{{homeList.1}}</span></div>	
-						{% endifequal %}
-					{% endfor %}
-				{% else %}		
-					<div  class='type-head'><span>分类名称</span></div>	
+				{% if typeOrder1 %}
+					<div  class='type-head'><span>{{typeOrder1.1}}</span></div>
+				{% else %}
+					<div  class='type-head'><span>分类名称</span></div>
 				{% endif %}
+						
 			</div>
 			
 	
 		
-				
+		
+		
 			<!--type2分类-->
 			<div class='t1-right1'>
 				<div class='t1-right1-imgOperate'>
 					<div class='t1-right1-img'>
-						<img class='t1-right1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+						{% if typeOrder2 %}
+							<img class='t1-right1-indexHerizon' src='/media/{{typeOrder2.2}}'>
+						{% else %}
+							<img class='t1-right1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+					{% if typeOrder2 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除分类</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave'  id='typeAdd2'>+增加分类</span></div>
+					{% endif %}
+					
 				</div>
-				<div  class='type-head'><span>分类名称</span></div>	
+				{% if typeOrder2 %}
+					<div  class='type-head'><span>{{typeOrder2.1}}</span></div>
+				{% else %}
+					<div  class='type-head'><span>分类名称</span></div>
+				{% endif %}	
 			</div>
 			
+			
+			
+			<!--type3分类-->
 			<div class='t1-right2'>
 				<div class='t1-right2-imgOperate'>
 					<div class='t1-right2-img'>
-						<img class='t1-right2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+						{% if typeOrder3 %}
+							<img class='t1-right2-indexHerizon' src='/media/{{typeOrder3.2}}'>
+						{% else %}
+							<img class='t1-right2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+					{% if typeOrder3 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除分类</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='typeAdd3'>+增加分类</span></div>
+					{% endif %}
 				</div>
-				<div  class='type-head'><span>分类名称</span></div>
+				{% if typeOrder3 %}
+					<div  class='type-head'><span>{{typeOrder3.1}}</span></div>
+				{% else %}
+					<div  class='type-head'><span>分类名称</span></div>
+				{% endif %}
 			</div>	
 			
 		<div>
@@ -410,51 +429,107 @@
 		
 		<div class='t2'>
 			<tr>
+			
+				<!--type4分类-->
 				<td>
 					<div class='t2-item'>
 						<div class='t2-imgOperate'>
 							<div class='t2-img'>
-								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% if typeOrder4 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder4.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
 							</div>
-							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+							{% if typeOrder4 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd4'>+增加分类</span></div>
+							{% endif %}
 						</div>
-						<div  class='type-head'><span>分类名称</span></div>
+						{% if typeOrder4 %}
+							<div  class='type-head'><span>{{typeOrder4.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+				
+				
+				<!--type5分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder5 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder5.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder5 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd5'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder5 %}
+							<div  class='type-head'><span>{{typeOrder5.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+				
+				
+			
+				<!--type6分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder6 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder6.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder6 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd6'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder6 %}
+							<div  class='type-head'><span>{{typeOrder6.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
 					</div>	
 				</td>
 			
+				<!--type7分类-->
 				<td>
 					<div class='t2-item'>
 						<div class='t2-imgOperate'>
 							<div class='t2-img'>
-								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% if typeOrder7 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder7.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
 							</div>
-							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+							{% if typeOrder7 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd7'>+增加分类</span></div>
+							{% endif %}
 						</div>
-						<div  class='type-head'><span>分类名称</span></div>
-					</div>	
-				</td>
-			
-				<td>
-					<div class='t2-item'>
-						<div class='t2-imgOperate'>
-							<div class='t2-img'>
-								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
-							</div>
-							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
-						</div>
-						<div  class='type-head'><span>分类名称</span></div>
-					</div>	
-				</td>
-			
-				<td>
-					<div class='t2-item'>
-						<div class='t2-imgOperate'>
-							<div class='t2-img'>
-								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
-							</div>
-							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
-						</div>
-						<div  class='type-head'><span>分类名称</span></div>
+						{% if typeOrder7 %}
+							<div  class='type-head'><span>{{typeOrder7.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
 					</div>	
 				</td>
 			</tr>
@@ -471,51 +546,105 @@
 		
 		<div class='t2'>
 			<tr>
+				<!--type8分类-->
 				<td>
 					<div class='t2-item'>
 						<div class='t2-imgOperate'>
 							<div class='t2-img'>
-								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% if typeOrder8 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder8.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
 							</div>
-							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+							{% if typeOrder8 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd8'>+增加分类</span></div>
+							{% endif %}
 						</div>
-						<div  class='type-head'><span>分类名称</span></div>
+						{% if typeOrder8 %}
+							<div  class='type-head'><span>{{typeOrder8.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
 					</div>	
 				</td>
 			
+			
+				<!--type9分类-->
 				<td>
 					<div class='t2-item'>
 						<div class='t2-imgOperate'>
 							<div class='t2-img'>
-								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% if typeOrder9 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder9.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
 							</div>
-							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+							{% if typeOrder9 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd9'>+增加分类</span></div>
+							{% endif %}
 						</div>
-						<div  class='type-head'><span>分类名称</span></div>
+						{% if typeOrder9 %}
+							<div  class='type-head'><span>{{typeOrder9.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
 					</div>	
 				</td>
 			
+				<!--type10分类-->
 				<td>
 					<div class='t2-item'>
 						<div class='t2-imgOperate'>
 							<div class='t2-img'>
-								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% if typeOrder10 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder10.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
 							</div>
-							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+							{% if typeOrder10 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd10'>+增加分类</span></div>
+							{% endif %}
 						</div>
-						<div  class='type-head'><span>分类名称</span></div>
+						{% if typeOrder10 %}
+							<div  class='type-head'><span>{{typeOrder10.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
 					</div>	
 				</td>
 			
+				
+				<!--type11分类-->
 				<td>
 					<div class='t2-item'>
 						<div class='t2-imgOperate'>
 							<div class='t2-img'>
-								<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% if typeOrder11 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder11.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
 							</div>
-							<div class='add-del-operate'><span class='onLeave'>+增加分类</span></div>
+							{% if typeOrder11 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd11'>+增加分类</span></div>
+							{% endif %}
 						</div>
-						<div  class='type-head'><span>分类名称</span></div>
+						{% if typeOrder11 %}
+							<div  class='type-head'><span>{{typeOrder11.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
 					</div>	
 				</td>
 			</tr>
@@ -843,14 +972,8 @@
 	
 	
 	
-	{{typeLists}}
-	
-	
 	
 	</div>
-	
-	
-	
 	
 	
 	
@@ -956,6 +1079,27 @@
 			
 			//1号分类添加点击事件
 			$('#typeAdd1').bind('click',{'order':1},addHomeType)
+			//2号分类添加点击事件
+			$('#typeAdd2').bind('click',{'order':2},addHomeType)
+			//3号分类添加点击事件
+			$('#typeAdd3').bind('click',{'order':3},addHomeType)
+			//4号分类添加点击事件
+			$('#typeAdd4').bind('click',{'order':4},addHomeType)
+			//5号分类添加点击事件
+			$('#typeAdd5').bind('click',{'order':5},addHomeType)
+			//6号分类添加点击事件
+			$('#typeAdd6').bind('click',{'order':6},addHomeType)
+			//7号分类添加点击事件
+			$('#typeAdd7').bind('click',{'order':7},addHomeType)
+			//8号分类添加点击事件
+			$('#typeAdd8').bind('click',{'order':8},addHomeType)
+			//9号分类添加点击事件
+			$('#typeAdd9').bind('click',{'order':9},addHomeType)
+			//10号分类添加点击事件
+			$('#typeAdd10').bind('click',{'order':10},addHomeType)
+			//11号分类添加点击事件
+			$('#typeAdd11').bind('click',{'order':11},addHomeType)
+			
 			
 			
 	
@@ -1012,6 +1156,21 @@
 			
 		});
 		
+		
+		
+		//执行取消操作
+		$('#cancle').click(function(){
+			$('.fixed-div').css("display","none");
+			$('.add-div').css("display","none");	
+		});
+		
+		
+	}
+	
+	
+	
+	function addHomeProduct(event){
+	
 	}
 
 </script>		

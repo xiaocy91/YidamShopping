@@ -409,7 +409,7 @@ def manageStore(request):
         storeid=request.session.get('storeid')
         if storeid:
             homeTypes=HomeType.objects.filter(StoreNid_id=storeid)
-        homeLists=[]
+        
         for homeType in homeTypes:
             secondTypeId=homeType.SecondTypeNid_id
             secondTypeImg=homeType.SecondTypeImg
@@ -422,12 +422,9 @@ def manageStore(request):
             homeList.append(secondTypeId)
             homeList.append(secondTypeName)
             homeList.append(secondTypeImg)
-            homeList.append(typeOrder)
-            homeLists.append(homeList)
+            typeOrder='typeOrder'+str(typeOrder)
+            resData[typeOrder]=homeList
         
-        resData['homeLists']=homeLists
-        
-           
         return render_to_response('store_manage_index.html',resData)
     
     
@@ -479,16 +476,20 @@ def addHomeType(request):
             storeid=request.session.get('storeid')
             #同一个位置只能添加一次，多个位置的分类相互不重复
             homeTypes=HomeType.objects.all()
+            
+            
+            dupFlag=True
             if homeTypes:
                 for homeType in homeTypes:
-                    if typeId==homeType.TypeNid_id or typeOrder==homeType.TypeOrder:
-                        return HttpResponse('Duplicate')
-                    else:
-                        HomeType.objects.create(StoreNid_id=storeid,SecondTypeImg=secondTypeImg,TypeNid_id=typeId,TypeOrder=typeOrder,SecondTypeNid_id=secondTypeId)
-                        return HttpResponse('True')
-            else:
+                    print 'dddd:',secondTypeId
+                    print  'lll:',homeType.SecondTypeNid_id
+                    if secondTypeId==homeType.SecondTypeNid_id or typeOrder==homeType.TypeOrder:
+                       dupFlag=False
+            if dupFlag:
                 HomeType.objects.create(StoreNid_id=storeid,SecondTypeImg=secondTypeImg,TypeNid_id=typeId,TypeOrder=typeOrder,SecondTypeNid_id=secondTypeId)
                 return HttpResponse('True')
+            else:
+                return HttpResponse('Duplicate')
         else:
             return HttpResponse('Empty')
         
