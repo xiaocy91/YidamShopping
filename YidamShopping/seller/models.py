@@ -68,12 +68,19 @@ class ProductPrice(models.Model):
     
     
 class HomeType(models.Model):  
-    HomeNid=models.AutoField(primary_key=True)
+    HomeTypeNid=models.AutoField(primary_key=True)
     StoreNid=models.ForeignKey(Store)
     TypeNid=models.ForeignKey(ProductType)
     SecondTypeNid=models.OneToOneField(ProductSecondType)
     SecondTypeImg=models.ImageField(upload_to='homeTypeImg/%Y%m%d%H%M%S')
     TypeOrder=models.IntegerField()
+    
+class HomeProduct(models.Model):
+    HomeProductNid=models.AutoField(primary_key=True)
+    StoreNid=models.ForeignKey(Store)
+    ProductNid=models.OneToOneField(Product)
+    ProductOrder=models.IntegerField()
+    
     
 
   

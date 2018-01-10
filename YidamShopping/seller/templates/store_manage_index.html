@@ -666,88 +666,169 @@
 		<!--商品区1-->
 		<table>
 			<tr>
+			<!--1号商品-->
 			<td>
 			<div class='t3-item1'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder1 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder1.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder1 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd1'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder1 %}
+					<div  class='product-head'><span>{{productOrder1.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
 			
+			
+			<!--2号商品-->
 			<td>
 			<div class='t3-item2'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder2 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder2.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder2 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd2'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder2 %}
+					<div  class='product-head'><span>{{productOrder2.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>
 			</td>
 			
+			<!--3号商品-->
 			<td>
 			<div class='t3-item3'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder3 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder3.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder3 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd3'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder3 %}
+					<div  class='product-head'><span>{{productOrder3.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
+			
 			</tr>
 		</div>	
 		</table>
 		
 		
 		
-		
 		<!--商品区2-->
 		<table>
 			<tr>
+			<!--4号商品-->
 			<td>
 			<div class='t3-item1'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder4 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder4.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder4 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd4'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder4 %}
+					<div  class='product-head'><span>{{productOrder4.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
 			
+			
+			<!--5号商品-->
 			<td>
 			<div class='t3-item2'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder5 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder5.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder5 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd5'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder5 %}
+					<div  class='product-head'><span>{{productOrder5.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>
 			</td>
 			
+			<!--6号商品-->
 			<td>
 			<div class='t3-item3'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder6 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder6.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder6 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd6'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder6 %}
+					<div  class='product-head'><span>{{productOrder6.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
+			
 			</tr>
-		
+		</div>	
 		</table>
 		
 		
@@ -756,42 +837,84 @@
 		<!--商品区3-->
 		<table>
 			<tr>
+			<!--7号商品-->
 			<td>
 			<div class='t3-item1'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder7 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder7.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder7 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd7'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder7 %}
+					<div  class='product-head'><span>{{productOrder7.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
 			
+			
+			<!--8号商品-->
 			<td>
 			<div class='t3-item2'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder8 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder8.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder8 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd8'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder8 %}
+					<div  class='product-head'><span>{{productOrder8.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>
 			</td>
 			
+			<!--9号商品-->
 			<td>
 			<div class='t3-item3'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder9 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder9.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder9 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd9'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder9 %}
+					<div  class='product-head'><span>{{productOrder9.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
+			
 			</tr>
+		</div>	
 		</table>
 		
 		
@@ -800,42 +923,84 @@
 		<!--商品区4-->
 		<table>
 			<tr>
+			<!--10号商品-->
 			<td>
 			<div class='t3-item1'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder10 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder10.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder10 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd10'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder10 %}
+					<div  class='product-head'><span>{{productOrder10.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
 			
+			
+			<!--11号商品-->
 			<td>
 			<div class='t3-item2'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder11 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder11.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder11 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd11'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder11 %}
+					<div  class='product-head'><span>{{productOrder11.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>
 			</td>
 			
+			<!--12号商品-->
 			<td>
 			<div class='t3-item3'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder12 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder12.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder12 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd12'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder12 %}
+					<div  class='product-head'><span>{{productOrder12.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
+			
 			</tr>
+		</div>	
 		</table>
 		
 		
@@ -843,42 +1008,84 @@
 		<!--商品区5-->
 		<table>
 			<tr>
+			<!--13号商品-->
 			<td>
 			<div class='t3-item1'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder13 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder13.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder13 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd13'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder13 %}
+					<div  class='product-head'><span>{{productOrder13.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
 			
+			
+			<!--14号商品-->
 			<td>
 			<div class='t3-item2'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder14 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder14.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder14 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd14'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder14 %}
+					<div  class='product-head'><span>{{productOrder14.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>
 			</td>
 			
+			<!--15号商品-->
 			<td>
 			<div class='t3-item3'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder15 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder15.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder15 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd15'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder15 %}
+					<div  class='product-head'><span>{{productOrder15.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
+			
 			</tr>
+		</div>	
 		</table>
 		
 		
@@ -887,86 +1094,170 @@
 		<!--商品区6-->
 		<table>
 			<tr>
+			<!--16号商品-->
 			<td>
 			<div class='t3-item1'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder16 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder16.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder16 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd16'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder16 %}
+					<div  class='product-head'><span>{{productOrder16.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
 			
+			
+			<!--17号商品-->
 			<td>
 			<div class='t3-item2'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder17 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder17.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder17 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd17'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder17 %}
+					<div  class='product-head'><span>{{productOrder17.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>
 			</td>
 			
+			<!--18号商品-->
 			<td>
 			<div class='t3-item3'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder18 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder18.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder18 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd18'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder18 %}
+					<div  class='product-head'><span>{{productOrder18.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
+			
 			</tr>
-		</table>	
+		</div>	
+		</table>
 			
 		
 		
 		<!--商品区7-->
 		<table>
 			<tr>
+			<!--19号商品-->
 			<td>
 			<div class='t3-item1'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder19 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder19.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder19 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd19'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder19 %}
+					<div  class='product-head'><span>{{productOrder19.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
 			
+			
+			<!--20号商品-->
 			<td>
 			<div class='t3-item2'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder20 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder20.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder20 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd20'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder20 %}
+					<div  class='product-head'><span>{{productOrder20.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>
 			</td>
 			
+			<!--21号商品-->
 			<td>
 			<div class='t3-item3'>
 				<div class='t3-imgOperate'>
 					<div class='t3-img'>
-						<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% if productOrder21 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder21.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
 					</div>
-					<div class='add-del-operate'><span class='onLeave'>+增加商品</span></div>
+					{% if productOrder21 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd21'>+增加商品</span></div>
+					{% endif %}
 				</div>
-				<div  class='product-head'><span>商品名称</span></div>
+				{% if productOrder21 %}
+					<div  class='product-head'><span>{{productOrder21.1}}</span></div>
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
 			</div>	
 			</td>
+			
 			</tr>
-		</table>		
+		</div>	
+		</table>	
 		
 	</div>
 	
@@ -1021,7 +1312,7 @@
 					<td  id='productNameId' >商品名称</td>
 					<td>
 						<select id='productSelectId'>
-							<option ></option>
+							<option>请选择商品</option>
 						</select>
 					</td>
 				</tr>
@@ -1076,8 +1367,35 @@
 				});
 			});
 			
+			//二级分类获取对应的商品
+			$('#secondTypeSelectId').bind('change',function(){
+				var secondTypeId=$(this).find('option:selected').val()
+				data={'secondTypeId':secondTypeId}
+				
+				$.ajax({
+					url:'/getProduct/',
+					method:'GET',
+					data:data,
+					success:function(result){
+						//先清除之前的option
+						$('#productSelectId').empty()
+						$('#productSelectId').append("<option>请选择商品</option>")
+						
+						var productLists=$.parseJSON(result)
+						for(var i=0;i<productLists.length;i++){
+							var productList=productLists[i]
+							var id=productList[0]
+							var name=productList[1]
+							$('#productSelectId').append("<option value='"+id+"'>"+name+"</option>")
+						}
+					},
+				
+				});
 			
-			//1号分类添加点击事件
+			});
+			
+			
+			//1号分类添加点击事件,bind方法，可以传递参数，字典类型参数
 			$('#typeAdd1').bind('click',{'order':1},addHomeType)
 			//2号分类添加点击事件
 			$('#typeAdd2').bind('click',{'order':2},addHomeType)
@@ -1101,7 +1419,48 @@
 			$('#typeAdd11').bind('click',{'order':11},addHomeType)
 			
 			
-			
+			//1号商品添加单击事件
+			$('#productAdd1').bind('click',{'order':1},addHomeProduct)
+			//2号商品添加单击事件
+			$('#productAdd2').bind('click',{'order':2},addHomeProduct)
+			//3号商品添加单击事件
+			$('#productAdd3').bind('click',{'order':3},addHomeProduct)
+			//3号商品添加单击事件
+			$('#productAdd4').bind('click',{'order':4},addHomeProduct)
+			//5号商品添加单击事件
+			$('#productAdd5').bind('click',{'order':5},addHomeProduct)
+			//6号商品添加单击事件
+			$('#productAdd6').bind('click',{'order':6},addHomeProduct)
+			//7号商品添加单击事件
+			$('#productAdd7').bind('click',{'order':7},addHomeProduct)
+			//8号商品添加单击事件
+			$('#productAdd8').bind('click',{'order':8},addHomeProduct)
+			//9号商品添加单击事件
+			$('#productAdd9').bind('click',{'order':9},addHomeProduct)
+			//10号商品添加单击事件
+			$('#productAdd10').bind('click',{'order':10},addHomeProduct)
+			//11号商品添加单击事件
+			$('#productAdd11').bind('click',{'order':11},addHomeProduct)
+			//12号商品添加单击事件
+			$('#productAdd12').bind('click',{'order':12},addHomeProduct)
+			//13号商品添加单击事件
+			$('#productAdd13').bind('click',{'order':13},addHomeProduct)
+			//14号商品添加单击事件
+			$('#productAdd14').bind('click',{'order':14},addHomeProduct)
+			//15号商品添加单击事件
+			$('#productAdd15').bind('click',{'order':15},addHomeProduct)
+			//16号商品添加单击事件
+			$('#productAdd16').bind('click',{'order':16},addHomeProduct)
+			//17号商品添加单击事件
+			$('#productAdd17').bind('click',{'order':17},addHomeProduct)
+			//18号商品添加单击事件
+			$('#productAdd18').bind('click',{'order':18},addHomeProduct)
+			//19号商品添加单击事件
+			$('#productAdd19').bind('click',{'order':19},addHomeProduct)
+			//20号商品添加单击事件
+			$('#productAdd20').bind('click',{'order':20},addHomeProduct)
+			//21号商品添加单击事件
+			$('#productAdd21').bind('click',{'order':21},addHomeProduct)
 	
 	});
 	
@@ -1110,8 +1469,9 @@
 	
 	
 	
-	
+	//添加首页分类
 	function addHomeType(event){
+		//bind方法，传递数据到event中，然后从event中获取传递的数据
 		var order=event.data.order
 		
 		$('.fixed-div').css('display','block')
@@ -1161,7 +1521,11 @@
 		//执行取消操作
 		$('#cancle').click(function(){
 			$('.fixed-div').css("display","none");
-			$('.add-div').css("display","none");	
+			$('.add-div').css("display","none");
+			//取消屏蔽样式
+			$('#productNameId').css('color','')
+			$('#productSelectId').css('background-color','')
+			$('#productSelectId').removeAttr("disabled");
 		});
 		
 		
@@ -1169,8 +1533,56 @@
 	
 	
 	
-	function addHomeProduct(event){
 	
+	
+	//添加首页商品
+	function addHomeProduct(event){
+		//bind方法，传递数据到event中，然后从event中获取传递的数据
+		var order=event.data.order
+		
+		$('.fixed-div').css('display','block')
+		//动态修改添加的div标签y轴位置
+		$('.add-div').css("display","block").css('margin-top',$(document).scrollTop()+80); 
+		
+		
+		$('#secondTypeImgNameId').css('color','#C3C3C3')
+		$('#secondTypeImgId').css('background-color','#EDEAEA')
+		$('#secondTypeImgId').attr("disabled","true")
+		
+		
+		
+		//点击确定
+		$('#confirm').off('click').click(function(){
+			var productId=$('#productSelectId').find("option:selected").val()
+			
+			$.ajax({
+				url:'/addHomeProduct/',
+				method:'POST',
+				data:{'productId':productId,'order':order},
+				success:function(result){
+					if(result=='True'){
+						alert('成功添加首页商品')
+					}else if(result=='Empty'){
+							alert('失败！参数不能为空')
+					}else{
+							alert('失败！添加商品不能重复')
+					}
+					window.location.reload()
+				},
+			});
+		
+		});
+		
+		
+		//执行取消操作
+		$('#cancle').click(function(){
+			$('.fixed-div').css("display","none");
+			$('.add-div').css("display","none");	
+			//取消屏蔽样式
+			$('#secondTypeImgNameId').css('color','')
+			$('#secondTypeImgId').css('background-color','')
+			$('#secondTypeImgId').removeAttr("disabled")
+			});
 	}
 
 </script>		

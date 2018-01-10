@@ -13,6 +13,9 @@ import time
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
 from seller.models import ProductPrice
+from _mysql import NULL
+from django.template.context_processors import request
+from seller.models import HomeProduct
 
 #进入卖家中心首页
 def sellerIndex(request):
@@ -389,7 +392,7 @@ def manageStore(request):
     resData=getTypesData(request)
     
     if request.method=='GET':
-        #获取店铺分类、商品、图片，全部信息
+        #获取店铺分类
         storeid=request.session.get('storeid')
         #初始化一级分类
         productTypes=ProductType.objects.filter(StoreNid_id=storeid)
@@ -401,15 +404,14 @@ def manageStore(request):
             typeList.append(typeId)
             typeList.append(typeName)
             typeLists.append(typeList)
-        #添加进返回数据    
         resData['typeLists']=typeLists
         
       
-        #获取主页分类
         storeid=request.session.get('storeid')
+        
+        #获取主页分类
         if storeid:
             homeTypes=HomeType.objects.filter(StoreNid_id=storeid)
-        
         for homeType in homeTypes:
             secondTypeId=homeType.SecondTypeNid_id
             secondTypeImg=homeType.SecondTypeImg
@@ -424,6 +426,25 @@ def manageStore(request):
             homeList.append(secondTypeImg)
             typeOrder='typeOrder'+str(typeOrder)
             resData[typeOrder]=homeList
+        
+        #获取主页商品
+        if storeid:
+            homeProducts=HomeProduct.objects.filter(StoreNid_id=storeid)
+        for homeProduct in homeProducts:
+            productId=homeProduct.ProductNid_id
+            productOrder=homeProduct.ProductOrder
+            if productId:
+                productInfo=Product.objects.get(Nid=productId)
+                productImg=ProductImage.objects.filter(ProductNid_id=productId).last().Img
+            if productInfo and productImg:
+                productHead=productInfo.Head
+            productList=[]
+            productList.append(productId)
+            productList.append(productHead)
+            productList.append(productImg)
+            productOrder='productOrder'+str(productOrder)
+            resData[productOrder]=productList
+               
         
         return render_to_response('store_manage_index.html',resData)
     
@@ -451,6 +472,28 @@ def getSecondType(request):
 
 
 
+def getProduct(request):
+    if request.method=='GET':
+        data=request.GET
+        secondTypeId=data.get('secondTypeId')
+        secondTypeId=int(secondTypeId)
+        products=Product.objects.filter(TypeNid_id=secondTypeId)
+        
+        productLists=[]
+        for product in products:
+            productList=[]
+            productId=product.Nid
+            productName=product.Head
+            productList.append(productId)
+            productList.append(productName)
+            productLists.append(productList)
+        productLists=json.dumps(productLists)
+        
+        if productLists:
+            return HttpResponse(productLists)
+        else:
+            return 'Empty'
+
 
 def addHomeType(request):
     if request.method=='POST':
@@ -461,28 +504,18 @@ def addHomeType(request):
         typeOrder=data.get('order')
         secondTypeImg=file.get('secondTypeImg')
         
-        
         typeId=int(typeId)
         secondTypeId=int(secondTypeId)
         typeOrder=int(typeOrder)
-        
-        
-        print secondTypeId
-        print typeId
-        print secondTypeImg
-      
      
         if typeId and secondTypeImg:
             storeid=request.session.get('storeid')
             #同一个位置只能添加一次，多个位置的分类相互不重复
             homeTypes=HomeType.objects.all()
             
-            
             dupFlag=True
             if homeTypes:
                 for homeType in homeTypes:
-                    print 'dddd:',secondTypeId
-                    print  'lll:',homeType.SecondTypeNid_id
                     if secondTypeId==homeType.SecondTypeNid_id or typeOrder==homeType.TypeOrder:
                        dupFlag=False
             if dupFlag:
@@ -495,4 +528,28 @@ def addHomeType(request):
         
         
         
+def addHomeProduct(request):
+    if request.method=='POST':
+        data=request.POST
+        productId=data.get('productId')
+        productOrder=data.get('order')
+        storeid=request.session.get('storeid')
+        #将字符类型转为整数类型
+        productId=int(productId)
+        productOrder=int(productOrder)
+        
+        if productId and productOrder:
+            homeProducts=HomeProduct.objects.all()
+            dupFlag=True
+            if homeProducts:
+                for homeProduct in homeProducts:
+                    if productId==homeProduct.ProductNid_id or productOrder==homeProduct.ProductOrder:
+                        dupFlag=False
+            if dupFlag:
+                HomeProduct.objects.create(ProductOrder=productOrder,ProductNid_id=productId,StoreNid_id=storeid)
+                return HttpResponse('True') 
+            else:
+                return HttpResponse('Duplicate')
+        else:
+            return HttpResponse('Empty')
         
