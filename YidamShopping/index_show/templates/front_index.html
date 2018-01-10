@@ -6,12 +6,48 @@
 <title>亿达购物商城</title>
 
 
+<style type='text/css'>
+		body{
+			margin:0px;
+			background-color:#F8F8FF;
+		}
+		
+		
+			
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+</style>
+
 </head>
 
 <body>
 
 {% include "front_top.html" %}
-
+<div class='bodyFrame'>
+	{% include 'front_left.html' %}
+	
+	
+	<div class='bodyContent'>
+	
+	</div>
+	
+</div>
 
 
 </body>

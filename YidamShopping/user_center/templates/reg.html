@@ -5,6 +5,33 @@
 	<meta http-equiv='Content-Type' content='text/html;charset=utf-8;'>
 	
 	<style tpye='text/css'>
+		body{
+			margin:0px;
+		}
+		.header-back{
+			width:100%;
+			height:110;
+			padding:0px; margin:0px;
+			background-color:#FFFFFF;
+		}
+		
+		.header{
+			z-index:1020;
+			width:1200px;
+			height:110px;
+			position:absolute;
+			z-index:1030;
+			left:50%;
+			margin-left:-600px;
+		}
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+	
 		.header{
 			height:110px;
 		}
@@ -31,23 +58,26 @@
 
 <body>
 
-<div id="form-header" class="header">
-	<div  >
-		<img class='logo' src='/statics/img/Yidam_logo.jpg'/>
+<div class='header-back'>
+	<div id="form-header" class="header">
+		<div>
+			<a href='/index/'><img class='logo' src='/statics/img/Yidam_logo.jpg'/></a>
+		</div>
+		<div class="logo-title">欢迎注册</div>
 	</div>
-	<div class="logo-title">欢迎注册</div>
 </div>
 
-
-<form action='/register/'  method='POST'>
-	用户名：<input type='text' name='account' value'userinput'/>
-	密码：<input type='password' name='password'/> 
-	<input type='submit' value='提交'>
-</form>
-
-{% if result %}
-	<p>{{result}}</p>
-{% endif %}
+<div class='bodyFrame'>
+	<form action='/register/'  method='POST'>
+		用户名：<input type='text' name='account' value'userinput'/>
+		密码：<input type='password' name='password'/> 
+		<input type='submit' value='提交'>
+	</form>
+	
+	{% if result %}
+		<p>{{result}}</p>
+	{% endif %}
+</div>
 
 </body>
 

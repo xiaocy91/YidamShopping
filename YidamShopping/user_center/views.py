@@ -54,7 +54,7 @@ def load(request):
                     request.session['account']=userinfo[0].Account
                     request.session['userid']=userinfo[0].Userid
                     request.session.set_expiry(0)
-                    return render_to_response('front_top.html',{'account':account})
+                    return render_to_response('front_index.html',{'account':account})
                 else:
                     reslut='用户账号或者密码错误'
             else:

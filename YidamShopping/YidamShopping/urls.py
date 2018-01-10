@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from user_center.views import register,load,loginOut
 from index_show.views import index
-from seller.views import sellerIndex,registerStore,searchStore,manageStore,editTypes,delSecondName
+from seller.views import sellerIndex,registerStore,viewStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
 from seller.views import editProduct,addAttr1,addAttr2,addPrice,addHomeType,getSecondType,getProduct
 from seller.views import addHomeProduct
@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^sellerIndex/$', sellerIndex),
     url(r'^loginOut/$', loginOut),
     url(r'^registerStore/$', registerStore),
-    url(r'^searchStore/$', searchStore), 
+    url(r'^viewStore/$', viewStore), 
     url(r'^manageStore/$', manageStore), 
     url(r'^editTypes/$', editTypes), 
     url(r'^delSecondName/$', delSecondName),  

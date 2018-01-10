@@ -83,7 +83,7 @@ def registerStore(request):
 
 
 #查看店铺信息
-def searchStore(request):
+def viewStore(request):
     userid=request.session.get('userid')
     account=request.session.get('account')
     openStore=request.session.get('openStore')
@@ -436,12 +436,21 @@ def manageStore(request):
             if productId:
                 productInfo=Product.objects.get(Nid=productId)
                 productImg=ProductImage.objects.filter(ProductNid_id=productId).last().Img
+                priceObj=ProductPrice.objects.filter(ProductNid_id=productId)
+                #判断是否有价格
+                if priceObj:
+                    productPrice=priceObj.last().Price
+                else:
+                    productPrice=-1
+              
+            
             if productInfo and productImg:
                 productHead=productInfo.Head
             productList=[]
             productList.append(productId)
             productList.append(productHead)
             productList.append(productImg)
+            productList.append(productPrice)
             productOrder='productOrder'+str(productOrder)
             resData[productOrder]=productList
                
@@ -511,7 +520,7 @@ def addHomeType(request):
         if typeId and secondTypeImg:
             storeid=request.session.get('storeid')
             #同一个位置只能添加一次，多个位置的分类相互不重复
-            homeTypes=HomeType.objects.all()
+            homeTypes=HomeType.objects.filter(StoreNid_id=storeid)
             
             dupFlag=True
             if homeTypes:
@@ -552,4 +561,6 @@ def addHomeProduct(request):
                 return HttpResponse('Duplicate')
         else:
             return HttpResponse('Empty')
+        
+        
         
