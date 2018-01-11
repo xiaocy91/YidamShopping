@@ -84,15 +84,153 @@ def registerStore(request):
 
 #查看店铺信息
 def viewStore(request):
+    resData={}
+    #获取店铺信息
     userid=request.session.get('userid')
     account=request.session.get('account')
     openStore=request.session.get('openStore')
-   
     if openStore:
         storeInfo = Store.objects.filter(UserNid_id=userid)
-        resData={'account':account,'openStore':openStore,'storeName':storeInfo[0].StoreName,'storeAddr':storeInfo[0].StoreAddr,'storeBossName':storeInfo[0].StoreBossName}
-        return render_to_response('store_view_index.html',resData)
+        resData['account']=account
+        resData['openStore']=openStore
+        resData['storeName']=storeInfo[0].StoreName
+        resData['storeAddr']=storeInfo[0].StoreAddr
+        resData['storeBossName']=storeInfo[0].StoreBossName
+        resData['storeId']=storeInfo[0].StoreNid
+        storeid=storeInfo[0].StoreNid
+    
+    #获取主页
+    if request.method=='GET':
+        #获取主页分类
+        if storeid:
+            homeTypes=HomeType.objects.filter(StoreNid_id=storeid)
+        secondTypeLists=[]
+        for homeType in homeTypes:
+            secondTypeId=homeType.SecondTypeNid_id
+            secondTypeImg=homeType.SecondTypeImg
+            typeOrder=homeType.TypeOrder
+            if secondTypeId:
+                secondTypeInfo=ProductSecondType.objects.get(SecondTypeNid=secondTypeId)
+            if secondTypeInfo:
+                secondTypeName=secondTypeInfo.SecondTypeName
+            secondTypeList=[]
+            secondTypeList.append(secondTypeId)
+            secondTypeList.append(secondTypeName)
+            secondTypeList.append(secondTypeImg)
+            secondTypeLists.append(secondTypeList)
+            typeOrder='typeOrder'+str(typeOrder)
+            resData[typeOrder]=secondTypeList
+        resData['secondTypeLists']=secondTypeLists
+        
+        #获取主页商品
+        if storeid:
+            homeProducts=HomeProduct.objects.filter(StoreNid_id=storeid)
+        for homeProduct in homeProducts:
+            productId=homeProduct.ProductNid_id
+            productOrder=homeProduct.ProductOrder
+            if productId:
+                productInfo=Product.objects.get(Nid=productId)
+                productImg=ProductImage.objects.filter(ProductNid_id=productId).last().Img
+                priceObj=ProductPrice.objects.filter(ProductNid_id=productId)
+                #判断是否有价格
+                if priceObj:
+                    productPrice=priceObj.last().Price
+                else:
+                    productPrice=-1
+              
+            
+            if productInfo and productImg:
+                productHead=productInfo.Head
+            productList=[]
+            productList.append(productId)
+            productList.append(productHead)
+            productList.append(productImg)
+            productList.append(productPrice)
+            productOrder='productOrder'+str(productOrder)
+            resData[productOrder]=productList
+    
+    return render_to_response('store_view_index.html',resData)
 
+
+def viewProduct(request):
+    print 'store',request.GET.get('storeId')
+    print 'secondId',request.GET.get('secondId')
+    
+    resData={}
+    #获取店铺Id和二级分类Id
+    data=request.GET
+    storeId=data.get('storeId')
+    secondId=data.get('secondId')
+    #获取店铺信息
+    userid=request.session.get('userid')
+    account=request.session.get('account')
+    openStore=request.session.get('openStore')
+    if openStore:
+        storeInfo = Store.objects.filter(UserNid_id=userid)
+        resData['account']=account
+        resData['openStore']=openStore
+        resData['storeName']=storeInfo[0].StoreName
+        resData['storeAddr']=storeInfo[0].StoreAddr
+        resData['storeBossName']=storeInfo[0].StoreBossName
+    #获取二级分类
+    if storeId:
+        homeTypes=HomeType.objects.filter(StoreNid_id=storeId)
+        secondTypeLists=[]
+        for homeType in homeTypes:
+            secondTypeId=homeType.SecondTypeNid_id
+            secondTypeImg=homeType.SecondTypeImg
+            typeOrder=homeType.TypeOrder
+            if secondTypeId:
+                secondTypeInfo=ProductSecondType.objects.get(SecondTypeNid=secondTypeId)
+            if secondTypeInfo:
+                secondTypeName=secondTypeInfo.SecondTypeName
+            secondTypeList=[]
+            secondTypeList.append(secondTypeId)
+            secondTypeList.append(secondTypeName)
+            secondTypeList.append(secondTypeImg)
+            secondTypeLists.append(secondTypeList)
+        resData['secondTypeLists']=secondTypeLists
+        resData['storeId']=storeId
+        resData['secondId']=secondId
+        
+     #获取商品
+    if request.method=='GET':
+        #从产品信息表获取数据
+        products=Product.objects.filter(TypeNid_id=secondId).all()
+        productLists=[]
+        for product in products:
+            proList=[]
+            id=product.Nid
+            head=product.Head
+            proList.append(id)
+            proList.append(head)
+            #获取一张商品的图片或者视频信息
+            proImg=ProductImage.objects.filter(ProductNid_id=id).last()
+            imgPath=proImg.Img
+            proList.append(imgPath)
+            #获取最后一个规格尺码的价格
+            proPrice=ProductPrice.objects.filter(ProductNid_id=id).last()
+            if proPrice:
+                print proPrice
+                price=proPrice.Price
+                proList.append(price)
+            #将每个商品的封装列表加入到总列表
+            productLists.append(proList)
+       
+        #进行分页    
+        paginator = Paginator(productLists,settings.HOME_PER_PAGE)#每页显示多少条数据，在setting里设置
+        page = request.GET.get('page')
+        try:
+            productLists = paginator.page(page)
+        except PageNotAnInteger:
+            productLists = paginator.page(1)
+        except EmptyPage:
+            productLists = paginator.page(paginator.num_pages)    
+            
+        #将商品列表加入返回的数据字典
+        resData['productLists']=productLists   
+            
+        return render_to_response('store_view_types.html',resData)
 
 
     

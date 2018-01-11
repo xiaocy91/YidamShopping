@@ -1,13 +1,18 @@
 <html>
 
-<head> 
-	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
-	
-	<style type='text/css'>
+<head>
+
+<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+<title>亿达购物商城</title>
+
+
+<style type='text/css'>
 		body{
 			margin:0px;
 		}
 		
+		
+			
 		.bodyFrame{
 			position:relative;
 			width:1200px;
@@ -16,61 +21,24 @@
 			margin-left:-600px;
 		}
 		
-		.bodyContent{
-			position:absolute;
-			float:right;
-			width:998px;
-			min-height:500px;
-			border: 1px solid #E0E0E0;
-			right:0px;
-			top:15px;
-		}	
-		
 		/*商品分类的最外层div*/	
 		.product-div-frame{
-			width:998px;
+			width:1200px;
 			min-height:400px;
-			margin-left:8px;
 			margin-right:0px;
 			margin-top:15px;
-			margin-bottom:15px;}	
-
-		
-	
-		.add-del-type{
-			position:relative;
-			height:40px;
-			margin:5px;
-			border-bottom:2px solid #D3D3D3;
-			cursor:pointer;
-		}
-		
-		
-		.add-del-item{
-			position:relative;
-			float:left;
-			margin:10px;}
-		
-		/*最上方竖直分割线*/
-		.gap-div{
-			background-color:#D3D3D3;
-			height:20px;
-			width:2px;
-			position:relative;
-			float:left;
-			margin-top:10px;}
-		
+			margin-bottom:15px;}
 		/*产品显示div*/
 		.product{
 			float:left;
-			width:220;
-			height:370;
-			margin:0px 27px 20px 0;
+			width:230;
+			height:385;
+			margin:0px 5px 5px 0;
 			border:1px solid #D3D3D3;
 		}
 		.product-img{
-			width:220;
-			height:225;
+			width:230;
+			height:240;
 			margin:0px;
 		}
 		
@@ -89,30 +57,37 @@
 	    overflow: hidden;
 	    margin:3px;}
 	    
+	    
 	    .seperate{
 	    	border-top:1px solid #D3D3D3;
 	    	width:220px;
 	    }
 	    
-	    .operates {
+	    /*交易信息*/
+	    	 .sell-info {
 	    margin:10px;
 	    }
+			.sell-info1{
+				line-height: 20px;
+    			font-size: 12px;
+				float:left;
+			}
+			.sell-info2{
+				float:right;
+				line-height: 20px;
+    			font-size: 12px;
+    			cursor:pointer;
+			}
 	    
 	    
 	    
 	    
 	    
 	    
-	    /*a链接去掉下划线*/
-		a{
-			text-decoration:none;
-		}
-		
-		
-		/*分页的样式*/
+	    /*分页的样式*/
 		.pagination{
 			clear:left;
-			width:998px;	
+			width:1200px;	
 			text-align:center;
 		}
 		
@@ -120,7 +95,7 @@
 			width:370px;
     		padding:0;
    			margin:0;
-    		margin-left:314px;}
+    		margin-left:500px;}
 
 		.wp-paginate li {
     		float:left;
@@ -155,45 +130,24 @@
 			    font-size:15px;
 			}		
 	
-	
-			/*编辑、删除操作的样式*/
-			.sale-info{
-				line-height: 20px;
-    			font-size: 12px;
-				float:left;
-			}
-			.edit-delete{
-				float:right;
-				line-height: 20px;
-    			font-size: 12px;
-    			cursor:pointer;
-			}
-			
-			
-	</style>
-	
-	
-</head>
+		
 
+		
+</style>
+
+</head>
 
 <body>
 
+{% include "store_view_top.html" %}
 
-{% include "store_manage_top.html"%}
 
 <div class='bodyFrame'>
-
-	{% include 'store_manage_left.html'%}
 	
 	
-	<div class='bodyContent'>
-		<div class='add-del-type'>
-				<div class='add-del-item'>删除全部商品</div>
-				<div class='gap-div'></div>
-				<div class='add-del-item' id='addProduct' >新增商品</div>
-		</div>
-		
-		<!--商品信息最外层div-->
+	
+	
+	<!--商品信息最外层div-->
 		<div class='product-div-frame'>
 		
 				
@@ -219,10 +173,10 @@
 							
 							<div class='seperate'></div>
 							
-							<div class='operates'>
-								<div class='sale-info'>销售信息</div> 
-								<div class='edit-delete' onclick='edit({{product.0}})'>编辑 </div>
-								<div class='edit-delete'>删除  &nbsp;</div>
+							<div class='sell-info'>
+								<div class='sell-info1'>月销售？？</div> 
+								<div class='sell-info2'>评价？？</div> 
+								
 							</div>
 						</div>
 					{% endfor%}	
@@ -235,8 +189,8 @@
 				    <span class="step-links">
 					    <ol class="wp-paginate">
 					        {% if productLists.has_previous %}
-					            <li><a href="?page=1">&laquo; 第一页</a></li>
-					            <li><a href="?page={{ productLists.previous_page_number }}">上一页</a></li>
+					            <li><a href="?storeId={{storeId}}&secondId={{secondId}}&page=1">&laquo; 第一页</a></li>
+					            <li><a href="?storeId={{storeId}}&secondId={{secondId}}&page={{ productLists.previous_page_number }}">上一页</a></li>
 					        {% endif %}
 					
 					        <span class="current">
@@ -244,8 +198,8 @@
 					        </span>
 					
 					        {% if productLists.has_next %}
-					            <li><a href="?page={{ productLists.next_page_number }}">下一页</a></li>
-					            <li><a href="?page={{ productLists.paginator.num_pages }}">最后页 &raquo;</a></li>
+					            <li><a href="?storeId={{storeId}}&secondId={{secondId}}&page={{ productLists.next_page_number }}">下一页</a></li>
+					            <li><a href="?storeId={{storeId}}&secondId={{secondId}}&page={{ productLists.paginator.num_pages }}">最后页 &raquo;</a></li>
 					        {% endif %}
 					     </ol>
 				    </span>
@@ -260,27 +214,15 @@
 		
 		
 		
-	</div>
+	
+	
+	
 	
 </div>
-
-<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
-<script type='text/javascript'>
-
-$(function(){
-
-	$('#addProduct').click(function(){
-		window.location.href='/addProduct/'+{{secondId}}+'/'
-	});
-})
-
-function edit(id){
-	window.location.href='/editProduct/'+id+'/'
-}
-
-</script>
 
 
 </body>
 
+
 </html>
+

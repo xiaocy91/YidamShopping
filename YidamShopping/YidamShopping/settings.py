@@ -136,5 +136,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
 MEDIA_URL = '/media/'
 
 
-#how many datas in one page
+#product manage,how many datas in one page
 PER_PAGE=8
+#home,page
+HOME_PER_PAGE=25
