@@ -82,7 +82,7 @@ def registerStore(request):
 
 
 
-#查看店铺信息
+#店铺首页
 def viewStore(request):
     resData={}
     #获取店铺信息
@@ -134,7 +134,7 @@ def viewStore(request):
                 priceObj=ProductPrice.objects.filter(ProductNid_id=productId)
                 #判断是否有价格
                 if priceObj:
-                    productPrice=priceObj.last().Price
+                    productPrice=priceObj.order_by('-Price').last().Price
                 else:
                     productPrice=-1
               
@@ -151,11 +151,8 @@ def viewStore(request):
     
     return render_to_response('store_view_index.html',resData)
 
-
-def viewProduct(request):
-    print 'store',request.GET.get('storeId')
-    print 'secondId',request.GET.get('secondId')
-    
+#店铺分类切换
+def viewType(request):
     resData={}
     #获取店铺Id和二级分类Id
     data=request.GET
@@ -166,7 +163,7 @@ def viewProduct(request):
     account=request.session.get('account')
     openStore=request.session.get('openStore')
     if openStore:
-        storeInfo = Store.objects.filter(UserNid_id=userid)
+        storeInfo = Store.objects.filter(StoreNid=storeId)
         resData['account']=account
         resData['openStore']=openStore
         resData['storeName']=storeInfo[0].StoreName
@@ -209,7 +206,7 @@ def viewProduct(request):
             imgPath=proImg.Img
             proList.append(imgPath)
             #获取最后一个规格尺码的价格
-            proPrice=ProductPrice.objects.filter(ProductNid_id=id).last()
+            proPrice=ProductPrice.objects.filter(ProductNid_id=id).order_by('-Price').last()
             if proPrice:
                 print proPrice
                 price=proPrice.Price
@@ -230,8 +227,67 @@ def viewProduct(request):
         #将商品列表加入返回的数据字典
         resData['productLists']=productLists   
             
-        return render_to_response('store_view_types.html',resData)
+        return render_to_response('store_view_type.html',resData)
 
+
+#店铺商品切换
+def viewProduct(request):
+    resData={}
+    #获取店铺Id和二级分类Id
+    data=request.GET
+    storeId=data.get('storeId')
+    proId=data.get('proId')
+    #获取店铺信息
+    userid=request.session.get('userid')
+    account=request.session.get('account')
+    openStore=request.session.get('openStore')
+    if openStore:
+        storeInfo = Store.objects.filter(StoreNid=storeId)
+        resData['account']=account
+        resData['openStore']=openStore
+        resData['storeName']=storeInfo[0].StoreName
+        resData['storeAddr']=storeInfo[0].StoreAddr
+        resData['storeBossName']=storeInfo[0].StoreBossName
+    #获取二级分类
+    if storeId:
+        storeId=int(storeId)
+        homeTypes=HomeType.objects.filter(StoreNid_id=storeId)
+        secondTypeLists=[]
+        for homeType in homeTypes:
+            secondTypeId=homeType.SecondTypeNid_id
+            if secondTypeId:
+                secondTypeInfo=ProductSecondType.objects.get(SecondTypeNid=secondTypeId)
+            if secondTypeInfo:
+                secondTypeName=secondTypeInfo.SecondTypeName
+            secondTypeList=[]
+            secondTypeList.append(secondTypeId)
+            secondTypeList.append(secondTypeName)
+            secondTypeLists.append(secondTypeList)
+        resData['secondTypeLists']=secondTypeLists
+        resData['storeId']=storeId
+    #获取商品详情
+    product=Product.objects.get(Nid=proId)
+    if product:
+        resData['product']=product
+        #获取图片
+        productImgs=ProductImage.objects.filter(ProductNid_id=proId)
+        if productImgs:
+            resData['productImgs']=productImgs
+        #获取规格
+        productAttr1s=ProductAttr1.objects.filter(ProductNid_id=proId)
+        if productAttr1s:
+            resData['productAttr1s']=productAttr1s
+        #商品尺码
+        productAttr2s=ProductAttr2.objects.filter(ProductNid_id=proId)
+        if productAttr2s:
+            resData['productAttr2s']=productAttr2s
+        #商品价格
+        productChip=ProductPrice.objects.filter(ProductNid_id=proId).order_by('-Price').last()
+        priceChip=productChip.Price
+        resData['priceChip']=priceChip
+    
+    return render_to_response('store_view_product.html',resData)
+    
 
     
 #创建默认店铺信息 ,该函数为封装的方法，在注册店铺的时候被调用   
@@ -390,7 +446,7 @@ def showProduct(request,secondId):
             proList.append(imgPath)
             
             #获取最后一个规格尺码的价格
-            proPrice=ProductPrice.objects.filter(ProductNid_id=id).last()
+            proPrice=ProductPrice.objects.filter(ProductNid_id=id).order_by('-Price').last()
             if proPrice:
                 print proPrice
                 price=proPrice.Price
@@ -674,7 +730,7 @@ def addHomeType(request):
             return HttpResponse('Empty')
         
         
-        
+#首页添加商品        
 def addHomeProduct(request):
     if request.method=='POST':
         data=request.POST
@@ -686,7 +742,7 @@ def addHomeProduct(request):
         productOrder=int(productOrder)
         
         if productId and productOrder:
-            homeProducts=HomeProduct.objects.all()
+            homeProducts=HomeProduct.objects.filter(StoreNid_id=storeid)
             dupFlag=True
             if homeProducts:
                 for homeProduct in homeProducts:

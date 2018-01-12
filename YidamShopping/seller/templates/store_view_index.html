@@ -221,11 +221,20 @@
 			text-align:center;
 			color:#AD2628;
 		}
-	
-	
-	
-
 		
+		
+		/*绝对定位,a链接失效！！！解决办法，添加一个绝对定位，透明，外面加上a链接*/
+		.link-div{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:0px;
+			top:0px;
+			left:0px;
+			cursor:pointer;
+		}
+	
+	
 </style>
 
 </head>
@@ -244,17 +253,23 @@
 				<div class='t1-left-imgOperate' >
 					<div class='t1-left1-img'>
 						{% if typeOrder1 %}
-							<img class='t1-left1-indexVertical' src='/media/{{typeOrder1.2}}'>
+							<img class='t1-left1-indexVertical' src='/media/{{typeOrder1.2}}' >
 						{% else %}
 							<img class='t1-left1-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
 						{% endif %}
 					</div>
+					{% if typeOrder1 %}
+						<div class='link-div' id='typeLink1'></div><!--链接层div-->
+					{% endif %}
 				</div>
 				{% if typeOrder1 %}
-					<div  class='type-head'><span>{{typeOrder1.1}}</span></div>
+					<div  class='type-head'><span>{{typeOrder1.1}}</span></div>				
 				{% else %}
 					<div  class='type-head'><span>分类名称</span></div>
 				{% endif %}
+				
+				
+				
 						
 			</div>
 			
@@ -272,6 +287,9 @@
 							<img class='t1-right1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 						{% endif %}
 					</div>
+					{% if typeOrder2 %}
+						<div class='link-div' id='typeLink2'></div><!--链接层div-->
+					{% endif %}
 				</div>
 				{% if typeOrder2 %}
 					<div  class='type-head'><span>{{typeOrder2.1}}</span></div>
@@ -292,6 +310,9 @@
 							<img class='t1-right2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 						{% endif %}
 					</div>
+					{% if typeOrder3 %}
+						<div class='link-div' id='typeLink3'></div><!--链接层div-->
+					{% endif %}
 				</div>
 				{% if typeOrder3 %}
 					<div  class='type-head'><span>{{typeOrder3.1}}</span></div>
@@ -323,6 +344,9 @@
 									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 								{% endif %}
 							</div>
+							{% if typeOrder4 %}
+								<div class='link-div' id='typeLink4'></div><!--链接层div-->
+							{% endif %}
 						</div>
 						{% if typeOrder4 %}
 							<div  class='type-head'><span>{{typeOrder4.1}}</span></div>
@@ -344,6 +368,9 @@
 									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 								{% endif %}
 							</div>
+							{% if typeOrder5 %}
+								<div class='link-div' id='typeLink5'></div><!--链接层div-->
+							{% endif %}
 						</div>
 						{% if typeOrder5 %}
 							<div  class='type-head'><span>{{typeOrder5.1}}</span></div>
@@ -366,6 +393,9 @@
 									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 								{% endif %}
 							</div>
+							{% if typeOrder6 %}
+								<div class='link-div' id='typeLink6'></div><!--链接层div-->
+							{% endif %}
 						</div>
 						{% if typeOrder6 %}
 							<div  class='type-head'><span>{{typeOrder6.1}}</span></div>
@@ -386,6 +416,9 @@
 									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 								{% endif %}
 							</div>
+							{% if typeOrder7 %}
+								<div class='link-div' id='typeLink7'></div><!--链接层div-->
+							{% endif %}
 						</div>
 						{% if typeOrder7 %}
 							<div  class='type-head'><span>{{typeOrder7.1}}</span></div>
@@ -419,6 +452,9 @@
 									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 								{% endif %}
 							</div>
+							{% if typeOrder8 %}
+								<div class='link-div' id='typeLink8'></div><!--链接层div-->
+							{% endif %}
 						</div>
 						{% if typeOrder8 %}
 							<div  class='type-head'><span>{{typeOrder8.1}}</span></div>
@@ -440,6 +476,9 @@
 									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 								{% endif %}
 							</div>
+							{% if typeOrder9 %}
+								<div class='link-div' id='typeLink9'></div><!--链接层div-->
+							{% endif %}
 						</div>
 						{% if typeOrder9 %}
 							<div  class='type-head'><span>{{typeOrder9.1}}</span></div>
@@ -460,6 +499,9 @@
 									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 								{% endif %}
 							</div>
+							{% if typeOrder10 %}
+								<div class='link-div' id='typeLink10'></div><!--链接层div-->
+							{% endif %}
 						</div>
 						{% if typeOrder10 %}
 							<div  class='type-head'><span>{{typeOrder10.1}}</span></div>
@@ -481,6 +523,9 @@
 									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
 								{% endif %}
 							</div>
+							{% if typeOrder11 %}
+								<div class='link-div' id='typeLink11'></div><!--链接层div-->
+							{% endif %}
 						</div>
 						{% if typeOrder11 %}
 							<div  class='type-head'><span>{{typeOrder11.1}}</span></div>
@@ -519,11 +564,15 @@
 							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
 						{% endif %}
 					</div>
+					{% if productOrder1 %}
+						<div class='link-div' id='proLink1'></div><!--链接层div-->
+					{% endif %}
+					
 				</div>
 				{% if productOrder1 %}
 					<div  class='product-head'><span>{{productOrder1.1}}</span></div>
 					{% ifequal productOrder1.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder1.3}}</span></div>
 					{% endifequal %}
@@ -549,7 +598,7 @@
 				{% if productOrder2 %}
 					<div  class='product-head'><span>{{productOrder2.1}}</span></div>
 					{% ifequal productOrder2.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder2.3}}</span></div>
 					{% endifequal %}
@@ -574,7 +623,7 @@
 				{% if productOrder3 %}
 					<div  class='product-head'><span>{{productOrder3.1}}</span></div>
 					{% ifequal productOrder3.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder3.3}}</span></div>
 					{% endifequal %}
@@ -608,7 +657,7 @@
 				{% if productOrder4 %}
 					<div  class='product-head'><span>{{productOrder4.1}}</span></div>
 					{% ifequal productOrder4.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder4.3}}</span></div>
 					{% endifequal %}
@@ -634,7 +683,7 @@
 				{% if productOrder5 %}
 					<div  class='product-head'><span>{{productOrder5.1}}</span></div>
 					{% ifequal productOrder5.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder5.3}}</span></div>
 					{% endifequal %}
@@ -659,7 +708,7 @@
 				{% if productOrder6 %}
 					<div  class='product-head'><span>{{productOrder6.1}}</span></div>
 					{% ifequal productOrder6.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder6.3}}</span></div>
 					{% endifequal %}
@@ -694,7 +743,7 @@
 				{% if productOrder7 %}
 					<div  class='product-head'><span>{{productOrder7.1}}</span></div>
 					{% ifequal productOrder7.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder7.3}}</span></div>
 					{% endifequal %}
@@ -720,7 +769,7 @@
 				{% if productOrder8 %}
 					<div  class='product-head'><span>{{productOrder8.1}}</span></div>
 					{% ifequal productOrder8.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder8.3}}</span></div>
 					{% endifequal %}
@@ -745,7 +794,7 @@
 				{% if productOrder9 %}
 					<div  class='product-head'><span>{{productOrder9.1}}</span></div>
 					{% ifequal productOrder9.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder9.3}}</span></div>
 					{% endifequal %}
@@ -780,7 +829,7 @@
 				{% if productOrder10 %}
 					<div  class='product-head'><span>{{productOrder10.1}}</span></div>
 					{% ifequal productOrder10.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder10.3}}</span></div>
 					{% endifequal %}
@@ -806,7 +855,7 @@
 				{% if productOrder11 %}
 					<div  class='product-head'><span>{{productOrder11.1}}</span></div>
 					{% ifequal productOrder11.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder11.3}}</span></div>
 					{% endifequal %}
@@ -831,7 +880,7 @@
 				{% if productOrder12 %}
 					<div  class='product-head'><span>{{productOrder12.1}}</span></div>
 					{% ifequal productOrder12.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder12.3}}</span></div>
 					{% endifequal %}
@@ -865,7 +914,7 @@
 				{% if productOrder13 %}
 					<div  class='product-head'><span>{{productOrder13.1}}</span></div>
 					{% ifequal productOrder13.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder13.3}}</span></div>
 					{% endifequal %}
@@ -891,7 +940,7 @@
 				{% if productOrder14 %}
 					<div  class='product-head'><span>{{productOrder14.1}}</span></div>
 					{% ifequal productOrder14.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder14.3}}</span></div>
 					{% endifequal %}
@@ -916,7 +965,7 @@
 				{% if productOrder15 %}
 					<div  class='product-head'><span>{{productOrder15.1}}</span></div>
 					{% ifequal productOrder15.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder15.3}}</span></div>
 					{% endifequal %}
@@ -951,7 +1000,7 @@
 				{% if productOrder16 %}
 					<div  class='product-head'><span>{{productOrder16.1}}</span></div>
 					{% ifequal productOrder16.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder16.3}}</span></div>
 					{% endifequal %}
@@ -977,7 +1026,7 @@
 				{% if productOrder17 %}
 					<div  class='product-head'><span>{{productOrder17.1}}</span></div>
 					{% ifequal productOrder17.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder17.3}}</span></div>
 					{% endifequal %}
@@ -1002,7 +1051,7 @@
 				{% if productOrder18 %}
 					<div  class='product-head'><span>{{productOrder18.1}}</span></div>
 					{% ifequal productOrder18.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder18.3}}</span></div>
 					{% endifequal %}
@@ -1036,7 +1085,7 @@
 				{% if productOrder19 %}
 					<div  class='product-head'><span>{{productOrder19.1}}</span></div>
 					{% ifequal productOrder19.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder19.3}}</span></div>
 					{% endifequal %}
@@ -1062,7 +1111,7 @@
 				{% if productOrder20 %}
 					<div  class='product-head'><span>{{productOrder20.1}}</span></div>
 					{% ifequal productOrder20.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder20.3}}</span></div>
 					{% endifequal %}
@@ -1087,7 +1136,7 @@
 				{% if productOrder21 %}
 					<div  class='product-head'><span>{{productOrder21.1}}</span></div>
 					{% ifequal productOrder21.3 -1 %}
-						<div  class='product-price'><span>￥?</span></div>
+						<div  class='product-price'><span>￥无单价</span></div>
 					{% else %}
 						<div  class='product-price'><span>￥{{productOrder21.3}}</span></div>
 					{% endifequal %}
@@ -1114,6 +1163,63 @@
 	
 	
 </div>
+
+
+
+
+
+
+
+
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+	$(function(){
+		//首页分类切换
+		$('#typeLink1').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder1.0}}'
+		});
+			
+		$('#typeLink2').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder2.0}}'
+		});
+		$('#typeLink3').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder3.0}}'
+		});
+		$('#typeLink4').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder4.0}}'
+		});
+		$('#typeLink5').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder5.0}}'
+		});
+		$('#typeLink6').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder6.0}}'
+		});
+		$('#typeLink7').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder7.0}}'
+		});
+		$('#typeLink8').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder8.0}}'
+		});
+		$('#typeLink9').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder9.0}}'
+		});
+		$('#typeLink10').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder10.0}}'
+		});
+		$('#typeLink11').click(function(){
+			window.location.href='/viewType/?storeId={{storeId}}&secondId={{typeOrder11.0}}'
+		});
+		
+		//首页商品切换	
+		$('#proLink1').click(function(){
+			window.location.href='/viewProduct/?storeId={{storeId}}&proId={{productOrder1.0}}'
+		});
+	
+	});
+	
+</script>
 
 
 </body>
