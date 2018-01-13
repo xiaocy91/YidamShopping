@@ -1,0 +1,286 @@
+<html>
+
+<head> 
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+	
+	<style type='text/css'>
+		body{
+			margin:0px;
+		}
+		
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+		/*商品分类的最外层div*/	
+		.product-div-frame{
+			width:998px;
+			min-height:400px;
+			margin-left:8px;
+			margin-right:0px;
+			margin-top:15px;
+			margin-bottom:15px;}	
+
+		
+	
+		.add-del-type{
+			position:relative;
+			height:40px;
+			margin:5px;
+			border-bottom:2px solid #D3D3D3;
+			cursor:pointer;
+		}
+		
+		
+		.add-del-item{
+			position:relative;
+			float:left;
+			margin:10px;}
+		
+		/*最上方竖直分割线*/
+		.gap-div{
+			background-color:#D3D3D3;
+			height:20px;
+			width:2px;
+			position:relative;
+			float:left;
+			margin-top:10px;}
+		
+		/*产品显示div*/
+		.product{
+			float:left;
+			width:220;
+			height:370;
+			margin:0px 27px 20px 0;
+			border:1px solid #D3D3D3;
+		}
+		.product-img{
+			width:220;
+			height:225;
+			margin:0px;
+		}
+		
+		.title{
+		height:50px;
+    	margin: 10px;
+    	line-height: 20px;
+    	font-size: 12px;
+    	max-height: 44px;
+   	 	overflow: hidden;
+   	 	}
+   	 	
+   	 	.price {
+	    height: 33px;
+	    line-height: 33px;
+	    overflow: hidden;
+	    margin:3px;}
+	    
+	    .seperate{
+	    	border-top:1px solid #D3D3D3;
+	    	width:220px;
+	    }
+	    
+	    .operates {
+	    margin:10px;
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    /*a链接去掉下划线*/
+		a{
+			text-decoration:none;
+		}
+		
+		
+		/*分页的样式*/
+		.pagination{
+			clear:left;
+			width:998px;	
+			text-align:center;
+		}
+		
+		.wp-paginate {
+			width:370px;
+    		padding:0;
+   			margin:0;
+    		margin-left:314px;}
+
+		.wp-paginate li {
+    		float:left;
+    		list-style:none;
+    		margin:2px;
+   		 	padding:0;
+    		margin:0px auto;}
+		.wp-paginate a {
+		    margin:0 2px;
+		    line-height:20px;
+		    text-align:center;
+		    text-decoration:none;
+		    border-radius:3px;
+		    -moz-border-radius:3px;
+		    float:left;
+		    min-height:20px;
+		    min-width:20px;
+		    color:#858585;
+		    border:2px #e3e3e3 solid;
+		    border-radius:13px;
+		    font-size:15px;}
+		
+			.wp-paginate span{
+				margin:0 2px;
+			    line-height:20px;
+			    text-align:center;
+			    text-decoration:none;
+			    float:left;
+			    min-height:20px;
+			    min-width:20px;
+			    color:#858585;
+			    font-size:15px;
+			}		
+	
+	
+			/*编辑、删除操作的样式*/
+			.sale-info{
+				line-height: 20px;
+    			font-size: 12px;
+				float:left;
+			}
+			.edit-delete{
+				float:right;
+				line-height: 20px;
+    			font-size: 12px;
+    			cursor:pointer;
+			}
+			
+			
+	</style>
+	
+	
+</head>
+
+
+<body>
+
+
+{% include "store_manage_top.html"%}
+
+<div class='bodyFrame'>
+
+	{% include 'store_manage_left.html'%}
+	
+	
+	<div class='bodyContent'>
+		<div class='add-del-type'>
+				<div class='add-del-item'>删除全部商品</div>
+				<div class='gap-div'></div>
+				<div class='add-del-item' id='addProduct' >新增商品</div>
+		</div>
+		
+		<!--商品信息最外层div-->
+		<div class='product-div-frame'>
+		
+				
+				{% if productLists %}
+					{% for product in productLists %}
+						
+						<div class='product'>
+							<div>
+								<img class='product-img' src='/media/{{product.2}}'/>
+							</div>
+						
+							<div class='price'>
+								{% if product.3 %}
+									￥{{product.3}}
+								{% else %}
+									￥无单价
+								{% endif %}
+							</div>
+							
+							<div class='title'>
+								{{product.1}}
+							</div>
+							
+							<div class='seperate'></div>
+							
+							<div class='operates'>
+								<div class='sale-info'>销售信息</div> 
+								<div class='edit-delete' onclick='edit({{product.0}})'>编辑 </div>
+								<div class='edit-delete'>删除  &nbsp;</div>
+							</div>
+						</div>
+					{% endfor%}	
+					
+				{% endif %}	
+				
+				
+				<!--使用pagination进行分页-->
+				<div class="pagination">
+				    <span class="step-links">
+					    <ol class="wp-paginate">
+					        {% if productLists.has_previous %}
+					            <li><a href="?page=1">&laquo; 第一页</a></li>
+					            <li><a href="?page={{ productLists.previous_page_number }}">上一页</a></li>
+					        {% endif %}
+					
+					        <span class="current">
+					            	<li><span>第 {{ productLists.number }} 页，共 {{ productLists.paginator.num_pages }}页</span></li>
+					        </span>
+					
+					        {% if productLists.has_next %}
+					            <li><a href="?page={{ productLists.next_page_number }}">下一页</a></li>
+					            <li><a href="?page={{ productLists.paginator.num_pages }}">最后页 &raquo;</a></li>
+					        {% endif %}
+					     </ol>
+				    </span>
+				</div>
+							
+				
+				
+			
+		</div>
+		
+		
+		
+		
+		
+	</div>
+	
+</div>
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+$(function(){
+
+	$('#addProduct').click(function(){
+		window.location.href='/addProduct/'+{{secondId}}+'/'
+	});
+})
+
+function edit(id){
+	window.location.href='/editProduct/'+id+'/'
+}
+
+</script>
+
+
+</body>
+
+</html>

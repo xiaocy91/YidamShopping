@@ -1,0 +1,1707 @@
+<html>
+
+<head> 
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+	
+	<style type='text/css'>
+		body{
+			margin:0px;
+		}
+		
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:580px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:580px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+		
+		.t1{
+			width:990px;
+			min-height:580px;
+			margin:5px;
+		}
+		
+		
+		.t1-left1{
+			position:relative;
+			float:left;
+			width:400px;
+			min-height:580px;
+			margin-left:40px;
+			margin-top:10px;
+		}
+		
+		.t1-left-imgOperate{
+			width:400px;
+			height:550px;
+			position:relative;
+		}
+		.t1-left1-img{
+			width:400px;
+			height:550px;
+			position:absolute;
+			z-index:-1;
+		}
+		.t1-left1-indexVertical{
+			width:400px;
+			height:550px;
+			
+		}
+		
+		/*右下方增加或删除操作*/
+		.add-del-operate{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:0px;
+			width:80px;
+			background-color:#EFE4B0;
+			color:#545151;
+			boder:2px solid #9D9191;
+			text-align:center;
+			padding:5px;
+			cursor:pointer;
+		}
+		
+		
+		
+		/*分类标题*/
+		.type-head{
+			font-size:40px;
+			font-weight:900;
+			font-family:"黑体";
+			text-align:center;
+		}
+		
+		
+		/*t1-right1的样式*/
+		.t1-right1{
+			position:relative;
+			float:right;
+			width:420px;
+			margin-right:40px;
+			margin-top:10px;
+		}
+		.t1-right1-imgOperate{
+			width:420px;
+			height:280px;
+			position:relative;
+		}
+		
+		.t1-right1-img{
+			width:420px;
+			height:280px;
+			position:absolute;
+			z-index:-1;
+		}
+		
+		.t1-right1-indexHerizon{
+			width:420px;
+			height:280px;
+		}
+		
+		
+		
+		/*t1-right2的全部样式*/
+		.t1-right2{
+			position:relative;
+			float:right;
+			width:380px;
+			margin-right:50px;
+			margin-top:10px;
+			
+		}
+		.t1-right2-imgOperate{
+			position:relative;
+			width:380px;
+			height:240px;
+		}
+		.t1-right2-img{
+			position:absolute;
+			z-index:-1;
+			width:380px;
+			height:240px;
+		}
+		.t1-right2-indexHerizon{
+			width:380px;
+			height:240px;
+		}
+		
+		
+		
+		/*t2分类区*/
+		.t2{
+			margin-left:40px;
+			width:990px;
+			min-height:50px;
+		}
+		.t2-item{
+			width:230px;
+			height:180px;
+			position:absoulte;
+			float:left;
+		}
+		.t2-imgOperate{
+			width:230px;
+			height:160px;
+			margin:15px;
+			position:relative;
+		}
+		.t2-img{
+			position:absolute;
+			z-index:-1;
+			width:230px;
+			height:160px;
+		}
+		.t2-indexHerizon{
+			width:230px;
+			height:160px;
+		}
+		
+		
+		
+		
+		
+		/*t3商品区*/
+		.t3{
+			margin-left:40px;
+			width:990px;
+			min-height:60px;
+		}
+		.t3-item1{
+			width:300px;
+			min-height:370px;
+			position:absoulte;
+			float:left;
+			margin-top:10px;
+			margin-left:10px;
+		}
+		
+		.t3-item2{
+			width:300px;
+			min-height:450px;
+			position:absoulte;
+			float:left;
+			margin-top:40px;
+			margin-left:10px;
+		}
+		
+		.t3-item3{
+			width:300px;
+			min-height:450px;
+			position:absoulte;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+		}
+		
+		.t3-imgOperate{
+			width:300px;
+			height:350px;
+			position:relative;
+		}
+		.t3-img{
+			position:absolute;
+			z-index:-1;
+			width:300px;
+			height:350px;
+		}
+		.t3-indexVertical{
+			width:300px;
+			height:350px;
+		}
+		
+		
+		/*商品标题*/
+		.product-head{
+			font-size:20px;
+			font-family:"黑体";
+			text-align:center;
+		}
+		/*商品价格*/
+		.product-price{
+			font-size:20px;
+			font-family:"黑体";
+			text-align:center;
+			color:#AD2628;
+		}
+		
+		
+		
+		
+		
+		
+			/*遮罩层样式*/
+		.fixed-div{
+			position:fixed;
+			top:0px;
+			left:0px;
+			bottom:0px;
+			right:0px;
+			background-color:#F5F5F5;
+			opacity:0.5;
+			display:none;
+			z-index:1500;}
+	/*添加分类*/
+		.add-div{
+			position:absolute;
+			top:0px;
+			left:50%;
+			width:500px;
+			height:320px;
+			margin-top:-80px;
+			margin-left:-180px;
+			background-color:#CDE1E2;
+			z-index:1520;
+			display:none;
+		}
+		
+	
+	/*添加文件的样式*/	
+	.attr_file {
+    position: relative;
+    display: inline-block;
+    background: #FFFFFF;
+    border: 1px solid #C3C3C3;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #C3C3C3;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width:250px;
+	}
+	
+	.add-content-div{
+			position:relative;
+			width:420px;
+			margin:40px;
+		}
+		.add-content-div td,th{
+			width:210px;
+			text-align:center;
+			height:40px;
+		}
+		
+	/*显示规格、尺码的表格*/
+	.attr td,th{
+		width:100px;
+		height:30px;
+		text-align:center;
+		font-size:12px;
+		padding:5px;
+		background-color:#CDE1E2;
+	}
+	
+		
+	 
+	 /*下拉列表样式*/
+	select {
+		border: 1px solid #DADADA;
+		color: #888;
+		height: 30px;
+		margin-bottom: 16px;
+		margin-right: 6px;
+		margin-top: 2px;
+		outline: 0 none;
+		padding: 3px 3px 3px 5px;
+		width: 250px;
+		font-size: 12px;
+		line-height:15px;
+		box-shadow: inset 0px 1px 4px #ECECEC;
+		-moz-box-shadow: inset 0px 1px 4px #ECECEC;
+		-webkit-box-shadow: inset 0px 1px 4px #ECECEC;}
+			
+	</style>
+	
+
+	
+</head>
+
+
+<body>
+
+
+{% include "store_manage_top.html"%}
+
+<div class='bodyFrame'>
+
+	{% include 'store_manage_left.html'%}
+	
+	
+	<div class='bodyContent'>
+		
+			
+		<!--分类区-->
+		<div class='t1'>
+			
+			<!--type1分类-->
+			<div class='t1-left1'> 
+				<div class='t1-left-imgOperate' >
+					<div class='t1-left1-img'>
+						{% if typeOrder1 %}
+							<img class='t1-left1-indexVertical' src='/media/{{typeOrder1.2}}'>
+						{% else %}
+							<img class='t1-left1-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					<div class='add-del-operate'>
+							{% if typeOrder1 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span id='typeAdd1'  class='onLeave' >+增加分类</span>	
+							{% endif %}
+					</div>
+				</div>
+				{% if typeOrder1 %}
+					<div  class='type-head'><span>{{typeOrder1.1}}</span></div>
+				{% else %}
+					<div  class='type-head'><span>分类名称</span></div>
+				{% endif %}
+						
+			</div>
+			
+	
+		
+		
+		
+			<!--type2分类-->
+			<div class='t1-right1'>
+				<div class='t1-right1-imgOperate'>
+					<div class='t1-right1-img'>
+						{% if typeOrder2 %}
+							<img class='t1-right1-indexHerizon' src='/media/{{typeOrder2.2}}'>
+						{% else %}
+							<img class='t1-right1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+						{% endif %}
+					</div>
+					{% if typeOrder2 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除分类</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave'  id='typeAdd2'>+增加分类</span></div>
+					{% endif %}
+					
+				</div>
+				{% if typeOrder2 %}
+					<div  class='type-head'><span>{{typeOrder2.1}}</span></div>
+				{% else %}
+					<div  class='type-head'><span>分类名称</span></div>
+				{% endif %}	
+			</div>
+			
+			
+			
+			<!--type3分类-->
+			<div class='t1-right2'>
+				<div class='t1-right2-imgOperate'>
+					<div class='t1-right2-img'>
+						{% if typeOrder3 %}
+							<img class='t1-right2-indexHerizon' src='/media/{{typeOrder3.2}}'>
+						{% else %}
+							<img class='t1-right2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+						{% endif %}
+					</div>
+					{% if typeOrder3 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除分类</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='typeAdd3'>+增加分类</span></div>
+					{% endif %}
+				</div>
+				{% if typeOrder3 %}
+					<div  class='type-head'><span>{{typeOrder3.1}}</span></div>
+				{% else %}
+					<div  class='type-head'><span>分类名称</span></div>
+				{% endif %}
+			</div>	
+			
+		<div>
+		
+		
+		
+		
+		
+		<!--分类区-->
+		<table>
+		
+		<div class='t2'>
+			<tr>
+			
+				<!--type4分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder4 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder4.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder4 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd4'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder4 %}
+							<div  class='type-head'><span>{{typeOrder4.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+				
+				
+				<!--type5分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder5 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder5.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder5 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd5'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder5 %}
+							<div  class='type-head'><span>{{typeOrder5.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+				
+				
+			
+				<!--type6分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder6 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder6.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder6 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd6'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder6 %}
+							<div  class='type-head'><span>{{typeOrder6.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+			
+				<!--type7分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder7 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder7.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder7 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd7'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder7 %}
+							<div  class='type-head'><span>{{typeOrder7.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+			</tr>
+			
+		</div>
+		
+		</table>
+		
+		
+		
+		
+		<!--分类区-->
+		<table>
+		
+		<div class='t2'>
+			<tr>
+				<!--type8分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder8 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder8.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder8 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd8'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder8 %}
+							<div  class='type-head'><span>{{typeOrder8.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+			
+			
+				<!--type9分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder9 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder9.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder9 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd9'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder9 %}
+							<div  class='type-head'><span>{{typeOrder9.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+			
+				<!--type10分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder10 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder10.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder10 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd10'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder10 %}
+							<div  class='type-head'><span>{{typeOrder10.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+			
+				
+				<!--type11分类-->
+				<td>
+					<div class='t2-item'>
+						<div class='t2-imgOperate'>
+							<div class='t2-img'>
+								{% if typeOrder11 %}
+									<img class='t2-indexHerizon' src='/media/{{typeOrder11.2}}'>
+								{% else %}
+									<img class='t2-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							{% if typeOrder11 %}
+								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+							{% else %}
+								<div class='add-del-operate'><span class='onLeave' id='typeAdd11'>+增加分类</span></div>
+							{% endif %}
+						</div>
+						{% if typeOrder11 %}
+							<div  class='type-head'><span>{{typeOrder11.1}}</span></div>
+						{% else %}
+							<div  class='type-head'><span>分类名称</span></div>
+						{% endif %}
+					</div>	
+				</td>
+			</tr>
+			
+		</div>
+		
+		</table>
+			
+		
+		
+		
+		<!--分类与商品隔离区-->
+		<div style='width:998px;height:120px;'></div>
+		
+		
+		
+		
+		<div class='t3'>
+		<!--商品区1-->
+		<table>
+			<tr>
+			<!--1号商品-->
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder1 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder1.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder1 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd1'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder1 %}
+					<div  class='product-head'><span>{{productOrder1.1}}</span></div>
+					{% ifequal productOrder1.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder1.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			
+			<!--2号商品-->
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder2 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder2.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder2 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd2'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder2 %}
+					<div  class='product-head'><span>{{productOrder2.1}}</span></div>
+					{% ifequal productOrder2.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder2.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>
+			</td>
+			
+			<!--3号商品-->
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder3 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder3.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder3 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd3'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder3 %}
+					<div  class='product-head'><span>{{productOrder3.1}}</span></div>
+					{% ifequal productOrder3.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder3.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			</tr>
+		</div>	
+		</table>
+		
+		
+		
+		<!--商品区2-->
+		<table>
+			<tr>
+			<!--4号商品-->
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder4 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder4.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder4 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd4'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder4 %}
+					<div  class='product-head'><span>{{productOrder4.1}}</span></div>
+					{% ifequal productOrder4.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder4.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			
+			<!--5号商品-->
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder5 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder5.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder5 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd5'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder5 %}
+					<div  class='product-head'><span>{{productOrder5.1}}</span></div>
+					{% ifequal productOrder5.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder5.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>
+			</td>
+			
+			<!--6号商品-->
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder6 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder6.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder6 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd6'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder6 %}
+					<div  class='product-head'><span>{{productOrder6.1}}</span></div>
+					{% ifequal productOrder6.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder6.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			</tr>
+		</div>	
+		</table>
+		
+		
+		
+		
+		<!--商品区3-->
+		<table>
+			<tr>
+			<!--7号商品-->
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder7 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder7.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder7 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd7'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder7 %}
+					<div  class='product-head'><span>{{productOrder7.1}}</span></div>
+					{% ifequal productOrder7.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder7.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			
+			<!--8号商品-->
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder8 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder8.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder8 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd8'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder8 %}
+					<div  class='product-head'><span>{{productOrder8.1}}</span></div>
+					{% ifequal productOrder8.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder8.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>
+			</td>
+			
+			<!--9号商品-->
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder9 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder9.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder9 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd9'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder9 %}
+					<div  class='product-head'><span>{{productOrder9.1}}</span></div>
+					{% ifequal productOrder9.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder9.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			</tr>
+		</div>	
+		</table>
+		
+		
+		
+		
+		<!--商品区4-->
+		<table>
+			<tr>
+			<!--10号商品-->
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder10 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder10.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder10 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd10'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder10 %}
+					<div  class='product-head'><span>{{productOrder10.1}}</span></div>
+					{% ifequal productOrder10.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder10.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			
+			<!--11号商品-->
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder11 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder11.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder11 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd11'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder11 %}
+					<div  class='product-head'><span>{{productOrder11.1}}</span></div>
+					{% ifequal productOrder11.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder11.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>
+			</td>
+			
+			<!--12号商品-->
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder12 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder12.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder12 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd12'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder12 %}
+					<div  class='product-head'><span>{{productOrder12.1}}</span></div>
+					{% ifequal productOrder12.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder12.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			</tr>
+		</div>	
+		</table>
+		
+		
+		
+		<!--商品区5-->
+		<table>
+			<tr>
+			<!--13号商品-->
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder13 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder13.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder13 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd13'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder13 %}
+					<div  class='product-head'><span>{{productOrder13.1}}</span></div>
+					{% ifequal productOrder13.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder13.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			
+			<!--14号商品-->
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder14 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder14.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder14 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd14'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder14 %}
+					<div  class='product-head'><span>{{productOrder14.1}}</span></div>
+					{% ifequal productOrder14.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder14.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>
+			</td>
+			
+			<!--15号商品-->
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder15 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder15.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder15 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd15'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder15 %}
+					<div  class='product-head'><span>{{productOrder15.1}}</span></div>
+					{% ifequal productOrder15.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder15.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			</tr>
+		</div>	
+		</table>
+		
+		
+		
+		
+		<!--商品区6-->
+		<table>
+			<tr>
+			<!--16号商品-->
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder16 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder16.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder16 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd16'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder16 %}
+					<div  class='product-head'><span>{{productOrder16.1}}</span></div>
+					{% ifequal productOrder16.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder16.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			
+			<!--17号商品-->
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder17 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder17.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder17 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd17'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder17 %}
+					<div  class='product-head'><span>{{productOrder17.1}}</span></div>
+					{% ifequal productOrder17.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder17.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>
+			</td>
+			
+			<!--18号商品-->
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder18 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder18.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder18 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd18'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder18 %}
+					<div  class='product-head'><span>{{productOrder18.1}}</span></div>
+					{% ifequal productOrder18.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder18.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			</tr>
+		</div>	
+		</table>
+			
+		
+		
+		<!--商品区7-->
+		<table>
+			<tr>
+			<!--19号商品-->
+			<td>
+			<div class='t3-item1'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder19 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder19.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder19 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd19'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder19 %}
+					<div  class='product-head'><span>{{productOrder19.1}}</span></div>
+					{% ifequal productOrder19.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder19.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			
+			<!--20号商品-->
+			<td>
+			<div class='t3-item2'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder20 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder20.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder20 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd20'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder20 %}
+					<div  class='product-head'><span>{{productOrder20.1}}</span></div>
+					{% ifequal productOrder20.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder20.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>
+			</td>
+			
+			<!--21号商品-->
+			<td>
+			<div class='t3-item3'>
+				<div class='t3-imgOperate'>
+					<div class='t3-img'>
+						{% if productOrder21 %}
+							<img class='t3-indexVertical' src='/media/{{productOrder21.2}}'>
+						{% else %}
+							<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+						{% endif %}
+					</div>
+					{% if productOrder21 %}
+						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+					{% else %}
+						<div class='add-del-operate'><span class='onLeave' id='productAdd21'>+增加商品</span></div>
+					{% endif %}
+				</div>
+				{% if productOrder21 %}
+					<div  class='product-head'><span>{{productOrder21.1}}</span></div>
+					{% ifequal productOrder21.3 -1 %}
+						<div  class='product-price'><span>￥无单价</span></div>
+					{% else %}
+						<div  class='product-price'><span>￥{{productOrder21.3}}</span></div>
+					{% endifequal %}
+				{% else %}
+					<div  class='product-head'><span>商品名称</span></div>
+				{% endif %}
+			</div>	
+			</td>
+			
+			</tr>
+		</div>	
+		</table>	
+		
+	</div>
+	
+	
+	
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	<!--遮罩层-->
+<div class='fixed-div'></div>
+
+
+
+<!--添加商品规格-->
+<div class='add-div'>
+	<div class='add-content-div'>
+		<form id="uploadForm" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td id='typeNameId' >分类名称</td>
+					<td> 
+						<select id='typeSelectId'>
+							<option>请选择一级级分类</option>
+							{% if typeLists %}
+								{% for typeList in typeLists %}
+									<option  value='{{typeList.0}}' >{{typeList.1}}</option>
+								{% endfor %}
+							{% endif %}
+						</select>
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<td id='secondTypeNameId' >二级分类名称</td>
+					<td> 
+						<select id='secondTypeSelectId'>
+							<option>请选择二级分类</option>
+						</select>
+					</td>
+				</tr>
+				<tr >
+					<td id='secondTypeImgNameId' >分类预览图</td>
+					<td><input  type='file' class='attr_file' id='secondTypeImgId'/>
+				</tr>
+				<tr>
+					<td  id='productNameId' >商品名称</td>
+					<td>
+						<select id='productSelectId'>
+							<option>请选择商品</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<table><tr>
+					<td> <input type='button' id='confirm' value='确定'/></td>
+					<td> <input type='button' id='cancle'  value='取消'/></td>
+					</tr></table>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+	
+	
+
+</div>
+
+
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+	$(function(){
+			
+			$('.onLeave').mouseover(function(){ $(this).css('color','#D7191C').css('font-weight','900') })
+			$('.onLeave').mouseleave(function(){ $(this).css('color','#000000').css('font-weight','') })
+			
+			
+			//获取对应二级分类
+			$('#typeSelectId').bind('change',function(){
+				var typeId=$(this).find('option:selected').val()
+				data={'typeId':typeId}
+				$.ajax({
+					url:'/getSecondType/',
+					method:'GET',
+					data:data,
+					success:function(result){
+						//先清除之前的option
+						$('#secondTypeSelectId').empty()
+						$('#secondTypeSelectId').append("<option>请选择二级分类</option>")
+					
+						var secondLists=$.parseJSON(result)
+						for(var i=0;i<secondLists.length;i++){
+							var secondList=secondLists[i]
+							var id=secondList[0]
+							var name=secondList[1]
+							$('#secondTypeSelectId').append("<option value='"+id+"'>"+name+"</option>")
+						}	
+					}
+				});
+			});
+			
+			//二级分类获取对应的商品
+			$('#secondTypeSelectId').bind('change',function(){
+				var secondTypeId=$(this).find('option:selected').val()
+				data={'secondTypeId':secondTypeId}
+				
+				$.ajax({
+					url:'/getProduct/',
+					method:'GET',
+					data:data,
+					success:function(result){
+						//先清除之前的option
+						$('#productSelectId').empty()
+						$('#productSelectId').append("<option>请选择商品</option>")
+						
+						var productLists=$.parseJSON(result)
+						for(var i=0;i<productLists.length;i++){
+							var productList=productLists[i]
+							var id=productList[0]
+							var name=productList[1]
+							$('#productSelectId').append("<option value='"+id+"'>"+name+"</option>")
+						}
+					},
+				
+				});
+			
+			});
+			
+			
+			//1号分类添加点击事件,bind方法，可以传递参数，字典类型参数
+			$('#typeAdd1').bind('click',{'order':1},addHomeType)
+			//2号分类添加点击事件
+			$('#typeAdd2').bind('click',{'order':2},addHomeType)
+			//3号分类添加点击事件
+			$('#typeAdd3').bind('click',{'order':3},addHomeType)
+			//4号分类添加点击事件
+			$('#typeAdd4').bind('click',{'order':4},addHomeType)
+			//5号分类添加点击事件
+			$('#typeAdd5').bind('click',{'order':5},addHomeType)
+			//6号分类添加点击事件
+			$('#typeAdd6').bind('click',{'order':6},addHomeType)
+			//7号分类添加点击事件
+			$('#typeAdd7').bind('click',{'order':7},addHomeType)
+			//8号分类添加点击事件
+			$('#typeAdd8').bind('click',{'order':8},addHomeType)
+			//9号分类添加点击事件
+			$('#typeAdd9').bind('click',{'order':9},addHomeType)
+			//10号分类添加点击事件
+			$('#typeAdd10').bind('click',{'order':10},addHomeType)
+			//11号分类添加点击事件
+			$('#typeAdd11').bind('click',{'order':11},addHomeType)
+			
+			
+			//1号商品添加单击事件
+			$('#productAdd1').bind('click',{'order':1},addHomeProduct)
+			//2号商品添加单击事件
+			$('#productAdd2').bind('click',{'order':2},addHomeProduct)
+			//3号商品添加单击事件
+			$('#productAdd3').bind('click',{'order':3},addHomeProduct)
+			//3号商品添加单击事件
+			$('#productAdd4').bind('click',{'order':4},addHomeProduct)
+			//5号商品添加单击事件
+			$('#productAdd5').bind('click',{'order':5},addHomeProduct)
+			//6号商品添加单击事件
+			$('#productAdd6').bind('click',{'order':6},addHomeProduct)
+			//7号商品添加单击事件
+			$('#productAdd7').bind('click',{'order':7},addHomeProduct)
+			//8号商品添加单击事件
+			$('#productAdd8').bind('click',{'order':8},addHomeProduct)
+			//9号商品添加单击事件
+			$('#productAdd9').bind('click',{'order':9},addHomeProduct)
+			//10号商品添加单击事件
+			$('#productAdd10').bind('click',{'order':10},addHomeProduct)
+			//11号商品添加单击事件
+			$('#productAdd11').bind('click',{'order':11},addHomeProduct)
+			//12号商品添加单击事件
+			$('#productAdd12').bind('click',{'order':12},addHomeProduct)
+			//13号商品添加单击事件
+			$('#productAdd13').bind('click',{'order':13},addHomeProduct)
+			//14号商品添加单击事件
+			$('#productAdd14').bind('click',{'order':14},addHomeProduct)
+			//15号商品添加单击事件
+			$('#productAdd15').bind('click',{'order':15},addHomeProduct)
+			//16号商品添加单击事件
+			$('#productAdd16').bind('click',{'order':16},addHomeProduct)
+			//17号商品添加单击事件
+			$('#productAdd17').bind('click',{'order':17},addHomeProduct)
+			//18号商品添加单击事件
+			$('#productAdd18').bind('click',{'order':18},addHomeProduct)
+			//19号商品添加单击事件
+			$('#productAdd19').bind('click',{'order':19},addHomeProduct)
+			//20号商品添加单击事件
+			$('#productAdd20').bind('click',{'order':20},addHomeProduct)
+			//21号商品添加单击事件
+			$('#productAdd21').bind('click',{'order':21},addHomeProduct)
+	
+	});
+	
+	
+	
+	
+	
+	
+	//添加首页分类
+	function addHomeType(event){
+		//bind方法，传递数据到event中，然后从event中获取传递的数据
+		var order=event.data.order
+		
+		$('.fixed-div').css('display','block')
+		//动态修改添加的div标签y轴位置
+		$('.add-div').css("display","block").css('margin-top',$(document).scrollTop()+80); 
+		
+		//将商品部分变为不可编辑
+		$('#productNameId').css('color','#C3C3C3')
+		$('#productSelectId').css('background-color','#EDEAEA')
+		$('#productSelectId').attr("disabled","true");
+		
+		
+	
+		//点击确定
+		$('#confirm').off('click').click(function(){
+			var typeId=$('#typeSelectId').find("option:selected").val()
+			var secondTypeId=$('#secondTypeSelectId').find("option:selected").val()
+			var oMyForm = new FormData();
+			oMyForm.append('order',parseInt(order))
+			oMyForm.append('typeId',parseInt(typeId))
+			oMyForm.append('secondTypeId',parseInt(secondTypeId))
+			oMyForm.append("secondTypeImg", $('#secondTypeImgId')[0].files[0]);
+			
+			$.ajax({
+				url:'/addHomeType/',
+				method:'POST',
+				data:oMyForm,
+				cache: false,
+				processData: false,
+                contentType: false,
+				success:function(result){
+					if(result=='True'){
+						alert('成功添加首页分类')
+						}else if(result=='Empty'){
+							alert('失败！参数不能为空')
+						}else{
+							alert('失败！添加分类不能重复')
+						}
+					window.location.reload()
+					}
+			});
+			
+		});
+		
+		
+		
+		//执行取消操作
+		$('#cancle').click(function(){
+			$('.fixed-div').css("display","none");
+			$('.add-div').css("display","none");
+			//取消屏蔽样式
+			$('#productNameId').css('color','')
+			$('#productSelectId').css('background-color','')
+			$('#productSelectId').removeAttr("disabled");
+		});
+		
+		
+	}
+	
+	
+	
+	
+	
+	//添加首页商品
+	function addHomeProduct(event){
+		//bind方法，传递数据到event中，然后从event中获取传递的数据
+		var order=event.data.order
+		
+		$('.fixed-div').css('display','block')
+		//动态修改添加的div标签y轴位置
+		$('.add-div').css("display","block").css('margin-top',$(document).scrollTop()+80); 
+		
+		
+		$('#secondTypeImgNameId').css('color','#C3C3C3')
+		$('#secondTypeImgId').css('background-color','#EDEAEA')
+		$('#secondTypeImgId').attr("disabled","true")
+		
+		
+		
+		//点击确定
+		$('#confirm').off('click').click(function(){
+			var productId=$('#productSelectId').find("option:selected").val()
+			
+			$.ajax({
+				url:'/addHomeProduct/',
+				method:'POST',
+				data:{'productId':productId,'order':order},
+				success:function(result){
+					if(result=='True'){
+						alert('成功添加首页商品')
+					}else if(result=='Empty'){
+							alert('失败！参数不能为空')
+					}else{
+							alert('失败！添加商品不能重复')
+					}
+					window.location.reload()
+				},
+			});
+		
+		});
+		
+		
+		//执行取消操作
+		$('#cancle').click(function(){
+			$('.fixed-div').css("display","none");
+			$('.add-div').css("display","none");	
+			//取消屏蔽样式
+			$('#secondTypeImgNameId').css('color','')
+			$('#secondTypeImgId').css('background-color','')
+			$('#secondTypeImgId').removeAttr("disabled")
+			});
+	}
+
+</script>		
+
+
+</body>
+
+</html>

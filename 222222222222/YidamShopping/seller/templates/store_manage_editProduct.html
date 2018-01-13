@@ -1,0 +1,586 @@
+<html>
+
+<head> 
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+	
+	<style type='text/css'>
+		body{
+			margin:0px;
+		}
+		
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+		/*商品信息的最外层div*/	
+		.info-div-frame{
+			width:900px;
+			min-height:400px;
+			margin-left:49px;
+			margin-top:15px;
+			margin-bottom:15px;}	
+	
+		.td-name{
+			width:120px;
+			height:30px;
+			text-align:center;}
+		
+		/*输入框样式*/	
+		.td-input{
+			padding: 4px;
+	    	border: solid 1px #E5E5E5;
+	    	outline: 0;
+	    	font: normal 13px/100% Verdana, Tahoma, sans-serif;
+	    	width: 260px;
+	    	height:40px;
+		    background: #FFFFFF;
+		    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;  
+		    margin:10px;
+		}
+		
+		/*提交按钮的颜色*/
+		.button{  
+		    background:#E0E0E0;  
+		    color:#FFFFFF;    
+		    padding: 10px 30px 10px 30px;  
+		    font-size:16px;  
+		    font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;  
+		    font-weight:bold;  
+		    border-radius:3px;  
+		    -webkit-transition:all linear 0.30s;  
+		    -moz-transition:all linear 0.30s;  
+		    transition:all linear 0.30s;  }  
+  
+  		/*商品图片显示样式*/
+	   .product-img{
+	   	width:100px;
+	   	height:110px;
+	   }
+	  .img-table{
+	  	font-size: 12px;
+	  	text-align:center;
+	  	border:1px solid #E5E5E5;
+	  	background: #FFFFFF;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	  }
+	  .img-table td{
+	  	width:100px;
+	  }
+ 
+  	/*添加操作小图标*/
+  	.add-img1{
+  		width:25px;
+  		height:25px;
+  		padding: 4px;
+  		margin:10px;
+  	}
+  	.add-img2{
+  		width:25px;
+  		height:25px;
+  		padding: 4px;
+  		margin:10px;
+  	}
+  
+  	
+  	
+  	
+  	/*遮罩层样式*/
+		.fixed-div{
+			position:fixed;
+			top:0px;
+			left:0px;
+			bottom:0px;
+			right:0px;
+			background-color:#F5F5F5;
+			opacity:0.5;
+			display:none;
+			z-index:1500;}
+	/*添加分类*/
+		.add-div{
+			position:absolute;
+			top:50%;
+			left:50%;
+			width:500px;
+			height:200px;
+			margin-top:-80px;
+			margin-left:-180px;
+			background-color:#CDE1E2;
+			z-index:2000;
+			display:none;
+		}
+		
+		.add-content-div{
+			position:relative;
+			width:420px;
+			margin:40px;
+		}
+		.add-content-div td,th{
+			width:210px;
+			text-align:center;
+			height:40px;
+		}
+		
+	/*显示规格、尺码的表格*/
+	.attr td,th{
+		width:100px;
+		height:30px;
+		text-align:center;
+		font-size:12px;
+		padding:5px;
+		background-color:#CDE1E2;
+	}
+	
+	.min-img{
+		width:50px;
+		height:60px;
+		padding:5px;
+	}
+		
+		
+	/*下拉列表样式*/
+	select {
+		border: 1px solid #DADADA;
+		color: #888;
+		height: 30px;
+		margin-bottom: 16px;
+		margin-right: 6px;
+		margin-top: 2px;
+		outline: 0 none;
+		padding: 3px 3px 3px 5px;
+		width: 160px;
+		font-size: 12px;
+		line-height:15px;
+		box-shadow: inset 0px 1px 4px #ECECEC;
+		-moz-box-shadow: inset 0px 1px 4px #ECECEC;
+		-webkit-box-shadow: inset 0px 1px 4px #ECECEC;}
+	
+	/*添加按钮的颜色*/
+		.button{  
+		    background:#E0E0E0;  
+		    color:#FFFFFF;  
+		    height: 30px;
+			margin-bottom: 16px;
+			margin-right: 6px;
+			margin-top: 2px;
+		    padding: 3px 3px 3px 5px;
+		    font-size:12px;  
+		    font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;  
+		    border-radius:3px;  
+		    -webkit-transition:all linear 0.30s;  
+		    -moz-transition:all linear 0.30s;  
+		    transition:all linear 0.30s;  } 
+	/*价格输入框样式*/
+	.price-input{
+			height: 30px;
+			width: 160px;
+			margin-bottom: 16px;
+			margin-right: 6px;
+			margin-top: 2px;
+	    	border: solid 1px #E5E5E5;
+	    	outline: 0;
+	    	font: normal 12px/100% Verdana, Tahoma, sans-serif;
+		    background: #FFFFFF;
+		    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;   
+		}
+	
+	/*价格表*/
+	.price-attr td,th{
+		width:160px;
+		height:30px;
+		text-align:center;
+		font-size:12px;
+		padding:5px;
+		background-color:#CDE1E2;
+	}
+	
+	
+	
+		
+	.attr_file {
+    position: relative;
+    display: inline-block;
+    background: #FFFFFF;
+    border: 1px solid #C3C3C3;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #C3C3C3;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width:250px;
+	}
+	
+	
+	
+	</style>
+	
+
+	
+</head>
+
+
+<body>
+
+
+{% include "store_manage_top.html"%}
+
+<div class='bodyFrame'>
+
+	{% include 'store_manage_left.html'%}
+	
+	
+	<div class='bodyContent'>
+		
+		<!--商品信息最外层div-->
+		<div class='info-div-frame'>
+		
+			<table>
+			{% if product %}
+				<tr>
+					<td class='td-name'>商品标题:</td>
+					<td ><input class='td-input' type='text' id='head' name='head' value='{{product.Head}}' /></td>
+				</tr>
+			
+			
+				<tr>
+					<td class='td-name'>图片:</td>
+					<!--图片用嵌入的table显示-->
+					<td>
+						<table class='img-table'>
+						{%  if productImgs %}
+							{% for productImg in productImgs %}
+								<tr>
+									<td >
+										<img class='product-img' src='/media/{{productImg.Img}}'/> 
+									</td>
+									<td>设为默认</td>
+									<td>修改</td>
+									<td>删除</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+						</table>
+					</td>
+				</tr>
+				
+				
+				<!--商品规格-->
+				<tr>
+					<table><tr>
+						<td class='td-name'>商品规格名称:</td>
+						
+						<td >
+							<input class='td-input' type='text' id='attribute1' name='attribute1' value='{{product.AttributeName1}}' />
+						</td> 
+						<td >
+							<img class='add-img1' src='/statics/img/add.jpg' onmouseenter='addAttrImg("attr1")' onmouseleave='delAttrImg("attr1")' onclick='addAttr({{product.Nid}},"attr1","{{product.AttributeName1}}")'/>
+						</td>
+					</tr><table>
+				</tr>
+				<!--商品规格-->
+				<tr>
+					<table class='attr'>
+						<tr>
+						{% if productAttr1s %}
+							{% for attr1 in productAttr1s %}
+								<!--模板上逻辑判断换行，conter0代表从0开始-->
+								{% if forloop.counter0|divisibleby:'5' %}
+									</tr><tr>
+								{% endif  %}
+									<td> 
+										<!--将规格图片和名称封装为table-->
+										<table>
+											<tr><td> <img class='min-img' src='/media/{{attr1.ImgAttr1}}'/></td><tr> 
+											<tr><td> {{attr1.Attr1}}</td><tr>
+										</table>
+									</td>
+							{% endfor %}
+						{% endif %}
+						</tr>
+					<table>
+				</tr>
+				
+				
+				<!--商品尺码-->
+				<tr>
+					<table><tr>
+					<td class='td-name'>商品尺码名称:</td>
+					<td><input  class='td-input' type='text' id='attribute2' name='attribute2' value='{{product.AttributeName2}}' /></td>
+					<td >
+						<img class='add-img2' src='/statics/img/add.jpg' onmouseenter='addAttrImg("attr2")' onmouseleave='delAttrImg("attr2")' onclick='addAttr({{product.Nid}},"attr2","{{product.AttributeName2}}")'/>
+					</td>
+					</tr><table>
+				</tr>
+				<!--商品尺码-->
+				<tr>
+					<table class='attr'>
+						<tr>
+						{% if productAttr2s %}
+							{% for attr2 in productAttr2s %}
+								<!--模板上逻辑判断换行，conter0代表从0开始-->
+								{% if forloop.counter0|divisibleby:'5' %}
+									</tr><tr>
+								{% endif  %}
+									<td> {{attr2.Attr2}} </td>
+							{% endfor %}
+						{% endif %}
+						</tr>
+					<table>
+				</tr>
+				
+				
+				
+				<!--添加商品价格-->
+				<tr>
+					<td class='td-name'>商品价格:</td>
+					<form>
+						<table>
+							<tr>
+								<!--规格-->
+								<td><select id='attrSelect1'>
+									{% if productAttr1s %}
+										{% for attr1 in productAttr1s %}
+										  <option name='attr1'  value='{{attr1.Nid}}'>{{attr1.Attr1}}</option>
+										{% endfor %}
+									{% endif %}
+								</select></td>
+								<!--尺码-->
+								<td><select id='attrSelect2'>
+								 	{% for attr2 in productAttr2s %}
+										 <option name='attr2' value='{{attr2.Nid}}'>{{attr2.Attr2}}</option>
+									{% endfor %}
+								</select></td>
+								<!--价格-->
+								<td><input class='price-input' type='text' name='price' placeholder='请输入价格'/></td>
+								<td><input class='button' type='button' value='添加' onclick='addPrice({{product.Nid}})'></td>
+							</tr>
+						</table>
+						
+						<table class='price-attr'>
+							{% if priceLists %}
+							<tr>
+								<th>规格</th>
+								<th>尺码</th>
+								<th>价格</th>
+							</tr>
+							
+								{% for productList in priceLists %}
+									<tr>
+										<td>{{productList.1}}</td>
+										<td>{{productList.2}}</td>
+										<td>{{productList.3}}</td>
+									</tr>
+								{% endfor %}
+						{% endif %}
+						</table>
+					</form>
+				<tr>
+				
+			{% endif %}
+			
+				
+			
+			</table>
+		
+			
+			
+		</div>
+		
+	</div>
+	
+	
+	
+	
+<!--遮罩层-->
+<div class='fixed-div'></div>
+
+
+<!--添加商品规格-->
+<div class='add-div'>
+	<div class='add-content-div'>
+		<form id="uploadForm" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td id='attrNameAdd' ></td>
+					<td><input  id='attr' name='attr' type='text' class='attr_file'/></td>
+				</tr>
+				<tr id='attr1Id' >
+					<td id='attrImgAdd'></td>
+					<td><input id='ImgAttr1' name='ImgAttr1' type='file' class='attr_file'/>
+				</tr>
+				<tr>
+					<table><tr>
+					<td> <input type='button' id='confirm' value='确定'/></td>
+					<td> <input type='button' id='cancle'  value='取消'/></td>
+					</tr></table>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+
+
+
+
+
+	
+	
+</div>
+
+
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+function addProduct(key){
+		path='/addProduct/'+key+'/'
+		$('#form_action').attr('action',path)
+}
+
+function addAttrImg(attrType){
+	if(attrType=='attr1'){
+		$('.add-img1').attr('src','/statics/img/add_light.jpg')
+	}else{
+		$('.add-img2').attr('src','/statics/img/add_light.jpg')
+	}
+}
+
+function delAttrImg(attrType){
+	if(attrType=='attr1'){
+		$('.add-img1').attr('src','/statics/img/add.jpg')
+	}else{
+		$('.add-img2').attr('src','/statics/img/add.jpg')
+	}
+}
+
+
+function addAttr(id,attrType,name){
+	$('.fixed-div').css('display','block')
+	
+	//动态显示规格名称，规格名称对应的图
+		$('#attrNameAdd').text(name+"-名称")
+		$('#attrImgAdd').text(name+"-图")
+	
+	//动态修改添加的div标签y轴位置
+	$('.add-div').css("display","block").css('margin-top',$(document).scrollTop()-80);  
+	if(attrType=='attr2'){
+		$('#attr1Id').attr('hidden','hidden')
+	}else{
+		$('#attr1Id').removeAttr('hidden')	
+	}
+	
+	$('#confirm').off('click').click(function(){
+		
+		//添加规格
+		if(attrType=='attr1'){
+			//封装参数和文件，使用formdata提交
+			var attr=$('#attr').val()
+			var oMyForm = new FormData();
+			oMyForm.append("attr",attr);
+			oMyForm.append("id",id);
+			oMyForm.append("ImgAttr1", $('#ImgAttr1')[0].files[0]);
+			
+			//使用ajax提交formdata,其中要注意cache、processData、contentType都为false状态
+			$.ajax({
+				url:'/addAttr1/',
+				method:'POST',
+				data:oMyForm,
+				cache: false,
+				processData: false,
+                contentType: false,
+				success:function(result){
+					if(result=='True'){
+						alert('成功添加规格')
+						window.location.reload()
+						}
+					}
+			});
+		}
+	
+		
+		//添加尺码
+		if(attrType=='attr2'){
+			var attr=$('#attr').val()
+			data={'id':id,'attr':attr}
+			
+			$.ajax({
+				url:'/addAttr2/',
+				method:'POST',
+				data:data,
+				success:function(result){
+					if(result=='True'){
+						alert('成功添加尺码')
+						window.location.reload()
+						}
+					}
+			});
+		
+		}
+
+	
+	
+	});
+	
+	
+	
+	
+	
+	//执行取消操作
+	$('#cancle').click(function(){
+		$('.fixed-div').css("display","none");
+		$('.add-div').css("display","none");	
+	});
+
+}
+
+
+
+
+function addPrice(id){
+	var attrId1=$("#attrSelect1").find("option:selected").val()
+	var attrId2=$("#attrSelect2").find("option:selected").val()
+	var price=$('.price-input').val()
+	
+	data={'attrId1':attrId1,'attrId2':attrId2,'price':price,'id':id}
+	$.ajax({
+		url:'/addPrice/',
+		method:'POST',
+		data:data,
+		success:function(result){
+			alert('成功添加价格')
+			window.location.reload()
+		},
+		
+	});
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>

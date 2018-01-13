@@ -1,0 +1,147 @@
+<html>
+
+<head> 
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+	
+	<style type='text/css'>
+		body{
+			margin:0px;
+		}
+		
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+		/*商品信息的最外层div*/	
+		.info-div-frame{
+			width:900px;
+			min-height:400px;
+			margin-left:49px;
+			margin-top:15px;
+			margin-bottom:15px;}	
+	
+		.td-name{
+			width:120px;
+			height:30px;
+			text-align:center;}
+		
+		/*输入框样式*/	
+		.td-input{
+			padding: 4px;
+	    	border: solid 1px #E5E5E5;
+	    	outline: 0;
+	    	font: normal 13px/100% Verdana, Tahoma, sans-serif;
+	    	width: 260px;
+	    	height:40px;
+		    background: #FFFFFF;
+		    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+		    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;  
+		    margin:10px;
+		}
+		
+		/*提交按钮的颜色*/
+		.button{  
+		    background:#E0E0E0;  
+		    color:#FFFFFF;  
+		    padding: 10px 30px 10px 30px;  
+		    font-size:16px;  
+		    font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;  
+		    font-weight:bold;  
+		    border-radius:3px;  
+		    -webkit-transition:all linear 0.30s;  
+		    -moz-transition:all linear 0.30s;  
+		    transition:all linear 0.30s;  }  
+  
+		
+	</style>
+	
+
+	
+</head>
+
+
+<body>
+
+
+{% include "store_manage_top.html"%}
+
+<div class='bodyFrame'>
+
+	{% include 'store_manage_left.html'%}
+	
+	
+	<div class='bodyContent'>
+		
+		<!--商品信息最外层div-->
+		<div class='info-div-frame'>
+		
+			<form enctype="multipart/form-data"  method='post' id='form_action' >
+				<table>
+					<tr>
+						<td class='td-name'><label for='head'>商品标题:</td>
+						<td ><input class='td-input' type='text' id='head' name='head' /></label></td>
+					</tr>
+				
+					<tr>
+						<td class='td-name'>图片:</td>
+						<td >
+							<input class='td-input' type='file' id='img' name='img' />
+							<input class='td-input' type='file' id='img' name='img'/>
+							<input class='td-input' type='file' id='img' name='img'/>
+							<input class='td-input' type='file' id='img' name='img'/>
+						</td>
+					</tr>
+					<tr>
+						<td class='td-name'><label for='attribute1' >商品规格名称:</td>
+						<td ><input class='td-input' type='text' id='attribute1' name='attribute1' value='颜色' /></label></td>
+					</tr>
+					<tr>
+						<td class='td-name'><label for='attribute2'>商品尺码名称:</td>
+						<td><input  class='td-input' type='text' id='attribute2' name='attribute2' value='尺码'></label></td>
+					</tr>
+				
+					<tr>
+						<td class='td-name' colspan="2"><input class='button' class='button' type='submit' id='sub' value='提交' onclick='addProduct({{secondId}})' /></td>
+					</tr>
+					
+					
+				
+				</table>
+			</form>
+			
+			
+		</div>
+		
+	</div>
+	
+</div>
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+function addProduct(key){
+		path='/addProduct/'+key+'/'
+		$('#form_action').attr('action',path)
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<html>
+
+<head>
+	<title> 个人登录 </title>
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8;'>
+	
+	<style tpye='text/css'>
+	
+		body{
+			margin:0px;
+		}
+		.header-back{
+			width:100%;
+			height:110;
+			padding:0px; margin:0px;
+			background-color:#FFFFFF;
+		}
+		
+		.header{
+			z-index:1020;
+			width:1200px;
+			height:110px;
+			position:absolute;
+			z-index:1030;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.logo {
+    		width: 160px;
+    		height: 50px;
+    		float: left;
+    		margin-top: 24px;
+		}
+		.logo-title {
+   			float: left;
+   			height: 34px;
+   			line-height: 34px;
+			font-size: 24px;
+    		color: #333;
+    		padding-left: 20px;
+    		margin-top: 34px;
+		}
+		
+		
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+	</style>
+</head>
+
+
+
+<body>
+
+<div class='header-back'>
+	<div id="form-header" class="header">
+		<div  >
+			<a href='/index/'><img class='logo' src='/statics/img/Yidam_logo.jpg'/></a>
+		</div>
+		<div class="logo-title">欢迎登录</div>
+	</div>
+</div>
+
+	
+<div class='bodyFrame'>
+	<form action='/load/'  method='POST'>
+	用户名：<input type='text' name='account' value'userinput'/>
+	密码：<input type='password' name='password'/> 
+	<input type='submit' value='提交'>
+	</form>
+
+	{% if result %}
+		<p>{{result}}</p>
+	{% endif %}
+</div>
+	
+
+</body>
+
+</html>
