@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from user_center.views import register,load,loginOut
-from index_show.views import index
+from index_show.views import index,searchStore
 from seller.views import sellerIndex,registerStore,viewStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
 from seller.views import editProduct,addAttr1,addAttr2,addPrice,addHomeType,getSecondType,getProduct
-from seller.views import addHomeProduct,viewType,viewProduct
+from seller.views import addHomeProduct,viewType,viewProduct,getSelectPrice
+
 
 
 #use for media and picture show
@@ -57,6 +58,14 @@ urlpatterns = [
     url(r'^getSecondType/$', getSecondType),
     url(r'^getProduct/$', getProduct),
     url(r'^addHomeProduct/$', addHomeProduct),
+    url(r'^getSelectPrice/$', getSelectPrice),
+    url(r'^searchStore/$', searchStore),
+    
+    
+    
+    
+    
+    
     
     
     

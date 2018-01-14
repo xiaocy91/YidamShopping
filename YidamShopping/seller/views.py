@@ -16,6 +16,7 @@ from seller.models import ProductPrice
 from _mysql import NULL
 from django.template.context_processors import request
 from seller.models import HomeProduct
+from lib2to3.fixer_util import Attr
 
 #进入卖家中心首页
 def sellerIndex(request):
@@ -32,8 +33,14 @@ def sellerIndex(request):
         
         request.session['openStore']=openStore
         
-        
-        resData={'account':account,'openStore':openStore}
+        if openStore:
+            userId=userinfos[0].Userid
+            storeId=Store.objects.get(UserNid_id=userId).StoreNid
+        else:
+            storeId=-1
+       
+            
+        resData={'account':account,'openStore':openStore,'storeId':storeId}
         return render_to_response('seller_index.html',resData)
     else:
         return HttpResponseRedirect('/load/')
@@ -89,14 +96,17 @@ def viewStore(request):
     userid=request.session.get('userid')
     account=request.session.get('account')
     openStore=request.session.get('openStore')
-    if openStore:
-        storeInfo = Store.objects.filter(UserNid_id=userid)
+    storeId=request.GET.get('storeId')
+    storeId=int(storeId)
+    if storeId:
+        storeInfo = Store.objects.filter(StoreNid=storeId)
         resData['account']=account
         resData['openStore']=openStore
         resData['storeName']=storeInfo[0].StoreName
         resData['storeAddr']=storeInfo[0].StoreAddr
         resData['storeBossName']=storeInfo[0].StoreBossName
         resData['storeId']=storeInfo[0].StoreNid
+        resData['openStore']=openStore
         storeid=storeInfo[0].StoreNid
     
     #获取主页
@@ -757,4 +767,28 @@ def addHomeProduct(request):
             return HttpResponse('Empty')
         
         
+#获取选中商品的价格
+def getSelectPrice(request):
+    if request.method == 'POST':
+        data=request.POST
+        dataJs=data.get('dataJs')
+        dataJs=json.loads(dataJs)
+        attr1=dataJs.get('attr1')
+        attr2=dataJs.get('attr2')
+        proid=dataJs.get('proid')
+        attr1=int(attr1)
+        attr2=int(attr2)
+        proid=int(proid)
         
+        print 'attr1:',attr1
+        print 'attr2',attr2
+        print 'prodi:',proid
+        
+        if attr1 and attr2 and proid:
+            priceObjs=ProductPrice.objects.filter(Attr1_id=attr1,Attr2_id=attr2,ProductNid_id=proid)
+            
+            if priceObjs:
+                price=priceObjs[0].Price 
+            else:
+                price=-1
+        return HttpResponse(price)   

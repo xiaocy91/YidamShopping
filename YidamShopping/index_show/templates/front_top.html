@@ -59,6 +59,46 @@
     		margin-top: 24px;
     		float:left;
 		}
+		
+		/*搜索*/
+		.search-div{
+    		float:right;
+			background-color:white;
+			border:3px solid #EC1A23;
+			width:545px;
+			height:30px;
+			margin-top:27px;
+    	}
+    	/*搜索输入框*/
+		.search-input{
+			border:3px solid #EC1A23;
+			width:450px;
+			height:30px;
+			padding:0px;
+			margin:0px;
+			padding: 5px 3px 5px 5px;
+    		outline: 0;
+    		border: none;
+    		font-weight: 900;
+		}
+		
+		
+		.search-but{
+			right: 0;
+		    top: 0;
+		    width: 90px;
+		    border: 0;
+		    font-size: 16px;
+		    letter-spacing: 4px;
+		    cursor: pointer;
+		    color: #fff;
+		    background-color: #EC1A23;
+		    height: 30px;
+		    overflow: hidden;
+		    font-family: '\5FAE\8F6F\96C5\9ED1',arial,"\5b8b\4f53";
+		}
+		
+		
 		.top-content{
 			height:35px;
 			width:1200px;
@@ -84,6 +124,16 @@
   			float:right;
   			cursor:pointer;	
     	}
+    	
+    	/*购物车小图标*/
+    	.top-default-right img{
+   		width:20px;
+   		height:16px;
+   		}
+   		.top-default-right a{
+   			text-decoration:none;
+   		}
+    	
     	
 	</style>
 	
@@ -111,6 +161,11 @@
 				<div  class='top-default-left' onclick='goRegister()'>请注册</div>
 			{% endif  %}
 			<div  class='top-default-right' onclick='goSeller()'>卖家中心</div>
+			<div  class='top-default-right'>我的亿达</div>
+			<div  class='top-default-right'>
+				<a href=''><img src='/statics/img/car.jpg'>购物车</a>
+			</div>
+			
 		</div>
 	</div>
 </div>
@@ -121,6 +176,13 @@
 	<div class='header-second'>
 		<div class='logoframe'>
 			<img class='logo' src='/statics/img/Yidam_logo.jpg'/>
+		</div>
+		<div class='search-div'>
+			<form action='/searchStore/' method='post'>
+				<input type='text' class='search-input' placeholder="搜索 店铺" name='storeName'/>
+				<input type='submit' value='搜索' class='search-but'>
+			</form>
+		
 		</div>
 	</div>
 </div>

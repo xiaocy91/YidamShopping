@@ -1,0 +1,187 @@
+<html>
+
+<head>
+
+<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+<title>亿达购物商城</title>
+
+
+<style type='text/css'>
+		body{
+			margin:0px;
+			background-color:#F8F8FF;
+		}
+		
+		
+			
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:1200px;
+			min-height:500px;
+			right:0px;
+			top:15px;
+		}	
+		
+		
+		/*所有店铺最外层ul*/
+		.store-ul{
+			list-style:none; 
+		}
+		/*单个店铺*/
+		.store-item{
+			width:1120px;
+			border: 1px solid #E0E0E0;
+			padding-left:20px;
+			margin-top:5px;
+		}
+		.list-info {
+	    width: 500px;
+	    height: 100%;
+	    margin-top: 2px;
+		}
+		.list-info p {
+	    line-height: 21px;
+	    height: 21px;
+	    width: 480px;
+	    overflow: hidden;
+	    padding-top: 3px;
+		}
+		
+		
+		
+		
+		/*分页的样式*/
+		.pagination{
+			clear:left;
+			width:1120px;	
+			text-align:center;
+		}
+		
+		.wp-paginate {
+			width:370px;
+    		padding:0;
+   			margin:0;
+    		margin-left:550px;}
+
+		.wp-paginate li {
+    		float:left;
+    		list-style:none;
+    		margin:2px;
+   		 	padding:0;
+    		margin:0px auto;}
+		.wp-paginate a {
+		    margin:0 2px;
+		    line-height:20px;
+		    text-align:center;
+		    text-decoration:none;
+		    border-radius:3px;
+		    -moz-border-radius:3px;
+		    float:left;
+		    min-height:20px;
+		    min-width:20px;
+		    color:#858585;
+		    border:2px #e3e3e3 solid;
+		    border-radius:13px;
+		    font-size:15px;}
+		
+			.wp-paginate span{
+				margin:0 2px;
+			    line-height:20px;
+			    text-align:center;
+			    text-decoration:none;
+			    float:left;
+			    min-height:20px;
+			    min-width:20px;
+			    color:#858585;
+			    font-size:15px;
+			}	
+			
+			
+			
+	
+	
+</style>
+
+</head>
+
+<body>
+
+{% include "front_top.html" %}
+<div class='bodyFrame'>
+	
+	<div class='bodyContent'>
+	
+		
+		<ul class='store-ul'>
+				
+			{% for store in stores%}
+			<div class='store-item'>
+				<li class='list-info'>
+					<h4><a href='/viewStore/?storeId={{store.0}}'>{{store.1}}</a></h4>
+					<p> 
+						<span>卖家:</span> 
+						<span class="shop-info-list"><a href='/viewStore/?storeId={{store.0}}'>{{store.2}}</a></span>
+					</p>
+					<p >
+        				<label>主营:</label>
+        				<a href='/viewStore/?storeId={{store.0}}'>
+	        				{% for name in store.3 %}
+	        					<span class="shop-info-list">{{name}}</span>
+	        				{% endfor %}
+        				</a>
+       				</p>
+				</li>
+			</div>
+			{% endfor %}
+				
+		</ul>
+		
+		
+		
+		
+		<!--使用pagination进行分页-->
+		<div class="pagination">
+		    <span class="step-links">
+			    <ol class="wp-paginate">
+			        {% if stores.has_previous %}
+			            <li><a href="?page=1">&laquo; 第一页</a></li>
+			            <li><a href="?page={{ stores.previous_page_number }}">上一页</a></li>
+			        {% endif %}
+			
+			        <span class="current">
+			            	<li><span>第 {{ stores.number }} 页，共 {{ stores.paginator.num_pages }}页</span></li>
+			        </span>
+			
+			        {% if stores.has_next %}
+			            <li><a href="?page={{ stores.next_page_number }}">下一页</a></li>
+			            <li><a href="?page={{ stores.paginator.num_pages }}">最后页 &raquo;</a></li>
+			        {% endif %}
+			     </ol>
+		    </span>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</body>
+
+
+</html>
+

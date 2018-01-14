@@ -94,6 +94,12 @@
 		float:left;}
 		
 		
+		/*首页小图标*/
+    	.top-default-left img{
+   		width:20px;
+   		height:16px;
+   		}
+		
 
 </style>
 
@@ -109,11 +115,13 @@
 	<div class='topFrame'>
 		<div class='header-back-first'>
 			<div class='header-content-first'>
+				<div  class='top-default-left' onclick='goIndex()'>
+					<img src='/statics/img/home.jpg'>亿达首页
+				</div>
 				{% if account %}
 					<div  class='top-default-left'>{{account}}</div>
 				{% endif  %}
 				<div  class='top-default-right' onclick='goSeller()'>卖家中心</div>
-				<div  class='top-default-right' onclick='goIndex()'>亿达商城首页</div>
 			</div>
 		</div>
 		
