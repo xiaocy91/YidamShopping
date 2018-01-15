@@ -144,24 +144,22 @@
 			{% if typeDic%}
 				<!--商品一级分类,通过class等于{{key.0}}来定位元素-->
 				{% for key,value in typeDic.items %}
-					<table class='types-table'>
-						<tr>
+					<table class='types-table' >
+						<tr id='firstTr'>
 							<td>
 							<label for='{{key.0}}'  >
-								<input type='checkbox' id='{{key.0}}'  onchange='selectAll(this,{{key.0}})'  class='{{key.0}}' />
+								<input type='checkbox' id='{{key.0}}'  onchange='selectAll(this,{{key.0}})'  />
 							{{key.1}}<label>
 							</td>
 							<td class='cursor-point' onclick='add_edit(this,{{key.0}},"edit1")' id='edit1'>编辑</td>
 							<td class='cursor-point' onclick='delChoose({{key.0}})'>删除选中</td>
 							<td class='cursor-point' onclick='add_edit(this,{{key.0}},"add2")' id='add2'>添加下级分类</td>	
-							
-								
-							
+						
 						<tr>
 						
 						<!--商品二级分类-->
 						{% for sencondType in value %}
-						<tr>
+						<tr id='secondTr'>
 							<td>
 								&nbsp;&nbsp;
 								<label for='{{sencondType.0}}'>
@@ -232,11 +230,31 @@ function selectAll(obj,key){
 //单个状态，影响全选状态
 function changeFirst(obj,id,class_name){
 
-	//判断是否取消一级标题的选中
+	
 	var status=$(obj).is(':checked')
 	if( !status){
+		//判断是否取消一级标题的选中
 		$('#'+class_name).prop("checked",false)
+	}else{
+		//判断一级标题是否选中，即二级全部选中时
+		var secondAll=$('.'+class_name)
+		var len=secondAll.length
+		var flag=0
+		secondAll.each(function(){
+			var status=$(this).is(':checked')
+			if(status){
+				flag+=1
+			}
+		});
+		if(flag==len){
+			$('#'+class_name).prop("checked",true)
+		}
 	}
+	
+	
+	
+	
+	
 }
 
 

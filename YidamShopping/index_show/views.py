@@ -20,6 +20,13 @@ def searchStore(request):
     resData={}
     if request.method=='POST':
         data=request.POST
+        
+        #添加用户账号信息
+        login_status=request.session.get('login_status')
+        if login_status:
+            account=request.session.get('account')
+            resData['account']=account
+        
         storeName=data.get('storeName')
         storeLists=[]
         
@@ -60,6 +67,7 @@ def searchStore(request):
                 
             #将商品列表加入返回的数据字典
             resData['stores']=storeLists   
+            
                 
                 
                 

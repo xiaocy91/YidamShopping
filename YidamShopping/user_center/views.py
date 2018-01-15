@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response,HttpResponseRedirect
 from models import Userinfo,ShopCar
 from seller.models import Store,Product,ProductAttr2,ProductAttr1,ProductPrice
 
@@ -134,4 +134,21 @@ def addCar(request):
                                    AttrName1=attrName1,AttrImg1=filename,AttrId2=attrId2,
                                    AttrName2=attrName2,PriceId=priceId,Price=price,Mount=mount)
         return HttpResponse(True)
+
+
+#展示购物车  
+def showCar(request):
+    resData={}
+    #用户登录信息
+    login_status=request.session.get('login_status',False)
+    if login_status:
+        account=request.session.get('account')
+        userId=request.session.get('userid')
+        resData['account']=account
+    #获取用户购物车信息
+       
+        return render_to_response('user_car.html',resData)
+    else:
+        return HttpResponseRedirect('/load/')
+    
 
