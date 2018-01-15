@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from user_center.views import register,load,loginOut
+from user_center.views import register,load,loginOut,addCar
 from index_show.views import index,searchStore
 from seller.views import sellerIndex,registerStore,viewStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
@@ -60,6 +60,7 @@ urlpatterns = [
     url(r'^addHomeProduct/$', addHomeProduct),
     url(r'^getSelectPrice/$', getSelectPrice),
     url(r'^searchStore/$', searchStore),
+    url(r'^addCar/$', addCar),
     
     
     

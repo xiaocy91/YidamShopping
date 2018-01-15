@@ -217,10 +217,6 @@ def viewType(request):
             proList.append(imgPath)
             #获取最后一个规格尺码的价格
             proPrice=ProductPrice.objects.filter(ProductNid_id=id).order_by('-Price').last()
-            if proPrice:
-                print proPrice
-                price=proPrice.Price
-                proList.append(price)
             #将每个商品的封装列表加入到总列表
             productLists.append(proList)
        
@@ -248,16 +244,15 @@ def viewProduct(request):
     storeId=data.get('storeId')
     proId=data.get('proId')
     #获取店铺信息
-    userid=request.session.get('userid')
+    userId=request.session.get('userid')
     account=request.session.get('account')
-    openStore=request.session.get('openStore')
-    if openStore:
-        storeInfo = Store.objects.filter(StoreNid=storeId)
-        resData['account']=account
-        resData['openStore']=openStore
-        resData['storeName']=storeInfo[0].StoreName
-        resData['storeAddr']=storeInfo[0].StoreAddr
-        resData['storeBossName']=storeInfo[0].StoreBossName
+    #店铺信息
+    storeInfo = Store.objects.filter(StoreNid=storeId)
+    resData['userId']=userId
+    resData['account']=account
+    resData['storeName']=storeInfo[0].StoreName
+    resData['storeAddr']=storeInfo[0].StoreAddr
+    resData['storeBossName']=storeInfo[0].StoreBossName
     #获取二级分类
     if storeId:
         storeId=int(storeId)
@@ -294,7 +289,9 @@ def viewProduct(request):
         #商品价格
         productChip=ProductPrice.objects.filter(ProductNid_id=proId).order_by('-Price').last()
         priceChip=productChip.Price
+        priceChipId=productChip.Nid
         resData['priceChip']=priceChip
+        resData['priceChipId']=priceChipId
     
     return render_to_response('store_view_product.html',resData)
     
@@ -788,7 +785,11 @@ def getSelectPrice(request):
             priceObjs=ProductPrice.objects.filter(Attr1_id=attr1,Attr2_id=attr2,ProductNid_id=proid)
             
             if priceObjs:
-                price=priceObjs[0].Price 
+                priceId=priceObjs[0].Nid
+                price=priceObjs[0].Price                 
             else:
+                priceId=-1
                 price=-1
-        return HttpResponse(price)   
+            priceData={'priceId':priceId,'price':price}
+            priceData=json.dumps(priceData)    
+        return HttpResponse(priceData)   

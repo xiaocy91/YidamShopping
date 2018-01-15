@@ -331,8 +331,9 @@ m-clear:after {
 				</div>
 				
 				<!--标价-->
-				<div class='tm-fcs-panel'>					
-					<dl class="tm-price-panel tm-price-cur" id="J_StrPriceModBox">
+				<div class='tm-fcs-panel'>
+					<!--在总的dd中记录下选中的price到value值中-->					
+					<dl  value='{{priceChipId}}' class="tm-price-panel tm-price-cur" id="pricedl">
         				<dt class="tb-metatit">价格</dt>
         				<dd>
         					<em class="tm-yen">¥</em> 
@@ -374,7 +375,7 @@ m-clear:after {
 					<br/><!--进行换行-->
 					
 					<!--颜色-->
-					<dl class="tb-prop tm-sale-prop tm-clear tm-img-prop "  id='attr1Id'>
+					<dl class="tb-prop tm-sale-prop tm-clear tm-img-prop ">
 						<dt class="tb-metatit">颜色分类</dt>
 							<!--在总的dl中记录下选中的id到value值中-->
 							<dd id='attr1Id' value='0'>
@@ -419,8 +420,8 @@ m-clear:after {
                     		<a id="J_LinkBuy" href="#" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button">
                     			立即购买</a>
                			</div>
-						<div class="btn-sku"><a href="#" rel="nofollow" id="J_LinkBasket" role="button"   id='addCar'>
-							加入购物车</a>
+						<div class="btn-sku" onclick='addCar({{storeId}},{{product.Nid}})'>
+							<a href="#" rel="nofollow" id="J_LinkBasket" role="button"   id='addCar'>加入购物车</a>
 						</div>
         			</div>
 					
@@ -538,19 +539,64 @@ m-clear:after {
 					data:{'dataJs':dataJs},
 					method:'POST',
 					success:function(result){
-						result=parseInt(result)
-						if(result>0){
-							$('#priceId').text(result)
-							$('#priceId').val(result)
+						var priceData=$.parseJSON(result)
+						var price=priceData['price']
+						var priceId=priceData['priceId']
+						price=parseInt(price)
+						priceId=parseInt(priceId)
+						
+						if(price>0){
+							
+							$('#priceId').text(price)
+							<!--在总的dl中记录下选中的price到value值中-->	
+							$('#pricedl').attr('value',priceId)
 						}else{
 							$('#priceId').text('无对应单价')
-							$('#priceId').val('-1')
+							<!--在总的dl中记录下选中的price到value值中-->	
+							$('#pricedl').attr('value','-1')
 						}
 					},
 				
 				});
 			}
 			
+	}
+	
+	
+	//添加购物车
+	function addCar(storeId,productId){
+			var priceId=$('#pricedl').attr('value')
+			var attrId2=$('#attr2Id').attr('value')
+			var attrId1=$('#attr1Id').attr('value')
+			var mount=$('#mountId').attr('value')
+			
+			
+			if(attr2Id=='0' | attr1Id=='0'){
+				alert('请选择商品属性')
+			}else if(priceId=='-1'){
+				alert('该商品无货')
+			}else{
+				data={'storeId':storeId,'productId':productId,
+					'attrId2':attrId2,'attrId1':attrId1,'priceId':priceId,
+					'mount':mount}
+				data=JSON.stringify(data)
+				
+				console.log(data)
+				$.ajax({
+					url:'/addCar/',
+					method:'POST',
+					data:{'carData':data},
+					success:function(result){
+						if(result){
+							alert('成功添加购物车')
+
+						}
+					},
+				});
+			}
+			
+			
+		
 	}
 
 </script>
