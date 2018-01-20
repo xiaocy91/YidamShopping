@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from user_center.views import register,load,loginOut,addCar,showCar
+from user_center.views import register,load,loginOut,addCar,showCar,modifyMount,userCenter,showOrderFinal
+from user_center.views import addOrder,submitOrder
 from index_show.views import index,searchStore
 from seller.views import sellerIndex,registerStore,viewStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
@@ -62,7 +63,11 @@ urlpatterns = [
     url(r'^searchStore/$', searchStore),
     url(r'^addCar/$', addCar),
     url(r'^showCar/$', showCar),
-    
+    url(r'^modifyMount/$', modifyMount),
+    url(r'^userCenter/$', userCenter),
+    url(r'^showOrderFinal/$', showOrderFinal),
+    url(r'^addOrder/$', addOrder),
+    url(r'^submitOrder/$', submitOrder),
     
     
     

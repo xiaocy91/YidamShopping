@@ -1,0 +1,340 @@
+<html>
+
+<head>
+
+<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+<title>亿达购物商城</title>
+
+
+<style type='text/css'>
+		body{
+			margin:0px;
+			background-color:#F8F8FF;
+		}
+		
+		
+			
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:relative;
+			width:1170px;
+			min-height:500px;
+			margin-left:15px;
+		}
+		
+		/*确认订单标题*/	
+		
+		buy-th-title {
+    line-height: 25px;
+    color: #333;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+
+
+/*确认订单div2的样式*/
+		.topItemDiv .left1{
+			position:relative;
+			float:left;
+			width:400px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+		
+		.topItemDiv .left2{
+			position:relative;
+			float:left;
+			width:300px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+		
+		.topItemDiv .left3{
+			position:relative;
+			float:left;
+			width:150px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+		.topItemDiv .left4{
+			position:relative;
+			float:left;
+			width:150px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+		.topItemDiv .left5{
+			position:relative;
+			float:left;
+			width:150px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+	
+	
+		.gapDiv{
+			width:1200px;
+			height:50px;
+		}
+	
+	
+		/*每条购物车*/
+		.itemDiv{
+			width:1170px;
+			min-height:80px;
+  			font-size:14px;
+  			
+		}
+		.itemDiv .left1{
+			position:relative;
+			float:left;
+			width:400px;
+		}
+		.itemDiv  .left1 img{
+			width:80px;
+			height:80px;
+			border:1px solid #E0E0E0;
+			position:relative;
+			float:left;
+			margin:5px;
+		}
+		.itemDiv .left2{
+			position:relative;
+			float:left;
+			width:300px;
+			text-align:center;
+			
+		}
+		.itemDiv .left3,.left4,.left5{
+			position:relative;
+			float:left;
+			width:140px;
+			text-align:center;
+		}
+		
+		
+		/*每条购物车店铺名称*/
+		.itemDiv .shop {
+		    position: relative;
+		    height: 38px;
+		    overflow: hidden;
+		    border-bottom:1px solid #E0E0E0;
+		   	padding-left:20px;
+		   	padding-right:20px;
+		   	border-bottom:1px solid #E0E0E0;
+		   	font-weight:bold;
+		   	padding-top:25px;
+		}
+		.itemDiv .product {
+		    position: relative;
+		    background: #CDE1E2;
+		   	padding:20px;
+		   	border-bottom:1px solid #E0E0E0;
+		   	border-left:1px solid #E0E0E0;
+		   	border-right:1px solid #E0E0E0;
+		   	min-height:90px;
+		}
+		
+		/*价格字体的颜色*/
+		.priceFont{
+			color:#E02028;
+			font-weight:bold;
+			}
+		
+		/*结算*/
+		.sum-div{
+			margin-bottom:30px;
+		}
+		
+ 	 .sum-div .sum-but{
+ 	 	position:relative;
+ 		float:right;
+ 		display: inline-block;
+	    width: 182px;
+	    height: 40px;
+	    vertical-align: middle;
+	    line-height: 39px;
+	    cursor: pointer;
+	    text-align: center;
+	    font-size: 14px;
+	    font-weight: 700;
+	    background: #E31F28;
+	    color: #fff;
+	    margin:10px;
+
+}
+ 	
+ 	 
+	.sum-div .total{
+ 	 	position:relative;
+ 		float:right;
+ 		color:#E02028;
+		font-weight:bold;
+		font-size:30px;
+		line-height:50px;
+		text-align:center;
+		margin-right:10px;
+	
+ 	 }
+
+	.sum-div .sum-name{
+ 	 	position:relative;
+ 		float:right;
+ 		font-size:12px;
+ 		line-height:50px;
+		text-align:center;
+		margin-right:10px;
+ 	 }
+ 	 
+ 	 .sum-div .seperateSub{
+ 	 	position:relative;
+ 		float:right;
+ 		font-size:12px;
+ 		font-weight:bold;
+ 		line-height:50px;
+		text-align:center;
+		margin-right:30px;
+		color:#E31F28;
+ 	 }
+		
+</style>
+
+</head>
+
+<body>
+
+{% include "user_center_orderConfirmTop.html" %}
+<div class='bodyFrame'>
+
+	<div class='bodyContent'>
+	
+		<h2 class="buy-th-title" data-reactid=".0.$confirmOrder_1.$orderDesc_0.0">确认订单信息</h2>
+		
+		<!--订单标题-->
+		<div class='topItemDiv'>
+			<div class='left1'>	
+				店铺宝贝
+			</div>
+			<div class='left2'>	
+				商品属性
+			</div>
+			<div class='left3'>	
+				单价
+			</div>
+			<div class='left4'>	
+				数量
+			</div>
+			<div class='left5'>	
+				金额
+			</div>
+		</div>
+		
+		
+		<!--隔离div-->
+		<div class='gapDiv'></div>
+		
+		
+		{% for order in orders %}
+		
+		<div class="itemDiv" id='{{order.0}}'>
+			<!--店铺名-->
+			<div class="shop ">
+				店铺：{{order.1}}
+			</div>
+			
+			{% for pro in order.3 %}
+			<!--商品信息-->
+			<div class="product"  id='{{pro.Nid}}'>		
+				<div class='left1'>	
+					<img src='/media/{{pro.AttrImg1}}' />{{pro.ProductHead}}
+				</div>
+				<div class='left2'>	
+					<div>颜色：{{pro.AttrName1}}</div>
+					<div>大小：{{pro.AttrName2}}</div>
+				</div>
+				<div class='left3'>	
+					{{pro.Price}}
+				</div>
+				<div class='left4'>	
+					{{pro.Mount}}
+				</div>
+				<div class='left5 priceFont' >	
+					¥{{pro.SumPrice}}
+				</div>
+			</div>
+			{% endfor %}
+		
+			<!--结算-->
+			<div class='sum-div'>
+				<form action='/submitOrder/' method='post'>
+					<input type='hidden' value='0' id='orderDataId' name='order'/>
+					<input class='sum-but' type='submit' value='提交订单' onclick='submitOrder({{order.0}},{{order.2}})' />
+				</form>
+				<div class='total' >¥{{order.2}}</div>
+				<div class='sum-name'>实付：</div>
+				{% if len %}
+					<div class='seperateSub'>请分开提交订单</div>
+				{% endif %}
+			</div>
+		
+		</div>
+		{% endfor %}
+		
+		
+		
+	</div>
+
+
+
+
+
+	
+</div>
+
+
+
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+function submitOrder(storeId,total){
+	//封装商品
+	var proArry=[]
+	//所有产品
+	var pros=$('#'+storeId).find('.product')
+	pros.each(function(){
+		var proId=$(this).attr('id')
+		proArry.push(proId)
+	});
+	var orderData={'storeId':storeId,'proArry':proArry,'total':total}
+	//json对象转化字符串
+	orderData=JSON.stringify(orderData)
+	console.log(orderData)
+	
+	//将提交数据写在隐藏的input中
+	$('#orderDataId').attr('value',orderData)
+	
+}
+
+</script>
+
+
+</body>
+
+
+</html>
+

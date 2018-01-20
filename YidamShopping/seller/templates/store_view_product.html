@@ -247,6 +247,7 @@ m-clear:after {
     border: 1px solid #FF0036;
     color: #FF0036;
     font-family: 'Microsoft Yahei';
+    cursor:pointer;
 }
 .btn-sku a {
 	padding:8px;
@@ -260,6 +261,7 @@ m-clear:after {
     border: 1px solid #FF0036;
     color: #FFFFFF;
     font-family: 'Microsoft Yahei';
+    cursor:pointer;
 }
 
 /*隔离样式*/
@@ -277,6 +279,8 @@ m-clear:after {
 		border-top:1px solid #CCCCCC;
 		min-height:300px;	
 	}
+	
+	
 
 </style>
 
@@ -338,7 +342,13 @@ m-clear:after {
         				<dt class="tb-metatit">价格</dt>
         				<dd>
         					<em class="tm-yen">¥</em> 
-        					<span id='priceId' class="tm-price">{{priceChip}}</span>
+        					<span id='priceId' class="tm-price">
+        						{% ifequal priceChip -1 %}
+        							无对应单价
+        						{% else %}
+        							{{priceChip}}
+        						{% endifequal %}
+        					</span>
         					<div class="staticPromoTip">
 								<!--rullBanner ids:$ids true-->
 
@@ -364,7 +374,7 @@ m-clear:after {
 									<!--ul换行结束-->
 									
 						  			<li data-value="20509:397490054"   onclick='changeSelect({{attr2.Nid}},"attr2",{{product.Nid}})' id='{{attr2.Nid}}'>
-										<a href="#" role="button" tabindex="0" >
+										<a  role="button" tabindex="0" >
 											<span>{{attr2.Attr2}}</span>
 										</a>
 									</li>									
@@ -383,7 +393,7 @@ m-clear:after {
 								<ul data-property="颜色分类" class="tm-clear J_TSaleProp tb-img     ">
 									{%for attr1 in productAttr1s %}
 					  				<li data-value="1627207:801810489" title="{{attr1.Attr1}}"  id='{{attr1.Nid}}' onclick='changeSelect({{attr1.Nid}},"attr1",{{product.Nid}})' >
-									<a  href="#" style="background:url(/media/{{attr1.ImgAttr1}}) center no-repeat;height:60px;margin:3px;" role="button" tabindex="0">
+									<a  style="background:url(/media/{{attr1.ImgAttr1}}) center no-repeat;height:60px;margin:3px;" role="button" tabindex="0">
 										
 									</a></li>
 									{% endfor %}
@@ -418,11 +428,11 @@ m-clear:after {
 					<!--加购物车，购买-->
 					<div class="tb-action tm-clear">
 						<div class="tb-btn-sku" id='buyPro'>
-                    		<a id="J_LinkBuy" href="#" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button">
+                    		<a id="J_LinkBuy"  rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button">
                     			立即购买</a>
                			</div>
 						<div class="btn-sku" onclick='addCar({{storeId}},{{product.Nid}})'>
-							<a href="#" rel="nofollow" id="J_LinkBasket" role="button"   id='addCar'>加入购物车</a>
+							<a rel="nofollow" id="J_LinkBasket" role="button"   id='addCar'>加入购物车</a>
 						</div>
         			</div>
 					

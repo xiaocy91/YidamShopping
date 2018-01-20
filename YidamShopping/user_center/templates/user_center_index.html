@@ -25,47 +25,25 @@
 		.bodyContent{
 			position:absolute;
 			float:right;
-			width:1200px;
+			width:998px;
 			min-height:500px;
 			border: 1px solid #E0E0E0;
 			right:0px;
 			top:15px;
 		}	
 		
-		/*单个店铺*/
-		.shop {
-	    position: relative;
-	    height: 38px;
-	    background: #fff;
-	    overflow: hidden;
-		}
-		
-	
 </style>
 
 </head>
 
 <body>
 
-{% include "user_top.html" %}
+{% include "user_center_top.html" %}
 <div class='bodyFrame'>
-
+	{% include 'user_center_left.html' %}
+	
 	
 	<div class='bodyContent'>
-	
-		<!--单个店铺-->
-		<div class="J_ItemHead shop clearfix">
-			<div class="cart-checkbox ">
-				
-			</div>
-			<div class="J_ItemHead shop clearfix">
-				<span>店铺：<a  title="浪莎女装旗舰店" class="J_MakePoint" data-point="tbcart.8.15">浪莎女装旗舰店</a></span>
-			</div>
-		</div>
-			
-		
-		
-		
 	
 	</div>
 	

@@ -24,12 +24,35 @@ class ShopCar(models.Model):
     StoreName=models.CharField(max_length=60)
     ProductId=models.IntegerField()
     ProductHead=models.CharField(max_length=200)
-    AttrId1=models.ImageField()
+    AttrId1=models.IntegerField()
     AttrName1=models.CharField(max_length=200)
-    AttrImg1=models.ImageField(upload_to='userProImg/%Y%m%d%H%M%S')
+    AttrImg1=models.ImageField()
     AttrId2=models.CharField(max_length=200)
     AttrName2=models.CharField(max_length=200)
     PriceId=models.IntegerField()
     Price=models.IntegerField()
+    SumPrice=models.IntegerField()
     Mount=models.IntegerField()
 
+class Order(models.Model):
+    Nid=models.AutoField(primary_key=True)
+    OrderNum=models.CharField(max_length=17)
+    DateTime=models.DateTimeField()
+    StoreId=models.IntegerField()
+    StoreName=models.CharField(max_length=60)
+    UserId=models.ForeignKey(Userinfo)
+    Total=models.IntegerField()
+    
+class OrderProduct(models.Model):
+    Nid=models.AutoField(primary_key=True)
+    OrderId=models.ForeignKey(Order)
+    ProductId=models.IntegerField()
+    ProductHead=models.CharField(max_length=200)
+    AttrName1=models.CharField(max_length=200)
+    AttrImg1=models.ImageField()
+    AttrName2=models.CharField(max_length=200)
+    Price=models.IntegerField()
+    Mount=models.IntegerField()
+    SumPrice=models.IntegerField()
+    
+    

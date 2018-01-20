@@ -116,13 +116,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+#to solve problem: RuntimeWarning: DateTimeField Order.DateTime received a naive datetime 
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+#to solve problem: RuntimeWarning: DateTimeField Order.DateTime received a naive datetime 
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

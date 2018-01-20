@@ -288,8 +288,12 @@ def viewProduct(request):
             resData['productAttr2s']=productAttr2s
         #商品价格
         productChip=ProductPrice.objects.filter(ProductNid_id=proId).order_by('-Price').last()
-        priceChip=productChip.Price
-        priceChipId=productChip.Nid
+        if productChip:
+            priceChip=productChip.Price
+            priceChipId=productChip.Nid
+        else:
+            priceChip=-1
+            priceChipId=-1
         resData['priceChip']=priceChip
         resData['priceChipId']=priceChipId
     

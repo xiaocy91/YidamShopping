@@ -1,0 +1,692 @@
+<html>
+
+<head>
+
+<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+<title>亿达购物商城</title>
+
+
+<style type='text/css'>
+		body{
+			margin:0px;
+			background-color:#F8F8FF;
+		}
+		
+		
+			
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:1200px;
+			min-height:500px;
+			right:0px;
+			top:15px;
+		}	
+		
+		
+		/*顶部的div1*/
+		.topItemDiv1{
+			width:1160px;
+			height:50px;
+			font-weight:bold;
+  			font-size:25px;
+  			color:#EC1A23;
+  			padding:20px;
+  			border-bottom:2px solid #E0E0E0;
+		}
+		.topItemDiv1 .left1{
+			position:relative;
+			float:left;
+		}
+		.topItemDiv1 .right1{
+			position:relative;
+			float:right;
+		}
+		.topItemDiv1 input{
+			background: #aaa;
+   			color: #fff;
+    		cursor:not-allowed;
+    		width:60px;
+    		height:30px;
+		}
+		
+		
+		/*顶部的div2*/
+		.topItemDiv2{
+			width:1160px;
+			height:25px;
+  			font-size:14px;
+  			padding:20px;
+		}
+		
+		
+		/*购物车顶部div2的样式*/
+		.topItemDiv2 .left1,.itemDiv .left1{
+			position:relative;
+			float:left;
+			width:50px;
+		}
+		
+		.topItemDiv2 .left2{
+			position:relative;
+			float:left;
+			width:500px;
+		}
+		.itemDiv .left2_1{
+			position:relative;
+			float:left;
+			width:300px;
+		}
+		.itemDiv .left2_2{
+			position:relative;
+			float:left;
+			width:200px;
+			text-align:center;
+		}
+		.topItemDiv2 .left3,.itemDiv .left3{
+			position:relative;
+			float:left;
+			width:150px;
+		}
+		.topItemDiv2 .left4,.itemDiv .left4{
+			position:relative;
+			float:left;
+			width:150px;
+		}
+		.topItemDiv2 .left5,.itemDiv .left5{
+			position:relative;
+			float:left;
+			width:150px;
+		}
+		.topItemDiv2  .left6,.itemDiv .left6{
+			position:relative;
+			float:left;
+			width:150px;
+		}
+		
+		
+		
+		/*每条购物车*/
+		.itemDiv{
+			width:1200px;
+			min-height:100px;
+  			font-size:14px;
+  			
+		}
+		
+		/*每条购物车店铺名称*/
+		.itemDiv .shop {
+		    position: relative;
+		    height: 38px;
+		    overflow: hidden;
+		    border-bottom:1px solid #E0E0E0;
+		   	padding-left:20px;
+		   	padding-right:20px;
+		   	border-bottom:1px solid #E0E0E0;
+		   	font-weight:bold;
+		   	padding-top:25px;
+		}
+		
+		.itemDiv .product {
+		    position: relative;
+		    background: #fff;
+		   	padding:20px;
+		   	border-bottom:1px solid #E0E0E0;
+		   	border-left:1px solid #E0E0E0;
+		   	border-right:1px solid #E0E0E0;
+		   	min-height:90px;
+		  
+		   	
+		}
+		
+		.itemDiv .left2_1 img{
+			width:80px;
+			height:80px;
+			border:1px solid #E0E0E0;
+			position:relative;
+			float:left;
+			margin-right:10px;
+		}
+		
+		/*价格字体的颜色*/
+		.priceFont{
+			color:E02028;
+			font-weight:bold;
+			}
+		/*属性样式*/
+		.attrDiv{
+			color:#7F7F7F;
+			
+		}
+		/*数量减少的样式*/
+		.delMount,.addMount{
+  		  display: block;
+    height: 23px;
+    width: 17px;
+    border: 1px solid #e5e5e5;
+    background: #f0f0f0;
+    text-align: center;
+    line-height: 23px;
+    color: #444;
+    top: 0;
+    position:relative;
+    float:left;
+	}
+	
+	/*数量的样式*/
+	.text-amount {
+    width: 39px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #aaa;
+    color: #343434;
+    text-align: center;
+    background-color: #fff;
+    top: 0;
+    position:relative;
+    float:left;
+}
+ 
+ input{
+ 	width:15px;
+ 	height:15px;
+ }
+ 
+ a{cursor:pointer;}
+ 
+ /*底部的div*/
+ .bottom-div{
+ 	position:fixed;
+ 	z-index:2000;
+    bottom:0;
+    left:50%;
+    margin-left:-600px;
+    width:1200px;
+    height:50px;
+    background-color:#E5E5E5;
+ }
+ .bottom-div-left{
+ 	position:relative;
+ 	float:left;
+ 	text-align:center;
+	line-height:50px;
+	width:90px;
+ }
+ .bottom-div-right{
+ 	position:relative;
+ 	float:right;
+ 	text-align:center;
+	line-height:50px;
+	width:50px;
+	
+ }
+ .bottom-but{
+ 	position:relative;
+ 	float:right;
+ 	margin-right:0px;
+ 	background-color:#8F8C8C;
+ 	text-align:center;
+ 	font-size:25px;
+ 	color:white;
+ 	text-align:center;
+ 	height:50px;
+ 	width:120px;
+ 	cursor:not-allowed;
+ 	
+ }
+ .bottomTotal{
+ 	position:relative;
+ 	float:right;
+ 	font-size:25px;
+ 	color:#E02028;
+	font-weight:bold;
+	text-align:center;
+	line-height:50px;
+	width:150px;
+ }
+
+ 
+ 
+	
+</style>
+
+</head>
+
+<body>
+
+
+
+
+{% include "user_car_top.html" %}
+<div class='bodyFrame'>
+
+	
+	<div class='bodyContent'>
+	
+		<!--顶部购物车结算-->
+		<div class='topItemDiv1'>
+			<div class='left1'>全部商品</div>
+			<div class='right1'>
+				<span id='topTotal' value='0' > 0 </span>     
+				<input type='button' value='结算' class='top-but' onclick='addOrder()'/>
+			</div>
+		</div>
+	
+		<!--购物车顶部全选-->
+		<div class='topItemDiv2'>
+			<div class='left1'>	
+				<input type='checkbox' onclick='carSelect(this)' id='carAllId'/>全选
+			</div>
+			<div class='left2'>	
+				<span style='margin-left:90px;'>商品信息</span>
+			</div>
+			<div class='left3'>	
+				单价
+			</div>
+			<div class='left4'>	
+				数量
+			</div>
+			<div class='left5'>	
+				金额
+			</div>
+			<div class='left6'>	
+				操作
+			</div>
+		</div>
+		
+		
+	
+		<!--单个店铺-->
+		{% for carList in carLists %}
+		<div class="itemDiv" >
+			<div class="shop ">
+				<input type='checkbox' id='{{carList.0}}'  onclick='storeSelect(this,{{carList.0}})' />店铺：{{carList.1}}
+			</div>
+			
+			{%for pro in carList.2%}
+			<!--商品信息-->
+			<div class="product"   >
+				<div class='left1'>	
+					<!--pro.10为购物车每条的id-->
+					<input type='checkbox'  class='{{carList.0}}'  onclick='itemProSelect(this,{{carList.0}})' id={{pro.10}} value='proidoo'/>
+				</div>
+				<div class='left2_1'>	
+					
+					<img src='/media/{{pro.4}}' />{{pro.1}}
+				</div>
+				<div class='left2_2'>	
+					<div class='attrDiv'>颜色：{{pro.3}}</div>
+					<div class='attrDiv'>大小：{{pro.6}}</div>
+				</div>
+				<div class='left3'>	
+					¥{{pro.8}}
+				</div>
+				<div class='left4'>	
+						<a class="delMount" value='{{pro.10}}'>-</a>
+						<input type="text" value="{{pro.9}}"  class="text-amount"/>
+						<a class="addMount" value='{{pro.10}}'>+</a>
+					
+				</div>
+				
+				<div class='left5 priceFont' value='{{pro.11}}'>	
+					¥{{pro.11}}
+				</div>
+				<div class='left6'>	
+					操作??
+				</div>
+			</div>
+			{% endfor %}
+			
+		</div>
+		{% endfor %}
+		
+		
+		
+		
+	
+	</div>
+	
+</div>
+
+
+
+
+
+
+<!--藏在底部的div-->
+<div class='bottom-div'>  
+	<div class='bottom-div-left'>	
+		<input type='checkbox' onchange='carSelect(this)' id='carAllId' style='width:15px;height:15px;'/>全选
+	</div>
+	<form method='post' action='/addOrder/'  onsubmit="return check()" style='position:relative;float:right;'>
+		<input type="hidden" id='orderId' name='order' value='0'/>
+		<input class='bottom-but' type='submit' value='结算' onclick='addOrder()'/>
+	</form>
+	
+	<div class='bottomTotal' value='0'>
+		¥0
+	</div>
+	
+	<div class='bottom-div-right'>
+		合计：
+	</div>
+	
+
+</div>
+
+
+
+
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+
+$(function(){
+
+//添加数量
+$('.addMount').click(function(){
+	//获取购物车id
+	var nid=$(this).attr('value')
+	nid=parseInt(nid)
+	
+	//获取数量，并执行加一次
+	var mount=$('#'+nid).children('.left4').find('input').attr('value')
+	mount=parseInt(mount)
+	mount+=1
+	//封装数据
+	addData={'nid':nid,'mount':mount}
+	addData=JSON.stringify(addData)
+	
+	
+	$.ajax({
+		url:'/modifyMount/',
+		method:'POST',
+		data:{'addData':addData},
+		success:function(result){
+				if(result>0){
+					$('#'+nid).children('.left4').find('input').attr('value',mount)
+					//修改总金额
+					$('#'+nid).children('.left5').text('¥'+result)
+					$('#'+nid).children('.left5').attr('value',result)
+				}
+			}
+	});
+	
+	
+	//修改总价
+	calculate()
+
+});
+
+
+
+
+//减少数量
+$('.delMount').click(function(){
+	//获取购物车id
+	var nid=$(this).attr('value')
+	nid=parseInt(nid)
+	//获取数量，并执行加一次
+	var mount=$('#'+nid).children('.left4').find('input').attr('value')
+	mount=parseInt(mount)
+	if(mount>1)
+		mount-=1
+	//封装数据
+	addData={'nid':nid,'mount':mount}
+	addData=JSON.stringify(addData)
+	
+	$.ajax({
+		url:'/modifyMount/',
+		method:'POST',
+		data:{'addData':addData},
+		success:function(result){
+				if(result>0){
+					$('#'+nid).children('.left4').find('input').attr('value',mount)
+					//修改总金额
+					$('#'+nid).children('.left5').text('¥'+result)
+					$('#'+nid).children('.left5').attr('value',result)
+				}
+			}
+	});
+
+});
+
+//修改总价
+	calculate()
+});
+
+
+
+
+//单个商品选中取消
+function itemProSelect(obj,storeId){
+	var status=$(obj).is(':checked')
+	
+	if(!status){
+		//单个取消，全选取消
+		$('#'+storeId).prop("checked",false)
+	}else{
+		//单个选中，判断是否全选
+		var storeAll=$('.'+storeId)
+		var len=storeAll.length
+		var flag=0
+		
+		storeAll.each(function(){
+			var eachStatus=$(this).is(':checked')
+			if(eachStatus){
+				flag+=1
+			}
+		});
+		if(flag==len){
+			$('#'+storeId).prop("checked",true)
+		}
+	}
+	
+	//修改总价
+	calculate()
+}
+
+
+
+
+//店铺全选
+function storeSelect(obj,storeId){
+	var status=$(obj).is(':checked')
+	var storeAll=$('.'+storeId)
+	
+	if(!status){
+		//全取消
+		$('#carAllId').prop("checked",false)
+		storeAll.each(function(){
+			$(this).prop("checked",false)
+		});	
+	}else{
+		//全选中
+		storeAll.each(function(){
+			$(this).prop("checked",true)
+		});
+	}
+	
+	//修改总价
+	calculate()
+	
+}
+
+
+
+
+//购物车全选
+function carSelect(obj){
+	var status=$(obj).is(':checked')
+	var carAll=$('.itemDiv')
+	
+	if(!status){
+		carAll.each(function(){
+			//修改店铺状态
+			$(this).children('.shop').find('input').prop("checked",false)
+			//修改店铺下商品状态
+			var storeAll=$(this).children('.product')
+			storeAll.each(function(){
+				$(this).find('.left1 input').prop("checked",false)
+			});
+		});
+	}else{
+		
+		carAll.each(function(){
+			//修改店铺状态
+			$(this).children('.shop').find('input').prop("checked",true)
+			//修改店铺下商品状态
+			var storeAll=$(this).children('.product')
+			storeAll.each(function(){
+				$(this).find('.left1 input').prop("checked",true)
+			});
+		});
+		
+	}
+	
+	//修改总价
+	calculate()
+}
+
+
+
+
+//总价
+function calculate(){
+	var carAll=$('.itemDiv')
+	var totalPrice=0
+	
+	//购物车所有店铺
+	carAll.each(function(){
+		//每个店铺所有商品
+		var storeAll=$(this).find('.product')
+		storeAll.each(function(){
+			var status=$(this).find('.left1 input').is(':checked')
+			if(status){
+				//选中商品，修改结算价格
+				var itemPrice=$(this).find('.left5').attr('value')
+				itemPrice=parseInt(itemPrice)
+				totalPrice+=itemPrice
+			}
+		});
+		
+	});
+	
+	totalPrice=parseInt(totalPrice)
+	//修改底部总价
+	$('.bottomTotal').attr('value',totalPrice)
+	$('.bottomTotal').text('¥'+totalPrice)
+	//修改头部总价
+	$('#topTotal').attr('value',totalPrice)
+	$('#topTotal').text('¥'+totalPrice)
+
+	
+	if(totalPrice>0){
+		//结算按钮样式
+		$('.top-but').css('cursor','pointer')
+		$('.top-but').css('background-color','#E11F27')
+		$('.bottom-but').css('cursor','pointer')
+		$('.bottom-but').css('background-color','#E11F27')	
+	}else{
+		//结算按钮样式
+		$('.top-but').css('cursor','not-allowed')
+		$('.top-but').css('background-color','#8F8C8C')
+		$('.bottom-but').css('cursor','not-allowed')
+		$('.bottom-but').css('background-color','#8F8C8C')	
+	}
+	
+}
+
+//添加订单*****
+function addOrder(){
+	
+	var carAll=$('.itemDiv')
+	//封装订单数组
+	var orderArry=[]
+	
+	//购物车所有店铺
+	carAll.each(function(){
+		//封装店铺的字典
+		var storeDic={}
+		var itemTotalPrice=0
+		var carId=0
+		var storeId=0
+		//店铺id
+		storeId=$(this).find('.shop input').attr('id')
+		storeDic['storeId']=storeId
+		
+		
+		var storeAll=$(this).find('.product')
+		//封装商品的数组
+		var proArry=[]
+		storeAll.each(function(){
+			var status=$(this).find('.left1 input').is(':checked')
+			if(status){
+				//购物车每条商品id
+				carId=$(this).find('.left1 input').attr('id')
+				proArry.push(carId)
+				
+				//每个店铺商品总价格
+				var itemPrice=$(this).find('.left5').attr('value')
+				itemPrice=parseInt(itemPrice)
+				itemTotalPrice+=itemPrice
+			}
+		});
+		//封装每个商品总价格到字典
+		storeDic['proArry']=proArry
+		storeDic['itemTotalPrice']=itemTotalPrice
+		
+		console.log(storeDic)
+		
+		//店铺总价大于0,将店铺加入总订单
+		if(itemTotalPrice>0){
+			orderArry.push(storeDic)
+		}
+	
+		
+	});
+	
+	//订单数组字符串化
+	//数据结构如------[{"storeId":"5","proArry":["43","44","47"],"itemTotalPrice":2660},]----------如此
+	orderArry=JSON.stringify(orderArry)
+	console.log(orderArry)
+	
+	//将数据放入隐藏的input中提交form
+	$('#orderId').attr('value',orderArry)
+	
+	
+
+	
+	
+}
+
+
+
+
+//首先判断是非可以添加订单
+function check(){
+  	var bottomTotal=$('.bottomTotal').attr('value')
+	bottomTotal=parseInt(bottomTotal)
+	if(bottomTotal<=0){
+		return false
+	}
+}
+
+</script>
+
+
+</body>
+
+
+</html>
+
