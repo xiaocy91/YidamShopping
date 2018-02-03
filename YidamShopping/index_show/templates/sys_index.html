@@ -1,0 +1,1194 @@
+<html>
+
+<head>
+	<title> sys html </title>
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8;'>
+	
+	<style tpye='text/css'>
+		body{
+			margin:0px;
+			background-color:#F8F8FF;
+		}
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			width:1200px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+		}	
+		
+		.header-back-second{
+			width:100%;
+			height:102px;
+			padding:0px; margin:0px;
+			background-color:#FFFFFF;
+			position:relative;
+			z-index:1000;
+			
+		}
+		.header-second{
+			z-index:1020;
+			width:1200px;
+			height:102px;
+			position:absolute;
+			z-index:1030;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.logoframe{
+			width: 160px;
+			height:102px;
+			float:left;
+			background-color:white;
+		}
+		
+		.logo {
+    		width: 160px;
+    		height: 50px;
+    		margin-top: 24px;
+    		float:left;
+		}
+		.page-head{
+			width: 200px;
+			line-height:102px;
+			float:left;
+			background-color:white;
+			text-align:center;
+			font-size: 24px;
+    		color: #333;
+		}
+		
+		.right-div{
+			float: right;
+			width:100px;
+			line-height:102px;
+			text-align:center;
+			font-size: 14px;
+		}
+		
+		
+		
+		
+		
+		/*store3分类区*/
+		.store3-item{
+			width:800px;
+			min-height:520px;
+			position:absoulte;
+			float:right;
+			margin-top:5px;
+			
+		}
+		.store3-imgOperate{
+			width:780px;
+			height:480px;
+			position:relative;
+		}
+		.store3-img{
+			position:absolute;
+			z-index:-1;
+			width:780px;
+			height:480px;
+		}
+		.store3-indexHerizon{
+			width:780px;
+			height:480px;
+		}
+		
+		
+		/*右下方增加或删除操作*/
+		.add-del-operate{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:0px;
+			width:80px;
+			background-color:#EFE4B0;
+			color:#545151;
+			boder:2px solid #9D9191;
+			text-align:center;
+			padding:5px;
+			cursor:pointer;
+		}
+		
+		
+		
+		
+		
+			/*store1分类区*/
+	
+		.store1-item{
+			width:370px;
+			height:255px;
+			position:absoulte;
+			float:left;
+			margin-left:15px;
+			margin-top:5px;
+		}
+		.store1-imgOperate{
+			width:370px;
+			height:255px;
+			position:relative;
+		}
+		.store1-img{
+			position:absolute;
+			z-index:-1;
+			width:370px;
+			height:255px;
+		}
+		.store1-indexHerizon{
+			width:370px;
+			height:255px;
+		}
+		
+		
+		/*图片索引*/
+		.index-div{
+			width:160px;
+			height:30px;
+			position:abosulte;
+			margin-left:325px;
+		
+			
+		}
+		.index-num{
+			width:20px;
+			height:20px;
+			border:1px solid #ACABAB;
+			margin:5px;
+			float:left;
+			line-height:20px;
+			text-align:center;
+			cursor:pointer;
+			
+		}
+		
+		
+		
+		
+		/*t3商品区*/
+		.t3{
+			margin-left:10px;
+			width:1200px;
+			min-height:60px;
+		}
+		.t3-item{
+			width:275px;
+			min-height:320px;
+			position:absoulte;
+			float:left;
+			margin-top:10px;
+			margin-left:10px;
+		}
+		.t3-imgOperate{
+			width:275px;
+			height:300px;
+			position:relative;
+		}
+		.t3-img{
+			position:absolute;
+			z-index:-1;
+			width:275px;
+			height:300px;
+		}
+		.t3-indexVertical{
+			width:275px;
+			height:300px;
+		}
+		
+		/*商品标题*/
+		.product-head{
+			font-size:15px;
+			font-family:"黑体";
+		}
+		/*商品价格*/
+		.product-price{
+			font-size:20px;
+			font-family:"黑体";
+			text-align:center;
+			color:#AD2628;
+		}
+		
+		
+		
+		
+		
+			/*遮罩层样式*/
+		.fixed-div{
+			position:fixed;
+			top:0px;
+			left:0px;
+			bottom:0px;
+			right:0px;
+			background-color:#F5F5F5;
+			opacity:0.5;
+			display:none;
+			z-index:1500;}
+	/*添加分类*/
+		.add-div{
+			position:absolute;
+			top:50%;
+			left:50%;
+			width:500px;
+			height:350px;
+			margin-top:-160px;
+			margin-left:-250px;
+			background-color:#CDE1E2;
+			z-index:1520;
+			display:none;
+		}
+		
+	
+	/*添加文件的样式*/	
+	.attr_file {
+    position: relative;
+    display: inline-block;
+    background: #FFFFFF;
+    border: 1px solid #C3C3C3;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #C3C3C3;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    width:250px;
+	}
+	
+	.add-content-div{
+			position:relative;
+			width:420px;
+			margin:40px;
+		}
+		.add-content-div td,th{
+			width:210px;
+			text-align:center;
+			height:40px;
+		}
+	 /*下拉列表样式*/
+	select {
+		border: 1px solid #DADADA;
+		color: #888;
+		height: 30px;
+		margin-bottom: 16px;
+		margin-right: 6px;
+		margin-top: 2px;
+		outline: 0 none;
+		padding: 3px 3px 3px 5px;
+		width: 250px;
+		font-size: 12px;
+		line-height:15px;
+		box-shadow: inset 0px 1px 4px #ECECEC;
+		-moz-box-shadow: inset 0px 1px 4px #ECECEC;
+		-webkit-box-shadow: inset 0px 1px 4px #ECECEC;}
+		
+		
+		
+		/*右下方增加或删除操作*/
+		.add-del-operate{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:0px;
+			width:80px;
+			background-color:#EFE4B0;
+			color:#545151;
+			boder:2px solid #9D9191;
+			text-align:center;
+			padding:5px;
+			cursor:pointer;
+		}
+		
+		/*绝对定位,a链接失效！！！解决办法，添加一个绝对定位，透明，外面加上a链接*/
+		.link-div{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:0px;
+			top:0px;
+			left:0px;
+			cursor:pointer;
+		}
+		
+	
+	</style>
+	
+	<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+	
+</head>
+
+
+
+<body>
+
+<div class='header-back-second'>
+	<!--顶部基本信息-->
+	<div class='header-second'>
+		<div class='logoframe'>
+			<img class='logo' src='/statics/img/Yidam_logo.jpg'/>
+		</div>
+		<div class='page-head'>
+			系统首页管理
+		</div>
+		<div class='right-div'>
+			{%if sysAccount%}
+				{{sysAccount}} &nbsp;&nbsp;   <a href='/sysExit/'><span>退出</span></a>
+			{% endif %}
+		</div>
+		
+	</div>
+</div>
+
+
+<div class='bodyFrame'>
+	
+	<div class='bodyContent'>
+	
+		
+		<table>
+		
+			<!--店铺-->
+			<tr width='1200px'>
+				<td width='400px'>	
+					<table>
+						<tr ><td>
+							<!--1号店铺-->
+							<div class='store1-item'>
+								<div class='store1-imgOperate'>
+									<div class='store1-img'>
+										{% if storeOrder1 %}
+											<img class='store1-indexHerizon' src='/media/{{storeOrder1.1}}'>
+										{% else %}
+											<img class='store1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+										{% endif %}
+									</div>
+									<div class='add-del-operate'>
+										{% if storeOrder1 %}
+											<span  class='onLeave' >-删除分类</span>
+										{% else %}
+											<span class='onLeave' id='storeAdd1'>+增加分类</span>
+										{% endif %}
+									</div>
+								</div>	
+							</div>
+						</td></tr>
+						 
+						<tr ><td>
+							<!--2号店铺-->
+							<div class='store1-item'>
+								<div class='store1-imgOperate'>
+									<div class='store1-img'>
+										{% if storeOrder2 %}
+											<img class='store1-indexHerizon' src='/media/{{storeOrder2.1}}'>
+										{% else %}
+											<img class='store1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+										{% endif %}
+									</div>
+									<div class='add-del-operate'>
+										{% if storeOrder2 %}
+											<span  class='onLeave' >-删除分类</span>
+										{% else %}
+											<span class='onLeave' id='storeAdd2'>+增加分类</span>
+										{% endif %}
+									</div>
+								</div>	
+							</div>
+						</td></tr>
+					</table>
+				<td>
+			
+			
+				<td  width='800px'>
+					<div class='store3-item'>
+						<!--3号店铺-->
+						<div class='store3-imgOperate'  id='scroll-item1'>
+							<div class='store3-img'>
+								{% if storeOrder3 %}
+									<img class='store3-indexHerizon' src='/media/{{storeOrder3.1}}'>
+								{% else %}
+									<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+								{% if storeOrder3 %}
+									<span  class='onLeave' >-删除分类</span>
+								{% else %}
+									<span class='onLeave' id='storeAdd3'>+增加分类</span>
+								{% endif %}
+							</div>	
+						</div>
+						
+						<!--4号店铺-->
+						<div class='store3-imgOperate' id='scroll-item2' style='display:none;'>
+							<div class='store3-img'>
+								{% if storeOrder4 %}
+									<img class='store3-indexHerizon' src='/media/{{storeOrder4.1}}'>
+								{% else %}
+									<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+								{% if storeOrder4 %}
+									<span  class='onLeave' >-删除分类</span>
+								{% else %}
+									<span class='onLeave' id='storeAdd4'>+增加分类</span>
+								{% endif %}
+							</div>	
+						</div>
+						
+						<!--5号店铺-->
+						<div class='store3-imgOperate' style='display:none;' id='scroll-item3'>
+							<div class='store3-img'>
+								{% if storeOrder5 %}
+									<img class='store3-indexHerizon' src='/media/{{storeOrder5.1}}'>
+								{% else %}
+									<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+								{% if storeOrder5 %}
+									<span  class='onLeave' >-删除分类</span>
+								{% else %}
+									<span class='onLeave' id='storeAdd5'>+增加分类</span>
+								{% endif %}
+							</div>
+						</div>
+						
+						<!--6号店铺-->
+						<div class='store3-imgOperate' style='display:none;' id='scroll-item4'>
+							<div class='store3-img'>
+								{% if storeOrder6 %}
+									<img class='store3-indexHerizon' src='/media/{{storeOrder6.1}}'>
+								{% else %}
+									<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+								{% if storeOrder6 %}
+									<span  class='onLeave' >-删除分类</span>
+								{% else %}
+									<span class='onLeave' id='storeAdd6'>+增加分类</span>
+								{% endif %}
+							</div>
+						</div>
+						
+						<!--7号店铺-->
+						<div class='store3-imgOperate' style='display:none;' id='scroll-item5'>
+							<div class='store3-img'>
+								{% if storeOrder7 %}
+									<img class='store3-indexHerizon' src='/media/{{storeOrder7.1}}'>
+								{% else %}
+									<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+								{% if storeOrder7 %}
+									<span  class='onLeave' >-删除分类</span>
+								{% else %}
+									<span class='onLeave' id='storeAdd7'>+增加分类</span>
+								{% endif %}
+							</div>	
+						</div>
+						
+						
+						<div class='index-div' id='storeSrollAll'> 
+							<div class='index-num' id='storeScoll1' value='scroll-item1' style='background-color:#CCC6C6;'>1</div>
+							<div class='index-num' id='storeScoll2' value='scroll-item2'>2</div>
+							<div class='index-num' id='storeScoll3' value='scroll-item3'>3</div>
+							<div class='index-num' id='storeScoll4' value='scroll-item4'>4</div>
+							<div class='index-num' id='storeScoll5' value='scroll-item5'>5</div>
+						</div>
+						
+						
+					</div>
+					
+					
+				</td>
+				
+			</tr>
+		</table>
+		
+		
+		
+		<!--分类与商品隔离区-->
+		<div style='width:998px;height:30px;margin-top:20px;margin-left:20px;color:#D8242B;font-size:14px;'>优选商品</div>
+		
+			
+			
+		<!--商品-->
+		<div class='t3'>
+		
+		<table>
+			<tr>
+				<td>
+					<!--1号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder1 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder1.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+							{% if proOrder1 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span class='onLeave' id='productAdd1'>+增加商品</span>
+							{% endif %}
+							</div>
+						</div>
+						<div  class='product-head'>
+						{% if proOrder1 %}
+							<span>{{proOrder1.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				
+				<td>
+					<!--2号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder2 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder2.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+							{% if proOrder2 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span class='onLeave' id='productAdd2'>+增加商品</span>
+							{% endif %}
+							</div>
+						</div>
+						<div  class='product-head'>
+						{% if proOrder2 %}
+							<span>{{proOrder2.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				<td>
+					<!--3号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder3 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder3.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+							{% if proOrder3 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span class='onLeave' id='productAdd3'>+增加商品</span>
+							{% endif %}
+							</div>
+						</div>
+						<div  class='product-head'>
+						{% if proOrder3 %}
+							<span>{{proOrder3.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				<td>
+					<!--4号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder4 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder4.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+							{% if proOrder4 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span class='onLeave' id='productAdd4'>+增加商品</span>
+							{% endif %}
+							</div>
+						</div>
+						<div  class='product-head'>
+						{% if proOrder4 %}
+							<span>{{proOrder4.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+			
+			
+			</tr>
+			
+			
+			
+			
+			
+			<tr>
+				<td>
+					<!--5号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder5 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder5.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+							{% if proOrder5 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span class='onLeave' id='productAdd5'>+增加商品</span>
+							{% endif %}
+							</div>
+						</div>
+						<div  class='product-head'>
+						{% if proOrder5 %}
+							<span>{{proOrder5.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				
+				<td>
+					<!--6号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder6 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder6.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+							{% if proOrder6 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span class='onLeave' id='productAdd6'>+增加商品</span>
+							{% endif %}
+							</div>
+						</div>
+						<div  class='product-head'>
+						{% if proOrder6 %}
+							<span>{{proOrder6.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				<td>
+					<!--7号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder7 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder7.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+							{% if proOrder7 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span class='onLeave' id='productAdd7'>+增加商品</span>
+							{% endif %}
+							</div>
+						</div>
+						<div  class='product-head'>
+						{% if proOrder7 %}
+							<span>{{proOrder7.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				<td>
+					<!--8号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder8 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder8.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							<div class='add-del-operate'>
+							{% if proOrder8 %}
+								<span  class='onLeave' >-删除分类</span>
+							{% else %}
+								<span class='onLeave' id='productAdd8'>+增加商品</span>
+							{% endif %}
+							</div>
+						</div>
+						<div  class='product-head'>
+						{% if proOrder8 %}
+							<span>{{proOrder8.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+			
+			
+			</tr>
+			
+			
+			
+			
+		</table>
+		</div>
+	
+	
+	
+	</div>
+	
+</div>
+
+
+
+
+<!--遮罩层-->
+<div class='fixed-div'></div>
+
+<!--系统首页添加-->
+<div class='add-div'>
+	<div class='add-content-div'>
+		<table>
+				<!--首页店铺-->
+				<tr>
+					<td id='storeNameId' >店铺名称</td>
+					<td> 
+						<select id='storeSelectId'>
+							<option>请选择店铺</option>
+							{% if stores %}
+								{% for store in stores %}
+									<option  value='{{store.StoreNid}}' >{{store.StoreName}}</option>
+								{% endfor %}
+							{% endif %}
+						</select>
+					</td>
+				</tr>
+				<tr >
+					<td id='storeImgNameId' >店铺广告图</td>
+					<td><input  type='file' class='attr_file' id='storeImgId'/>
+				</tr>
+				
+				
+				<!--首页商品-->
+				<tr>
+					<td id='typeNameId' >分类名称</td>
+					<td> 
+						<select id='typeSelectId'>
+							<option>请选择一级级分类</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td id='secondTypeNameId' >二级分类名称</td>
+					<td> 
+						<select id='secondTypeSelectId'>
+							<option>请选择二级分类</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td  id='productNameId' >商品名称</td>
+					<td>
+						<select id='productSelectId'>
+							<option>请选择商品</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<table><tr>
+					<td> <input type='button' id='confirm' value='确定'/></td>
+					<td> <input type='button' id='cancle'  value='取消'/></td>
+					</tr></table>
+				</tr>
+			</table>
+			
+		</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--javacript动态交换部分-->
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+$(function(){
+
+	//增加、删除店铺和商品的样式
+	$('.onLeave').mouseover(function(){ $(this).css('color','#D7191C').css('font-weight','900') })
+	$('.onLeave').mouseleave(function(){ $(this).css('color','#000000').css('font-weight','') })
+	
+	
+
+	
+	//店铺首页5按钮、图片样式
+	var scrolls=$('#storeSrollAll').children()
+	scrolls.each(function(){
+		var id=$(this).attr('id')
+		$(this).bind('click',{'id':id},chooseClick);
+	});
+	
+	
+	//添加首页店铺
+	$('#storeAdd1').bind('click',{'order':1},addSysStore)
+	$('#storeAdd2').bind('click',{'order':2},addSysStore)
+	$('#storeAdd3').bind('click',{'order':3},addSysStore)
+	$('#storeAdd4').bind('click',{'order':4},addSysStore)
+	$('#storeAdd5').bind('click',{'order':5},addSysStore)
+	$('#storeAdd6').bind('click',{'order':6},addSysStore)
+	$('#storeAdd7').bind('click',{'order':7},addSysStore)
+	
+	//首页店铺
+	$('#storeLink1').click(function(){
+			window.location.href='/viewStore/?storeId={{storeOrder1.0}}'
+		});
+	$('#storeLink2').click(function(){
+			window.location.href='/viewStore/?storeId={{storeOrder2.0}}'
+		});
+	$('#storeLink3').click(function(){
+			window.location.href='/viewStore/?storeId={{storeOrder3.0}}'
+		});
+	$('#storeLink4').click(function(){
+			window.location.href='/viewStore/?storeId={{storeOrder4.0}}'
+		});
+	$('#storeLink5').click(function(){
+			window.location.href='/viewStore/?storeId={{storeOrder5.0}}'
+		});
+	$('#storeLink6').click(function(){
+			window.location.href='/viewStore/?storeId={{storeOrder6.0}}'
+		});
+	$('#storeLink7').click(function(){
+			window.location.href='/viewStore/?storeId={{storeOrder7.0}}'
+		});
+		
+	//首页商品
+	$('#productAdd1').bind('click',{'order':1},addSysPro)
+	$('#productAdd2').bind('click',{'order':2},addSysPro)
+	$('#productAdd3').bind('click',{'order':3},addSysPro)
+	$('#productAdd4').bind('click',{'order':4},addSysPro)
+	$('#productAdd5').bind('click',{'order':5},addSysPro)
+	$('#productAdd6').bind('click',{'order':6},addSysPro)
+	$('#productAdd7').bind('click',{'order':7},addSysPro)
+	$('#productAdd8').bind('click',{'order':8},addSysPro)
+	
+	
+	
+	
+	
+	//店铺名select改变时函数，一级分类
+	$('#storeSelectId').bind('change',function(){
+		var storeId=$(this).find('option:selected').val()
+		
+		$.ajax({
+			url:'/getFirstType/',
+			method:'post',
+			data:{'storeId':storeId},
+			success:function(result){
+				//先清除之前的option
+				$('#typeSelectId').empty()
+				$('#typeSelectId').append("<option>请选择一级分类</option>")
+				//添加返回数据
+				var typeLists=JSON.parse(result)
+				for(var i=0;i<typeLists.length;i++){
+					var typeList=typeLists[i]
+					var id=typeList[0]
+					var name=typeList[1]
+					$('#typeSelectId').append("<option value='"+id+"'>"+name+"</option>")
+				}	
+			}
+		});
+	
+	});	
+	
+	
+	
+	//一级标题改变时,改变二级分类
+	$('#typeSelectId').bind('change',function(){
+			var typeId=$(this).find('option:selected').val()
+			data={'typeId':typeId}
+			$.ajax({
+				url:'/getSecondType/',
+				method:'GET',
+				data:data,
+				success:function(result){
+					//先清除之前的option
+					$('#secondTypeSelectId').empty()
+					$('#secondTypeSelectId').append("<option>请选择二级分类</option>")
+				
+					var secondLists=$.parseJSON(result)
+					for(var i=0;i<secondLists.length;i++){
+						var secondList=secondLists[i]
+						var id=secondList[0]
+						var name=secondList[1]
+						$('#secondTypeSelectId').append("<option value='"+id+"'>"+name+"</option>")
+					}	
+				}
+			});
+	
+	});
+	
+	
+	
+	
+	
+	//二级分类获取对应的商品
+	$('#secondTypeSelectId').bind('change',function(){
+		var secondTypeId=$(this).find('option:selected').val()
+		data={'secondTypeId':secondTypeId}
+		
+		$.ajax({
+			url:'/getProduct/',
+			method:'GET',
+			data:data,
+			success:function(result){
+				//先清除之前的option
+				$('#productSelectId').empty()
+				$('#productSelectId').append("<option>请选择商品</option>")
+				
+				var productLists=$.parseJSON(result)
+				for(var i=0;i<productLists.length;i++){
+					var productList=productLists[i]
+					var id=productList[0]
+					var name=productList[1]
+					$('#productSelectId').append("<option value='"+id+"'>"+name+"</option>")
+				}
+			},
+		
+		});
+	
+	});
+		
+
+
+
+});
+
+
+
+
+
+//点击选择图片
+function chooseClick(event){
+	var id=event.data.id
+	
+	//修改当前背景色，出去其他兄弟的背景色
+	$('#'+id).css('background-color','#CCC6C6')
+	$('#'+id).siblings().css('background-color','')
+	
+	//显示对应的大图，影藏其他的大图
+	var val=$('#'+id).attr('value')
+	//影藏其他兄弟，自身和编号显示
+	$('#'+val).siblings().css('display','none')
+	$('#'+val).css('display','block')
+	$('#storeSrollAll').css('display','block')
+}
+
+
+
+
+function addSysStore(event){
+
+	//bind方法，传递数据到event中，然后从event中获取传递的数据
+	var order=event.data.order
+		
+	$('.fixed-div').css('display','block')
+	//动态修改添加的div标签y轴位置
+	$('.add-div').css("display","block").css('margin-top',$(document).scrollTop()-100); 
+	
+	
+	//一级分类不可编辑
+	$('#typeNameId').css('color','#C3C3C3')
+	$('#typeSelectId').css('background-color','#EDEAEA')
+	$('#typeSelectId').attr("disabled","true");
+	//二级分类不可编辑
+	$('#secondTypeNameId').css('color','#C3C3C3')
+	$('#secondTypeSelectId').css('background-color','#EDEAEA')
+	$('#secondTypeSelectId').attr("disabled","true");
+	//二级分类不可编辑
+	$('#productNameId').css('color','#C3C3C3')
+	$('#productSelectId').css('background-color','#EDEAEA')
+	$('#productSelectId').attr("disabled","true");
+	
+	
+	//点击确定
+	$('#confirm').off('click').click(function(){
+		var storeId=$('#storeSelectId').find("option:selected").val()
+		
+		var oMyForm = new FormData();
+		oMyForm.append('order',parseInt(order))
+		oMyForm.append('storeId',parseInt(storeId))
+		oMyForm.append("storeImg", $('#storeImgId')[0].files[0]);
+		
+		
+		$.ajax({
+			url:'/addSysStore/',
+			method:'POST',
+			data:oMyForm,
+			cache:false,
+			processData: false,
+            contentType: false,
+            success:function(result){
+            	if(result=='True'){
+					alert('成功添加首页分类')
+				}else if(result=='Empty'){
+					alert('失败！参数不能为空')
+				}else{
+					alert('失败！添加分类不能重复')
+				}
+				window.location.reload()
+					
+            }
+		
+		});
+		
+		
+	});
+	
+	
+	//执行取消操作
+	$('#cancle').click(function(){
+		$('.fixed-div').css("display","none");
+		$('.add-div').css("display","none");
+		//取消一级分类屏蔽
+		$('#typeNameId').css('color','')
+		$('#typeSelectId').css('background-color','')
+		$('#typeSelectId').removeAttr("disabled");
+		//取消二级分类屏蔽
+		$('#secondTypeNameId').css('color','')
+		$('#secondTypeSelectId').css('background-color','')
+		$('#secondTypeSelectId').removeAttr("disabled");
+		//取消商品屏蔽样式
+		$('#productNameId').css('color','')
+		$('#productSelectId').css('background-color','')
+		$('#productSelectId').removeAttr("disabled");
+	
+	});
+
+}
+
+//添加首页商品
+function addSysPro(event){
+	//bind方法，传递数据到event中，然后从event中获取传递的数据
+	var order=event.data.order
+	
+	$('.fixed-div').css('display','block')
+	//动态修改添加的div标签y轴位置
+	$('.add-div').css("display","block").css('margin-top',$(document).scrollTop()-100); 
+	
+	
+	//店铺图片屏蔽
+	$('#storeImgNameId').css('color','#C3C3C3')
+	$('#storeImgId').css('background-color','#EDEAEA')
+	$('#storeImgId').attr("disabled","true");
+	
+	
+	//点击确定
+	$('#confirm').off('click').click(function(){
+			var storeId=$('#storeSelectId').find("option:selected").val()
+			var proId=$('#productSelectId').find('option:selected').val()
+			data={'proId':proId,'storeId':storeId,'order':order}
+			data=JSON.stringify(data)
+			$.ajax({
+				url:'/addSysPro/',
+				method:'post',
+				data:{'sysPro':data},
+				success:function(result){
+					if(result=='True'){
+						alert('添加商品成功')
+						//影藏添加框
+						$('.fixed-div').css('display','none')
+						$('.add-div').css("display","none");
+						//重新加载页面
+						window.location.reload()
+					}else if(result='Duple'){
+						alert('添加顺序重复')
+					}else{
+						alert('添加失败')
+					}
+				}
+			
+			});
+	});
+	
+	
+	
+	//执行取消操作
+	$('#cancle').click(function(){
+		$('.fixed-div').css("display","none");
+		$('.add-div').css("display","none");
+		
+		//取消店铺图片屏蔽
+		$('#storeImgNameId').css('color','')
+		$('#storeImgId').css('background-color','')
+		$('#storeImgId').removeAttr("disabled");
+	
+	});
+	
+	
+	
+	
+}
+
+
+</script>
+
+
+</body>
+
+</html>

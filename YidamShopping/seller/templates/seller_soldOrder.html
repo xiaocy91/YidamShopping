@@ -1,0 +1,351 @@
+<html>
+
+<head> 
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+	
+	<style type='text/css'>
+		body{
+			margin:0px;
+		}
+		
+		
+			
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:absolute;
+			float:right;
+			width:998px;
+			min-height:500px;
+			border: 1px solid #E0E0E0;
+			right:0px;
+			top:15px;
+		}	
+		
+		
+		
+		
+		
+		
+		/*整个订单页面的边距*/
+		.page-div{
+			width:900px;
+			min-height:400px;
+			margin-left:49px;
+			margin-top:15px;
+			margin-bottom:15px;
+		}
+		.order-title{
+			background-color:#fff;
+			width:900px;
+			border:1px solid #CDE1E2;
+		}
+		
+		.t1{
+			width:300px;
+			line-height:20px;
+			text-align:center;
+			vertical-align:middle;
+		}
+		.t2,.t3,.t4,.t5{
+			width:150px;
+			line-height:20px;
+			text-align:center;
+			vertical-align:middle;
+		}
+		
+		/*隔离区div*/
+		.gap{
+			widht:900px;
+			height:30px;
+		}
+		
+		
+		
+		/*单个订单*/
+		.orderDiv{
+			 width:900px;
+			 margin-bottom:20px;
+			 font-size:12px;
+			 border-bottom:2px solid #CDE1E2;
+		
+		}
+		.shop-div{
+			width:900px;
+			height:30px;
+			border:1px solid #CDE1E2;
+		}
+		.pro-div{
+			width:900px;
+			height:101px;
+			background-color:white;
+			border-left:1px solid #CDE1E2;
+			border-right:1px solid #CDE1E2;
+		}
+		
+		/*店铺*/
+		.shop-div .left1_1{
+			float:left;
+			width:100px;
+			font-weight:bold;
+			line-height:20px;
+			text-align:center;
+			vertical-align:middle;
+		}
+		.shop-div .left1_2{
+			float:left;
+			width:210px;
+			line-height:20px;
+			vertical-align:middle;
+		}
+		
+		.shop-div .left2{
+			float:left;
+			width:150px;
+			text-align:center;
+			vertical-align:middle;
+			font-weight:bold;
+		}
+		
+		
+		
+		/*商品*/
+		.pro-div .left1_1{
+			float:left;
+			width:100px;
+			height:100px;
+			border-bottom:1px solid #CDE1E2;
+		}
+		
+		.pro-div  .left1_1 img{
+			width:80px;
+			height:80px;
+			border:1px solid #E0E0E0;
+			position:relative;
+			float:left;
+			margin:5px;
+		}
+		.pro-div .left1_2{
+			float:left;
+			width:210px;
+			height:100px;
+			border-bottom:1px solid #CDE1E2;
+			line-height:20px;
+			vertical-align:middle;
+		}
+		/*字体颜色*/
+		.pro-div .left1_2 .head{
+			width:180px;
+		}
+		.pro-div .left1_2 .font-div{
+			color:#ABABAB;
+		}
+		
+		.pro-div .left2,.pro-div .left3{
+			float:left;
+			width:150px;
+			height:100px;
+			line-height:20px;
+			text-align:center;
+			vertical-align:middle;
+			border-bottom:1px solid #CDE1E2;
+		}
+		
+		.pro-div .left4{
+			float:left;
+			width:150px;
+			height:100px;
+			line-height:20px;
+			text-align:center;
+			vertical-align:middle;
+			border-left:1px solid #CDE1E2;
+			border-right:1px solid #CDE1E2;
+		}
+		
+		.pro-div .left5{
+			float:left;
+			width:130px;
+			height:100px;
+			line-height:20px;
+			text-align:center;
+			vertical-align:middle;
+		}
+		
+		
+		
+		
+		/*分页的样式*/
+		.pagination{
+			clear:left;
+			width:998px;	
+			text-align:center;
+		}
+		
+		.wp-paginate {
+			width:370px;
+    		padding:0;
+   			margin:0;
+    		margin-left:314px;}
+
+		.wp-paginate li {
+    		float:left;
+    		list-style:none;
+    		margin:2px;
+   		 	padding:0;
+    		margin:0px auto;}
+		.wp-paginate a {
+		    margin:0 2px;
+		    line-height:20px;
+		    text-align:center;
+		    text-decoration:none;
+		    border-radius:3px;
+		    -moz-border-radius:3px;
+		    float:left;
+		    min-height:20px;
+		    min-width:20px;
+		    color:#858585;
+		    border:2px #e3e3e3 solid;
+		    border-radius:13px;
+		    font-size:15px;}
+		
+			.wp-paginate span{
+				margin:0 2px;
+			    line-height:20px;
+			    text-align:center;
+			    text-decoration:none;
+			    float:left;
+			    min-height:20px;
+			    min-width:20px;
+			    color:#858585;
+			    font-size:15px;
+			}	
+			
+	</style>
+	
+
+	
+</head>
+
+
+<body>
+
+
+{% include 'seller_top.html' %}
+
+<div class='bodyFrame'>
+	{% include 'seller_left.html' %}
+	
+	
+	<div class='bodyContent'>
+	
+	
+		<div class='page-div'>
+
+			<h2 >所有订单</h2>	
+			
+			
+			<table class='order-title'>
+				<tr>
+					<td class='t1'>宝贝</td>
+					<td  class='t2'>单价</td>
+					<td class='t3' >数量</td>
+					<td  class='t4'>实付款</td>
+					<td class='t5'>交易操作</td>
+				</tr>
+			</table>
+			
+			<!--隔离区div-->
+			<div class='gap'></div>
+			
+			
+			{% for orderList in orderLists %}
+			<div class='orderDiv'>
+				<div class='shop-div'> 
+					<div class='left1_1'>{{orderList.3}}</div>
+					<div class='left1_2'>订单号：{{orderList.0}}</div>
+					<div class='left2'>买家：{{orderList.5}}</div>
+				</div>
+				
+				{% for pro in orderList.6 %}
+				<div class='pro-div'>
+					<div class='left1_1'>
+						<img src='/media/{{pro.3}}' />
+					</div>
+					<div class='left1_2'>
+						<div class='head'>{{pro.1}} </div>
+						<div class='font-div'>颜色分类：{{pro.2}} </div>
+						<div class='font-div'>尺码：{{pro.4}} </div>
+					</div>
+					<div class='left2'> ¥{{pro.5}} </div>
+					<div class='left3'> {{pro.6}} </div>
+					
+					{% if forloop.first %}
+						<div class='left4'> ¥{{orderList.4}} </div>
+					{% elif forloop.last %}
+						<div class='left4' style='border-bottom:1px solid #CDE1E2;'></div>
+					{% else %}
+						<div class='left4'></div>
+					{% endif %}
+					
+					
+					{% if forloop.first %}
+						<div class='left5'> 删除订单</div>
+					{% else %}
+						<div class='left5' ></div>
+					{% endif %}
+					
+				</div>
+				{% endfor %}
+			
+			</div>
+			{% endfor %}
+			
+			
+						
+
+		</div>
+		
+		
+		
+		
+		
+		<!--使用pagination进行分页-->
+		<div class="pagination">
+		    <span class="step-links">
+			    <ol class="wp-paginate">
+			        {% if orderLists.has_previous %}
+			            <li><a href="?page=1">&laquo; 第一页</a></li>
+			            <li><a href="?page={{ orderLists.previous_page_number }}">上一页</a></li>
+			        {% endif %}
+			
+			        <span class="current">
+			            	<li><span>第 {{ orderLists.number }} 页，共 {{ orderLists.paginator.num_pages }}页</span></li>
+			        </span>
+			
+			        {% if orderLists.has_next %}
+			            <li><a href="?page={{ orderLists.next_page_number }}">下一页</a></li>
+			            <li><a href="?page={{ orderLists.paginator.num_pages }}">最后页 &raquo;</a></li>
+			        {% endif %}
+			     </ol>
+		    </span>
+		</div>
+	
+	
+	
+	
+	</div>
+	
+</div>
+
+
+
+
+</body>
+
+</html>

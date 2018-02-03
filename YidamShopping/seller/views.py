@@ -14,9 +14,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
 from seller.models import ProductPrice
 from _mysql import NULL
-from django.template.context_processors import request
+####from django.template.context_processors import request
 from seller.models import HomeProduct
 from lib2to3.fixer_util import Attr
+from user_center.models import Order,OrderProduct
+from user_center.models import Userinfo
+
+
 
 #进入卖家中心首页
 def sellerIndex(request):
@@ -79,7 +83,8 @@ def registerStore(request):
             defaultStore(request)
             
             resData={'account':account,'openStore':True,'storeName':storeName,'storeAddr':storeAddr,'storeBossName':storeBossName}
-            return render_to_response('store_view_index.html',resData)
+            #将放回页面改查重定向/manageStore/！！！！！！！！！！！！！！！！！
+            return HttpResponseRedirect('/manageStore/')
         else:
             return render_to_response('register_store.html',resData)
     
@@ -216,7 +221,10 @@ def viewType(request):
             imgPath=proImg.Img
             proList.append(imgPath)
             #获取最后一个规格尺码的价格
-            proPrice=ProductPrice.objects.filter(ProductNid_id=id).order_by('-Price').last()
+            priceObj=ProductPrice.objects.filter(ProductNid_id=id).order_by('-Price').last()
+            if priceObj:
+                proPrice=priceObj.Price
+                proList.append(proPrice)
             #将每个商品的封装列表加入到总列表
             productLists.append(proList)
        
@@ -588,8 +596,37 @@ def addPrice(request):
         attr2=data.get('attrId2')
         price=data.get('price')
         id=data.get('id')
-        ProductPrice.objects.create(ProductNid_id=id,Attr1_id=attr1,Attr2_id=attr2,Price=price)
-        return HttpResponse('True') 
+        #先判断是否已经添加了该属性
+        pro=ProductPrice.objects.filter(ProductNid_id=id,Attr1_id=attr1,Attr2_id=attr2)
+        if pro:
+            
+            return HttpResponse('Duple')
+        else:
+            print 'non'
+            ProductPrice.objects.create(ProductNid_id=id,Attr1_id=attr1,Attr2_id=attr2,Price=price)
+            return HttpResponse('True') 
+ 
+
+
+
+#保存、修改商品详情内容
+def saveProContent(request):
+    if request.method=='POST':
+        data=request.POST
+        content=data.get('proContent')
+        id=data.get('proId')
+        
+        print content
+        
+        if content:
+            pro=Product.objects.get(Nid=id)
+            pro.ProContent=content
+            pro.save()
+            return HttpResponse('True') 
+        else:
+           return HttpResponse('Empty')  
+
+
     
 
 #进入店铺管理主页
@@ -797,3 +834,92 @@ def getSelectPrice(request):
             priceData={'priceId':priceId,'price':price}
             priceData=json.dumps(priceData)    
         return HttpResponse(priceData)   
+    
+
+#已经卖出的宝贝 
+def soldOrder(request):
+    if request.method=='GET':
+        #判断是否登录
+        login_status=request.session.get('login_status',False)
+        if login_status:
+            account=request.session.get('account')
+            userinfos=Userinfo.objects.filter(Account=account)
+            openStore=userinfos[0].OpenStore
+            request.session['openStore']=openStore
+        #获取店铺信息
+        if openStore:
+            userId=userinfos[0].Userid
+            storeId=Store.objects.get(UserNid_id=userId).StoreNid
+        else:
+            storeId=-1
+        #封装店铺数据
+        resData={'account':account,'openStore':openStore,'storeId':storeId}
+        #获取店铺订单
+        orders=Order.objects.filter(StoreId=storeId).order_by('-DateTime')
+        
+        orderLists=[]
+        for order in orders:
+            orderList=[]
+            id=order.Nid
+            orderNum=order.OrderNum 
+            storeId=order.StoreId 
+            storeName=order.StoreName 
+            dateTime=order.DateTime 
+            year=dateTime.year
+            month=dateTime.month
+            day=dateTime.day
+            dateStr='%d-%d-%d'%(year,month,day) 
+            total=order.Total 
+            #获取用户信息 
+            buyUserId=order.UserId_id
+            buyUserName=Userinfo.objects.get(Userid=buyUserId).Account
+            #封装订单店铺数据
+            orderList.append(orderNum) #0
+            orderList.append(storeId) #1
+            orderList.append(storeName) #2
+            orderList.append(dateStr) #3
+            orderList.append(total) #4
+            orderList.append(buyUserName) #5
+            #获取店铺商品
+            pros=OrderProduct.objects.filter(OrderId_id=id)
+            proLists=[]
+            for pro in pros:
+                proList=[]
+                proId=pro.ProductId 
+                proHead=pro.ProductHead 
+                name1=pro.AttrName1 
+                img1=pro.AttrImg1  
+                name2=pro.AttrName2 
+                price=pro.Price 
+                mount=pro.Mount  
+                sum=pro.SumPrice
+                #封装数据
+                proList.append(proId) #0
+                proList.append(proHead) #1
+                proList.append(name1) #2
+                proList.append(img1) #3
+                proList.append(name2) #4
+                proList.append(price) #5
+                proList.append(mount) #6
+                proList.append(sum)  #7
+                proLists.append(proList)
+            orderList.append(proLists)
+            orderLists.append(orderList)
+        #封装卖出订单信息
+        resData['orderLists']=orderLists
+        
+        #进行分页    
+        paginator = Paginator(orderLists,settings.PER_PAGE)#每页显示多少条数据，在setting里设置
+        page = request.GET.get('page')
+        try:
+            orderLists = paginator.page(page)
+        except PageNotAnInteger:
+            orderLists = paginator.page(1)
+        except EmptyPage:
+            orderLists = paginator.page(paginator.num_pages) 
+        
+            
+        return render_to_response('seller_soldOrder.html',resData)    
+  
+  
+  

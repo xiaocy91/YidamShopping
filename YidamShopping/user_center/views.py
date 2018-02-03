@@ -11,7 +11,11 @@ import time
 import datetime
 from django.conf import settings
 from django.http.response import HttpResponse
-from test.test_datetime import DAY
+###from test.test_datetime import DAY
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from index_show.views import getSysStore
+
+
 
 
 describe={'empty':'用户名或密码不能为空','success':'注册成功','wrong':'注册失败',
@@ -60,12 +64,20 @@ def load(request):
                 if password==userinfo[0].Password:
                     result=userinfo[0].Account
                     
-                    #用户进入卖家中心的学习
+                    #设置session
                     request.session['login_status']=True
                     request.session['account']=userinfo[0].Account
                     request.session['userid']=userinfo[0].Userid
-                    request.session.set_expiry(0)
-                    return render_to_response('front_index.html',{'account':account})
+                    request.session.set_expiry(0) #session的value是0,用户关闭浏览器session就会失效
+                    #获取店铺首页数据
+                    resData=getSysStore()
+                    resData['account']=account
+                    #设置cookie
+                    print 'cookie set'
+                    response=render_to_response('front_index.html',resData)
+                    response.set_cookie('account',account,max_age=60*1) #cookie有效时间为60秒
+                    response.set_cookie('password',password,max_age=60*1) #cookie有效时间为60秒
+                    return response
                 else:
                     reslut='用户账号或者密码错误'
             else:
@@ -75,15 +87,23 @@ def load(request):
 
 
 def loginOut(request):
-    del request.session['login_status']
-    del request.session['account']
-    del request.session['userid']
-    return render_to_response('front_index.html')
+    
+    try:
+        del request.session['login_status']
+        del request.session['account']
+        del request.session['userid']
+    except Exception:
+        return HttpResponseRedirect('/index/')
+    return HttpResponseRedirect('/index/')
+
+
 
 #添加购物车
 def addCar(request):
     #格式{"storeId":1,"productId":78,"attrId2":"3","attrId1":"3","priceId":"4","mount":"1"}
     if request.method=='POST':
+        status=request.session.get('login_status','False')
+        
         data=request.POST
         carData=data.get('carData')
         carData=json.loads(carData)
@@ -96,8 +116,6 @@ def addCar(request):
         mount=carData.get('mount')
         #获取用户id
         userId=request.session.get('userid')
-       
-        
         #准备数据
         storeName=Store.objects.get(StoreNid=storeId).StoreName
         productHead=Product.objects.get(Nid=productId).Head
@@ -351,9 +369,16 @@ def submitOrder(request):
 def showOrderFinal(request):
     if request.method=='GET':
         #用户Id
-        userId=request.session.get('userid')
+        resData={}
+        login_status=request.session.get('login_status',False)
+        #判断是否登录
+        if login_status:
+            account=request.session.get('account')
+            userId=request.session.get('userid')
+            resData['account']=account
+            resData['userId']=userId
         #获取用户订单
-        orders=Order.objects.filter(UserId_id=userId)
+        orders=Order.objects.filter(UserId_id=userId).order_by('-DateTime')
         orderLists=[]
         for order in orders:
             orderList=[]
@@ -398,7 +423,129 @@ def showOrderFinal(request):
                 proLists.append(proList)
             orderList.append(proLists)
             orderLists.append(orderList)
-        
-            
+        #封装订单信息
+        resData['orderLists']=orderLists
+         #进行分页    
+        paginator = Paginator(orderLists,settings.PER_PAGE)#每页显示多少条数据，在setting里设置
+        page = request.GET.get('page')
+        try:
+            orderLists = paginator.page(page)
+        except PageNotAnInteger:
+            orderLists = paginator.page(1)
+        except EmptyPage:
+            orderLists = paginator.page(paginator.num_pages)    
+               
     
-    return render_to_response('user_center_orderFinal.html',{'orderLists':orderLists})
+    return render_to_response('user_center_orderFinal.html',resData)
+
+
+
+
+
+
+#立即购买商品
+#数据结构{"storeId":1,"productId":1,"attrId2":"2","attrId1":"1","priceId":"2","mount":"2"}
+def buyPro(request):
+    if request.method == 'POST':
+        #判断是否登录
+        status=request.session.get('login_status',False)
+        if status==False:
+            return HttpResponseRedirect('/load/')
+        #若登录，获取提交数据
+        data=request.POST
+        buyData=data.get('buyData')
+        buyData=json.loads(buyData)
+        #获取商品数据
+        storeId=buyData['storeId']
+        productId=buyData['productId']
+        attrId2=buyData['attrId2']
+        attrId1=buyData['attrId1']
+        priceId=buyData['priceId']
+        mount=buyData['mount']
+        #判断数据有效性,添加订单
+        if storeId and productId and attrId2 and attrId1 and priceId and mount:
+            #封装返回数据
+            storeName=Store.objects.get(StoreNid=storeId).StoreName
+            proHead=Product.objects.get(Nid=productId).Head
+            attr1=ProductAttr1.objects.get(Nid=attrId1)
+            attrName1=attr1.Attr1
+            attrImg1=attr1.ImgAttr1
+            attrName2=ProductAttr2.objects.get(Nid=attrId2).Attr2
+            priceObj=ProductPrice.objects.get(Attr1_id=attrId1,Attr2_id=attrId2)
+            priceId=priceObj.Nid
+            price=priceObj.Price
+            proList=[]
+            proList.append(storeId)#0
+            proList.append(storeName) #1
+            proList.append(productId) #2
+            proList.append(proHead) #3
+            proList.append(attrId1) #4
+            proList.append(attrName1) #5
+            proList.append(attrImg1) #6
+            proList.append(attrId2) #7
+            proList.append(attrName2) #8
+            proList.append(priceId) #9
+            proList.append(price) #10
+            proList.append(mount) #11
+            resData={'proList':proList}
+            return render_to_response('user_center_buyOrderConfirm.html',resData)
+            
+       
+#提交立即购买的订单
+def submitBuyOrder(request):
+    if request.method=='POST':
+        data=request.POST
+        order=data.get('order')
+        order=json.loads(order)
+        #获取订单数据
+        storeId=order['storeId']
+        storeName=order['storeName']
+        proId=order['proId']
+        proName=order['proName']
+        proImg=order['proImg']
+        attrName1=order['attrName1']
+        attrName2=order['attrName2']
+        price=order['price']
+        mount=order['mount']
+        total=order['total']
+        #将商品属性图存在userProImg中
+        proImg=str(proImg)
+       
+        f1=open(settings.MEDIA_ROOT+'/'+proImg,'rb')
+        filename='userProImg/'+time.strftime('%Y%m%d_%H%M%S',time.localtime())+'.jpg'
+        filePath=settings.MEDIA_ROOT+'/'+filename
+        f2=open(filePath,'wb')
+        while True:
+            line=f1.readline()
+            if len(line)==0:
+                break
+            f2.write(line)
+        f1.close()
+        f2.close()
+        #插入订单数据库
+        #用户Id
+        userId=request.session.get('userid')
+        #当前时间
+        t=datetime.datetime.now()
+        #订单号为日期+用户ID
+        #用户id为5位，不够用0补充
+        userStr=str(userId)
+        userStr=userStr.zfill(5)
+        dateStr=t.strftime('%y%m%d%H%M%S')
+        #合成订单号
+        orderNum=dateStr+userStr
+        #生成订单
+        Order.objects.create(OrderNum=orderNum,DateTime=t,StoreId=storeId,
+                            StoreName=storeName,UserId_id=userId,Total=total)
+        #获取生成的订单中的Nid号
+        orderId=Order.objects.get(OrderNum=orderNum).Nid
+        #添加进订单对应商品
+        OrderProduct.objects.create(OrderId_id=orderId,ProductId=proId,
+                                    ProductHead=proName,AttrName1=attrName1,
+                                    AttrImg1=filename,AttrName2=attrName2,
+                                    Price=price,Mount=mount,SumPrice=total)
+        return render_to_response('user_center_orderSuccess.html')
+    
+    
+    
+        

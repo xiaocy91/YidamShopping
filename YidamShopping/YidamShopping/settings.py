@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-from django.conf.global_settings import STATICFILES_DIRS, MEDIA_ROOT, MEDIA_URL
+from django.conf.global_settings import STATICFILES_DIRS, MEDIA_ROOT, MEDIA_URL,\
+    FIXTURE_DIRS
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -45,12 +46,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
-    'django.middleware.security.SecurityMiddleware',
+    #'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -142,3 +143,7 @@ MEDIA_URL = '/media/'
 PER_PAGE=8
 #home,page
 HOME_PER_PAGE=25
+
+
+#use to initial user data:admin account
+FIXTURE_DIRS= (os.path.join(BASE_DIR, 'fixtures',).replace('\\', '/'),)

@@ -3,6 +3,11 @@
 #use for picture rename
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
+
+
+
+
+
 class ImageStorage(FileSystemStorage):
     from django.conf import settings
     

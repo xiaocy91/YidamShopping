@@ -1,0 +1,341 @@
+<html>
+
+<head>
+
+<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+<title>亿达购物商城</title>
+
+
+<style type='text/css'>
+		body{
+			margin:0px;
+			background-color:#F8F8FF;
+		}
+		
+		
+			
+		.bodyFrame{
+			position:relative;
+			width:1200px;
+			min-height:500px;
+			left:50%;
+			margin-left:-600px;
+		}
+		
+		.bodyContent{
+			position:relative;
+			width:1170px;
+			min-height:500px;
+			margin-left:15px;
+		}
+		
+		/*确认订单标题*/	
+		
+		buy-th-title {
+    line-height: 25px;
+    color: #333;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+
+
+/*确认订单div2的样式*/
+		.topItemDiv .left1{
+			position:relative;
+			float:left;
+			width:400px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+		
+		.topItemDiv .left2{
+			position:relative;
+			float:left;
+			width:300px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+		
+		.topItemDiv .left3{
+			position:relative;
+			float:left;
+			width:150px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+		.topItemDiv .left4{
+			position:relative;
+			float:left;
+			width:150px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+		.topItemDiv .left5{
+			position:relative;
+			float:left;
+			width:150px;
+			text-align:center;
+			border-bottom:3px solid #ED1B24;
+			margin-right:2px;
+		}
+	
+	
+		.gapDiv{
+			width:1200px;
+			height:50px;
+		}
+	
+	
+		/*每条购物车*/
+		.itemDiv{
+			width:1170px;
+			min-height:80px;
+  			font-size:14px;
+  			
+		}
+		.itemDiv .left1{
+			position:relative;
+			float:left;
+			width:400px;
+		}
+		.itemDiv  .left1 img{
+			width:80px;
+			height:80px;
+			border:1px solid #E0E0E0;
+			position:relative;
+			float:left;
+			margin:5px;
+		}
+		.itemDiv .left2{
+			position:relative;
+			float:left;
+			width:300px;
+			text-align:center;
+			
+		}
+		.itemDiv .left3,.left4,.left5{
+			position:relative;
+			float:left;
+			width:140px;
+			text-align:center;
+		}
+		
+		
+		/*每条购物车店铺名称*/
+		.itemDiv .shop {
+		    position: relative;
+		    height: 38px;
+		    overflow: hidden;
+		    border-bottom:1px solid #E0E0E0;
+		   	padding-left:20px;
+		   	padding-right:20px;
+		   	border-bottom:1px solid #E0E0E0;
+		   	font-weight:bold;
+		   	padding-top:25px;
+		}
+		.itemDiv .product {
+		    position: relative;
+		    background: #CDE1E2;
+		   	padding:20px;
+		   	border-bottom:1px solid #E0E0E0;
+		   	border-left:1px solid #E0E0E0;
+		   	border-right:1px solid #E0E0E0;
+		   	min-height:90px;
+		}
+		
+		/*价格字体的颜色*/
+		.priceFont{
+			color:#E02028;
+			font-weight:bold;
+			}
+		
+		/*结算*/
+		.sum-div{
+			margin-bottom:30px;
+		}
+		
+ 	 .sum-div .sum-but{
+ 	 	position:relative;
+ 		float:right;
+ 		display: inline-block;
+	    width: 182px;
+	    height: 40px;
+	    vertical-align: middle;
+	    line-height: 39px;
+	    cursor: pointer;
+	    text-align: center;
+	    font-size: 14px;
+	    font-weight: 700;
+	    background: #E31F28;
+	    color: #fff;
+	    margin:10px;
+
+}
+ 	
+ 	 
+	.sum-div .total{
+ 	 	position:relative;
+ 		float:right;
+ 		color:#E02028;
+		font-weight:bold;
+		font-size:30px;
+		line-height:50px;
+		text-align:center;
+		margin-right:10px;
+	
+ 	 }
+
+	.sum-div .sum-name{
+ 	 	position:relative;
+ 		float:right;
+ 		font-size:12px;
+ 		line-height:50px;
+		text-align:center;
+		margin-right:10px;
+ 	 }
+ 	 
+ 	 .sum-div .seperateSub{
+ 	 	position:relative;
+ 		float:right;
+ 		font-size:12px;
+ 		font-weight:bold;
+ 		line-height:50px;
+		text-align:center;
+		margin-right:30px;
+		color:#E31F28;
+ 	 }
+		
+</style>
+
+</head>
+
+<body>
+
+{% include "user_center_orderConfirmTop.html" %}
+<div class='bodyFrame'>
+
+	<div class='bodyContent'>
+	
+		<h2 class="buy-th-title" data-reactid=".0.$confirmOrder_1.$orderDesc_0.0">确认订单信息</h2>
+		
+		<!--订单标题-->
+		<div class='topItemDiv'>
+			<div class='left1'>	
+				店铺宝贝
+			</div>
+			<div class='left2'>	
+				商品属性
+			</div>
+			<div class='left3'>	
+				单价
+			</div>
+			<div class='left4'>	
+				数量
+			</div>
+			<div class='left5'>	
+				金额
+			</div>
+		</div>
+		
+		
+		<!--隔离div-->
+		<div class='gapDiv'></div>
+		
+		
+		
+		<div class="itemDiv" value='{{proList.0}}'>
+			<!--店铺名-->
+			<div class="shop " value='{{proList.1}}'>
+				店铺：{{proList.1}}
+			</div>
+			
+		
+			
+			<!--商品信息-->
+			<div class="product"  value='{{proList.2}}' >		
+				<div class='left1' value='{{proList.3}}' id='proName'>	
+					<img src='/media/{{proList.6}}' value='{{proList.6}}' id='proImg'/>{{proList.3}}
+				</div>
+				<div class='left2'>	
+					<div id='attrId1' value='{{proList.5}}'>颜色：{{proList.5}}</div>
+					<div id='attrId2' value='{{proList.8}}'>大小：{{proList.8}}</div>
+				</div>
+				<div class='left3' value='{{proList.10}}' id='priceId'>	
+					¥{{proList.10}}
+				</div>
+				<div class='left4' value='{{proList.11}}' id='mountId'>	
+					{{proList.11}}
+				</div>
+				<div class='left5 priceFont'>	
+					¥{%  widthratio proList.11 1 proList.10 %}
+				</div>
+			</div>
+			
+		
+			<!--结算-->
+			<div class='sum-div'>
+				<form action='/submitBuyOrder/' method='post'>
+					<input type='hidden' value='0' id='proDataId' name='order'/>
+					<input class='sum-but' type='submit' value='提交订单' onclick='submitBuyOrder({{proList.0}},{%  widthratio proList.11 1 proList.10 %})' />
+				</form>
+				<div class='total' >¥{%  widthratio proList.11 1 proList.10 %}</div>
+				<div class='sum-name'>实付：</div>
+			</div>
+		
+		</div>
+		
+		
+		
+		
+	</div>
+
+
+
+
+
+	
+</div>
+
+
+
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+function submitBuyOrder(storeId,total){
+	
+	var storeName= $('.shop').attr('value')
+	var proId= $('.product').attr('value')
+	var proName=$('#proName').attr('value')
+	var proImg=$('#proImg').attr('value')
+	var attrName1=$('#attrId1').attr('value')
+	var attrName2=$('#attrId2').attr('value')
+	var price=$('#priceId').attr('value')
+	var mount=$('#mountId').attr('value')
+	
+	var proData={'storeId':storeId,'storeName':storeName,'proId':proId,'proName':proName,
+	'proImg':proImg,'attrName1':attrName1,'attrName2':attrName2,'price':price,'mount':mount,
+	'total':total}
+	//json对象转化字符串
+	proData=JSON.stringify(proData)
+	console.log(proData)
+	
+	//将提交数据写在隐藏的input中
+	$('#proDataId').attr('value',proData)
+	
+}
+
+</script>
+
+
+</body>
+
+
+</html>
+

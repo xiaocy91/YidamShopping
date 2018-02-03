@@ -275,8 +275,14 @@
 		<div class='topItemDiv1'>
 			<div class='left1'>全部商品</div>
 			<div class='right1'>
-				<span id='topTotal' value='0' > 0 </span>     
-				<input type='button' value='结算' class='top-but' onclick='addOrder()'/>
+				<span id='topTotal' value='0' > 0 </span>    
+				
+				<form method='post' action='/addOrder/'  onsubmit="return check()" style='position:relative;float:right;'>
+					<input type="hidden" id='orderIdTop' name='order' value='0'/>
+					<input type='submit' value='结算' class='top-but' onclick='addOrder()'/>
+				</form>
+				 
+				
 			</div>
 		</div>
 	
@@ -330,7 +336,7 @@
 					¥{{pro.8}}
 				</div>
 				<div class='left4'>	
-						<a class="delMount" value='{{pro.10}}'>-</a>
+						<a class="delMount" value='{{pro.10}}'>-</a>  
 						<input type="text" value="{{pro.9}}"  class="text-amount"/>
 						<a class="addMount" value='{{pro.10}}'>+</a>
 					
@@ -395,12 +401,13 @@ $(function(){
 
 //添加数量
 $('.addMount').click(function(){
+
 	//获取购物车id
 	var nid=$(this).attr('value')
 	nid=parseInt(nid)
 	
 	//获取数量，并执行加一次
-	var mount=$('#'+nid).children('.left4').find('input').attr('value')
+	var mount=$(this).siblings('input').attr('value')
 	mount=parseInt(mount)
 	mount+=1
 	//封装数据
@@ -414,10 +421,13 @@ $('.addMount').click(function(){
 		data:{'addData':addData},
 		success:function(result){
 				if(result>0){
-					$('#'+nid).children('.left4').find('input').attr('value',mount)
+					$('#'+nid).parent('.left1').siblings('.left4').find('input').attr('value',mount)
 					//修改总金额
-					$('#'+nid).children('.left5').text('¥'+result)
-					$('#'+nid).children('.left5').attr('value',result)
+					$('#'+nid).parent('.left1').siblings('.left5').text('¥'+result)
+					$('#'+nid).parent('.left1').siblings('.left5').attr('value',result)
+					
+					//修改总价
+					calculate()
 				}
 			}
 	});
@@ -437,7 +447,7 @@ $('.delMount').click(function(){
 	var nid=$(this).attr('value')
 	nid=parseInt(nid)
 	//获取数量，并执行加一次
-	var mount=$('#'+nid).children('.left4').find('input').attr('value')
+	var mount=$(this).siblings('input').attr('value')
 	mount=parseInt(mount)
 	if(mount>1)
 		mount-=1
@@ -451,18 +461,20 @@ $('.delMount').click(function(){
 		data:{'addData':addData},
 		success:function(result){
 				if(result>0){
-					$('#'+nid).children('.left4').find('input').attr('value',mount)
+					$('#'+nid).parent('.left1').siblings('.left4').find('input').attr('value',mount)
 					//修改总金额
-					$('#'+nid).children('.left5').text('¥'+result)
-					$('#'+nid).children('.left5').attr('value',result)
+					$('#'+nid).parent('.left1').siblings('.left5').text('¥'+result)
+					$('#'+nid).parent('.left1').siblings('.left5').attr('value',result)
+					
+					//修改总价
+					calculate()
 				}
 			}
 	});
 
 });
 
-//修改总价
-	calculate()
+
 });
 
 
@@ -663,6 +675,7 @@ function addOrder(){
 	
 	//将数据放入隐藏的input中提交form
 	$('#orderId').attr('value',orderArry)
+	$('#orderIdTop').attr('value',orderArry)
 	
 	
 

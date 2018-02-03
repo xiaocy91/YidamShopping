@@ -25,12 +25,137 @@
 		.bodyContent{
 			position:absolute;
 			float:right;
-			width:998px;
+			width:1200px;
 			min-height:500px;
 			border: 1px solid #E0E0E0;
 			right:0px;
 			top:15px;
 		}	
+		
+		
+		
+		
+		/*store3分类区*/
+		.store3-item{
+			width:800px;
+			min-height:500px;
+			position:absoulte;
+			float:right;
+			margin-top:5px;
+			
+		}
+		.store3-scroll{
+			width:4000px;
+			min-height:500px;
+		}
+		.store3-imgOperate{
+			width:780px;
+			height:480px;
+			position:relative;
+			float:left;
+		}
+		.store3-img{
+			position:absolute;
+			z-index:-1;
+			width:780px;
+			height:480px;
+		}
+		.store3-indexHerizon{
+			width:780px;
+			height:480px;
+		}
+		
+		
+		
+		
+		
+		
+		
+			/*store1分类区*/
+	
+		.store1-item{
+			width:370px;
+			height:240px;
+			position:absoulte;
+			float:left;
+			margin-left:15px;
+			margin-top:5px;
+		}
+		.store1-imgOperate{
+			width:370px;
+			height:240px;
+			position:relative;
+		}
+		.store1-img{
+			position:absolute;
+			z-index:-1;
+			width:370px;
+			height:240px;
+		}
+		.store1-indexHerizon{
+			width:370px;
+			height:240px;
+		}
+		
+		
+		
+		
+		
+		
+		/*t3商品区*/
+		.t3{
+			margin-left:10px;
+			width:1200px;
+			min-height:60px;
+		}
+		.t3-item{
+			width:275px;
+			min-height:320px;
+			position:absoulte;
+			float:left;
+			margin-top:10px;
+			margin-left:10px;
+		}
+		.t3-imgOperate{
+			width:275px;
+			height:300px;
+			position:relative;
+		}
+		.t3-img{
+			position:absolute;
+			z-index:-1;
+			width:275px;
+			height:300px;
+		}
+		.t3-indexVertical{
+			width:275px;
+			height:300px;
+		}
+		
+		/*商品标题*/
+		.product-head{
+			font-size:15px;
+			font-family:"黑体";
+		}
+		/*商品价格*/
+		.product-price{
+			font-size:20px;
+			font-family:"黑体";
+			text-align:center;
+			color:#AD2628;
+		}
+		
+		
+		/*绝对定位,a链接失效！！！解决办法，添加一个绝对定位，透明，外面加上a链接*/
+		.link-div{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:0px;
+			top:0px;
+			left:0px;
+			cursor:pointer;
+		}
 		
 </style>
 
@@ -40,14 +165,457 @@
 
 {% include "front_top.html" %}
 <div class='bodyFrame'>
-	{% include 'front_left.html' %}
-	
 	
 	<div class='bodyContent'>
+	
+	
+			<table  class='table1' height='480px'>
+		
+			<!--店铺-->
+			<tr width='1200px'>
+				<td width='400'>	
+					<table >
+						<tr><td>
+							<!--1号店铺-->
+							<div class='store1-item'>
+								<div class='store1-imgOperate'>
+									<div class='store1-img'>
+										{% if storeOrder1 %}
+											<img class='store1-indexHerizon' src='/media/{{storeOrder1.1}}'>
+										{% else %}
+											<img class='store1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+										{% endif %}
+									</div>
+									{% if storeOrder1 %}
+										<div class='link-div' id='storeLink1'></div><!--链接层div-->
+									{% endif %}		
+								</div>
+							</div>
+						</td></tr>
+						 
+						<tr><td>
+							<!--2号店铺-->
+							<div class='store1-item'>
+								<div class='store1-imgOperate'>
+									<div class='store1-img'>
+										{% if storeOrder2 %}
+											<img class='store1-indexHerizon' src='/media/{{storeOrder2.1}}'>
+										{% else %}
+											<img class='store1-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+										{% endif %}
+									</div>
+									{% if storeOrder2 %}
+										<div class='link-div' id='storeLink2'></div><!--链接层div-->
+									{% endif %}	
+								</div>	
+							</div>
+						</td></tr>
+					</table>
+				<td>
+			
+			
+				<td  width='800px'>
+					<div class='store3-item'>
+						<div class='store3-scroll'>
+							<!--3号店铺-->
+							<div class='store3-imgOperate'  id='scroll-item1' >
+								<div class='store3-img'>
+									{% if storeOrder3 %}
+										<img class='store3-indexHerizon' src='/media/{{storeOrder3.1}}'>
+									{% else %}
+										<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+									{% endif %}
+								</div>
+								{% if storeOrder3 %}
+									<div class='link-div' id='storeLink3'></div><!--链接层div-->
+								{% endif %}	
+							</div>
+							
+							<!--4号店铺-->
+							<div class='store3-imgOperate' id='scroll-item2' style='display:none;' >
+								<div class='store3-img'>
+									{% if storeOrder4 %}
+										<img class='store3-indexHerizon' src='/media/{{storeOrder4.1}}'>
+									{% else %}
+										<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+									{% endif %}
+								</div>
+								{% if storeOrder4 %}
+									<div class='link-div' id='storeLink4'></div><!--链接层div-->
+								{% endif %}	
+							</div>
+							
+							<!--5号店铺-->
+							<div class='store3-imgOperate'  id='scroll-item3' style='display:none;'>
+								<div class='store3-img'>
+									{% if storeOrder5 %}
+										<img class='store3-indexHerizon' src='/media/{{storeOrder5.1}}'>
+									{% else %}
+										<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+									{% endif %}
+								</div>
+								{% if storeOrder5 %}
+									<div class='link-div' id='storeLink5'></div><!--链接层div-->
+								{% endif %}	
+							</div>
+							
+							<!--6号店铺-->
+							<div class='store3-imgOperate' style='display:none;' id='scroll-item4'>
+								<div class='store3-img'>
+									{% if storeOrder6 %}
+										<img class='store3-indexHerizon' src='/media/{{storeOrder6.1}}'>
+									{% else %}
+										<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+									{% endif %}
+								</div>
+								{% if storeOrder6 %}
+									<div class='link-div' id='storeLink6'></div><!--链接层div-->
+								{% endif %}	
+							</div>
+							
+							<!--7号店铺-->
+							<div class='store3-imgOperate' style='display:none;' id='scroll-item5'>
+								<div class='store3-img'>
+									{% if storeOrder7 %}
+										<img class='store3-indexHerizon' src='/media/{{storeOrder7.1}}'>
+									{% else %}
+										<img class='store3-indexHerizon' src='/statics/img/store_manage_indexHerizon.jpg'>
+									{% endif %}
+								</div>
+								{% if storeOrder7 %}
+									<div class='link-div' id='storeLink7'></div><!--链接层div-->
+								{% endif %}	
+							</div>
+							
+						</div>
+						
+					</div>
+					
+					
+				</td>
+				
+			</tr>
+		</table>
+		
+		
+		
+		<!--分类与商品隔离区-->
+		<div style='width:998px;height:30px;margin-top:20px;margin-left:20px;color:#D8242B;font-size:14px;'>优选商品</div>
+		
+			
+			
+		<!--商品-->
+		<div class='t3'>
+		
+		<table>
+			<tr>
+				<td>
+					<!--1号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder1 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder1.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							{% if proOrder1 %}
+								<div class='link-div' id='proLink1'></div><!--链接层div-->
+							{% endif %}	
+						</div>
+						<div  class='product-head'>
+						{% if proOrder1 %}
+							<span>{{proOrder1.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				
+				<td>
+					<!--2号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder2 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder2.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							{% if proOrder2 %}
+								<div class='link-div' id='proLink2'></div><!--链接层div-->
+							{% endif %}	
+						</div>
+						<div  class='product-head'>
+						{% if proOrder2 %}
+							<span>{{proOrder2.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				<td>
+					<!--3号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder3 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder3.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							{% if proOrder3 %}
+								<div class='link-div' id='proLink3'></div><!--链接层div-->
+							{% endif %}	
+						</div>
+						<div  class='product-head'>
+						{% if proOrder3 %}
+							<span>{{proOrder3.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				<td>
+					<!--4号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder4 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder4.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							{% if proOrder4 %}
+								<div class='link-div' id='proLink4'></div><!--链接层div-->
+							{% endif %}	
+						</div>
+						<div  class='product-head'>
+						{% if proOrder4 %}
+							<span>{{proOrder4.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+			
+			
+			</tr>
+			
+			
+			
+			
+			
+			<tr>
+				<td>
+					<!--5号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder5 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder5.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							{% if proOrder5 %}
+								<div class='link-div' id='proLink5'></div><!--链接层div-->
+							{% endif %}	
+						</div>
+						<div  class='product-head'>
+						{% if proOrder5 %}
+							<span>{{proOrder5.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				
+				<td>
+					<!--6号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder6 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder6.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							{% if proOrder6 %}
+								<div class='link-div' id='proLink6'></div><!--链接层div-->
+							{% endif %}	
+						</div>
+						<div  class='product-head'>
+						{% if proOrder6 %}
+							<span>{{proOrder6.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				<td>
+					<!--7号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder7 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder7.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							{% if proOrder7 %}
+								<div class='link-div' id='proLink7'></div><!--链接层div-->
+							{% endif %}	
+						</div>
+						<div  class='product-head'>
+						{% if proOrder7 %}
+							<span>{{proOrder7.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+				
+				<td>
+					<!--8号商品-->
+					<div class='t3-item'>
+						<div class='t3-imgOperate'>
+							<div class='t3-img'>
+								{% if proOrder8 %}
+									<img class='t3-indexVertical' src='/media/{{proOrder8.2}}'>
+								{% else %}
+									<img class='t3-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
+								{% endif %}
+							</div>
+							{% if proOrder8 %}
+								<div class='link-div' id='proLink8'></div><!--链接层div-->
+							{% endif %}	
+						</div>
+						<div  class='product-head'>
+						{% if proOrder8 %}
+							<span>{{proOrder8.3}}</span>
+						{% else %}
+							<span>商品名称</span>
+						{% endif %}
+						</div>
+					</div>
+				<td>
+			</tr>
+			
+		</table>
+		</div>
+	
+	
+	
 	
 	</div>
 	
 </div>
+
+
+
+
+
+
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+
+	//首页店铺切换
+	$('#storeLink1').click(function(){
+		window.location.href='/viewStore/?storeId={{storeOrder1.0}}'
+	});
+	$('#storeLink2').click(function(){
+		window.location.href='/viewStore/?storeId={{storeOrder2.0}}'
+	});
+	$('#storeLink3').click(function(){
+		window.location.href='/viewStore/?storeId={{storeOrder3.0}}'
+	});
+	$('#storeLink4').click(function(){
+		window.location.href='/viewStore/?storeId={{storeOrder4.0}}'
+	});
+	$('#storeLink5').click(function(){
+		window.location.href='/viewStore/?storeId={{storeOrder5.0}}'
+	});
+	$('#storeLink6').click(function(){
+		window.location.href='/viewStore/?storeId={{storeOrder6.0}}'
+	});
+	$('#storeLink7').click(function(){
+		window.location.href='/viewStore/?storeId={{storeOrder7.0}}'
+	});
+	
+	
+	//首页商品切换
+	
+	$('#proLink1').click(function(){
+		window.location.href='/viewProduct/?storeId={{proOrder1.0}}&proId={{proOrder1.1}}'
+	});
+	$('#proLink2').click(function(){
+		window.location.href='/viewProduct/?storeId={{proOrder2.0}}&proId={{proOrder2.1}}'
+	});
+	$('#proLink3').click(function(){
+		window.location.href='/viewProduct/?storeId={{proOrder3.0}}&proId={{proOrder3.1}}'
+	});
+	$('#proLink4').click(function(){
+		window.location.href='/viewProduct/?storeId={{proOrder4.0}}&proId={{proOrder4.1}}'
+	});
+	$('#proLink5').click(function(){
+		window.location.href='/viewProduct/?storeId={{proOrder5.0}}&proId={{proOrder5.1}}'
+	});
+	$('#proLink6').click(function(){
+		window.location.href='/viewProduct/?storeId={{proOrder6.0}}&proId={{proOrder6.1}}'
+	});
+	$('#proLink7').click(function(){
+		window.location.href='/viewProduct/?storeId={{proOrder7.0}}&proId={{proOrder7.1}}'
+	});
+	$('#proLink8').click(function(){
+		window.location.href='/viewProduct/?storeId={{proOrder8.0}}&proId={{proOrder8.1}}'
+	});
+	
+	
+	
+	//循环显示
+	var i=0
+	setInterval(function(){
+		if(i<=5){
+			i++
+		}else{
+			i=0
+		}
+	
+		$('#scroll-item'+i).css('display','block')
+		$('#scroll-item'+i).siblings().css('display','none')
+		
+		
+	
+	},2500);
+
+
+</script>
+
+
+
+
 
 
 </body>

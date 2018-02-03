@@ -120,6 +120,7 @@
 				</div>
 				{% if account %}
 					<div  class='top-default-left'>{{account}}</div>
+					<div  class='top-default-left' onclick='goLogout()'>退出</div>
 				{% endif  %}
 				<div  class='top-default-right' onclick='goSeller()'>卖家中心</div>
 			</div>
@@ -157,6 +158,10 @@ function goIndex(){
 function goSeller(){
 	window.location.href='/sellerIndex/'
 
+}
+
+function goLogout(){
+	window.location.href='/loginOut/'
 }
 </script>
 

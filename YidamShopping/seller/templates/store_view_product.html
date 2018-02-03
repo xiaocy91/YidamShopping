@@ -235,7 +235,7 @@ m-clear:after {
     background-color: #ffeded;
     border: 1px solid #ffeded;
 }
-.tb-btn-sku a {
+.tb-btn-sku a{
 	padding:8px;
 	text-align:center;
     margin-right: 0;
@@ -248,7 +248,27 @@ m-clear:after {
     color: #FF0036;
     font-family: 'Microsoft Yahei';
     cursor:pointer;
+     font-size:16px;
 }
+
+/*立即购买按钮*/
+.buyBut{
+	padding:8px;
+	text-align:center;
+    margin-right: 0;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 178px;
+    background-color: #ffeded;
+    border: 1px solid #FF0036;
+    color: #FF0036;
+    font-family: 'Microsoft Yahei';
+    cursor:pointer;
+    font-size:16px;
+
+}
+
 .btn-sku a {
 	padding:8px;
 	text-align:center;
@@ -274,10 +294,15 @@ m-clear:after {
 		height:50px;
 	}
 	
+	/*商品详情样式*/
 	.pro-detail2{
 		margin-top:10px;
 		border-top:1px solid #CCCCCC;
 		min-height:300px;	
+	}
+	.pro-detail2-content{
+		width:1100px;
+		margin:50px;
 	}
 	
 	
@@ -428,11 +453,18 @@ m-clear:after {
 					<!--加购物车，购买-->
 					<div class="tb-action tm-clear">
 						<div class="tb-btn-sku" id='buyPro'>
-                    		<a id="J_LinkBuy"  rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button">
-                    			立即购买</a>
+                    		<form action='/buyPro/' method='post'>
+                    			<!--影藏购买的订单数据-->
+                    			<input type='hidden' value='0' name='buyData' id='buyValueId'/>  
+                    			<input type='submit' value='立即购买' class='buyBut'  onclick='buyPro({{storeId}},{{product.Nid}},event)'/>
+                    		</form>
                			</div>
-						<div class="btn-sku" onclick='addCar({{storeId}},{{product.Nid}})'>
-							<a rel="nofollow" id="J_LinkBasket" role="button"   id='addCar'>加入购物车</a>
+               			{% if account %}
+							<div class="btn-sku" onclick='addCar({{storeId}},{{product.Nid}})'>
+						{% else %}
+							<div class="btn-sku" onclick='goLoad()'>
+						{% endif %}
+								<a rel="nofollow" id="J_LinkBasket" role="button"   id='addCar'>加入购物车</a>
 						</div>
         			</div>
 					
@@ -455,9 +487,14 @@ m-clear:after {
 
 
 
-<!--商品详情-->
+<!--商品详情,tinymce的使用，显示中加上safe关键字，可显示样式-->
 <div class='pro-detail2'>
-		商品详情?????
+	<div class='pro-detail2-content'>
+		<h1>商品详情</h1>
+		{% if product %}
+			{{product.ProContent|safe}}
+		{% endif %}
+	</div>
 </div>
 
 
@@ -495,8 +532,10 @@ m-clear:after {
 	
 	
 	});
-
-
+	
+	function goLoad(){
+		window.location.href='/load/'
+	}
 
 	function hasSelected(obj){
 		//小图选中样式
@@ -582,7 +621,7 @@ m-clear:after {
 			var mount=$('#mountId').attr('value')
 			
 			
-			if(attr2Id=='0' | attr1Id=='0'){
+			if(attrId2=='0' | attrId1=='0'){
 				alert('请选择商品属性')
 			}else if(priceId=='-1'){
 				alert('该商品无货')
@@ -609,6 +648,35 @@ m-clear:after {
 			
 		
 	}
+	
+	
+	
+	//立即购买
+	function buyPro(storeId,productId,event){
+		var priceId=$('#pricedl').attr('value')
+		var attrId2=$('#attr2Id').attr('value')
+		var attrId1=$('#attr1Id').attr('value')
+		var mount=$('#mountId').attr('value')
+		
+		if(attrId2=='0' | attrId1=='0'){
+			//阻止购买操作
+			event.preventDefault();
+			alert('请选择商品属性')
+		}else if(priceId=='-1'){
+			//阻止购买操作
+			event.preventDefault();
+			alert('该商品无货')
+		}else{
+			data={'storeId':storeId,'productId':productId,
+				'attrId2':attrId2,'attrId1':attrId1,'priceId':priceId,
+				'mount':mount}
+			data=JSON.stringify(data)
+			
+			$('#buyValueId').attr('value',data)
+		}
+	
+	}
+	
 
 </script>
 

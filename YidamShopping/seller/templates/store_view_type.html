@@ -55,7 +55,8 @@
 	    height: 33px;
 	    line-height: 33px;
 	    overflow: hidden;
-	    margin:3px;}
+	    margin:3px;
+	    color:#ED1B24}
 	    
 	    
 	    .seperate{
@@ -129,7 +130,18 @@
 			    color:#858585;
 			    font-size:15px;
 			}		
-	
+			
+			
+			/*绝对定位,a链接失效！！！解决办法，添加一个绝对定位，透明，外面加上a链接*/
+		.link-div{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:0px;
+			top:0px;
+			left:0px;
+			cursor:pointer;
+		}
 		
 
 		
@@ -156,9 +168,11 @@
 						
 						<div class='product'>
 							<div>
-								<img class='product-img' src='/media/{{product.2}}'/>
+								<a href='/viewProduct/?storeId={{storeId}}&proId={{product.0}}'>
+									<img class='product-img' src='/media/{{product.2}}'/>
+								</a>
 							</div>
-						
+							
 							<div class='price'>
 								{% if product.3 %}
 									￥{{product.3}}
@@ -179,6 +193,7 @@
 								
 							</div>
 						</div>
+						
 					{% endfor%}	
 					
 				{% endif %}	

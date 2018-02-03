@@ -1,0 +1,14 @@
+[
+  {
+    "model": "user_center.Userinfo",
+    "pk": 1,
+    "fields": {
+      "Account": "admin",
+      "Password": "admin",
+      "Phone": "123",
+      "Nickname": "xiao",
+      "Headphoto": "123",
+      "Email": "2122"
+    }
+  }
+]

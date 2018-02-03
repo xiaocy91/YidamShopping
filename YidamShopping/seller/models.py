@@ -41,6 +41,7 @@ class Product(models.Model):
     AttributeName2=models.CharField(max_length=200,default='2')
     DefaultImg=models.IntegerField(blank=True,null=True)
     DefaultPrice=models.IntegerField(blank=True,null=True)
+    ProContent=models.TextField(blank=True,null=True)
    
     
 class ProductImage(models.Model):

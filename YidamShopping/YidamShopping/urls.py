@@ -16,12 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from user_center.views import register,load,loginOut,addCar,showCar,modifyMount,userCenter,showOrderFinal
-from user_center.views import addOrder,submitOrder
-from index_show.views import index,searchStore
+from user_center.views import addOrder,submitOrder,buyPro,submitBuyOrder
+from index_show.views import index,searchStore,sys,sysExit,addSysStore,getFirstType,addSysPro
 from seller.views import sellerIndex,registerStore,viewStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
 from seller.views import editProduct,addAttr1,addAttr2,addPrice,addHomeType,getSecondType,getProduct
-from seller.views import addHomeProduct,viewType,viewProduct,getSelectPrice
+from seller.views import addHomeProduct,viewType,viewProduct,getSelectPrice,saveProContent,soldOrder
 
 
 
@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^register/$', register),
     url(r'^load/$', load),
     url(r'^index/$', index),
+    url(r'^$', index),
     url(r'^sellerIndex/$', sellerIndex),
     url(r'^loginOut/$', loginOut),
     url(r'^registerStore/$', registerStore),
@@ -68,6 +69,21 @@ urlpatterns = [
     url(r'^showOrderFinal/$', showOrderFinal),
     url(r'^addOrder/$', addOrder),
     url(r'^submitOrder/$', submitOrder),
+    url(r'^sys/$', sys),
+    url(r'^sysExit/$', sysExit),
+    url(r'^addSysStore/$', addSysStore),
+    url(r'^saveProContent/$', saveProContent),
+    url(r'^getFirstType/$', getFirstType),
+    url(r'^addSysPro/$', addSysPro),
+    url(r'^buyPro/$', buyPro),
+    url(r'^submitBuyOrder/$', submitBuyOrder),
+    url(r'^soldOrder/$', soldOrder),
+    
+    
+    
+    
+    
+    
     
     
     

@@ -140,7 +140,7 @@
 		}
 		/*字体颜色*/
 		.pro-div .left1_2 .head{
-			width:170px;
+			width:180px;
 		}
 		.pro-div .left1_2 .font-div{
 			color:#ABABAB;
@@ -175,6 +175,55 @@
 			text-align:center;
 			vertical-align:middle;
 		}
+		
+		
+		
+		
+		/*分页的样式*/
+		.pagination{
+			clear:left;
+			width:998px;	
+			text-align:center;
+		}
+		
+		.wp-paginate {
+			width:370px;
+    		padding:0;
+   			margin:0;
+    		margin-left:314px;}
+
+		.wp-paginate li {
+    		float:left;
+    		list-style:none;
+    		margin:2px;
+   		 	padding:0;
+    		margin:0px auto;}
+		.wp-paginate a {
+		    margin:0 2px;
+		    line-height:20px;
+		    text-align:center;
+		    text-decoration:none;
+		    border-radius:3px;
+		    -moz-border-radius:3px;
+		    float:left;
+		    min-height:20px;
+		    min-width:20px;
+		    color:#858585;
+		    border:2px #e3e3e3 solid;
+		    border-radius:13px;
+		    font-size:15px;}
+		
+			.wp-paginate span{
+				margin:0 2px;
+			    line-height:20px;
+			    text-align:center;
+			    text-decoration:none;
+			    float:left;
+			    min-height:20px;
+			    min-width:20px;
+			    color:#858585;
+			    font-size:15px;
+			}	
 		
 		
 		
@@ -241,7 +290,7 @@
 					
 					
 					{% if forloop.first %}
-						<div class='left5'> 取消订单</div>
+						<div class='left5'> 删除订单</div>
 					{% else %}
 						<div class='left5' ></div>
 					{% endif %}
@@ -256,6 +305,38 @@
 						
 
 		</div>
+		
+		
+		
+		
+		
+		<!--使用pagination进行分页-->
+		<div class="pagination">
+		    <span class="step-links">
+			    <ol class="wp-paginate">
+			        {% if orderLists.has_previous %}
+			            <li><a href="?page=1">&laquo; 第一页</a></li>
+			            <li><a href="?page={{ orderLists.previous_page_number }}">上一页</a></li>
+			        {% endif %}
+			
+			        <span class="current">
+			            	<li><span>第 {{ orderLists.number }} 页，共 {{ orderLists.paginator.num_pages }}页</span></li>
+			        </span>
+			
+			        {% if orderLists.has_next %}
+			            <li><a href="?page={{ orderLists.next_page_number }}">下一页</a></li>
+			            <li><a href="?page={{ orderLists.paginator.num_pages }}">最后页 &raquo;</a></li>
+			        {% endif %}
+			     </ol>
+		    </span>
+		</div>
+		
+		
+		
+		
+		
+		
+		
 	</div>
 	
 </div>
