@@ -63,28 +63,49 @@ def load(request):
             if userinfo:
                 if password==userinfo[0].Password:
                     result=userinfo[0].Account
-                    
                     #设置session
                     request.session['login_status']=True
                     request.session['account']=userinfo[0].Account
                     request.session['userid']=userinfo[0].Userid
                     request.session.set_expiry(0) #session的value是0,用户关闭浏览器session就会失效
-                    #获取店铺首页数据
-                    resData=getSysStore()
-                    resData['account']=account
-                    #设置cookie
-                    print 'cookie set'
-                    response=render_to_response('front_index.html',resData)
-                    response.set_cookie('account',account,max_age=60*1) #cookie有效时间为60秒
-                    response.set_cookie('password',password,max_age=60*1) #cookie有效时间为60秒
-                    return response
+                    #判断是否有go_url的cookie
+                    go_url=request.COOKIES.get("go_url")
+                    if go_url:
+                        #重定向url存在
+                        print go_url
+                        return HttpResponseRedirect(go_url)
+                    else:
+                        #url不存在，则进入首页
+                        #获取店铺首页数据
+                        resData=getSysStore()
+                        resData['account']=account
+                        #设置cookie
+                        response=render_to_response('front_index.html',resData)
+                       # response.set_cookie('account',account,max_age=30*1) #cookie有效时间为60秒
+                       # response.set_cookie('password',password,max_age=30*1) #cookie有效时间为60秒
+                        return response
                 else:
                     reslut='用户账号或者密码错误'
             else:
                 result='用户账号或者密码错误'
-            
-    return render_to_response('load.html',{'result':result})
-
+        return render_to_response('load.html',{'result':result})
+    #加入购物功能添加go_url
+    if request.method == 'GET':  
+        data=request.GET
+        path=data.get('path')
+        store=data.get('store') 
+        pro=data.get('pro') 
+        #判断get请求包含参数
+        if path and store and pro:
+            #将登陆前url存入cookie
+            go_url=path+'?'+store+'&'+pro
+            response=render_to_response('load.html')
+            response.set_cookie('go_url',go_url,max_age=60*1)
+            return response
+        else:
+            return render_to_response('load.html')
+       
+       
 
 def loginOut(request):
     
@@ -170,6 +191,7 @@ def showCar(request):
     #用户登录信息
     login_status=request.session.get('login_status',False)
     if login_status:
+        #已登陆
         account=request.session.get('account')
         userId=request.session.get('userid')
         resData['account']=account
@@ -227,6 +249,8 @@ def showCar(request):
         return render_to_response('user_car_index.html',resData)
     else:
         return HttpResponseRedirect('/load/')
+    
+    
     
 
 
@@ -447,14 +471,18 @@ def showOrderFinal(request):
 #数据结构{"storeId":1,"productId":1,"attrId2":"2","attrId1":"1","priceId":"2","mount":"2"}
 def buyPro(request):
     if request.method == 'POST':
-        #判断是否登录
-        status=request.session.get('login_status',False)
-        if status==False:
-            return HttpResponseRedirect('/load/')
         #若登录，获取提交数据
         data=request.POST
         buyData=data.get('buyData')
+        buyUrl=data.get('buyUrl')
         buyData=json.loads(buyData)
+        #判断是否登录
+        status=request.session.get('login_status',False)
+        if status==False:
+            #将登陆前url存入cookie
+            response=HttpResponseRedirect('/load/')
+            response.set_cookie('go_url',buyUrl,max_age=30*1)
+            return response
         #获取商品数据
         storeId=buyData['storeId']
         productId=buyData['productId']

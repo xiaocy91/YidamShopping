@@ -455,11 +455,16 @@ m-clear:after {
 						<div class="tb-btn-sku" id='buyPro'>
                     		<form action='/buyPro/' method='post'>
                     			<!--影藏购买的订单数据-->
+                    			<input type='hidden' value='0' name='buyUrl' id='buyUrlId'/>  
                     			<input type='hidden' value='0' name='buyData' id='buyValueId'/>  
-                    			<input type='submit' value='立即购买' class='buyBut'  onclick='buyPro({{storeId}},{{product.Nid}},event)'/>
+                    			{% if account %} <!--判断是否已登录-->
+                    				<input type='submit' value='立即购买' class='buyBut'  onclick='buyPro({{storeId}},{{product.Nid}},event)'/>
+                    			{% else %}
+                    				<input type='button' value='立即购买' class='buyBut' onclick='goLoad()' />
+                    			{% endif %}
                     		</form>
                			</div>
-               			{% if account %}
+               			{% if account %} <!--判断是否已登录-->
 							<div class="btn-sku" onclick='addCar({{storeId}},{{product.Nid}})'>
 						{% else %}
 							<div class="btn-sku" onclick='goLoad()'>
@@ -533,10 +538,20 @@ m-clear:after {
 	
 	});
 	
+	//购买、加购物车，先登录
 	function goLoad(){
-		window.location.href='/load/'
+		var path=window.location.pathname
+		var params=window.location.search.substr(1)
+		//将参数用&分割
+		var paramList=params.split('&')
+		var storeId=paramList[0]
+		var proId=paramList[1]
+		//合成url
+		var url='/load/?path='+path+'&store='+storeId+'&pro='+proId
+		window.location.href=url
 	}
-
+	
+	
 	function hasSelected(obj){
 		//小图选中样式
 		$(obj).removeClass().addClass('preview-img-selected')
@@ -673,6 +688,12 @@ m-clear:after {
 			data=JSON.stringify(data)
 			
 			$('#buyValueId').attr('value',data)
+			
+			
+			//设置当前页url
+			var url = window.location.href;
+			$('#buyUrlId').attr('value',url)
+			
 		}
 	
 	}
