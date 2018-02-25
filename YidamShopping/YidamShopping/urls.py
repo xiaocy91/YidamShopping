@@ -16,12 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from user_center.views import register,load,loginOut,addCar,showCar,modifyMount,userCenter,showOrderFinal
-from user_center.views import addOrder,submitOrder,buyPro,submitBuyOrder
-from index_show.views import index,searchStore,sys,sysExit,addSysStore,getFirstType,addSysPro
+from user_center.views import addOrder,submitOrder,buyPro,submitBuyOrder,addHeadPhoto
+from user_center.views import checkOldPwd,modifyNewPwd,modifyBaseInfo
+from index_show.views import index,searchStorePro,sys,sysExit,addSysStore,getFirstType,addSysPro
+from index_show.views import delSysStore,delSysPro
 from seller.views import sellerIndex,registerStore,viewStore,manageStore,editTypes,delSecondName
 from seller.views import delFirstName,addSecond,editSecond,editFirst,addFirst,addProduct,showProduct
 from seller.views import editProduct,addAttr1,addAttr2,addPrice,addHomeType,getSecondType,getProduct
 from seller.views import addHomeProduct,viewType,viewProduct,getSelectPrice,saveProContent,soldOrder
+from seller.views import modifyStore,delAllType,delHomeType,delHomeProduct,delePro,delTypeAllPro
 
 
 
@@ -61,7 +64,7 @@ urlpatterns = [
     url(r'^getProduct/$', getProduct),
     url(r'^addHomeProduct/$', addHomeProduct),
     url(r'^getSelectPrice/$', getSelectPrice),
-    url(r'^searchStore/$', searchStore),
+    url(r'^searchStorePro/$', searchStorePro),
     url(r'^addCar/$', addCar),
     url(r'^showCar/$', showCar),
     url(r'^modifyMount/$', modifyMount),
@@ -78,11 +81,18 @@ urlpatterns = [
     url(r'^buyPro/$', buyPro),
     url(r'^submitBuyOrder/$', submitBuyOrder),
     url(r'^soldOrder/$', soldOrder),
-    
-    
-    
-    
-    
+    url(r'^addHeadPhoto/$', addHeadPhoto),
+    url(r'^checkOldPwd/$', checkOldPwd),
+    url(r'^modifyNewPwd/$', modifyNewPwd),
+    url(r'^modifyBaseInfo/$', modifyBaseInfo),
+    url(r'^modifyStore/$', modifyStore),
+    url(r'^delAllType/$', delAllType),
+    url(r'^delHomeType/$', delHomeType),
+    url(r'^delHomeProduct/$', delHomeProduct),
+    url(r'^delSysStore/$', delSysStore),
+    url(r'^delSysPro/$', delSysPro),
+    url(r'^delePro/$', delePro),
+    url(r'^delTypeAllPro/$', delTypeAllPro),
     
     
     

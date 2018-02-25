@@ -18,7 +18,7 @@
 	.div-left-frame{
 		
 		margin:2px;
-		padding:2px;
+		padding:5px;
 		
 	}
 	
@@ -50,6 +50,13 @@
 		padding:2px
 	}
 	
+	.store-content a{
+		 text-decoration:none;
+		 color:#000;
+		 font-size:16px;
+		 line-height:30px;
+	}
+	
 </style>
 
 
@@ -71,12 +78,13 @@
 				<li>
 					{% if openStore%}
 						<div class='store-content'>
-						<a target="_blank" href="/viewStore/?storeId={{storeId}}">查看店铺</a>
-						<a target="_blank" href="/manageStore/">管理店铺</a>
+						 	<div><a target="_blank" href='/sellerIndex/'>店铺基本信息</a></div>
+							<div><a target="_blank" href="/viewStore/?storeId={{storeId}}">查看店铺</a></div>
+							<div><a target="_blank" href="/manageStore/">管理店铺</a></div>
 						<div>
 					{% else %}
 						<div class='store-content'>
-						<a target="_blank" href="/registerStore/">我要开店</a>
+							<div><a target="_blank" href="/registerStore/">我要开店</a></div>
 						</div>
 					{% endif %}
 				</li>

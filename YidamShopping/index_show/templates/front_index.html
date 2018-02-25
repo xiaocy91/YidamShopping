@@ -23,7 +23,6 @@
 		}
 		
 		.bodyContent{
-			position:absolute;
 			float:right;
 			width:1200px;
 			min-height:500px;
@@ -45,14 +44,14 @@
 			
 		}
 		.store3-scroll{
-			width:4000px;
+			width:400px;
 			min-height:500px;
 		}
 		.store3-imgOperate{
 			width:780px;
 			height:480px;
-			position:relative;
-			float:left;
+			position:absolute;
+			border:2px solid #E0E0E0;
 		}
 		.store3-img{
 			position:absolute;
@@ -85,6 +84,8 @@
 			width:370px;
 			height:240px;
 			position:relative;
+			float:left;
+			border:2px solid #E0E0E0;
 		}
 		.store1-img{
 			position:absolute;
@@ -104,6 +105,7 @@
 		
 		/*t3商品区*/
 		.t3{
+			position:relative;
 			margin-left:10px;
 			width:1200px;
 			min-height:60px;
@@ -120,6 +122,7 @@
 			width:275px;
 			height:300px;
 			position:relative;
+			border:2px solid #E0E0E0;
 		}
 		.t3-img{
 			position:absolute;
@@ -156,6 +159,37 @@
 			left:0px;
 			cursor:pointer;
 		}
+		
+		/*左右切换按钮*/
+		.left-right-btn{
+			position:absolute;
+			z-index:1030;
+			width:783px;
+			min-height:50px;
+			margin-top:220px;
+		}
+		.left-btn{
+			position:relative;
+			float:left;
+			width:30px;
+			height:50px;
+			
+			margin-left:2px;
+			background:url('/statics/img/left.jpg');
+			background-size:40px 60px;
+			opacity:0.8;
+		}
+		.right-btn{
+			position:relative;
+			float:right;
+			width:30px;
+			height:50px;
+			
+			background:url('/statics/img/right.jpg');
+			background-size:30px 50px;
+			opacity:0.8;
+		}
+		
 		
 </style>
 
@@ -216,6 +250,12 @@
 			
 				<td  width='800px'>
 					<div class='store3-item'>
+						<!--左右切换功能-->
+						<div class='left-right-btn'>
+								<div class='left-btn' onclick='goLeft()'></div>
+								<div class='right-btn' onclick='goRight()'></div>
+						</div>
+					
 						<div class='store3-scroll'>
 							<!--3号店铺-->
 							<div class='store3-imgOperate'  id='scroll-item1' >
@@ -529,11 +569,14 @@
 	
 	</div>
 	
+	
 </div>
 
 
-
-
+<!--隔离区div-->
+<div class='gap-div' style='width:100%;height:30px;padding:0px;margin:0px;background-color:#F8F8FF;clear:both;'></div>
+<!--底部-->
+{% include "bottom.html" %}
 
 
 
@@ -602,13 +645,58 @@
 		}else{
 			i=0
 		}
-	
 		$('#scroll-item'+i).css('display','block')
 		$('#scroll-item'+i).siblings().css('display','none')
 		
-		
+	},5000);
 	
-	},2500);
+	//左切换
+	function goLeft(){
+		var id=1
+		var stores=$('.store3-imgOperate')
+		stores.each(function(){
+			var status=$(this).css('display')
+			if(status=='block'){
+				var idStr=$(this).attr('id')
+				//idStr的类型为，例如第4个scroll-item4
+				//获取idStr的最后一个字符
+				id=idStr.substr(idStr.length-1,1)
+				id=parseInt(id)
+				if(id<=1){
+					id=4
+				}else{
+					id--
+				}
+			}
+		});
+		//然后设置左切换后的样式
+		$('#scroll-item'+id).siblings().css('display','none')
+		$('#scroll-item'+id).css('display','block')
+	}
+	
+	//右边切换
+	function goRight(){
+		var id=1
+		var stores=$('.store3-imgOperate')
+		stores.each(function(){
+			var status=$(this).css('display')
+			if(status=='block'){
+				var idStr=$(this).attr('id')
+				//idStr的类型为，例如第4个scroll-item4
+				//获取idStr的最后一个字符
+				id=idStr.substr(idStr.length-1,1)
+				id=parseInt(id)
+				if(id>=4){
+					id=1
+				}else{
+					id++
+				}
+			}
+		});
+		//然后设置左切换后的样式
+		$('#scroll-item'+id).siblings().css('display','none')
+		$('#scroll-item'+id).css('display','block')
+	}
 
 
 </script>

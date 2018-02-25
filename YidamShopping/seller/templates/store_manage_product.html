@@ -188,7 +188,7 @@
 	
 	<div class='bodyContent'>
 		<div class='add-del-type'>
-				<div class='add-del-item'>删除全部商品</div>
+				<div class='add-del-item' onclick='delTypeAllPro({{secondId}})'>删除全部商品</div>
 				<div class='gap-div'></div>
 				<div class='add-del-item' id='addProduct' >新增商品</div>
 		</div>
@@ -222,7 +222,7 @@
 							<div class='operates'>
 								<div class='sale-info'>销售信息</div> 
 								<div class='edit-delete' onclick='edit({{product.0}})'>编辑 </div>
-								<div class='edit-delete'>删除  &nbsp;</div>
+								<div class='edit-delete' onclick='dele({{product.0}})'>删除  &nbsp;</div>
 							</div>
 						</div>
 					{% endfor%}	
@@ -276,6 +276,38 @@ $(function(){
 
 function edit(id){
 	window.location.href='/editProduct/'+id+'/'
+}
+
+//删除管理页面商品
+function dele(id){
+	$.ajax({
+		url:'/delePro/',
+		method:'post',
+		data:{'id':id},
+		success:function(result){
+			if(result=='True'){
+				window.location.reload()
+			
+			}
+		}
+	});
+
+}
+
+
+//删除该分类下所有商品
+function delTypeAllPro(id){
+	$.ajax({
+		url:'/delTypeAllPro/',
+		method:'post',
+		data:{'id':id},
+		success:function(result){
+			if(result=='True'){
+				window.location.reload()
+			
+			}
+		}
+	});
 }
 
 </script>

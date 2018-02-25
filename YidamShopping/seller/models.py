@@ -47,13 +47,13 @@ class Product(models.Model):
 class ProductImage(models.Model):
     Nid=models.AutoField(primary_key=True)
     ProductNid=models.ForeignKey(Product)
-    Img=models.ImageField(upload_to='img/%Y%m%d%H%M%S')
+    Img=models.ImageField(upload_to='proImg/%Y%m%d%H%M%S')
 
 class ProductAttr1(models.Model):
     Nid=models.AutoField(primary_key=True)
     ProductNid=models.ForeignKey(Product)
     Attr1=models.CharField(max_length=200)
-    ImgAttr1=models.ImageField(upload_to='minImg/%Y%m%d%H%M%S')
+    ImgAttr1=models.ImageField(upload_to='proMinImg/%Y%m%d%H%M%S')
     
 class ProductAttr2(models.Model):
     Nid=models.AutoField(primary_key=True)

@@ -4,19 +4,18 @@ from django.db import models
 
 
 
-# Create your models here.
 
 class Userinfo(models.Model):
     Userid=models.AutoField(primary_key=True)
-    Account=models.CharField(max_length=20)
-    Password=models.CharField(max_length=20)
+    Account=models.CharField(max_length=30)
+    Password=models.CharField(max_length=30)
     Phone=models.CharField(max_length=11,null=True)
-    Nickname=models.CharField(max_length=20,null=True)
-    Headphoto=models.CharField(max_length=255,null=True)
-    Email=models.CharField(max_length=20,null=True)
+    Nickname=models.CharField(max_length=30,null=True)
+    Headphoto=models.ImageField(upload_to='headPhoto/%Y%m%d%H%M%S')
+    Email=models.CharField(max_length=30,null=True)
     OpenStore=models.BooleanField(default=False)
     
-    
+#upload='/',is to say no upload   
 class ShopCar(models.Model):
     Nid=models.AutoField(primary_key=True)
     UserNid=models.ForeignKey(Userinfo)
@@ -44,7 +43,9 @@ class Order(models.Model):
     StoreName=models.CharField(max_length=60)
     UserId=models.ForeignKey(Userinfo)
     Total=models.FloatField()
+    
 #order product
+#upload='/',is to say no upload 
 class OrderProduct(models.Model):
     Nid=models.AutoField(primary_key=True)
     OrderId=models.ForeignKey(Order)

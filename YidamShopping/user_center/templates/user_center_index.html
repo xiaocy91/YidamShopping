@@ -30,7 +30,111 @@
 			border: 1px solid #E0E0E0;
 			right:0px;
 			top:15px;
+		}
+		
+		
+		/*整个订单页面的边距*/
+		.page-div{
+			width:900px;
+			min-height:400px;
+			margin-left:49px;
+			margin-top:15px;
+			margin-bottom:15px;
 		}	
+		
+		.p-item{
+			line-height: 25px;
+		    position: relative;
+		    padding-left: 6em;
+		}
+		.label-prompt{
+			position: absolute;
+		    vertical-align: middle;
+		    left: 0;
+		    height: 26px;
+		    line-height: 26px;
+		    display: block;
+		}
+		.span-content{
+			display: inline-block;
+		    position: relative;
+		    border: 3px solid #e6e6e6;
+		    width: 80px;
+		    height: 80px;
+		    border-radius:100px;
+		}
+		.span-content a{
+			cursor:pointer;
+			font-size:15px;
+		}
+		.a-img{
+			display: table-cell;
+		    width: 80px;
+		    height: 80px;
+		    vertical-align: middle;
+		    text-align: center;
+		    border-radius:100px;
+		}
+		.a-edit{
+			background: #000;
+		    background-position: 10px 6px;
+		    position: absolute;
+		    bottom: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 21px;
+		    line-height: 21px;
+		    text-align: center;
+		    color: #e1d7ca;
+		    opacity: .7;
+		    filter: alpha(opacity=70);
+		}
+		
+		/*昵称编辑框*/
+		.nick-input,.photo-input{
+			padding: 5px;
+		    border: 1px solid #cecece;
+		    width: 320px;
+		}
+		/*保存按钮*/
+		.save-btn{
+			display: block;
+		    color: #fff;
+		    padding: 0 11px;
+		    background-position: 100% -320px ;
+		    background-color:#808080;
+		    border: 0;
+		    cursor: pointer;
+		    line-height: 22px;
+		    margin-left:60px;
+		}
+		.other-input{
+			padding: 5px;
+		    border: 1px solid #cecece;
+		    width: 250px;
+		}
+		
+		
+		/*账户管理标题栏*/
+		.switch-div{
+			width:100%;
+			height:30px;
+			line-height:30px;
+			align:center;
+			border-bottom:2px solid #E0E0E0;
+		}
+		.switch-div ul{
+		    list-style:none;
+		   
+		}
+		.switch-div ul li{
+			float:left; 
+			width:100px;
+			height:20px;
+			cursor:pointer;
+			font-size:16px;
+		}
+		
 		
 </style>
 
@@ -45,9 +149,265 @@
 	
 	<div class='bodyContent'>
 	
+		<div class='page-div'>
+			
+			<!--基本信息标题栏切换-->
+			<div class='switch-div'>
+				<ul > 
+					<li id='basicSwitchId' onclick='switch_basic()'>基本资料 </li>
+					<li id='pwdSwitchId' onclick='switch_pwd()'>密码修改</li>
+					<li id='photoSwitchId' onclick='switch_photo()'>编辑头像</li>
+				</ul>
+			</div>
+			
+			
+			
+			
+			<div class='switch-content'>
+			
+				<!--基本资料-->
+				<div id='basicId'>
+					<p class='p-item'>
+		                <label class='label-prompt'>当前头像：</label>
+		                <span class="span-content">
+		                    <img style='width:80px;height:80px;border-radius:100px;' src='
+		                    {% if photo %} 
+		                    	/media/{{photo}} 
+	                    	{% else%} 
+	                    		/statics/img/head_photo.jpg 
+	                    	{% endif%}'> <!--图片样式为圆形-->
+		                    <a class='a-edit'   onclick='switch_photo()' onmouseover='photo_on(this)' onmouseout='photo_out(this)'>编辑头像</a>
+		                </span>
+		            </p>
+		            
+		            <form action='/modifyBaseInfo/' method='post'>
+			            <p class='p-item'>
+			                <label class='label-prompt'>昵称：</label>
+			                <input name='nickname' class="nick-input" type="text"  maxlength="25"  {% if nickname %} value='{{nickname}}' {% endif %}/>
+			            </p>
+			            
+			             <p class='p-item'>
+			                <label class='label-prompt'>电话：</label>
+			                <input name='phone'  class="other-input" type="text"  maxlength="25"  {% if phone %} value='{{phone}}' {% endif %}/>
+			            </p>
+			            
+			             <p class='p-item'>
+			                <label class='label-prompt'>邮箱：</label>
+			                <input name='email' class="other-input" type="text"  maxlength="25" {% if email %} value='{{email}}' {% endif %}/>
+			            </p>
+			            
+			            <span class='save-span'>
+			                <button class="save-btn"  type="submit" id="J_saveProfile">保存</button>
+			            </span>
+			        </form>
+		        </div>
+		        
+		        
+		        <!--密码修改-->
+		        <div id='pwdId' hidden='hidden'>
+		        	<div id='old_pwdiv'>
+			        	<p class='p-item'>
+			                <label class='label-prompt'>旧密码：</label>
+			                <input id='old_pwd_input'  class="other-input" type="text"  maxlength="25" />
+			            </p>
+			            <span class='save-span'>
+			                <button class="save-btn"  type="button" id="old_pwd_confirm">确定</button>
+			            </span>
+			        </div>
+		            
+		            <div id='new_pwdiv' hidden='hidden'>
+			            <p class='p-item'>
+			                <label class='label-prompt'>新密码：</label>
+			                <input id='first_pwd' class="other-input" type="text"  maxlength="25"/>
+			            </p>
+			            <p class='p-item'>
+			                <label class='label-prompt'>再次新密码：</label>
+			                <input id='secon_pwd' class="other-input" type="text"  maxlength="25"/>
+			            </p>
+			            <span class='save-span'>
+			                <button class="save-btn"  type="button" id="new_pwd_save">保存</button>
+			            </span>
+			        </div>
+		        	
+		        </div>
+		        
+		        
+		        
+		        
+		        <!--编辑头像-->
+		        <div id='photoId' hidden='hidden'>
+					<p class='p-item'>
+		                <label class='label-prompt'>当前头像：</label>
+		                <span class="span-content">
+		                    <img style='width:80px;height:80px;border-radius:100px;' 
+		                    src='{% if photo %} 
+		                    		/media/{{photo}} 
+		                    	{% else%} 
+		                    		/statics/img/head_photo.jpg 
+		                    	{% endif%}'> <!--图片样式为圆形-->
+		                </span>
+		            </p>
+		            <form method='post' action='/addHeadPhoto/' enctype="multipart/form-data" >
+			            <p class='p-item'>
+			                <label class='label-prompt'>修改头像：</label>
+			                <input name='photo'  class="photo-input" type="file"  maxlength="25"/>
+			            </p>
+			            
+			             <span class='save-span'>
+			                <button class="save-btn"  type="submit" id="J_saveProfile">保存</button>
+			            </span>
+			         </form>
+		       	</div> 
+		       	
+		       	
+		       	
+		    </div>    <!--switch content结束-->
+	      
+	      
+	      
+	      
+	      
+           
+		</div>
+		
+	
 	</div>
 	
 </div>
+
+
+
+<!--隔离区div-->
+<div class='gap-div' style='width:100%;height:30px;padding:0px;margin:0px;background-color:#F8F8FF;clear:both;'></div>
+<!--底部-->
+{% include "bottom.html" %}
+
+
+
+<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+<script type='text/javascript'>
+	$(function(){
+	
+		//初始化账户管理页面
+		$('#basicSwitchId').css('font-size','18')
+		$('#basicSwitchId').css('font-weight','bold')
+		
+		
+		//旧密码绑定click
+		$('#old_pwd_confirm').click(function(){
+			var oldPwd=$('#old_pwd_input').val()
+			$.ajax({
+				url:'/checkOldPwd/',
+				method:'post',
+				data:{'oldPwd':oldPwd},
+				success:function(result){
+					if(result=='True'){
+						$('#old_pwdiv').attr('hidden','hidden')
+						$('#new_pwdiv').removeAttr('hidden')
+					}else{
+						alert('旧密码输入错误')
+					}
+				},
+			
+			});
+		
+		});
+		
+		
+		
+		//新密码保存
+		$('#new_pwd_save').click(function(){
+			var firstPwd=$('#first_pwd').val()
+			var seconPwd=$('#secon_pwd').val()
+			
+			if(firstPwd==seconPwd){
+				$.ajax({
+					url:'/modifyNewPwd/',
+					method:'post',
+					data:{'pwd':firstPwd},
+					success:function(result){
+						if(result=='True'){
+							alert('修改密码成功，请重新登录！')
+							window.location.href='/loginOut/'
+						}
+					},
+				});
+			}else{
+				alert('两次密码不一致')
+			}
+			
+		
+		});
+		
+		
+		
+	
+	});
+	
+	function photo_on(obj){
+		$(obj).css('color','#CA2A1F')
+		$(obj).css('font-weight','bold')
+		$(obj).css('text-decoration','underline')
+	}
+	function photo_out(obj){
+		$(obj).css('color','')
+		$(obj).css('font-weight','')
+		$(obj).css('text-decoration','none')
+	}
+	
+	
+	//切换到基本信息
+	function switch_basic(){
+		//字体样式
+		$('#basicSwitchId').css('font-size','18')
+		$('#basicSwitchId').css('font-weight','bold')
+		$('#pwdSwitchId').css('font-size','16')
+		$('#pwdSwitchId').css('font-weight','')
+		$('#photoSwitchId').css('font-size','16')
+		$('#photoSwitchId').css('font-weight','')
+		//影藏和显示
+		$('#basicId').removeAttr('hidden')
+		$('#pwdId').attr('hidden','hidden')
+		$('#photoId').attr('hidden','hidden')
+		
+	}
+	
+	//切换到密码修改
+	function switch_pwd(){
+		//字体样式
+		$('#pwdSwitchId').css('font-size','18')
+		$('#pwdSwitchId').css('font-weight','bold')
+		$('#basicSwitchId').css('font-size','16')
+		$('#basicSwitchId').css('font-weight','')
+		$('#photoSwitchId').css('font-size','16')
+		$('#photoSwitchId').css('font-weight','')
+		//影藏和显示
+		$('#basicId').attr('hidden','hidden')
+		$('#pwdId').removeAttr('hidden')
+		$('#photoId').attr('hidden','hidden')
+	
+	}
+
+	//切换到上传头像
+	function switch_photo(){
+		//字体样式
+		$('#photoSwitchId').css('font-size','18')
+		$('#photoSwitchId').css('font-weight','bold')
+		$('#basicSwitchId').css('font-size','16')
+		$('#basicSwitchId').css('font-weight','')
+		$('#pwdSwitchId').css('font-size','16')
+		$('#pwdSwitchId').css('font-weight','')
+		//影藏和显示
+		$('#photoId').removeAttr('hidden')
+		$('#pwdId').attr('hidden','hidden')
+		$('#basicId').attr('hidden','hidden')
+	
+	}
+	
+	
+	
+
+</script>
 
 
 </body>

@@ -85,9 +85,9 @@
     	line-height: 35px;
   		color:#808080;
   		font-weight:bold;
-  		font-size:25px;
+  		font-size:20px;
   		padding:16px;
-    	width: 100px;
+    	width: 220px;
 		height:50px;
 		background-color:white;
 		position:relative;
@@ -119,7 +119,7 @@
 					<img src='/statics/img/home.jpg'>亿达首页
 				</div>
 				{% if account %}
-					<div  class='top-default-left'>{{account}}</div>
+					<a href='/userCenter/'><div  class='top-default-left'>{{account}}</div></a>
 					<div  class='top-default-left' onclick='goLogout()'>退出</div>
 				{% endif  %}
 				<div  class='top-default-right' onclick='goSeller()'>卖家中心</div>

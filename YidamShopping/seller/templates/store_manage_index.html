@@ -47,6 +47,7 @@
 			width:400px;
 			height:550px;
 			position:relative;
+			border:2px solid #E0E0E0;
 		}
 		.t1-left1-img{
 			width:400px;
@@ -98,6 +99,7 @@
 			width:420px;
 			height:280px;
 			position:relative;
+			border:2px solid #E0E0E0;
 		}
 		
 		.t1-right1-img{
@@ -127,6 +129,7 @@
 			position:relative;
 			width:380px;
 			height:240px;
+			border:2px solid #E0E0E0;
 		}
 		.t1-right2-img{
 			position:absolute;
@@ -158,6 +161,7 @@
 			height:160px;
 			margin:15px;
 			position:relative;
+			border:2px solid #E0E0E0;
 		}
 		.t2-img{
 			position:absolute;
@@ -211,6 +215,7 @@
 			width:300px;
 			height:350px;
 			position:relative;
+			border:2px solid #E0E0E0;
 		}
 		.t3-img{
 			position:absolute;
@@ -324,6 +329,20 @@
 		box-shadow: inset 0px 1px 4px #ECECEC;
 		-moz-box-shadow: inset 0px 1px 4px #ECECEC;
 		-webkit-box-shadow: inset 0px 1px 4px #ECECEC;}
+		
+		
+		
+	
+	/*绝对定位,a链接失效！！！解决办法，添加一个绝对定位，透明，外面加上a链接*/
+		.link-div{
+			position:absolute;
+			z-index:1000;
+			right:0px;
+			bottom:40px;
+			top:0px;
+			left:0px;
+			cursor:pointer;
+		}
 			
 	</style>
 	
@@ -358,9 +377,12 @@
 							<img class='t1-left1-indexVertical' src='/statics/img/store_manage_indexVertical.jpg'>
 						{% endif %}
 					</div>
+					{% if typeOrder1 %}
+						<div class='link-div' id='typeLink1'></div><!--链接层div-->
+					{% endif %}
 					<div class='add-del-operate'>
 							{% if typeOrder1 %}
-								<span  class='onLeave' >-删除分类</span>
+								<span  id='typeDele1' class='onLeave' >-删除分类</span>
 							{% else %}
 								<span id='typeAdd1'  class='onLeave' >+增加分类</span>	
 							{% endif %}
@@ -389,7 +411,10 @@
 						{% endif %}
 					</div>
 					{% if typeOrder2 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除分类</span></div>
+						<div class='link-div' id='typeLink2'></div><!--链接层div-->
+					{% endif %}
+					{% if typeOrder2 %}
+						<div class='add-del-operate'><span class='onLeave' id='typeDele2'>-删除分类</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave'  id='typeAdd2'>+增加分类</span></div>
 					{% endif %}
@@ -415,7 +440,10 @@
 						{% endif %}
 					</div>
 					{% if typeOrder3 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除分类</span></div>
+						<div class='link-div' id='typeLink3'></div><!--链接层div-->
+					{% endif %}
+					{% if typeOrder3 %}
+						<div class='add-del-operate'><span class='onLeave' id='typeDele3'>-删除分类</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='typeAdd3'>+增加分类</span></div>
 					{% endif %}
@@ -451,7 +479,10 @@
 								{% endif %}
 							</div>
 							{% if typeOrder4 %}
-								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+								<div class='link-div' id='typeLink4'></div><!--链接层div-->
+							{% endif %}
+							{% if typeOrder4 %}
+								<div class='add-del-operate'><span class='onLeave'  id='typeDele4'>-删除分类</span></div>
 							{% else %}
 								<div class='add-del-operate'><span class='onLeave' id='typeAdd4'>+增加分类</span></div>
 							{% endif %}
@@ -477,7 +508,10 @@
 								{% endif %}
 							</div>
 							{% if typeOrder5 %}
-								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+								<div class='link-div' id='typeLink5'></div><!--链接层div-->
+							{% endif %}
+							{% if typeOrder5 %}
+								<div class='add-del-operate'><span class='onLeave' id='typeDele5' >-删除分类</span></div>
 							{% else %}
 								<div class='add-del-operate'><span class='onLeave' id='typeAdd5'>+增加分类</span></div>
 							{% endif %}
@@ -504,7 +538,10 @@
 								{% endif %}
 							</div>
 							{% if typeOrder6 %}
-								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+								<div class='link-div' id='typeLink6'></div><!--链接层div-->
+							{% endif %}
+							{% if typeOrder6 %}
+								<div class='add-del-operate'><span class='onLeave' id='typeDele6'>-删除分类</span></div>
 							{% else %}
 								<div class='add-del-operate'><span class='onLeave' id='typeAdd6'>+增加分类</span></div>
 							{% endif %}
@@ -529,7 +566,10 @@
 								{% endif %}
 							</div>
 							{% if typeOrder7 %}
-								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+								<div class='link-div' id='typeLink7'></div><!--链接层div-->
+							{% endif %}
+							{% if typeOrder7 %}
+								<div class='add-del-operate'><span class='onLeave' id='typeDele7'>-删除分类</span></div>
 							{% else %}
 								<div class='add-del-operate'><span class='onLeave' id='typeAdd7'>+增加分类</span></div>
 							{% endif %}
@@ -567,7 +607,10 @@
 								{% endif %}
 							</div>
 							{% if typeOrder8 %}
-								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+								<div class='link-div' id='typeLink8'></div><!--链接层div-->
+							{% endif %}
+							{% if typeOrder8 %}
+								<div class='add-del-operate'><span class='onLeave' id='typeDele8'>-删除分类</span></div>
 							{% else %}
 								<div class='add-del-operate'><span class='onLeave' id='typeAdd8'>+增加分类</span></div>
 							{% endif %}
@@ -593,7 +636,10 @@
 								{% endif %}
 							</div>
 							{% if typeOrder9 %}
-								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+								<div class='link-div' id='typeLink9'></div><!--链接层div-->
+							{% endif %}
+							{% if typeOrder9 %}
+								<div class='add-del-operate'><span class='onLeave' id='typeDele9'>-删除分类</span></div>
 							{% else %}
 								<div class='add-del-operate'><span class='onLeave' id='typeAdd9'>+增加分类</span></div>
 							{% endif %}
@@ -618,7 +664,10 @@
 								{% endif %}
 							</div>
 							{% if typeOrder10 %}
-								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+								<div class='link-div' id='typeLink10'></div><!--链接层div-->
+							{% endif %}
+							{% if typeOrder10 %}
+								<div class='add-del-operate'><span class='onLeave' id='typeDele10'>-删除分类</span></div>
 							{% else %}
 								<div class='add-del-operate'><span class='onLeave' id='typeAdd10'>+增加分类</span></div>
 							{% endif %}
@@ -644,7 +693,10 @@
 								{% endif %}
 							</div>
 							{% if typeOrder11 %}
-								<div class='add-del-operate'><span class='onLeave' >-删除分类</span></div>
+								<div class='link-div' id='typeLink11'></div><!--链接层div-->
+							{% endif %}
+							{% if typeOrder11 %}
+								<div class='add-del-operate'><span class='onLeave' id='typeDele11'>-删除分类</span></div>
 							{% else %}
 								<div class='add-del-operate'><span class='onLeave' id='typeAdd11'>+增加分类</span></div>
 							{% endif %}
@@ -687,7 +739,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder1 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink1'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder1 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele1'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd1'>+增加商品</span></div>
 					{% endif %}
@@ -718,7 +773,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder2 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink2'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder2 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele2'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd2'>+增加商品</span></div>
 					{% endif %}
@@ -748,7 +806,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder3 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink3'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder3 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele3'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd3'>+增加商品</span></div>
 					{% endif %}
@@ -787,7 +848,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder4 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink4'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder4 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele4'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd4'>+增加商品</span></div>
 					{% endif %}
@@ -818,7 +882,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder5 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink5'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder5 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele5'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd5'>+增加商品</span></div>
 					{% endif %}
@@ -848,7 +915,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder6 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink6'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder6 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele6'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd6'>+增加商品</span></div>
 					{% endif %}
@@ -888,7 +958,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder7 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink7'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder7 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele7'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd7'>+增加商品</span></div>
 					{% endif %}
@@ -919,7 +992,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder8 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink8'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder8 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele8'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd8'>+增加商品</span></div>
 					{% endif %}
@@ -949,7 +1025,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder9 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink9'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder9 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele9'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd9'>+增加商品</span></div>
 					{% endif %}
@@ -989,7 +1068,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder10 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink10'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder10 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele10'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd10'>+增加商品</span></div>
 					{% endif %}
@@ -1020,7 +1102,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder11 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink11'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder11 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele11'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd11'>+增加商品</span></div>
 					{% endif %}
@@ -1050,7 +1135,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder12 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink12'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder12 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele12'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd12'>+增加商品</span></div>
 					{% endif %}
@@ -1089,7 +1177,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder13 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink13'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder13 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele13'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd13'>+增加商品</span></div>
 					{% endif %}
@@ -1120,7 +1211,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder14 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink14'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder14 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele14'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd14'>+增加商品</span></div>
 					{% endif %}
@@ -1150,7 +1244,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder15 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink15'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder15 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele15'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd15'>+增加商品</span></div>
 					{% endif %}
@@ -1190,7 +1287,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder16 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink16'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder16 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele16'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd16'>+增加商品</span></div>
 					{% endif %}
@@ -1221,7 +1321,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder17 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink17'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder17 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele17'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd17'>+增加商品</span></div>
 					{% endif %}
@@ -1251,7 +1354,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder18 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink18'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder18 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele18'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd18'>+增加商品</span></div>
 					{% endif %}
@@ -1290,7 +1396,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder19 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink19'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder19 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele19'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd19'>+增加商品</span></div>
 					{% endif %}
@@ -1321,7 +1430,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder20 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink20'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder20 %}
+						<div class='add-del-operate'><span class='onLeave' id='productDele20'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd20'>+增加商品</span></div>
 					{% endif %}
@@ -1351,7 +1463,10 @@
 						{% endif %}
 					</div>
 					{% if productOrder21 %}
-						<div class='add-del-operate'><span class='onLeave'>-删除商品</span></div>
+						<div class='link-div' id='proLink21'></div><!--链接层div-->
+					{% endif %}
+					{% if productOrder21 %}
+						<div class='add-del-operate'><span class='onLeave' id='productdele21'>-删除商品</span></div>
 					{% else %}
 						<div class='add-del-operate'><span class='onLeave' id='productAdd21'>+增加商品</span></div>
 					{% endif %}
@@ -1448,6 +1563,16 @@
 
 
 
+
+<!--隔离区div-->
+<div class='gap-div' style='width:100%;height:30px;padding:0px;margin:0px;background-color:white;clear:both;'></div>
+<!--底部-->
+{% include "bottom.html" %}
+
+
+
+
+
 <script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
 <script type='text/javascript'>
 
@@ -1509,72 +1634,140 @@
 			});
 			
 			
-			//1号分类添加点击事件,bind方法，可以传递参数，字典类型参数
-			$('#typeAdd1').bind('click',{'order':1},addHomeType)
-			//2号分类添加点击事件
-			$('#typeAdd2').bind('click',{'order':2},addHomeType)
-			//3号分类添加点击事件
-			$('#typeAdd3').bind('click',{'order':3},addHomeType)
-			//4号分类添加点击事件
-			$('#typeAdd4').bind('click',{'order':4},addHomeType)
-			//5号分类添加点击事件
-			$('#typeAdd5').bind('click',{'order':5},addHomeType)
-			//6号分类添加点击事件
-			$('#typeAdd6').bind('click',{'order':6},addHomeType)
-			//7号分类添加点击事件
-			$('#typeAdd7').bind('click',{'order':7},addHomeType)
-			//8号分类添加点击事件
-			$('#typeAdd8').bind('click',{'order':8},addHomeType)
-			//9号分类添加点击事件
-			$('#typeAdd9').bind('click',{'order':9},addHomeType)
-			//10号分类添加点击事件
-			$('#typeAdd10').bind('click',{'order':10},addHomeType)
-			//11号分类添加点击事件
-			$('#typeAdd11').bind('click',{'order':11},addHomeType)
+			//1-11号分类添加点击事件,bind方法，可以传递参数，字典类型参数
+			for(i=1;i<=11;i++){
+				$('#typeAdd'+i).bind('click',{'order':i},addHomeType)
+			}
+			
+			//1-11号分类删除点击事件,bind方法，可以传递参数，字典类型参数
+			for(i=1;i<=11;i++){
+				$('#typeDele'+i).bind('click',{'order':i},delHomeType)
+			}
+	
+			//1-21号商品添加单击事件
+			for(i=1;i<=21;i++){
+				$('#productAdd'+i).bind('click',{'order':i},addHomeProduct)
+			}
+			
+			//1-21号商品删除单击事件
+			for(i=1;i<=21;i++){
+				$('#productDele'+i).bind('click',{'order':i},delHomeProduct)
+			}
 			
 			
-			//1号商品添加单击事件
-			$('#productAdd1').bind('click',{'order':1},addHomeProduct)
-			//2号商品添加单击事件
-			$('#productAdd2').bind('click',{'order':2},addHomeProduct)
-			//3号商品添加单击事件
-			$('#productAdd3').bind('click',{'order':3},addHomeProduct)
-			//3号商品添加单击事件
-			$('#productAdd4').bind('click',{'order':4},addHomeProduct)
-			//5号商品添加单击事件
-			$('#productAdd5').bind('click',{'order':5},addHomeProduct)
-			//6号商品添加单击事件
-			$('#productAdd6').bind('click',{'order':6},addHomeProduct)
-			//7号商品添加单击事件
-			$('#productAdd7').bind('click',{'order':7},addHomeProduct)
-			//8号商品添加单击事件
-			$('#productAdd8').bind('click',{'order':8},addHomeProduct)
-			//9号商品添加单击事件
-			$('#productAdd9').bind('click',{'order':9},addHomeProduct)
-			//10号商品添加单击事件
-			$('#productAdd10').bind('click',{'order':10},addHomeProduct)
-			//11号商品添加单击事件
-			$('#productAdd11').bind('click',{'order':11},addHomeProduct)
-			//12号商品添加单击事件
-			$('#productAdd12').bind('click',{'order':12},addHomeProduct)
-			//13号商品添加单击事件
-			$('#productAdd13').bind('click',{'order':13},addHomeProduct)
-			//14号商品添加单击事件
-			$('#productAdd14').bind('click',{'order':14},addHomeProduct)
-			//15号商品添加单击事件
-			$('#productAdd15').bind('click',{'order':15},addHomeProduct)
-			//16号商品添加单击事件
-			$('#productAdd16').bind('click',{'order':16},addHomeProduct)
-			//17号商品添加单击事件
-			$('#productAdd17').bind('click',{'order':17},addHomeProduct)
-			//18号商品添加单击事件
-			$('#productAdd18').bind('click',{'order':18},addHomeProduct)
-			//19号商品添加单击事件
-			$('#productAdd19').bind('click',{'order':19},addHomeProduct)
-			//20号商品添加单击事件
-			$('#productAdd20').bind('click',{'order':20},addHomeProduct)
-			//21号商品添加单击事件
-			$('#productAdd21').bind('click',{'order':21},addHomeProduct)
+			
+			
+			//管理首页分类切换
+			$('#typeLink1').click(function(){
+				window.location.href='/showProduct/{{typeOrder1.0}}'
+			});
+			$('#typeLink2').click(function(){
+				window.location.href='/showProduct/{{typeOrder2.0}}'
+			});
+			$('#typeLink3').click(function(){
+				window.location.href='/showProduct/{{typeOrder3.0}}'
+			});
+			$('#typeLink4').click(function(){
+				window.location.href='/showProduct/{{typeOrder4.0}}'
+			});
+			$('#typeLink5').click(function(){
+				window.location.href='/showProduct/{{typeOrder5.0}}'
+			});
+			$('#typeLink6').click(function(){
+				window.location.href='/showProduct/{{typeOrder6.0}}'
+			});
+			$('#typeLink7').click(function(){
+				window.location.href='/showProduct/{{typeOrder7.0}}'
+			});
+			$('#typeLink8').click(function(){
+				window.location.href='/showProduct/{{typeOrder8.0}}'
+			});
+			$('#typeLink9').click(function(){
+				window.location.href='/showProduct/{{typeOrder9.0}}'
+			});
+			$('#typeLink10').click(function(){
+				window.location.href='/showProduct/{{typeOrder10.0}}'
+			});
+			$('#typeLink11').click(function(){
+				window.location.href='/showProduct/{{typeOrder11.0}}'
+			});
+			
+			
+			
+			
+			
+			//管理首页商品切换
+			$('#proLink1').click(function(){
+				window.location.href='/editProduct/{{productOrder1.0}}'
+			});
+			$('#proLink2').click(function(){
+				window.location.href='/editProduct/{{productOrder2.0}}'
+			});
+			$('#proLink3').click(function(){
+				window.location.href='/editProduct/{{productOrder3.0}}'
+			});
+			$('#proLink4').click(function(){
+				window.location.href='/editProduct/{{productOrder4.0}}'
+			});
+			$('#proLink5').click(function(){
+				window.location.href='/editProduct/{{productOrder5.0}}'
+			});
+			$('#proLink6').click(function(){
+				window.location.href='/editProduct/{{productOrder6.0}}'
+			});
+			$('#proLink7').click(function(){
+				window.location.href='/editProduct/{{productOrder7.0}}'
+			});
+			$('#proLink8').click(function(){
+				window.location.href='/editProduct/{{productOrder8.0}}'
+			});
+			$('#proLink9').click(function(){
+				window.location.href='/editProduct/{{productOrder9.0}}'
+			});
+			$('#proLink10').click(function(){
+				window.location.href='/editProduct/{{productOrder10.0}}'
+			});
+			$('#proLink11').click(function(){
+				window.location.href='/editProduct/{{productOrder11.0}}'
+			});
+			$('#proLink12').click(function(){
+				window.location.href='/editProduct/{{productOrder12.0}}'
+			});
+			$('#proLink13').click(function(){
+				window.location.href='/editProduct/{{productOrder13.0}}'
+			});
+			$('#proLink14').click(function(){
+				window.location.href='/editProduct/{{productOrder14.0}}'
+			});
+			$('#proLink15').click(function(){
+				window.location.href='/editProduct/{{productOrder15.0}}'
+			});
+			$('#proLink16').click(function(){
+				window.location.href='/editProduct/{{productOrder16.0}}'
+			});
+			$('#proLink17').click(function(){
+				window.location.href='/editProduct/{{productOrder17.0}}'
+			});
+			$('#proLink18').click(function(){
+				window.location.href='/editProduct/{{productOrder18.0}}'
+			});
+			$('#proLink19').click(function(){
+				window.location.href='/editProduct/{{productOrder19.0}}'
+			});
+			$('#proLink20').click(function(){
+				window.location.href='/editProduct/{{productOrder20.0}}'
+			});
+			$('#proLink21').click(function(){
+				window.location.href='/editProduct/{{productOrder21.0}}'
+			});
+			
+			
+			
+			
+			
+			
+			
+			
 	
 	});
 	
@@ -1619,12 +1812,13 @@
 				success:function(result){
 					if(result=='True'){
 						alert('成功添加首页分类')
+						window.location.reload()
 						}else if(result=='Empty'){
 							alert('失败！参数不能为空')
 						}else{
 							alert('失败！添加分类不能重复')
 						}
-					window.location.reload()
+					
 					}
 			});
 			
@@ -1676,12 +1870,13 @@
 				success:function(result){
 					if(result=='True'){
 						alert('成功添加首页商品')
+						window.location.reload()
 					}else if(result=='Empty'){
 							alert('失败！参数不能为空')
 					}else{
 							alert('失败！添加商品不能重复')
 					}
-					window.location.reload()
+					
 				},
 			});
 		
@@ -1697,6 +1892,47 @@
 			$('#secondTypeImgId').css('background-color','')
 			$('#secondTypeImgId').removeAttr("disabled")
 			});
+	}
+	
+	
+	
+	
+	//删除首页分类
+	function delHomeType(event){
+		var order=event.data.order
+		$.ajax({
+			url:'/delHomeType/',
+			method:'post',
+			data:{'order':order},
+			success:function(result){
+				if(result=='True'){
+					window.location.reload()
+				}else{
+					alert('删除失败')
+				}
+			},
+			
+		});
+	}
+	
+	
+	
+	//删除首页商品
+	function delHomeProduct(event){
+		var order=event.data.order
+		$.ajax({
+			url:'/delHomeProduct/',
+			method:'post',
+			data:{'order':order},
+			success:function(result){
+				if(result=='True'){
+					window.location.reload()
+				}else{
+					alert('删除失败')
+				}
+			},
+			
+		});
 	}
 
 </script>		

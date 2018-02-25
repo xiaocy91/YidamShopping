@@ -27,6 +27,52 @@
 			right:0px;
 			top:15px;
 		}	
+		
+		
+		/*整个订单页面的边距*/
+		.page-div{
+			width:900px;
+			min-height:400px;
+			margin-left:49px;
+			margin-top:15px;
+			margin-bottom:15px;
+		}	
+		
+		
+		.p-item{
+			line-height: 25px;
+		    position: relative;
+		    padding-left: 6em;
+		}
+		.label-prompt{
+			position: absolute;
+		    vertical-align: middle;
+		    left: 0;
+		    height: 26px;
+		    line-height: 26px;
+		    display: block;
+		}
+		
+		
+		/*保存按钮*/
+		.save-btn{
+			display: block;
+		    color: #fff;
+		    padding: 0 11px;
+		    background-position: 100% -320px ;
+		    background-color:#808080;
+		    border: 0;
+		    cursor: pointer;
+		    line-height: 22px;
+		    margin-left:60px;
+		}
+		
+		.store-input{
+			padding: 5px;
+		    border: 1px solid #cecece;
+		    width: 300px;
+		    font-size:14px;
+		}
 			
 	</style>
 	
@@ -46,10 +92,44 @@
 	
 	<div class='bodyContent'>
 	
+		
+		<div class='page-div'>
+			
+			{% if openStore %}
+				<form method='POST' action='/modifyStore/'>
+					 <p class='p-item'>
+					      <label class='label-prompt'>店铺名称：</label>
+					      <input name='storeName' class="store-input" type="text"  maxlength="10" {% if storeName %} value='{{storeName}}' {% endif %} />
+					 </p>
+					 
+					  <p class='p-item'>
+					      <label class='label-prompt'>店铺地址：</label>
+					      <input name='storeAddr' class="store-input" type="text"  maxlength="10"  {% if storeAddr %} value='{{storeAddr}}' {% endif %}/>
+					 </p>
+					 
+					 <p class='p-item'>
+					      <label class='label-prompt'>掌柜：</label>
+					      <input name='storeBoss' class="store-input" type="text"  maxlength="8" {% if storeBoss %} value='{{storeBoss}}' {% endif %}/>
+					 </p>
+					 
+					 <span class='save-span'>
+		                <button class="save-btn"  type="submit" id="J_saveProfile">保存</button>
+		            </span>
+				</form>
+			{% else %}
+				<div style='font-size:18px;font-weight:bold;'>您还没有开通店铺，请在'我要开店'中进行开通！</div>
+			{% endif %}
+		</div>
+		
 	</div>
 	
 </div>
 
+
+<!--隔离区div-->
+<div class='gap-div' style='width:100%;height:30px;padding:0px;margin:0px;background-color:white;clear:both;'></div>
+<!--底部-->
+{% include "bottom.html" %}
 
 
 

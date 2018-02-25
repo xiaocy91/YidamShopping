@@ -98,13 +98,13 @@
    		text-decoration:none;
    	}
 
-
+	/*店铺名称*/
 	.store-name{
     	line-height: 35px;
   		color:#808080;
   		font-weight:bold;
-  		font-size:15px;
-    	width: 100px;
+  		font-size:20px;
+    	width: 220px;
 		height:50px;
 		background-color:white;
 		position:relative;
@@ -113,6 +113,54 @@
 		height: 38px;
     	border-left: 1px solid #f0f0f0;
     	padding: 30px 0 0 10px;}
+    
+    /*店铺评分*/
+    .store-code{
+    	line-height: 35px;
+  		color:#000;
+  		font-weight:bold;
+  		font-size:20px;
+    	width: 120px;
+		height:50px;
+		background-color:white;
+		position:relative;
+		float:left;
+		font-family: "\5b8b\4f53";
+		height: 38px;
+    	border-left: 1px solid #f0f0f0;
+    	padding: 30px 0 0 10px;
+    }
+    
+    /*店铺掌柜*/
+    .store-boss{
+    	line-height: 35px;
+  		color:#000;
+  		font-size:13px;
+    	width: 160px;
+		height:50px;
+		background-color:white;
+		position:relative;
+		float:left;
+		font-family: "\5b8b\4f53";
+		height: 38px;
+    	border-left: 1px solid #f0f0f0;
+    	padding: 30px 0 0 10px;
+    }
+    /*店铺地址*/
+     .store-addr{
+    	line-height: 35px;
+  		color:#000;
+  		font-size:13px;
+    	width: 200px;
+		height:50px;
+		background-color:white;
+		position:relative;
+		float:left;
+		font-family: "\5b8b\4f53";
+		height: 38px;
+    	border-left: 1px solid #f0f0f0;
+    	padding: 30px 0 0 10px;
+    }
     	
     	
  
@@ -158,7 +206,64 @@
 		border-bottom:1px solid #CCC;
 	}
   
-    	
+  	/*首页、所有商品按钮钥匙*/
+  	.home-btn{
+  		padding-left:23px;
+  		padding-right:23px;
+  		padding-top:5px;
+  		padding-bottom:5px;
+  	}
+  	.all-btn{
+  		padding-left:10px;
+  		padding-right:10px;
+  		padding-top:5px;
+  		padding-bottom:5px;
+  	}
+  	
+  	
+  	/*所有分类样式*/
+  	.all-type-div{
+  		position:absolute;
+  		z-index:1020;
+  		width:100%;
+  		height:220px;
+  		background-color:white;
+  		border-bottom:1px solid #F5F5F5;
+  	
+  	}
+  	.all-type-content{
+  		position:absolute;
+  		z-index:1020;
+  		width:1200px;
+  		min-height:190px;
+  		left:50%;
+  		margin-left:-600px;
+  	}
+  	
+  	/*全部分类样式*/
+  	.all-type{
+  		list-style:none;
+  		width:100px;
+  		float:left;
+  		margin:5px;
+  		min-height:190px;
+  		
+  	}
+  	/*一级分类*/
+  	.first-type{
+  		font-size:15px;
+  		font-weight:bold;
+  		color:#000;
+  		line-height:25px;
+  		text-align:left;
+  	}
+  	.secon-type{
+  		font-size:15px;
+  		color:#000;
+  		line-height:25px;
+  		text-align:left;
+  	}
+  	
 	</style>
 	
 	<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
@@ -183,7 +288,7 @@
 			</div>
 			
 			{% if account %}
-				<div  class='top-default-left'>{{account}}</div>
+				<a href='/userCenter/'><div  class='top-default-left'>{{account}}</div></a>
 				<div  class='top-default-left' onclick='goLogout()'>退出</div>
 			{% else %}
 				<div  class='top-default-left' onclick='goLoad()'>请登陆</div>
@@ -207,16 +312,16 @@
 		{% if storeName%}
 			<a href='/viewStore/?storeId={{storeId}}'><div  class='store-name'>{{storeName}}</div></a>
 			
-			<div class='store-name'>动态评分:?</div>
+			<div class='store-code'>动态评分:?</div>
 			
-			<div class='store-name'>
+			<div class='store-boss'>
 				店主:
 				{% if storeBossName %}
 					{{storeBossName}}
 				{% endif %}
     		</div>
     		
-    		<div class='store-name'>
+    		<div class='store-addr'>
 				地址:
 				{% if storeAddr%}
 					{{storeAddr}}
@@ -231,15 +336,15 @@
 
 
 <!--商品分类-->
-<div class='type-div'>
+<div class='type-div' >
 	<div class='type-name'>
 		<span class='next1'>
-			<a href='/viewStore/?storeId={{storeId}}'>
+			<a href='/viewStore/?storeId={{storeId}}' class='home-btn'>
 				<span style="color:rgb(0,0,0);">首页 </span>
 			</a>
 		 </span>
 		 <span class='next1'>
-			<span style="color:rgb(0,0,0);">所有商品 </span>
+			<span style="color:rgb(0,0,0);" class='all-btn'>所有商品 </span>
 		 </span>
 		 {% if secondTypeLists %}
 			 {% for secondTypeList in  secondTypeLists%}
@@ -258,10 +363,60 @@
 
 
 
+<!--全部商品分类-->
+<div class='all-type-div' hidden='hidden' >
+	<div class='all-type-content'>
+		{% if all_firstLists %}
+			{% for all_first in all_firstLists %}
+				<div class='all-type'>
+						<li class='first-type' value='{{all_first.0}}'>{{all_first.1}}</li>
+						{% for all_secon in all_first.2 %}
+							<a href='/viewType/?storeId={{storeId}}&secondId={{all_secon.0}}'>
+								<li class='secon-type'>{{all_secon.1}}</li>
+							</a>
+						{% endfor %}	
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+</div>
+
+
+
 
 
 <!--javacript动态交换部分-->
 <script type='text/javascript'>
+
+
+$(function(){
+	
+	
+	//全部商品按钮鼠标移入事件
+	$('.all-btn').mouseover(function(){
+		$('.all-type-div').removeAttr('hidden')
+		//所有商品div样式，父div跟子div一起变化
+		var high=$('.all-type-content').height()+'px'
+		$('.all-type-div').css('height',high)
+		
+	});
+	
+	//全部商品按钮鼠标移出
+	$('.all-btn').mouseout(function(){
+		//所有商品分类鼠标事件
+		$('.all-type-div').mouseover(function(){
+			$(this).removeAttr('hidden')
+		});
+		$('.all-type-div').mouseout(function(){
+			$(this).attr('hidden','hidden')
+		});
+	
+	});
+	
+	
+	
+
+});
 
 function goLoad(){
 	window.location.href='/load/'

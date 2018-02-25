@@ -182,7 +182,7 @@
 				<a href='/index/'><img src='/statics/img/home.jpg'>亿达首页</a>
 			</div>
 			{% if account %}
-				<div  class='top-default-left'>{{account}}</div>
+				<a href='/userCenter/'><div  class='top-default-left'>{{account}}</div></a>
 				<div  class='top-default-left' onclick='goLogout()'>退出</div>
 			{% else %}
 				<div  class='top-default-left' onclick='goLoad()'>请登陆</div>

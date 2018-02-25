@@ -19,20 +19,49 @@
 			margin:10px;
 		}
 		
-		
-		.nameFirst{
+		/*暂时没有！！！！！！！！用于上下收拢的特效*/
+		.nameFirst_change{
 			font-weight:bold;
 			font-size:18px;
-			padding:3px 5px 3px 5px;}
+			padding:3px 5px 3px 5px;
+			margin:2px;
+			width:158px;
+			height:35px;
+			background-image: url(/statics/img/type_down_open.jpg);
+			background-size:158px 40px;
+			cursor:pointer;}
+			
+			
+		.nameFirst_fixed{
+			font-weight:bold;
+			font-size:18px;
+			padding:3px 5px 3px 5px;
+			margin:2px;
+			width:158px;
+			height:30px;
+			background-color: #F5F5F5;
+			cursor:pointer;
+		}
+		
+		.nameFirst_nopointer{
+			font-weight:bold;
+			font-size:18px;
+			padding:3px 5px 3px 5px;
+			margin:2px;
+			width:158px;
+			height:30px;
+			background-color: #F5F5F5;
+		}
 			
 		.nameSecond{
 			font-size:15px;
 			padding:3px 5px 3px 5px;
-			cursor:pointer;}
+			cursor:pointer;
+		}
 			
 	</style>
 	
-	<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
+	
 	
 </head>
 
@@ -44,32 +73,68 @@
 		<div class='div-left'>
 		{% if typeDic%}
 			{% for key,value in typeDic.items %}
-				<div class='nameFirst'> {{key.1}} </div>
+				<div class='nameFirst_nopointer' id='{{key.1}}'> {{key.1}} </div>
 				{% for sencondType in value %}
-					<div class='nameSecond' onclick='showProduct({{sencondType.0}})'>{{sencondType.1}}</div>
+					<!--这里的二级标题的id 和一级标题的id重复了，所有二级标题的id写成secon加数字？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？-->
+					<div class='nameSecond' onclick='showProduct({{sencondType.0}})' id='secon{{sencondType.0}}'>{{sencondType.1}}</div>
 				{% endfor %}
 			{% endfor %}
 		{% endif %}
 		
-		<div class='nameFirst' onclick='editTypes()'>编辑商品分类</div>
-		<div class='nameFirst' onclick='toManageStore()'>店铺主页编辑</div>
+		<div class='nameFirst_fixed' onclick='editTypes()' id='typeEditId'>编辑商品分类</div>
+		<div class='nameFirst_fixed' onclick='toManageStore()' id='indexEditId'>店铺主页编辑</div>
 		
 		</div>
 	</div>
 	
-	
+	<script type='text/javascript' src='/statics/jquery/jquery-3.2.1.js'></script>
 	<script type='text/javascript'>
+		$(function(){
+			//获取页面url中的二级分类参数
+			var url=window.location.pathname
+			//list格式是["", "showProduct", "8", ""]
+			var list=url.split('\/')
+			var len=list.length
+			if(len>=3){
+				//选中二级分类
+				var showpro=list[1]
+				var secondType=list[2]
+				if(secondType!='' && showpro=='showProduct'){
+					$('#secon'+secondType).css('background-color','#CDE1E2')
+				}else if(len>=2){
+					var firstHead=list[1]
+					if(firstHead=='editTypes'){
+						//选中编辑商品分类
+						$('#typeEditId').css('background-color','#CDE1E2')
+					}else{
+						//选中编辑首页
+						$('#indexEditId').css('background-color','#CDE1E2')
+					}
+				}
+			}
+			
+			
+		
+		
+		});
+		
+	
 		function editTypes(){
 			window.location.href='/editTypes/'
 		}
 		
 		function showProduct(key){
+			//二级分类选中样式
+			$('#'+key).css('background-color','#CDE1E2')
+			//显示选定二级分类的商品
 			window.location.href='/showProduct/'+key+'/'
 		}
 		
 		function toManageStore(){
 			window.location.href='/manageStore/'
 		}
+		
+		
 	</script>
 	
 	

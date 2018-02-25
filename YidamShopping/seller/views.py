@@ -19,6 +19,8 @@ from seller.models import HomeProduct
 from lib2to3.fixer_util import Attr
 from user_center.models import Order,OrderProduct
 from user_center.models import Userinfo
+import shutil
+from index_show.models import SysProduct
 
 
 
@@ -26,7 +28,7 @@ from user_center.models import Userinfo
 def sellerIndex(request):
     
     #对session进入卖家中心的学习
-    
+    resData={}
     login_status=request.session.get('login_status',False)
    
     if login_status:
@@ -34,17 +36,24 @@ def sellerIndex(request):
         userinfos=Userinfo.objects.filter(Account=account)
         openStore=userinfos[0].OpenStore
         
-        
         request.session['openStore']=openStore
         
         if openStore:
             userId=userinfos[0].Userid
-            storeId=Store.objects.get(UserNid_id=userId).StoreNid
+            store=Store.objects.get(UserNid_id=userId)
+            storeId=store.StoreNid
+            storeName=store.StoreName
+            storeAddr=store.StoreAddr
+            storeBoss=store.StoreBossName
+            resData['storeName']=storeName
+            resData['storeAddr']=storeAddr
+            resData['storeBoss']=storeBoss
+            resData['storeId']=storeId
         else:
             storeId=-1
+        resData['account']=account
+        resData['openStore']=openStore
        
-            
-        resData={'account':account,'openStore':openStore,'storeId':storeId}
         return render_to_response('seller_index.html',resData)
     else:
         return HttpResponseRedirect('/load/')
@@ -164,6 +173,31 @@ def viewStore(request):
             productOrder='productOrder'+str(productOrder)
             resData[productOrder]=productList
     
+        #获取店铺所有一级、二级分类
+        all_firstTypes=ProductType.objects.filter(StoreNid_id=storeId)
+        all_firstLists=[]
+        if all_firstTypes:
+            for all_firstType in all_firstTypes:
+                all_firstList=[]
+                all_firstTypeId=all_firstType.TypeNid
+                all_firstTypeName=all_firstType.TypeName
+                all_firstList.append(all_firstTypeId)  #0
+                all_firstList.append(all_firstTypeName)  #1
+                #获取对应二级分类
+                all_seconTypes=ProductSecondType.objects.filter(TypeNid_id=all_firstTypeId)
+                all_seconLists=[]
+                for all_seconType in all_seconTypes:
+                    all_seconList=[]
+                    all_seconTypeId=all_seconType.SecondTypeNid
+                    all_seconTypeName=all_seconType.SecondTypeName
+                    all_seconList.append(all_seconTypeId)  #0
+                    all_seconList.append(all_seconTypeName) #1
+                    all_seconLists.append(all_seconList)
+                all_firstList.append(all_seconLists)
+                all_firstLists.append(all_firstList)
+        #封装所有分类
+        resData['all_firstLists']=all_firstLists
+    
     return render_to_response('store_view_index.html',resData)
 
 #店铺分类切换
@@ -240,6 +274,32 @@ def viewType(request):
             
         #将商品列表加入返回的数据字典
         resData['productLists']=productLists   
+        
+        
+        #获取店铺所有一级、二级分类
+        all_firstTypes=ProductType.objects.filter(StoreNid_id=storeId)
+        all_firstLists=[]
+        if all_firstTypes:
+            for all_firstType in all_firstTypes:
+                all_firstList=[]
+                all_firstTypeId=all_firstType.TypeNid
+                all_firstTypeName=all_firstType.TypeName
+                all_firstList.append(all_firstTypeId)  #0
+                all_firstList.append(all_firstTypeName)  #1
+                #获取对应二级分类
+                all_seconTypes=ProductSecondType.objects.filter(TypeNid_id=all_firstTypeId)
+                all_seconLists=[]
+                for all_seconType in all_seconTypes:
+                    all_seconList=[]
+                    all_seconTypeId=all_seconType.SecondTypeNid
+                    all_seconTypeName=all_seconType.SecondTypeName
+                    all_seconList.append(all_seconTypeId)  #0
+                    all_seconList.append(all_seconTypeName) #1
+                    all_seconLists.append(all_seconList)
+                all_firstList.append(all_seconLists)
+                all_firstLists.append(all_firstList)
+        #封装所有分类
+        resData['all_firstLists']=all_firstLists
             
         return render_to_response('store_view_type.html',resData)
 
@@ -304,6 +364,32 @@ def viewProduct(request):
             priceChipId=-1
         resData['priceChip']=priceChip
         resData['priceChipId']=priceChipId
+        
+    
+         #获取店铺所有一级、二级分类
+        all_firstTypes=ProductType.objects.filter(StoreNid_id=storeId)
+        all_firstLists=[]
+        if all_firstTypes:
+            for all_firstType in all_firstTypes:
+                all_firstList=[]
+                all_firstTypeId=all_firstType.TypeNid
+                all_firstTypeName=all_firstType.TypeName
+                all_firstList.append(all_firstTypeId)  #0
+                all_firstList.append(all_firstTypeName)  #1
+                #获取对应二级分类
+                all_seconTypes=ProductSecondType.objects.filter(TypeNid_id=all_firstTypeId)
+                all_seconLists=[]
+                for all_seconType in all_seconTypes:
+                    all_seconList=[]
+                    all_seconTypeId=all_seconType.SecondTypeNid
+                    all_seconTypeName=all_seconType.SecondTypeName
+                    all_seconList.append(all_seconTypeId)  #0
+                    all_seconList.append(all_seconTypeName) #1
+                    all_seconLists.append(all_seconList)
+                all_firstList.append(all_seconLists)
+                all_firstLists.append(all_firstList)
+        #封装所有分类
+        resData['all_firstLists']=all_firstLists
     
     return render_to_response('store_view_product.html',resData)
     
@@ -373,6 +459,7 @@ def getTypesData(request):
         storeName=store[0].StoreName
         #封装返回数据
         resData={'storeName':storeName,'account':account,'typeDic':typeDic}
+        resData['storeId']=storeid
         return resData
 
 
@@ -388,23 +475,107 @@ def delSecondName(request):
         data=request.POST
         secondJson=data.get('secondJson')
         secondJson=json.loads(secondJson)
-        
+        flag=0
         for i in secondJson:
-            ProductSecondType.objects.filter(SecondTypeNid=int(i)).delete()
-        return HttpResponse('True')
+            #判断二级分类是否有对应的商品
+            pro=Product.objects.filter(TypeNid=int(i))
+            if pro:
+                result='删除失败！二级标题存在对应的商品'
+                flag=1
+            else:
+                ProductSecondType.objects.filter(SecondTypeNid=int(i)).delete()
+        #返回结果    
+        if flag:
+            return HttpResponse(result)
+        else:
+            return HttpResponse('True')
+        
 
 #删除一级标题，以及一级标题对应的二级标题
 def delFirstName(request):
     if request.method=='POST':
         data=request.POST
-        firstId=data.get('firstId')
-        
-        #先删除一级对应的所有二级标题
-        ProductSecondType.objects.filter(TypeNid_id=firstId).delete()
+        firstId=data.get('firstId')   
+        #检查一级对应的所有二级标题是否为空
+        second=ProductSecondType.objects.filter(TypeNid_id=firstId)
         #删除一级标题
-        ProductType.objects.filter(TypeNid=firstId).delete()
+        if second:
+            return HttpResponse('删除失败！该一级标题存在对应的二级标题')
+        else:
+            #不存在下级标题
+            ProductType.objects.filter(TypeNid=firstId).delete()
+            return HttpResponse('True')
         
+        
+        
+#清空全部分类
+def delAllType(request):
+     if request.method=='POST':
+        data=request.POST
+        storeId=data.get('storeId')
+        #全部一级分类
+        types=ProductType.objects.filter(StoreNid_id=storeId)
+        for type in types:
+            #全部二级分类
+            seconTypes=ProductSecondType.objects.filter(TypeNid_id=type.TypeNid)
+            for seconType in seconTypes:
+                #全部店铺首页分类
+                homeTypes=HomeType.objects.filter(SecondTypeNid_id=seconType.SecondTypeNid)
+                #全部商品
+                pros=Product.objects.filter(TypeNid_id=seconType.SecondTypeNid)
+        
+                for homeType in homeTypes:
+                    #店铺分类图片删除
+                    homeImgPath=str(homeType.SecondTypeImg)
+                    #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+                    homeImgPathList=homeImgPath.split('/')
+                    folderPath=homeImgPathList[0]+'/'+homeImgPathList[1]
+                    #商品图片所在文件夹路径
+                    homeImgPathFinal=settings.MEDIA_ROOT+'/'+folderPath
+                    #shutil.rmtree可以删除非空文件夹及文件夹里的文件
+                    if os.path.exists(homeImgPathFinal):
+                        shutil.rmtree(homeImgPathFinal)
+                
+                for pro in pros:
+                    #系统首页商品
+                    sysPros=SysProduct.objects.filter(SysProNid=pro.Nid)
+                    if sysPros:
+                        for sysPro in sysPros:
+                            sysPro.delete()
+                    #全部商品图
+                    proImgs=ProductImage.objects.filter(ProductNid_id=pro.Nid)
+                    #全部属性图
+                    proAttr1s=ProductAttr1.objects.filter(ProductNid_id=pro.Nid)
+                    for proImg in proImgs:
+                        #执行删除
+                        proImgPath=str(proImg.Img)
+                        #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+                        proImgPathList=proImgPath.split('/')
+                        folderPath=proImgPathList[0]+'/'+proImgPathList[1]
+                        #商品图片所在文件夹路径
+                        proImgPathFinal=settings.MEDIA_ROOT+'/'+folderPath
+                        #shutil.rmtree可以删除非空文件夹及文件夹里的文件
+                        if os.path.exists(proImgPathFinal):
+                            shutil.rmtree(proImgPathFinal)
+                    for proAttr1 in proAttr1s:
+                        #执行删除
+                        proAttr1ImgPath=str(proAttr1.ImgAttr1)
+                        #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+                        proAttr1ImgPathList=proAttr1ImgPath.split('/')
+                        folderPath=proAttr1ImgPathList[0]+'/'+proAttr1ImgPathList[1]
+                        #属性图片所在文件夹路径
+                        proAttr1ImgPathFinal=settings.MEDIA_ROOT+'/'+folderPath
+                        #shutil.rmtree可以删除非空文件夹及文件夹里的文件
+                        if os.path.exists(proAttr1ImgPathFinal):
+                            shutil.rmtree(proAttr1ImgPathFinal)
+        #图片文件删除后，执行删除所有分类
+        types.delete()  
+        #返回删除结果              
         return HttpResponse('True')
+    
+    
+    
+    
     
 def addSecond(request):
      if request.method=='POST':
@@ -445,6 +616,7 @@ def addFirst(request):
         return HttpResponseRedirect('/editTypes/')
 
 
+#管理店铺分类下产品
 def showProduct(request,secondId):
     if request.method=='GET':
         resData=getTypesData(request)
@@ -602,7 +774,6 @@ def addPrice(request):
             
             return HttpResponse('Duple')
         else:
-            print 'non'
             ProductPrice.objects.create(ProductNid_id=id,Attr1_id=attr1,Attr2_id=attr2,Price=price)
             return HttpResponse('True') 
  
@@ -905,8 +1076,6 @@ def soldOrder(request):
                 proLists.append(proList)
             orderList.append(proLists)
             orderLists.append(orderList)
-        #封装卖出订单信息
-        resData['orderLists']=orderLists
         
         #进行分页    
         paginator = Paginator(orderLists,settings.PER_PAGE)#每页显示多少条数据，在setting里设置
@@ -917,9 +1086,182 @@ def soldOrder(request):
             orderLists = paginator.page(1)
         except EmptyPage:
             orderLists = paginator.page(paginator.num_pages) 
-        
+         #封装卖出订单信息
+        resData['orderLists']=orderLists
             
         return render_to_response('seller_soldOrder.html',resData)    
   
-  
-  
+ 
+ 
+ 
+ #修改店铺信息
+def modifyStore(request):
+    if request.method=='POST':
+        data=request.POST
+        storeAddr=data.get('storeAddr')
+        storeName=data.get('storeName')
+        storeBoss=data.get('storeBoss')
+        storeAddr.strip()
+        storeName.strip()
+        storeBoss.strip()
+        
+        print storeAddr,storeName,storeBoss
+        
+        if storeAddr and storeName and storeBoss:
+            userId=request.session.get('userid')
+            if userId:
+                store=Store.objects.get(UserNid_id=userId)
+                store.StoreName=storeName
+                store.StoreAddr=storeAddr
+                store.StoreBossName=storeBoss
+                store.save()
+                return HttpResponseRedirect('/sellerIndex/')
+        
+        print storeAddr,storeName,storeBoss
+    
+
+#删除首页分类
+def delHomeType(request):
+    if request.method=='POST':
+        data=request.POST
+        order=data.get('order')
+        if order:
+            try:
+                type=HomeType.objects.get(TypeOrder=order)
+                if type:
+                    img=type.SecondTypeImg
+                    path=str(img)
+                    finalPath=structFile(path)
+                    if os.path.exists(finalPath):
+                            #删除文件
+                            shutil.rmtree(finalPath)
+                    #删除数据
+                    type.delete()
+            except Exception:
+                return HttpResponse('False')
+            return HttpResponse('True')
+
+
+#删除首页商品
+def delHomeProduct(request):
+    if request.method=='POST':
+        data=request.POST
+        order=data.get('order')
+        if order:
+            try:
+                pro=HomeProduct.objects.get(ProductOrder=order)
+                if pro:
+                    pro.delete()
+            except Exception:
+                return HttpResponse('False')
+            return HttpResponse('True')
+
+
+#管理删除店铺商品
+def delePro(request):
+    if request.method=='POST':
+        data=request.POST
+        id=data.get('id')
+        try:
+            pro=Product.objects.get(Nid=id)
+             #全部商品图
+            proImgs=ProductImage.objects.filter(ProductNid_id=id)
+            #全部属性图
+            proAttr1s=ProductAttr1.objects.filter(ProductNid_id=id)
+            if proImgs:
+                for proImg in proImgs:
+                    #执行删除
+                    proImgPath=str(proImg.Img)
+                    #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+                    proImgPathList=proImgPath.split('/')
+                    folderPath=proImgPathList[0]+'/'+proImgPathList[1]
+                    #商品图片所在文件夹路径
+                    proImgPathFinal=settings.MEDIA_ROOT+'/'+folderPath
+                    #shutil.rmtree可以删除非空文件夹及文件夹里的文件
+                    if os.path.exists(proImgPathFinal):
+                        shutil.rmtree(proImgPathFinal)
+            if proAttr1s:    
+                for proAttr1 in proAttr1s:
+                    #执行删除
+                    proAttr1ImgPath=str(proAttr1.ImgAttr1)
+                    #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+                    proAttr1ImgPathList=proAttr1ImgPath.split('/')
+                    folderPath=proAttr1ImgPathList[0]+'/'+proAttr1ImgPathList[1]
+                    #属性图片所在文件夹路径
+                    proAttr1ImgPathFinal=settings.MEDIA_ROOT+'/'+folderPath
+                    #shutil.rmtree可以删除非空文件夹及文件夹里的文件
+                    if os.path.exists(proAttr1ImgPathFinal):
+                        shutil.rmtree(proAttr1ImgPathFinal)
+            if pro:
+                pro.delete()            
+            return HttpResponse('True')
+        except Exception:
+            return HttpResponse('False')
+
+
+
+#删除该二级分类下所有商品
+def delTypeAllPro(request):
+    if request.method=='POST':
+        data=request.POST
+        id=data.get('id')
+        #全部商品
+        pros=Product.objects.filter(TypeNid_id=id)
+        if pros:
+            for pro in pros:
+                #系统首页商品
+                sysPros=SysProduct.objects.filter(SysProNid=pro.Nid)
+                if sysPros:
+                    for sysPro in sysPros:
+                        sysPro.delete()
+                #全部商品图
+                proImgs=ProductImage.objects.filter(ProductNid_id=pro.Nid)
+                #全部属性图
+                proAttr1s=ProductAttr1.objects.filter(ProductNid_id=pro.Nid)
+                for proImg in proImgs:
+                    #执行删除
+                    proImgPath=str(proImg.Img)
+                    #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+                    proImgPathList=proImgPath.split('/')
+                    folderPath=proImgPathList[0]+'/'+proImgPathList[1]
+                    #商品图片所在文件夹路径
+                    proImgPathFinal=settings.MEDIA_ROOT+'/'+folderPath
+                    #shutil.rmtree可以删除非空文件夹及文件夹里的文件
+                    if os.path.exists(proImgPathFinal):
+                        shutil.rmtree(proImgPathFinal)
+                for proAttr1 in proAttr1s:
+                    #执行删除
+                    proAttr1ImgPath=str(proAttr1.ImgAttr1)
+                    #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+                    proAttr1ImgPathList=proAttr1ImgPath.split('/')
+                    folderPath=proAttr1ImgPathList[0]+'/'+proAttr1ImgPathList[1]
+                    #属性图片所在文件夹路径
+                    proAttr1ImgPathFinal=settings.MEDIA_ROOT+'/'+folderPath
+                    #shutil.rmtree可以删除非空文件夹及文件夹里的文件
+                    if os.path.exists(proAttr1ImgPathFinal):
+                        shutil.rmtree(proAttr1ImgPathFinal)
+                #删除商品数据
+                pro.delete()
+            return HttpResponse('True')
+        else:
+            return HttpResponse('False')
+        
+
+
+
+
+
+
+
+
+
+#
+#重组需要删除的文件路径
+#
+def structFile(path):
+    #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+    pathList=path.split('/')
+    folderPath=pathList[0]+'/'+pathList[1]
+    #属性图片所在文件夹路径
+    pathListFinal=settings.MEDIA_ROOT+'/'+folderPath
+    return pathListFinal

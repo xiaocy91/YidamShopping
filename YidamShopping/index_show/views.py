@@ -1,6 +1,6 @@
 #encoding:utf-8
 
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render,render_to_response, redirect
 from seller.models import Store,HomeProduct,HomeType,ProductSecondType,Product,ProductImage,ProductPrice,\
     ProductType,ProductImage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -9,13 +9,12 @@ from user_center.models import Userinfo
 from models import SysStore,SysProduct
 from django.http.response import HttpResponse
 import json
-
+import os
+import shutil
 # Create your views here.
 
 def index(request):
     resData=getSysStore()
-    
-   
     
     login_status=request.session.get('login_status')
     if login_status:
@@ -40,7 +39,7 @@ def index(request):
    
 
 
-def searchStore(request):
+def searchStorePro(request):
     resData={}
     if request.method=='POST':
         data=request.POST
@@ -51,52 +50,98 @@ def searchStore(request):
             account=request.session.get('account')
             resData['account']=account
         
-        storeName=data.get('storeName')
-        storeLists=[]
-        
-        if storeName:
-            storeObjs=Store.objects.filter(StoreName__contains=storeName)
-            if storeObjs:
-                for store in storeObjs:
-                    storeList=[]
-                    storeList.append(store.StoreNid)
-                    storeList.append(store.StoreName)
-                    storeList.append(store.StoreBossName)
-                    
-                    storeId=store.StoreNid
-                    types=HomeType.objects.filter(StoreNid_id=storeId)
-                    typeList=[]
-                    for type in types:
-                        typeId=type.SecondTypeNid_id
-                        seconType=ProductSecondType.objects.get(SecondTypeNid=typeId)
-                        seconTypeName=seconType.SecondTypeName
-                        
-                        print seconTypeName
-                        typeList.append(seconTypeName)
-                        storeList.append(typeList)
-                        
-                        print storeList
-                    storeLists.append(storeList)
-            
-            
-                #进行分页    
-            paginator = Paginator(storeLists,settings.PER_PAGE)#每页显示多少条数据，在setting里设置
+        #判断类型为店铺或者商品
+        type=data.get('type')
+        storePro=data.get('storePro')
+        #脱空格
+        storePro=storePro.strip()
+        #搜索商品
+        if type=='1':
+            productLists=[]
+            proObjs=Product.objects.filter(Head__icontains=storePro)
+            if proObjs:
+                for pro in proObjs:
+                    productList=[]
+                    seconTypeId=pro.TypeNid_id
+                    seconType=ProductSecondType.objects.get(SecondTypeNid=seconTypeId)
+                    firstTypeId=seconType.TypeNid_id
+                    firstType=ProductType.objects.get(TypeNid=firstTypeId)
+                    #店铺id
+                    storeId=firstType.StoreNid_id
+                    #商品信息
+                    proId=pro.Nid 
+                    img=ProductImage.objects.filter(ProductNid_id=proId).last().Img
+                    head=pro.Head
+                    priceObj=ProductPrice.objects.filter(ProductNid_id=proId)
+                    #商品价格存在与不存在
+                    if priceObj:
+                        price=priceObj.order_by("Price")[0].Price
+                    else:
+                        price=0
+                    #封装商品数据
+                    productList.append(storeId) #0
+                    productList.append(proId) #1
+                    productList.append(img)     #2
+                    productList.append(head) #3
+                    productList.append(price) #4
+                    productLists.append(productList)
+            #进行分页    
+            paginator = Paginator(productLists,settings.PER_PAGE)#每页显示多少条数据，在setting里设置
             page = request.GET.get('page')
             try:
-                storeLists = paginator.page(page)
+                productLists = paginator.page(page)
             except PageNotAnInteger:
-                storeLists = paginator.page(1)
+                productLists = paginator.page(1)
             except EmptyPage:
-                storeLists = paginator.page(paginator.num_pages)    
-                
-            #将商品列表加入返回的数据字典
-            resData['stores']=storeLists   
-            
-                
-                
-                
-                
-            return render_to_response('front_store.html',resData)
+                productLists = paginator.page(paginator.num_pages)   
+            #封装数据
+            resData={'productLists':productLists}
+            resData['storePro']=storePro
+            resData['type']=type
+            return render_to_response('front_product.html',resData)
+           
+        #搜索店铺    
+        elif type=='2':
+            storeLists=[]
+            if storePro:
+                storeObjs=Store.objects.filter(StoreName__icontains=storePro)
+                if storeObjs:
+                    for store in storeObjs:
+                        storeList=[]
+                        storeList.append(store.StoreNid)
+                        storeList.append(store.StoreName)
+                        storeList.append(store.StoreBossName)
+                        
+                        storeId=store.StoreNid
+                        types=HomeType.objects.filter(StoreNid_id=storeId)
+                        typeList=[]
+                        for type in types:
+                            typeId=type.SecondTypeNid_id
+                            seconType=ProductSecondType.objects.get(SecondTypeNid=typeId)
+                            seconTypeName=seconType.SecondTypeName
+                            
+                            print seconTypeName
+                            typeList.append(seconTypeName)
+                            storeList.append(typeList)
+                            
+                            print storeList
+                        storeLists.append(storeList)
+                    #进行分页    
+                paginator = Paginator(storeLists,settings.PER_PAGE)#每页显示多少条数据，在setting里设置
+                page = request.GET.get('page')
+                try:
+                    storeLists = paginator.page(page)
+                except PageNotAnInteger:
+                    storeLists = paginator.page(1)
+                except EmptyPage:
+                    storeLists = paginator.page(paginator.num_pages)    
+                #将商品列表加入返回的数据字典
+                resData['stores']=storeLists  
+                resData['type']=type 
+                resData['storePro']=storePro
+                return render_to_response('front_store.html',resData)
+            else:
+                return redirect('/index/')
         else:
             resData['stores']=[] 
             return render_to_response('front_store.html')
@@ -120,23 +165,24 @@ def getSysStore():
         resData[order]=storeList
         
     pros=SysProduct.objects.all()
-    for pro in pros:
-        proList=[]
-        storeId=pro.SysStoreNid
-        proOrder=pro.SysStoreOrder
-        proId=pro.SysProNid
-        proOrder='proOrder'+str(proOrder)
-        #封装单个商品
-        proList.append(storeId)
-        proList.append(proId)
-        #查找商品图片
-        img=ProductImage.objects.filter(ProductNid_id=proId).last().Img
-        #查找商品标题
-        head=Product.objects.get(Nid=proId).Head
-        proList.append(img)
-        proList.append(head)
-        #当个商品存入字典
-        resData[proOrder]=proList
+    if pros:
+        for pro in pros:
+            proList=[]
+            storeId=pro.SysStoreNid
+            proOrder=pro.SysProOrder
+            proId=pro.SysProNid
+            proOrder='proOrder'+str(proOrder)
+            #封装单个商品
+            proList.append(storeId)
+            proList.append(proId)
+            #查找商品图片
+            img=ProductImage.objects.filter(ProductNid_id=proId).last().Img
+            #查找商品标题
+            head=Product.objects.get(Nid=proId).Head
+            proList.append(img)
+            proList.append(head)
+            #当个商品存入字典
+            resData[proOrder]=proList
         
     return resData
     
@@ -166,19 +212,23 @@ def sys(request):
             if sysAccount == 'admin':
                 if sysAccount and sysPassword:
                     userinfo=Userinfo.objects.filter(Account=sysAccount)
-                    if sysPassword==userinfo[0].Password:
-                        request.session['sys_loginStatus']=True
-                        request.session['sysAccount']=sysAccount
-                        #获取首页店铺
-                        stores=Store.objects.all()
-                        #获取带顺序显示的店铺、商品
-                        resData=getSysStore()
-                        resData['sysAccount']=sysAccount
-                        resData['stores']=stores
-                        return render_to_response('sys_index.html',resData)
+                    if userinfo:
+                        if sysPassword==userinfo[0].Password:
+                            request.session['sys_loginStatus']=True
+                            request.session['sysAccount']=sysAccount
+                            #获取首页店铺
+                            stores=Store.objects.all()
+                            #获取带顺序显示的店铺、商品
+                            resData=getSysStore()
+                            resData['sysAccount']=sysAccount
+                            resData['stores']=stores
+                            return render_to_response('sys_index.html',resData)
+                        else:
+                            result='用户账号或者密码错误'
+                            return render_to_response('sys_load.html',{'result':result})  
                     else:
                         result='用户账号或者密码错误'
-                        return render_to_response('sys_load.html',{'result':result})  
+                        return render_to_response('sys_load.html',{'result':result}) 
                 else:
                     result='用户账号或者密码错误'
                     return render_to_response('sys_load.html',{'result':result})  
@@ -194,7 +244,7 @@ def sys(request):
 def sysExit(request):
     del request.session['sys_loginStatus']
     del request.session['sysAccount']
-    return render_to_response('sys_load.html')
+    return redirect('/sys/')
 
 
 
@@ -250,7 +300,7 @@ def getFirstType(request):
         return HttpResponse(typeLists)
     
     
-    
+ #添加系统首页商品   
 def addSysPro(request):
     if request.method=='POST':
         data=request.POST
@@ -271,11 +321,77 @@ def addSysPro(request):
             pros=SysProduct.objects.all()
             if pros:
                 for pro in pros:
-                    if order==pro.SysStoreOrder:
+                    if order==pro.SysProOrder:
                         return HttpResponse('Duple')
                     else:
-                        SysProduct.objects.create(SysStoreNid=storeId,SysProNid=proId,SysStoreOrder=order)
+                        SysProduct.objects.create(SysStoreNid=storeId,SysProNid=proId,SysProOrder=order)
                         return HttpResponse('True')
             else:
-                SysProduct.objects.create(SysStoreNid=storeId,SysProNid=proId,SysStoreOrder=order)
+                SysProduct.objects.create(SysStoreNid=storeId,SysProNid=proId,SysProOrder=order)
                 return HttpResponse('True')
+
+
+#删除系统首页店铺
+def delSysStore(request):
+    if request.method=='POST':
+        data=request.POST
+        order=data.get('order')
+        if order:
+            try:
+                store=SysStore.objects.get(SysStoreOrder=order)
+                if store:
+                    img=store.SysStoreImg
+                    path=str(img)
+                    finalPath=structFile(path)
+                    if os.path.exists(finalPath):
+                            #删除文件
+                            shutil.rmtree(finalPath)
+                    #删除数据
+                    store.delete()
+            except Exception:
+                return HttpResponse('False')
+            return HttpResponse('True')
+
+
+
+#删除系统首页商品
+def delSysPro(request):
+    if request.method=='POST':
+        data=request.POST
+        order=data.get('order')
+        if order:
+            try:
+                pro=SysProduct.objects.get(SysProOrder=order)
+                if pro:
+                    pro.delete()
+            except Exception:
+                return HttpResponse('False')
+            return HttpResponse('True')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+#重组需要删除的文件路径
+#
+def structFile(path):
+    #list包含三个元素，分别是第一个上传位置文件夹，第二级日期文件夹，第三个.jpg名字
+    pathList=path.split('/')
+    folderPath=pathList[0]+'/'+pathList[1]
+    #属性图片所在文件夹路径
+    pathListFinal=settings.MEDIA_ROOT+'/'+folderPath
+    return pathListFinal

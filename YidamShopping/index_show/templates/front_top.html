@@ -63,12 +63,28 @@
 		/*搜索*/
 		.search-div{
     		float:right;
-			background-color:white;
-			border:3px solid #EC1A23;
+			width:545px;
+			height:102px;
+			margin-top:10px;
+    	}
+    	/*搜索商品*/
+    	.search-type{
+    		height:50px;
+    		width:50px;
+    		padding:5px;
+    		color:#000;
+    		font-size:14px;
+    		font-weight:bold;
+    		cursor:pointer;
+    	}
+    	
+    	/*搜索内容*/
+    	.search-content{
 			width:545px;
 			height:30px;
-			margin-top:27px;
-    	}
+			background-color:white;
+			border:3px solid #EC1A23;
+		}
     	/*搜索输入框*/
 		.search-input{
 			border:3px solid #EC1A23;
@@ -157,7 +173,7 @@
 				<a href='/index/'><img src='/statics/img/home.jpg'>亿达首页</a>
 			</div>
 			{% if account %}
-				<div  class='top-default-left'>{{account}}</div>
+				<a href='/userCenter/'><div  class='top-default-left'>{{account}}</div></a>
 				<div  class='top-default-left' onclick='goLogout()'>退出</div>
 			{% else %}
 				<div  class='top-default-left' onclick='goLoad()'>请登陆</div>
@@ -183,10 +199,19 @@
 			<img class='logo' src='/statics/img/Yidam_logo.jpg'/>
 		</div>
 		<div class='search-div'>
-			<form action='/searchStore/' method='post'>
-				<input type='text' class='search-input' placeholder="搜索 店铺" name='storeName'/>
-				<input type='submit' value='搜索' class='search-but'>
-			</form>
+			<div style='margin-bottom:5px;'>
+				<span id='proSpan' class='search-type'>商品</span>
+				<span id='storeSpan' class='search-type'>店铺</span>
+			</div>
+			<div class='search-content'>
+				<form action='/searchStorePro/' method='post' id='searchForm'>
+					<input hidden='hidden' name='type' type='text' id='searchTypeId' 
+					{% if type %} value='{{type}}' {% else %} value='1' {% endif %}/>
+					<input type='text' class='search-input' placeholder="搜索 商品" name='storePro' id='searchContentId'
+					{% if storePro %} value='{{storePro}} {% endif %}'/>
+					<input type='submit' value='搜索' class='search-but' onclick='submitSearch(event)'>
+				</form>
+			</div>
 		
 		</div>
 	</div>
@@ -197,6 +222,47 @@
 
 <!--javacript动态交换部分-->
 <script type='text/javascript'>
+
+$(function(){
+
+	//初始化商品或店铺
+	var type=$('#searchTypeId').val()
+	if(type=='1'){
+		//设置商品
+		$('#proSpan').css('background-color','#EC1A23')
+		$('#searchTypeId').attr('value','1')
+	}else{
+		//设置店铺
+		$('#storeSpan').css('background-color','#EC1A23')
+		$('#searchTypeId').attr('value','2')
+	}
+		
+	$('#proSpan').click(function(){
+		$(this).css('background-color','#EC1A23')
+		$('#searchContentId').attr('placeholder','搜索  商品')
+		$('#storeSpan').css('background-color','')
+		$('#searchTypeId').attr('value','1')
+	})
+	
+	$('#storeSpan').click(function(){
+	
+		$(this).css('background-color','#EC1A23')
+		$('#searchContentId').attr('placeholder','搜索  店铺')
+		$('#proSpan').css('background-color','')
+		$('#searchTypeId').attr('value','2')
+	})
+	
+	
+});
+
+//搜索输入内容为空不允许提交搜索
+function submitSearch(event){
+	var content=$('#searchContentId').val()
+		if(content==''){
+			//输入为空，阻止空搜索提交
+			event.preventDefault()
+		}
+}
 
 function goLoad(){
 	window.location.href='/load/'

@@ -14,7 +14,8 @@ from django.http.response import HttpResponse
 ###from test.test_datetime import DAY
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from index_show.views import getSysStore
-
+import shutil
+from email import email
 
 
 
@@ -59,35 +60,40 @@ def load(request):
         password=data.get('password')
         
         if account and password:
-            userinfo=Userinfo.objects.filter(Account=account)
-            if userinfo:
-                if password==userinfo[0].Password:
-                    result=userinfo[0].Account
-                    #设置session
-                    request.session['login_status']=True
-                    request.session['account']=userinfo[0].Account
-                    request.session['userid']=userinfo[0].Userid
-                    request.session.set_expiry(0) #session的value是0,用户关闭浏览器session就会失效
-                    #判断是否有go_url的cookie
-                    go_url=request.COOKIES.get("go_url")
-                    if go_url:
-                        #重定向url存在
-                        print go_url
-                        return HttpResponseRedirect(go_url)
+            #管理员用户无登录权限
+            if account!='admin':
+                userinfo=Userinfo.objects.filter(Account=account)
+                if userinfo:
+                    if password==userinfo[0].Password:
+                        result=userinfo[0].Account
+                        #设置session
+                        request.session['login_status']=True
+                        request.session['account']=userinfo[0].Account
+                        request.session['userid']=userinfo[0].Userid
+                        request.session.set_expiry(0) #session的value是0,用户关闭浏览器session就会失效
+                        #判断是否有go_url的cookie
+                        go_url=request.COOKIES.get("go_url")
+                        if go_url:
+                            #重定向url存在
+                            return HttpResponseRedirect(go_url)
+                        else:
+                            #url不存在，则进入首页
+                            #获取店铺首页数据
+                            resData=getSysStore()
+                            resData['account']=account
+                            #设置cookie
+                            response=render_to_response('front_index.html',resData)
+                           # response.set_cookie('account',account,max_age=30*1) #cookie有效时间为60秒
+                           # response.set_cookie('password',password,max_age=30*1) #cookie有效时间为60秒
+                            return response
                     else:
-                        #url不存在，则进入首页
-                        #获取店铺首页数据
-                        resData=getSysStore()
-                        resData['account']=account
-                        #设置cookie
-                        response=render_to_response('front_index.html',resData)
-                       # response.set_cookie('account',account,max_age=30*1) #cookie有效时间为60秒
-                       # response.set_cookie('password',password,max_age=30*1) #cookie有效时间为60秒
-                        return response
+                        result='用户账号或者密码错误'
                 else:
-                    reslut='用户账号或者密码错误'
+                    result='用户账号或者密码错误'
             else:
-                result='用户账号或者密码错误'
+                result='无登录权限'
+        else:
+            result='用户账号或者密码不能为空'
         return render_to_response('load.html',{'result':result})
     #加入购物功能添加go_url
     if request.method == 'GET':  
@@ -292,7 +298,19 @@ def userCenter(request):
         userId=request.session.get('userid')
         resData['account']=account
         resData['userId']=userId
-    
+        
+        #用户基本信息
+        if userId:
+            user=Userinfo.objects.get(Userid=userId)
+            phone=user.Phone
+            nickname=user.Nickname
+            headPhoto=user.Headphoto
+            email=user.Email
+            #封装返回数据
+            resData['phone']=phone
+            resData['nickname']=nickname
+            resData['photo']=headPhoto
+            resData['email']=email
         return render_to_response('user_center_index.html',resData)
     else:
         return HttpResponseRedirect('/load/')
@@ -447,8 +465,7 @@ def showOrderFinal(request):
                 proLists.append(proList)
             orderList.append(proLists)
             orderLists.append(orderList)
-        #封装订单信息
-        resData['orderLists']=orderLists
+        
          #进行分页    
         paginator = Paginator(orderLists,settings.PER_PAGE)#每页显示多少条数据，在setting里设置
         page = request.GET.get('page')
@@ -458,7 +475,8 @@ def showOrderFinal(request):
             orderLists = paginator.page(1)
         except EmptyPage:
             orderLists = paginator.page(paginator.num_pages)    
-               
+        #封装订单信息
+        resData['orderLists']=orderLists       
     
     return render_to_response('user_center_orderFinal.html',resData)
 
@@ -470,6 +488,7 @@ def showOrderFinal(request):
 #立即购买商品
 #数据结构{"storeId":1,"productId":1,"attrId2":"2","attrId1":"1","priceId":"2","mount":"2"}
 def buyPro(request):
+    resData={}
     if request.method == 'POST':
         #若登录，获取提交数据
         data=request.POST
@@ -483,6 +502,8 @@ def buyPro(request):
             response=HttpResponseRedirect('/load/')
             response.set_cookie('go_url',buyUrl,max_age=30*1)
             return response
+        else:
+            resData['account']=request.session.get('account')
         #获取商品数据
         storeId=buyData['storeId']
         productId=buyData['productId']
@@ -515,7 +536,7 @@ def buyPro(request):
             proList.append(priceId) #9
             proList.append(price) #10
             proList.append(mount) #11
-            resData={'proList':proList}
+            resData['proList']=proList
             return render_to_response('user_center_buyOrderConfirm.html',resData)
             
        
@@ -572,8 +593,90 @@ def submitBuyOrder(request):
                                     ProductHead=proName,AttrName1=attrName1,
                                     AttrImg1=filename,AttrName2=attrName2,
                                     Price=price,Mount=mount,SumPrice=total)
-        return render_to_response('user_center_orderSuccess.html')
+        #存入用户
+        resData={}
+        resData['account']=request.session.get('account')
+        return render_to_response('user_center_orderSuccess.html',resData)
     
     
     
+#添加用户头像
+def addHeadPhoto(request):
+    if request.method=='POST':
+        data=request.POST
+        file=request.FILES
+        newPhoto=file.get('photo')
+        userId=request.session.get('userid')
+        #判断头像是否存在，存在则删除
+        userList=Userinfo.objects.filter(Userid=userId)
+        if userList:
+            user=userList[0]
+            oldPhoto=user.Headphoto
+            if oldPhoto:
+                #执行删除
+                oldPhoto=str(oldPhoto)
+                oldPhotoList=oldPhoto.split('/')
+                folderPath=oldPhotoList[0]+'/'+oldPhotoList[1]
+                oldPath=settings.MEDIA_ROOT+'/'+folderPath
+                #shutil.rmtree可以删除非空文件夹及文件夹里的文件
+                if os.path.exists(oldPath):
+                    shutil.rmtree(oldPath)
+            #修改头像
+            if newPhoto and userId:
+               user.Headphoto=newPhoto
+               user.save()
+               return HttpResponseRedirect('/userCenter/')
+          
+
+
+#检查旧密码是否输入正确
+def checkOldPwd(request):
+    if request.method=='POST':
+        data=request.POST
+        oldPwd=data.get('oldPwd')
+        #数据库查询比对密码
+        userId=request.session.get('userid')
+        if userId:
+            user=Userinfo.objects.get(Userid=userId)
+        pwd=user.Password
+        if oldPwd==pwd:
+            return HttpResponse('True')
+        else:
+            return HttpResponse('False')
+        
+        
+
+#修改新密码
+def modifyNewPwd(request):
+    if request.method=='POST':
+        data=request.POST
+        pwd=data.get('pwd')
+        #修改密码
+        if pwd:
+            userId=request.session.get('userid')
+            if userId:
+                user=Userinfo.objects.get(Userid=userId)
+                user.Password=pwd
+                user.save()
+                return HttpResponse('True')
+ 
+ 
+ 
+#修改用户基本信息
+def modifyBaseInfo(request):
+    if request.method=='POST':
+        data=request.POST
+        nickname=data.get('nickname')
+        phone=data.get('phone')
+        email=data.get('email')
+        #修改基本信息
+        if nickname and phone and email:
+            userId=request.session.get('userid')
+            if userId:
+                user=Userinfo.objects.get(Userid=userId)
+                user.Nickname=nickname
+                user.Phone=phone
+                user.Email=email
+                user.save()
+                return HttpResponseRedirect('/userCenter/')
         

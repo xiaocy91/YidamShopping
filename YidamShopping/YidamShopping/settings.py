@@ -147,3 +147,8 @@ HOME_PER_PAGE=25
 
 #use to initial user data:admin account
 FIXTURE_DIRS= (os.path.join(BASE_DIR, 'fixtures',).replace('\\', '/'),)
+
+
+
+#public templates,this kind is on django1.8
+#TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates').replace('\\', '/'),)

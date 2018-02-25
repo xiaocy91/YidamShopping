@@ -14,5 +14,5 @@ class SysProduct(models.Model):
     Nid=models.AutoField(primary_key=True)
     SysStoreNid=models.IntegerField()
     SysProNid=models.IntegerField()
-    SysStoreOrder=models.IntegerField()
+    SysProOrder=models.IntegerField()
     

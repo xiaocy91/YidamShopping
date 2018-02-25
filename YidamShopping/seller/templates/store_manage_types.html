@@ -133,9 +133,9 @@
 	<div class='bodyContent'>
 	
 		<div class='add-del-type'>
-				<div class='add-del-item'>删除全部分类</div>
+				<div class='add-del-item' onclick="deleteAll({{storeId}})">清空全部分类</div>
 				<div class='gap-div'></div>
-				<div class='add-del-item'  onclick='add_edit(this,0,"add1")' id='add1'>新增分类</div>
+				<div class='add-del-item'  onclick='add_edit(this,0,"add1")' id='add1'>新增一级分类</div>
 		</div>
 		
 		<!--商品分类最外层div-->
@@ -235,21 +235,24 @@ function changeFirst(obj,id,class_name){
 	if( !status){
 		//判断是否取消一级标题的选中
 		$('#'+class_name).prop("checked",false)
-	}else{
-		//判断一级标题是否选中，即二级全部选中时
-		var secondAll=$('.'+class_name)
-		var len=secondAll.length
-		var flag=0
-		secondAll.each(function(){
-			var status=$(this).is(':checked')
-			if(status){
-				flag+=1
-			}
-		});
-		if(flag==len){
-			$('#'+class_name).prop("checked",true)
-		}
 	}
+	
+	
+//	else{
+		//判断一级标题是否选中，即二级全部选中时
+//		var secondAll=$('.'+class_name)
+//		var len=secondAll.length
+//		var flag=0
+//		secondAll.each(function(){
+//			var status=$(this).is(':checked')
+//			if(status){
+//				flag+=1
+//			}
+//		});
+//		if(flag==len){
+//			$('#'+class_name).prop("checked",true)
+//		}
+//	}
 	
 	
 	
@@ -265,19 +268,25 @@ function delChoose(key){
 	var status=$('#'+key).is(':checked')
 	if(status){
 		//执行删除一级和相应的二级分类
+		alert('确定要删除一级分类吗？')
 		firstId=key
 		$.ajax({
 			url:'/delFirstName/',
 			type:'POST',
 			data:{'firstId':firstId},
 			success:function(result){
-				alert('delete success')
+				if(result=='True'){
+					alert('成功删除一级分类！')
+				}else{
+					alert(result)
+				}
 				window.location.reload()
 			}
 		
 		});
 	}else{
 		//执行删除二级分类
+		alert('确定要删除二级分类吗？')
 		var secondAll=$('.'+key+':checked')
 		
 		if( secondAll.length ==0 )
@@ -301,10 +310,14 @@ function delChoose(key){
 				type:"POST",
 				data:{'secondJson':secondJson},
 				success: function(result) {
-	       			if(result=='True'){
-	       				alert('delete success')
-	       				window.location.reload()}   },
-	       		});
+	  				if(result=='True'){
+	       				alert('成功删除二级分类！')
+	       			}else{
+	       				alert(result)
+	       			}
+	  				window.location.reload()   
+	       		},
+	       	});
 		}
 	}
 	
@@ -411,6 +424,26 @@ function add_edit(obj,key,operType){
 
 
 
+
+//删除全部分类
+function deleteAll(storeId){
+	alert('清空后不可恢复，确定要清空全部分类及商品吗？')
+	$.ajax({
+		url:'/delAllType/',
+		method:'post',
+		data:{'storeId':storeId},
+		success:function(result){
+			if(result=='True'){
+				alert('清空成功')
+			}else{
+				alert('清空成功')
+			}
+			window.location.reload()
+		},
+	
+	});
+
+}
 
 
 
